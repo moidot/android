@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="h1_bold_24" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="lineHeight">36dp</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="h1_med_24" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="lineHeight">36dp</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="h1_reg_24" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="lineHeight">36dp</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="h2_bold_20" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="lineHeight">30dp</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="h2_med_20" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="lineHeight">30dp</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="h2_reg_20" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="lineHeight">30dp</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="h3_bold_18" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="lineHeight">27dp</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="h3_med_18" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="lineHeight">27dp</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="h3_reg_18" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="lineHeight">27dp</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="b1_bold_16" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="lineHeight">24dp</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="b1_med_16" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="lineHeight">24dp</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="b1_reg_16" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="lineHeight">24dp</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="b2_bold_14" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="lineHeight">21dp</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="b2_med_14" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="lineHeight">21dp</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="b2_reg_14" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="lineHeight">21dp</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="c1_bold_12" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="lineHeight">18dp</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="c1_med_12" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="lineHeight">18dp</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="c1_reg_12" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="lineHeight">18dp</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="c2_bold_11" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="lineHeight">16.5dp</item>
+        <item name="android:textSize">11dp</item>
+    </style>
+
+    <style name="c2_med_11" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="lineHeight">16.5dp</item>
+        <item name="android:textSize">11dp</item>
+    </style>
+
+    <style name="c2_reg_11" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="lineHeight">16.5dp</item>
+        <item name="android:textSize">11dp</item>
+    </style>
+</resources>
