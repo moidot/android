@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -5,6 +7,9 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
 }
+
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = "com.moidot.moidot"
@@ -16,6 +21,10 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "KAKAO_NATIVE_APP_KEY", properties.getProperty("kakao_native_app_key"))
+        buildConfigField("String", "KAKAO_REST_API_KEY", properties.getProperty("kakao_rest_api_key"))
+        manifestPlaceholders["MANIFEST_KAKAO_NATIVE_APP_KEY"] = properties.getProperty("manifest_kakao_native_app_key")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,6 +43,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        buildConfig = true
         dataBinding = true
     }
 }
@@ -76,6 +86,9 @@ dependencies {
     // Glide
     implementation("com.github.bumptech.glide:glide:4.14.2")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
+
+    // Kakao
+    implementation("com.kakao.sdk:v2-user:2.19.0") // login
 
 }
 

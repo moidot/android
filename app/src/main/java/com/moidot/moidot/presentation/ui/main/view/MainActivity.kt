@@ -1,6 +1,7 @@
-package com.moidot.moidot
+package com.moidot.moidot.presentation.ui.main.view
 
 import android.os.Bundle
+import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityMainBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
 
