@@ -11,6 +11,10 @@
     <color name="gray200">#E5E7EB</color>
     <color name="gray300">#D1D5DB</color>
     <color name="gray400">#9CA3AF</color>
+    <color name="gray500">#6B7280</color>
     <color name="gray700">#374151</color>
     <color name="gray800">#1F2937</color>
+
+    <color name="font_black100">#393939</color>
+    <color name="icon_gray100">#DEDEDE</color>
 </resources>
