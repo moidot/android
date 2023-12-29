@@ -16,4 +16,10 @@ class MoidotApplication : Application() {
     private fun initSdk() {
         KakaoSdk.init(this, KAKAO_NATIVE_APP_KEY)
     }
+
+    companion object {
+        const val MOIDOT_APP = "moidot_app"
+        const val ACCESS_TOKEN = "access_token"
+        const val REFRESH_TOKEN = "refresh_token"
+    }
 }
