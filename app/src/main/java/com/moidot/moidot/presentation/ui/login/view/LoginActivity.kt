@@ -4,5 +4,5 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityLoginBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
 
-class LoginActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 }
