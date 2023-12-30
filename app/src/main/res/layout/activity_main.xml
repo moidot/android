@@ -30,7 +30,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
             app:itemActiveIndicatorStyle="@null"
-            app:itemBackground="@color/white"
+            app:itemBackground="@drawable/bg_main_btm_nav"
             app:itemIconTint="@color/main_btm_nav_item_color"
             app:itemTextAppearanceActive="@style/BottomNavigationView"
             app:itemTextAppearanceInactive="@style/BottomNavigationView"
