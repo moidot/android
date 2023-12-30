@@ -32,16 +32,20 @@
         </activity>
         <activity
             android:name=".presentation.ui.main.view.MainActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".presentation.ui.auth.signin.view.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.ui.onboard.view.OnboardActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".presentation.ui.auth.signin.view.SignInActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
