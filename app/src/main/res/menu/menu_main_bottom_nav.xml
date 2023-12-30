@@ -13,7 +13,7 @@
     <item
         android:id="@+id/noti_nav_graph"
         android:enabled="true"
-        android:icon="@drawable/ic_nav_noti_selector"
+        android:icon="@drawable/ic_nav_group_selector"
         android:menuCategory="secondary"
         android:title="@string/main_btm_nav_noti_title"
         app:showAsAction="always" />
