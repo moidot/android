@@ -1,14 +1,28 @@
 <resources>
     <string name="app_name">모이닷</string>
 
-    <!-- common -->
+    <!-- common, all -->
     <string name="binding_error_msg">binding이 초기화되지 않았습니다.</string>
+    <string name="all_next">다음</string>
 
     <!-- MainActivity -->
     <string name="main_btm_nav_home_title">홈</string>
     <string name="main_btm_nav_noti_title">모임</string>
     <string name="main_btm_nav_calendar_title">캘린더</string>
     <string name="main_btm_nav_my_page_title">마이페이지</string>
+
+    <!-- OnBoard -->
+    <string name="onboard_skip">건너뛰기</string>
+    <string name="onboard_first_bubble_one">다들 어디쯤에 사시나요?</string>
+    <string name="onboard_first_bubble_two">우리.. 어디에서 만나는 게 좋을까요?</string>
+    <string name="onboard_first_team_play">팀플</string>
+    <string name="onboard_first_study">스터디</string>
+    <string name="onboard_first_friend">친목모임</string>
+    <string name="onboard_first_club">동호회</string>
+    <string name="onboard_first_etc_group">그 외 단체모임</string>
+    <string name="onboard_first_etc">등등&#8230;</string>
+    <string name="onboard_first_info_sub">모임장소를 정하는 것이 어렵다면?</string>
+    <string name="onboard_first_info_main">모이닷에서 편하게 정해보세요!</string>
 
     <!-- LoginActivity -->
     <string name="login_kakao_btn">카카오로 시작하기</string>
