@@ -126,4 +126,10 @@
         <item name="lineHeight">16.5dp</item>
         <item name="android:textSize">11dp</item>
     </style>
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10dp</item>
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="lineHeight">15dp</item>
+    </style>
 </resources>
