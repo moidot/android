@@ -32,7 +32,7 @@
         </activity>
         <activity
             android:name=".presentation.ui.main.view.MainActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".presentation.ui.auth.signin.view.SignInActivity"
