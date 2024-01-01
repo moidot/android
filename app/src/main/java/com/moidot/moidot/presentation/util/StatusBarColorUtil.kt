@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.util
+package com.moidot.moidot.presentation.util
 
 import android.app.Activity
 import android.os.Build
