@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.moidot.moidot.presentation.ui.onboard.view.OnboardActivity" />
+
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.ui.onboard.view.OnboardSecondFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fg_onboard_second_tv_skip"
+            style="@style/b2_reg_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> activity.exitOnboard()}"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="17dp"
+            android:text="@string/onboard_skip"
+            android:textColor="@color/gray400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/fg_onboard_second_chip_group_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="29dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fg_onboard_second_tv_skip"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fg_onboard_second_chip_indicator_one"
+                style="@style/chip_indicator"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fg_onboard_second_chip_indicator_two"
+                style="@style/chip_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="2" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fg_onboard_second_chip_indicator_three"
+                style="@style/chip_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="3" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fg_onboard_second_chip_indicator_four"
+                style="@style/chip_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="4" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fg_onboard_second_chip_indicator_five"
+                style="@style/chip_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="5" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/fg_onboard_second_tv_info_title"
+            style="@style/h1_bold_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/onboard_second_info_title"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/fg_onboard_second_chip_group_indicator"
+            app:layout_constraintTop_toBottomOf="@id/fg_onboard_second_chip_group_indicator" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/fg_onboard_second_vp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="19dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fg_onboard_second_tv_info_title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fg_onboard_second_btn_next"
+            style="@style/btn_orange500"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="@{() -> fragment.moveToNext()}"
+            android:text="@string/all_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
