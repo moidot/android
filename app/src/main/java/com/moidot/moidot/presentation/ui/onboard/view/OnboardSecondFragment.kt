@@ -1,10 +1,13 @@
 package com.moidot.moidot.presentation.ui.onboard.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.chip.Chip
 import com.moidot.moidot.R
 import com.moidot.moidot.data.data.OnboardItem
 import com.moidot.moidot.databinding.FragmentOnboardSecondBinding
@@ -67,7 +70,13 @@ class OnboardSecondFragment : BaseFragment<FragmentOnboardSecondBinding>(R.layou
 
     private fun setupObservers() {
         viewModel.currentPos.observe(viewLifecycleOwner) {
-            val indicatorNumber = it.plus(1)
+            changeChipCheckedState(it)
+        }
+    }
+
+    private fun changeChipCheckedState(currentPos: Int) {
+        binding.fgOnboardSecondChipGroupIndicator.children.forEachIndexed { index, view ->
+            (view as Chip).isChecked = index == currentPos
         }
     }
 
