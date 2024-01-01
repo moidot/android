@@ -30,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="17dp"
-                android:onClick="@{() -> fragment.exitOnboard()}"
                 android:text="@string/onboard_skip"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,70 +97,124 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    style="@style/b2_bold_14"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_onboard_keyword"
-                    android:gravity="center"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_keyword_team_play"
-                    android:textColor="@color/orange500" />
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="6dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="71dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
 
-                <TextView
-                    style="@style/b2_bold_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:background="@drawable/bg_onboard_keyword"
-                    android:gravity="center"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_keyword_study"
-                    android:textColor="@color/orange500" />
+                    <TextView
+                        style="@style/b2_bold_14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/onboard_first_keyword_team_play"
+                        android:textColor="@color/orange500" />
+                </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    style="@style/b2_bold_14"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:background="@drawable/bg_onboard_keyword"
-                    android:gravity="center"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_keyword_friend"
-                    android:textColor="@color/orange500" />
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="6dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="71dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
 
-                <TextView
-                    style="@style/b2_bold_14"
+                    <TextView
+                        style="@style/b2_bold_14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/onboard_first_keyword_study"
+                        android:textColor="@color/orange500" />
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:background="@drawable/bg_onboard_keyword"
-                    android:gravity="center"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_keyword_club"
-                    android:textColor="@color/orange500" />
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="6dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="71dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
+
+                    <TextView
+                        style="@style/b2_bold_14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/onboard_first_keyword_friend"
+                        android:textColor="@color/orange500" />
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="6dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="71dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
+
+                    <TextView
+                        style="@style/b2_bold_14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/onboard_first_keyword_club"
+                        android:textColor="@color/orange500" />
+                </com.google.android.material.card.MaterialCardView>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    style="@style/b2_bold_14"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_onboard_keyword"
-                    android:gravity="center"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_keyword_club"
-                    android:textColor="@color/orange500" />
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="6dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="71dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
+
+                    <TextView
+                        style="@style/b2_bold_14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/onboard_first_keyword_etc"
+                        android:textColor="@color/orange500" />
+                </com.google.android.material.card.MaterialCardView>
 
                 <TextView
                     style="@style/b2_med_14"
@@ -177,7 +230,7 @@
                 style="@style/b2_med_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/onboard_first_info_sub"
                 android:textColor="@color/gray500" />
 
