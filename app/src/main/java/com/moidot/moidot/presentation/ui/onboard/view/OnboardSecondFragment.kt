@@ -1,9 +1,10 @@
 package com.moidot.moidot.presentation.ui.onboard.view
 
+import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -76,7 +77,10 @@ class OnboardSecondFragment : BaseFragment<FragmentOnboardSecondBinding>(R.layou
 
     private fun changeChipCheckedState(currentPos: Int) {
         binding.fgOnboardSecondChipGroupIndicator.children.forEachIndexed { index, view ->
-            (view as Chip).isChecked = index == currentPos
+            val chip = view as Chip
+            val fontId = if (index == currentPos) R.font.pretendard_bold else R.font.pretendard_regular
+            chip.isChecked = index == currentPos
+            chip.typeface = Typeface.create(ResourcesCompat.getFont(requireContext(), fontId), Typeface.BOLD.takeIf { index == currentPos } ?: Typeface.NORMAL)
         }
     }
 
