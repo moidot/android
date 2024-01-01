@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.moidot.moidot.data.data.OnboardItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_onboard_arched_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.9"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/item_onboard_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="60dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:drawableImageBinding="@{data.img}"
+            tools:background="@color/black" />
+
+        <TextView
+            android:id="@+id/item_onboard_tv_title"
+            style="@style/h3_bold_18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="12dp"
+            android:text="@{data.title}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_onboard_img"
+            tools:text="모임원 초대하기" />
+
+        <TextView
+            android:id="@+id/item_onboard_tv_content"
+            style="@style/b2_med_14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{data.content}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/item_onboard_tv_title"
+            app:layout_constraintStart_toStartOf="@+id/item_onboard_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/item_onboard_tv_title"
+            tools:text="모임원들과 함께 장소를 조율할 수 있도록\n모이닷스페이스의 링크를 모임원에게 전송해주세요!" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

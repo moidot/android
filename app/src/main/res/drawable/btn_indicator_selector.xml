@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/btn_indicator_normal" android:state_selected="false" />
+    <item android:drawable="@drawable/btn_indicator_focused" android:state_selected="true" />
+</selector>

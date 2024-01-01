@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="activity"
+            type="com.moidot.moidot.presentation.ui.onboard.view.OnboardActivity" />
 
         <variable
             name="fragment"
@@ -31,6 +34,7 @@
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="17dp"
                 android:text="@string/onboard_skip"
+                android:onClick="@{() -> activity.exitOnboard()}"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
