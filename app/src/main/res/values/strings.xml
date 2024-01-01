@@ -15,14 +15,25 @@
     <string name="onboard_skip">건너뛰기</string>
     <string name="onboard_first_bubble_one">다들 어디쯤에 사시나요?</string>
     <string name="onboard_first_bubble_two">우리.. 어디에서 만나는 게 좋을까요?</string>
-    <string name="onboard_first_team_play">팀플</string>
-    <string name="onboard_first_study">스터디</string>
-    <string name="onboard_first_friend">친목모임</string>
-    <string name="onboard_first_club">동호회</string>
-    <string name="onboard_first_etc_group">그 외 단체모임</string>
+    <string name="onboard_first_keyword_team_play">팀플</string>
+    <string name="onboard_first_keyword_study">스터디</string>
+    <string name="onboard_first_keyword_friend">친목모임</string>
+    <string name="onboard_first_keyword_club">동호회</string>
+    <string name="onboard_first_keyword_etc">그 외 단체모임</string>
     <string name="onboard_first_etc">등등&#8230;</string>
     <string name="onboard_first_info_sub">모임장소를 정하는 것이 어렵다면?</string>
     <string name="onboard_first_info_main">모이닷에서 편하게 정해보세요!</string>
+    <string name="onboard_second_info_title">모이닷,\n어떻게 사용하나요?</string>
+    <string name="onboard_second_title_social_login">소셜로그인으로 시작하기</string>
+    <string name="onboard_second_title_moidot_space">모이닷스페이스 만들기</string>
+    <string name="onboard_second_title_invite">모임원 초대하기</string>
+    <string name="onboard_second_title_recommend_place">중간장소, 추천장소 확인하기</string>
+    <string name="onboard_second_title_vote_place">장소 투표하기</string>
+    <string name="onboard_second_content_social_login">모이닷은 사용자의 ‘모이닷스페이스’ 히스토리를 저장하기 위해 소셜로그인 정보를 수집해요. 복잡한 회원가입절차가 없으니 간편하게 시작하실 수 있어요.</string>
+    <string name="onboard_second_content_moidot_space">모임장이 되어 모이닷스페이스를 만들어보세요!\n모임날짜, 출발장소와 이동수단을 입력하면 간단하게 만들 수 있어요.</string>
+    <string name="onboard_second_content_invite">모임원들과 함께 장소를 조율할 수 있도록\n모이닷스페이스의 링크를 모임원에게 전송해주세요!</string>
+    <string name="onboard_second_content_recommend_place">모임원들이 입력한 정보에 따라 모이닷이 중간장소와 해당 장소에서 갈 만한 곳들을 추천해드려요!</string>
+    <string name="onboard_second_content_vote_place">추천된 장소 중에서도 고민된다면?\n장소 투표를 진행하여 모임장소를 확정해보세요!</string>
 
     <!-- LoginActivity -->
     <string name="login_kakao_btn">카카오로 시작하기</string>

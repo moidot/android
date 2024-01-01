@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.ui.onboard.view.OnboardFirstFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="17dp"
+                android:onClick="@{() -> fragment.exitOnboard()}"
                 android:text="@string/onboard_skip"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,10 +102,11 @@
                     style="@style/b2_bold_14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_onboard_keyword"
                     android:gravity="center"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_team_play"
+                    android:text="@string/onboard_first_keyword_team_play"
                     android:textColor="@color/orange500" />
 
                 <TextView
@@ -109,10 +114,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_onboard_keyword"
                     android:gravity="center"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_study"
+                    android:text="@string/onboard_first_keyword_study"
                     android:textColor="@color/orange500" />
 
                 <TextView
@@ -120,10 +126,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_onboard_keyword"
                     android:gravity="center"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_friend"
+                    android:text="@string/onboard_first_keyword_friend"
                     android:textColor="@color/orange500" />
 
                 <TextView
@@ -131,28 +138,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_onboard_keyword"
                     android:gravity="center"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_club"
+                    android:text="@string/onboard_first_keyword_club"
                     android:textColor="@color/orange500" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/b2_bold_14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="4dp"
+                    android:background="@drawable/bg_onboard_keyword"
                     android:gravity="center"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="4dp"
-                    android:text="@string/onboard_first_etc_group"
+                    android:text="@string/onboard_first_keyword_club"
                     android:textColor="@color/orange500" />
 
                 <TextView
@@ -190,6 +198,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="24dp"
+            android:onClick="@{() -> fragment.moveToOnboardSecond()}"
             android:text="@string/all_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
