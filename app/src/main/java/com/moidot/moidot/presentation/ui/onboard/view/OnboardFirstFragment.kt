@@ -11,8 +11,13 @@ import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.LIGHT_IC
 class OnboardFirstFragment : BaseFragment<FragmentOnboardFirstBinding>(R.layout.fragment_onboard_first) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragment = this
+        initBinding()
         initStatusBar()
+    }
+
+    private fun initBinding() {
+        binding.fragment = this
+        binding.activity = (activity as OnboardActivity)
     }
 
     private fun initStatusBar() {
@@ -25,7 +30,4 @@ class OnboardFirstFragment : BaseFragment<FragmentOnboardFirstBinding>(R.layout.
             .commit()
     }
 
-    fun exitOnboard() {
-        (activity as OnboardActivity).finish()
-    }
 }
