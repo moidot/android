@@ -2,6 +2,8 @@ package com.moidot.moidot.presentation.ui.onboard.view
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityOnboardBinding
 import com.moidot.moidot.presentation.ui.auth.signin.view.SignInActivity
@@ -13,17 +15,12 @@ class OnboardActivity : BaseActivity<ActivityOnboardBinding>(R.layout.activity_o
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initView()
+        initNavigation()
     }
 
-    private fun initView() {
-        initFragmentView()
-    }
-
-    private fun initFragmentView() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.onboard_fcv, OnboardFirstFragment())
-            .commit()
+    private fun initNavigation() {
+        val navHost = supportFragmentManager.findFragmentById(R.id.onboard_fcv) as NavHostFragment
+        navHost.findNavController().setGraph(R.navigation.onboard_nav_graph, intent.extras)
     }
 
     fun exitOnboard() {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboard_nav_graph"
+    app:startDestination="@id/onboardFirstFragment">
+
+    <fragment
+        android:id="@+id/onboardFirstFragment"
+        android:name="com.moidot.moidot.presentation.ui.onboard.view.OnboardFirstFragment"
+        android:label="fragment_onboard_first"
+        tools:layout="@layout/fragment_onboard_first">
+        <action
+            android:id="@+id/action_onboardFirstFragment_to_onboardSecondFragment"
+            app:destination="@id/onboardSecondFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/onboardSecondFragment"
+        android:label="fragment_onboard_second"
+        android:name="com.moidot.moidot.presentation.ui.onboard.view.OnboardSecondFragment"
+        tools:layout="@layout/fragment_onboard_second" />
+</navigation>

@@ -6,6 +6,7 @@ plugins {
     id("kotlin-kapt")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 val properties = Properties()

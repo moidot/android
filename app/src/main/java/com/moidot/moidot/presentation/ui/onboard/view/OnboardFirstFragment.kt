@@ -2,6 +2,7 @@ package com.moidot.moidot.presentation.ui.onboard.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentOnboardFirstBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
@@ -25,9 +26,7 @@ class OnboardFirstFragment : BaseFragment<FragmentOnboardFirstBinding>(R.layout.
     }
 
     fun moveToOnboardSecond() {
-        (activity as OnboardActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.onboard_fcv, OnboardSecondFragment())
-            .commit()
+        findNavController().navigate(OnboardFirstFragmentDirections.actionOnboardFirstFragmentToOnboardSecondFragment())
     }
 
 }
