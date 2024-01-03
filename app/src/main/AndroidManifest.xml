@@ -30,13 +30,11 @@
                     android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.ui.main.view.MainActivity"
-            android:exported="false"/>
 
         <activity
-            android:name=".presentation.ui.onboard.view.OnboardActivity"
-            android:exported="true" >
+            android:name=".presentation.ui.splash.view.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -44,7 +42,15 @@
         </activity>
 
         <activity
-            android:name=".presentation.ui.auth.signin.view.SignInActivity"
+            android:name=".presentation.ui.main.MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.ui.onboard.view.OnboardActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.ui.auth.SignInActivity"
             android:exported="false" />
     </application>
 

@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.group
+package com.moidot.moidot.presentation.ui.main.group
 
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentGroupBinding

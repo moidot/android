@@ -6,7 +6,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.chip.Chip
 import com.moidot.moidot.R
@@ -14,13 +14,13 @@ import com.moidot.moidot.data.data.OnboardItem
 import com.moidot.moidot.databinding.FragmentOnboardSecondBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
 import com.moidot.moidot.presentation.ui.onboard.adapter.OnBoardingAdapter
-import com.moidot.moidot.presentation.ui.onboard.viewmodel.OnboardViewModel
+import com.moidot.moidot.presentation.ui.onboard.viewmodel.OnboardFragmentViewModel
 import com.moidot.moidot.presentation.util.StatusBarColorUtil
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 
 class OnboardSecondFragment : BaseFragment<FragmentOnboardSecondBinding>(R.layout.fragment_onboard_second) {
 
-    private val viewModel: OnboardViewModel by activityViewModels()
+    private val viewModel: OnboardFragmentViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

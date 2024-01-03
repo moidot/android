@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.home
+package com.moidot.moidot.presentation.ui.main.home
 
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentHomeBinding

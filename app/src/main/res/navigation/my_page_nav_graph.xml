@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.moidot.moidot.presentation.ui.mypage.MyPageFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.mypage.MyPageFragment"
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" />
 

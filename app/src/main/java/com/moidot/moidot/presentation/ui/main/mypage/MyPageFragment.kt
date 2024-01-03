@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.mypage
+package com.moidot.moidot.presentation.ui.main.mypage
 
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentMyPageBinding
