@@ -2,16 +2,20 @@ package com.moidot.moidot.presentation.ui.onboard.view
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityOnboardBinding
-import com.moidot.moidot.presentation.ui.sign.SignInActivity
+import com.moidot.moidot.presentation.ui.auth.SignInActivity
 import com.moidot.moidot.presentation.ui.base.BaseActivity
+import com.moidot.moidot.presentation.ui.onboard.viewmodel.OnboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OnboardActivity : BaseActivity<ActivityOnboardBinding>(R.layout.activity_onboard) {
+
+    private val viewModel: OnboardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

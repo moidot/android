@@ -32,7 +32,7 @@
         </activity>
 
         <activity
-            android:name=".presentation.ui.splash.SplashActivity"
+            android:name=".presentation.ui.splash.view.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -50,7 +50,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".presentation.ui.sign.SignInActivity"
+            android:name=".presentation.ui.auth.SignInActivity"
             android:exported="false" />
     </application>
 
