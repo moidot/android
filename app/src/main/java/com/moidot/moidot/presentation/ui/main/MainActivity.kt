@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.view
+package com.moidot.moidot.presentation.ui.main
 
 import android.os.Bundle
 import androidx.navigation.NavController

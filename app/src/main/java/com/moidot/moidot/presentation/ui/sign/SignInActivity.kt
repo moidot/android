@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.auth.signin.view
+package com.moidot.moidot.presentation.ui.sign
 
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySigninBinding

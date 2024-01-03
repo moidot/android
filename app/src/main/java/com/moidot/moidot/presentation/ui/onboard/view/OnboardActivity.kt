@@ -6,7 +6,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityOnboardBinding
-import com.moidot.moidot.presentation.ui.auth.signin.view.SignInActivity
+import com.moidot.moidot.presentation.ui.sign.SignInActivity
 import com.moidot.moidot.presentation.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.calendar
+package com.moidot.moidot.presentation.ui.main.calendar
 
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentCalendarBinding
