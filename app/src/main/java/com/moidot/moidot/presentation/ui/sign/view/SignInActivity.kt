@@ -6,6 +6,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.moidot.moidot.BuildConfig
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySignInBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
@@ -24,10 +25,15 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
+        initSdk()
     }
 
     private fun initBinding() {
         binding.activity = this
+    }
+
+    private fun initSdk() {
+        NaverIdLoginSDK.initialize(this, BuildConfig.NAVER_CLIENT_ID, BuildConfig.NAVER_CLIENT_SECRET_KEY, getString(R.string.app_name))
     }
 
     fun onclickKakaoSignIn() {
