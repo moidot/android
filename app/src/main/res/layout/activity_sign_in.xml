@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="activity"
+            type="com.moidot.moidot.presentation.ui.sign.SignInActivity" />
 
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.ui.sign.SignInViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,34 +17,35 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/login_guide_line_top"
+            android:id="@+id/sign_in_guide_line_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.13" />
 
         <ImageView
-            android:id="@+id/login_iv_logo"
+            android:id="@+id/sign_in_iv_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_login_logo"
+            android:src="@drawable/img_sign_in_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_guide_line_top" />
+            app:layout_constraintTop_toBottomOf="@id/sign_in_guide_line_top" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@id/login_guide_line_bottom"
+            app:layout_constraintBottom_toTopOf="@id/sign_in_guide_line_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/login_btn_kakao"
+                android:id="@+id/sign_in_btn_kakao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:onClick="@{() -> activity.onclickKakaoSignIn()}"
                 app:cardBackgroundColor="#FFDF36"
                 app:cardCornerRadius="12dp"
                 app:strokeWidth="0dp">
@@ -51,13 +58,13 @@
                     android:layout_marginVertical="12dp"
                     android:drawablePadding="20dp"
                     android:gravity="center"
-                    android:text="@string/login_kakao_btn"
+                    android:text="@string/sign_in_kakao_btn"
                     android:textColor="@color/font_black100"
-                    app:drawableStartCompat="@drawable/ic_login_logo_kakao" />
+                    app:drawableStartCompat="@drawable/ic_sign_in_logo_kakao" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/login_btn_naver"
+                android:id="@+id/sign_in_btn_naver"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
@@ -73,13 +80,13 @@
                     android:layout_marginVertical="12dp"
                     android:drawablePadding="20dp"
                     android:gravity="center"
-                    android:text="@string/login_naver_btn"
+                    android:text="@string/sign_in_naver_btn"
                     android:textColor="@color/white"
-                    app:drawableStartCompat="@drawable/ic_login_logo_naver" />
+                    app:drawableStartCompat="@drawable/ic_sign_in_logo_naver" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/login_btn_google"
+                android:id="@+id/sign_in_btn_google"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
@@ -97,9 +104,9 @@
                     android:layout_marginVertical="12dp"
                     android:drawablePadding="20dp"
                     android:gravity="center"
-                    android:text="@string/login_google_btn"
+                    android:text="@string/sign_in_google_btn"
                     android:textColor="@color/font_black100"
-                    app:drawableStartCompat="@drawable/ic_login_logo_google" />
+                    app:drawableStartCompat="@drawable/ic_sign_in_logo_google" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -116,35 +123,35 @@
                     android:paddingVertical="16dp">
 
                     <TextView
-                        android:id="@+id/login_tv_info_title"
+                        android:id="@+id/sign_in_tv_info_title"
                         style="@style/b2_bold_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/login_info_title"
+                        android:text="@string/sign_in_info_title"
                         android:textColor="@color/orange500"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/login_tv_info_content"
+                        android:id="@+id/sign_in_tv_info_content"
                         style="@style/c1_reg_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:gravity="center"
-                        android:text="@string/login_info_content"
+                        android:text="@string/sign_in_info_content"
                         android:textColor="@color/gray500"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/login_tv_info_title" />
+                        app:layout_constraintTop_toBottomOf="@id/sign_in_tv_info_title" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/login_guide_line_bottom"
+            android:id="@+id/sign_in_guide_line_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

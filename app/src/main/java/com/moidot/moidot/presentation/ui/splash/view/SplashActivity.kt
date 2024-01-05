@@ -15,10 +15,4 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-    companion object {
-        const val ONBOARD = "onboard"
-        const val HOME = "home"
-        const val LOGIN = "login"
-    }
 }

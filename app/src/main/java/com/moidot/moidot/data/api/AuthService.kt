@@ -8,6 +8,6 @@ import retrofit2.http.GET
 
 interface AuthService {
 
-    @GET("/auth/signin")
+    @GET("/auth/signin/token")
     suspend fun getSignIn(@Body body: RequestSignIn): Response<ResponseSignIn>
 }
