@@ -50,8 +50,8 @@
             android:exported="false" />
 
         <activity
-            android:name=".presentation.ui.sign.SignInActivity"
-            android:exported="false" />
+            android:name=".presentation.ui.sign.view.SignInActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

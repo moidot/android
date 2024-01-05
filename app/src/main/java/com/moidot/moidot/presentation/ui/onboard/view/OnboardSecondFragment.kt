@@ -46,11 +46,11 @@ class OnboardSecondFragment : BaseFragment<FragmentOnboardSecondBinding>(R.layou
 
     private fun setOnBoardItems():MutableList<OnboardItem> {
         return mutableListOf<OnboardItem>().apply {
-            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_onboard_second_door)!!,resources.getString(R.string.onboard_second_title_social_login),resources.getString(R.string.onboard_second_content_social_login)))
-            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_login_logo)!!,resources.getString(R.string.onboard_second_title_moidot_space),resources.getString(R.string.onboard_second_content_moidot_space)))
-            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_login_logo)!!,resources.getString(R.string.onboard_second_title_invite),resources.getString(R.string.onboard_second_content_invite)))
-            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_login_logo)!!,resources.getString(R.string.onboard_second_title_recommend_place),resources.getString(R.string.onboard_second_content_recommend_place)))
-            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_login_logo)!!,resources.getString(R.string.onboard_second_title_vote_place),resources.getString(R.string.onboard_second_content_vote_place)))
+            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_onboard_second_door)!!,resources.getString(R.string.onboard_second_title_social_sign_in),resources.getString(R.string.onboard_second_content_social_sign_in)))
+            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_sign_in_logo)!!,resources.getString(R.string.onboard_second_title_moidot_space),resources.getString(R.string.onboard_second_content_moidot_space)))
+            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_sign_in_logo)!!,resources.getString(R.string.onboard_second_title_invite),resources.getString(R.string.onboard_second_content_invite)))
+            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_sign_in_logo)!!,resources.getString(R.string.onboard_second_title_recommend_place),resources.getString(R.string.onboard_second_content_recommend_place)))
+            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_sign_in_logo)!!,resources.getString(R.string.onboard_second_title_vote_place),resources.getString(R.string.onboard_second_content_vote_place)))
         }
     }
 
