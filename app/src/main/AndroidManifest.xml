@@ -51,7 +51,7 @@
 
         <activity
             android:name=".presentation.ui.sign.view.SignInActivity"
-            android:exported="true" />
+            android:exported="false" />
     </application>
 
 </manifest>
