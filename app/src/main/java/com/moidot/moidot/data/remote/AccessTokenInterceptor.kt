@@ -1,7 +1,7 @@
 package com.moidot.moidot.data.remote
 
 import android.content.SharedPreferences
-import com.moidot.moidot.presentation.ui.MoidotApplication.Companion.ACCESS_TOKEN
+import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ACCESS_TOKEN
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

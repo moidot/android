@@ -1,17 +1,18 @@
 package com.moidot.moidot.presentation.ui.sign.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import com.moidot.moidot.BuildConfig
 import com.moidot.moidot.BuildConfig.NAVER_CLIENT_ID
 import com.moidot.moidot.BuildConfig.NAVER_CLIENT_SECRET_KEY
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySignInBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
+import com.moidot.moidot.presentation.ui.main.MainActivity
 import com.moidot.moidot.presentation.ui.sign.model.Platform.KAKAO
 import com.moidot.moidot.presentation.ui.sign.model.Platform.NAVER
 import com.moidot.moidot.presentation.ui.sign.viewmodel.SignInViewModel
@@ -28,6 +29,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         super.onCreate(savedInstanceState)
         initBinding()
         initSdk()
+        setupObserver()
     }
 
     private fun initBinding() {
@@ -36,6 +38,17 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private fun initSdk() {
         NaverIdLoginSDK.initialize(this, NAVER_CLIENT_ID, NAVER_CLIENT_SECRET_KEY, getString(R.string.app_name))
+    }
+
+    private fun setupObserver() {
+        viewModel.loginSuccessState.observe(this) {
+            if (it) moveToHome()
+        }
+    }
+
+    private fun moveToHome() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     fun onclickKakaoSignIn() { // 카카오 로그인
