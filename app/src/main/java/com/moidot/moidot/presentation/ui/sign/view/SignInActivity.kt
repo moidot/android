@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.sign
+package com.moidot.moidot.presentation.ui.sign.view
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -9,6 +9,7 @@ import com.kakao.sdk.user.UserApiClient
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySignInBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
+import com.moidot.moidot.presentation.ui.sign.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

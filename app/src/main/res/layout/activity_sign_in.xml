@@ -5,11 +5,11 @@
     <data>
         <variable
             name="activity"
-            type="com.moidot.moidot.presentation.ui.sign.SignInActivity" />
+            type="com.moidot.moidot.presentation.ui.sign.view.SignInActivity" />
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.ui.sign.SignInViewModel" />
+            type="com.moidot.moidot.presentation.ui.sign.viewmodel.SignInViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
