@@ -14,9 +14,9 @@ class AccessTokenInterceptor @Inject constructor(private val sharedPreferences: 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder: Request.Builder = chain.request().newBuilder()
-        val atk: String? = sharedPreferences.getString(ACCESS_TOKEN, null)
-        if (atk != null) {
-            builder.addHeader("Authorization", "$atk")
+        val accessToken: String? = sharedPreferences.getString(ACCESS_TOKEN, null)
+        if (accessToken != null) {
+            builder.addHeader("Authorization", "$accessToken")
         }
         return chain.proceed(builder.build())
     }
