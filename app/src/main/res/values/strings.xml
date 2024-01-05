@@ -4,6 +4,7 @@
     <!-- common, all -->
     <string name="binding_error_msg">binding이 초기화되지 않았습니다.</string>
     <string name="all_next">다음</string>
+    <string name="all_cancel">취소하기</string>
 
     <!-- MainActivity -->
     <string name="main_btm_nav_home_title">홈</string>

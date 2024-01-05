@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dialog"
+            type="com.moidot.moidot.presentation.util.PopupDeleteDialog" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_popup"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/popup_delete_dialog_tv_title"
+            style="@style/b1_bold_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{dialog.title}"
+            android:textColor="@color/gray700"
+            tools:text="정말 ‘모이닷 팀 프로젝트’ 에서 나가시겠어요?" />
+
+        <TextView
+            android:id="@+id/popup_delete_dialog_tv_content"
+            style="@style/c1_reg_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{dialog.content}"
+            android:textColor="@color/gray500"
+            tools:text="모이닷 스페이스를 나가게 되면 입력하신 정보가
+삭제되고 스페이스 리스트에서 조회가 불가능합니다." />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/popup_delete_dialog_tv_cancel"
+                style="@style/b2_reg_14"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:onClick="@{() -> dialog.dismiss()}"
+                android:text="@string/all_cancel"
+                android:textColor="@color/orange500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/popup_delete_dialog_btn_delete"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/popup_delete_dialog_btn_delete"
+                style="@style/b2_bold_14"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:backgroundTint="@color/red400"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{() -> dialog.onClickDelete()}"
+                android:paddingVertical="13dp"
+                android:text="@{dialog.btnTxt}"
+                android:textColor="@color/white"
+                app:cornerRadius="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@id/popup_delete_dialog_tv_cancel"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="모이닷 스페이스 나가기" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
