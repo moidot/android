@@ -9,6 +9,8 @@ import com.kakao.sdk.user.UserApiClient
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySignInBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
+import com.moidot.moidot.presentation.ui.sign.model.Platform.KAKAO
+import com.moidot.moidot.presentation.ui.sign.model.Platform.NAVER
 import com.moidot.moidot.presentation.ui.sign.viewmodel.SignInViewModel
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.OAuthLoginCallback
@@ -35,13 +37,13 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     }
 
     private val kakaoAccountSignInCallBack: (OAuthToken?, Throwable?) -> Unit = { token, _ ->
-        if (token != null) viewModel.signInWithKakao(token.accessToken)
+        if (token != null) viewModel.signInWithSocialToken(token.accessToken, KAKAO.name)
     }
 
     private fun signInWithKakaoTalk(apiClient: UserApiClient) {
         apiClient.loginWithKakaoTalk(this) { token, error ->
             if (error is ClientError && error.reason == ClientErrorCause.Cancelled) return@loginWithKakaoTalk
-            if (token != null) viewModel.signInWithKakao(token.accessToken) else signInWithKakaoAccount(apiClient)
+            if (token != null) viewModel.signInWithSocialToken(token.accessToken, KAKAO.name) else signInWithKakaoAccount(apiClient)
         }
     }
 
@@ -51,13 +53,9 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     fun onclickNaverSignIn() {
         val oauthLoginCallback = object : OAuthLoginCallback {
-            override fun onSuccess() { // 로그인 성공
-
-            }
+            override fun onSuccess() = viewModel.signInWithSocialToken(NaverIdLoginSDK.getAccessToken().toString(), NAVER.name)
             override fun onFailure(httpStatus: Int, message: String) {}
-            override fun onError(errorCode: Int, message: String) {
-                onFailure(errorCode, message)
-            }
+            override fun onError(errorCode: Int, message: String) = onFailure(errorCode, message)
         }
         NaverIdLoginSDK.authenticate(this@SignInActivity, oauthLoginCallback)
     }
