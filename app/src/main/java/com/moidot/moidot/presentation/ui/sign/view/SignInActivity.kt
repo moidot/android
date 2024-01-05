@@ -10,12 +10,15 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySignInBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
 import com.moidot.moidot.presentation.ui.sign.viewmodel.SignInViewModel
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.OAuthLoginCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
 
     private val viewModel: SignInViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
@@ -44,6 +47,19 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private fun signInWithKakaoAccount(apiClient: UserApiClient) {
         apiClient.loginWithKakaoAccount(this, callback = kakaoAccountSignInCallBack)
+    }
+
+    fun onclickNaverSignIn() {
+        val oauthLoginCallback = object : OAuthLoginCallback {
+            override fun onSuccess() { // 로그인 성공
+
+            }
+            override fun onFailure(httpStatus: Int, message: String) {}
+            override fun onError(errorCode: Int, message: String) {
+                onFailure(errorCode, message)
+            }
+        }
+        NaverIdLoginSDK.authenticate(this@SignInActivity, oauthLoginCallback)
     }
 
 }
