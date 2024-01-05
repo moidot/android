@@ -7,6 +7,8 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.moidot.moidot.BuildConfig
+import com.moidot.moidot.BuildConfig.NAVER_CLIENT_ID
+import com.moidot.moidot.BuildConfig.NAVER_CLIENT_SECRET_KEY
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySignInBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
@@ -33,10 +35,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     }
 
     private fun initSdk() {
-        NaverIdLoginSDK.initialize(this, BuildConfig.NAVER_CLIENT_ID, BuildConfig.NAVER_CLIENT_SECRET_KEY, getString(R.string.app_name))
+        NaverIdLoginSDK.initialize(this, NAVER_CLIENT_ID, NAVER_CLIENT_SECRET_KEY, getString(R.string.app_name))
     }
 
-    fun onclickKakaoSignIn() {
+    fun onclickKakaoSignIn() { // 카카오 로그인
         UserApiClient.instance.apply {
             if (isKakaoTalkLoginAvailable(this@SignInActivity)) signInWithKakaoTalk(this) else signInWithKakaoAccount(this)
         }
@@ -57,7 +59,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         apiClient.loginWithKakaoAccount(this, callback = kakaoAccountSignInCallBack)
     }
 
-    fun onclickNaverSignIn() {
+    fun onclickNaverSignIn() { // 네이버 로그인
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() = viewModel.signInWithSocialToken(NaverIdLoginSDK.getAccessToken().toString(), NAVER.name)
             override fun onFailure(httpStatus: Int, message: String) {}
