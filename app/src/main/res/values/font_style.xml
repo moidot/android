@@ -76,7 +76,7 @@
     <style name="b2_bold_14" parent="@android:style/Widget.DeviceDefault.TextView">
         <item name="android:fontFamily">@font/pretendard_bold</item>
         <item name="lineHeight">21dp</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">12dp</item>
     </style>
 
     <style name="b2_med_14" parent="@android:style/Widget.DeviceDefault.TextView">
