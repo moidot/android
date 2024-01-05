@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="activity"
             type="com.moidot.moidot.presentation.ui.sign.view.SignInActivity" />
@@ -68,6 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
+                android:onClick="@{() -> activity.onclickNaverSignIn()}"
                 app:cardBackgroundColor="#00C73C"
                 app:cardCornerRadius="12dp"
                 app:strokeWidth="0dp">

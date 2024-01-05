@@ -25,6 +25,8 @@ android {
 
         buildConfigField("String", "KAKAO_NATIVE_APP_KEY", properties.getProperty("kakao_native_app_key"))
         buildConfigField("String", "KAKAO_REST_API_KEY", properties.getProperty("kakao_rest_api_key"))
+        buildConfigField("String", "NAVER_CLIENT_ID", properties.getProperty("naver_client_id"))
+        buildConfigField("String", "NAVER_CLIENT_SECRET_KEY", properties.getProperty("naver_client_secret_key"))
         buildConfigField("String", "BASE_URL", properties.getProperty("base_url"))
         manifestPlaceholders["MANIFEST_KAKAO_NATIVE_APP_KEY"] = properties.getProperty("manifest_kakao_native_app_key")
 
@@ -92,6 +94,8 @@ dependencies {
     // Kakao
     implementation("com.kakao.sdk:v2-user:2.19.0") // signin
 
+    // Naver
+    implementation("com.navercorp.nid:oauth:5.9.0")
 }
 
 kapt {
