@@ -19,7 +19,5 @@ class MoidotApplication : Application() {
 
     companion object {
         const val MOIDOT_APP = "moidot_app"
-        const val ACCESS_TOKEN = "access_token"
-        const val REFRESH_TOKEN = "refresh_token"
     }
 }

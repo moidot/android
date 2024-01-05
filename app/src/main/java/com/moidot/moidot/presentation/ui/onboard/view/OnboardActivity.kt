@@ -29,7 +29,7 @@ class OnboardActivity : BaseActivity<ActivityOnboardBinding>(R.layout.activity_o
 
     fun exitOnboard() {
         finish()
-        // TODO 온보딩 읽음 여부 prefs 저장
+        viewModel.saveOnboardDone()
         startActivity(Intent(this, SignInActivity::class.java))
     }
 }

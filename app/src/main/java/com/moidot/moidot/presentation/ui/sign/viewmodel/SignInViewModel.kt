@@ -4,23 +4,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moidot.moidot.data.remote.response.ResponseSignIn
 import com.moidot.moidot.domain.repository.AuthRepository
+import com.moidot.moidot.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
+class SignInViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val authRepository: AuthRepository
+) : ViewModel() {
 
-    private val _signInResult = MutableLiveData<ResponseSignIn.Data>()
-    val signInResult : LiveData<ResponseSignIn.Data> = _signInResult
+    private val _loginSuccessState = MutableLiveData<Boolean>()
+    val loginSuccessState: LiveData<Boolean> = _loginSuccessState
 
     fun signInWithSocialToken(token: String, platform: String) {
-        viewModelScope.launch { // TODO refresh 토큰 및 실패 처리
+        viewModelScope.launch {
             authRepository.signIn(token, platform).onSuccess {
-                _signInResult.value = it.data
+                saveUserTokens(it.data.accessToken, it.data.refreshToken)
+                _loginSuccessState.value = true
             }
+        }
+    }
+
+    private fun saveUserTokens(accessToken: String, refreshToken: String) {
+        userRepository.apply {
+            saveAccessToken(accessToken)
+            saveRefreshToken(refreshToken)
         }
     }
 }
