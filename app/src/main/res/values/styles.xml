@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="btn_orange500" parent="Widget.Material3.Button">
         <item name="cornerRadius">12dp</item>
         <item name="android:textSize">14dp</item>
@@ -25,6 +26,15 @@
 
     <style name="custom_dialog" parent="Theme.MaterialComponents.Dialog">
         <item name="android:layout_marginHorizontal">20dp</item>
+    </style>
+
+    <style name="MaterialButton.12.14.M" parent="Widget.Material3.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingVertical">12dp</item>
     </style>
 
 </resources>
