@@ -42,4 +42,14 @@
     <string name="sign_in_google_btn">Google로 시작하기</string>
     <string name="sign_in_info_title">왜 소셜로그인으로 로그인하나요?</string>
     <string name="sign_in_info_content">모이닷은 여러분들의 모임관리가 수월하도록 장소 조율\n내역을 저장하기 때문에 소셜로그인이 필요합니다.\n히스토리 저장 외의 목적으로 개인정보를 수집하지 않습니다.</string>
+
+    <!-- GroupFragment -->
+    <string name="group_top_bar">모이닷 스페이스</string>
+    <string name="group_search_hint">참여중인 모임을 검색해보세요.</string>
+    <string name="group_filter_newest">최신순</string>
+    <string name="group_filter_oldest">오래된 순</string>
+    <string name="group_filter_abc">가나다순</string>
+    <string name="group_empty_title">앗, 아직 모임이 없어요!</string>
+    <string name="group_empty_content">모임장이 되어\n모이닷 스페이스를 만들어볼까요?</string>
+    <string name="group_empty_btn_add_group">모이닷 스페이스 만들기</string>
 </resources>
