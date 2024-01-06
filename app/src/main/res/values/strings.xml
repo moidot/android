@@ -53,6 +53,7 @@
     <string name="group_empty_content">모임장이 되어\n모이닷 스페이스를 만들어볼까요?</string>
     <string name="group_empty_btn_add_group">모이닷 스페이스 만들기</string>
     <string name="group_exist_exit_group"><u>모이닷 스페이스 나가기</u></string>
+    <string name="group_end_exit_mode">나가기 모드 끝내기</string>
     <!-- item_my_group -->
     <string name="group_vote_state_voting">모임장소 투표 중</string>
     <string name="group_vote_state_done">모임장소 확정</string>
