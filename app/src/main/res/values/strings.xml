@@ -52,4 +52,12 @@
     <string name="group_empty_title">앗, 아직 모임이 없어요!</string>
     <string name="group_empty_content">모임장이 되어\n모이닷 스페이스를 만들어볼까요?</string>
     <string name="group_empty_btn_add_group">모이닷 스페이스 만들기</string>
+    <string name="group_exist_exit_group">모이닷 스페이스 나가기</string>
+
+    <!-- item_my_group -->
+    <string name="group_vote_state_voting">모임장소 투표 중</string>
+    <string name="group_vote_state_done">모임장소 확정</string>
+    <string name="group_add_member">모임원 추가</string>
+    <string name="group_exit">나가기</string>
+    <string name="group_cannot_exit_info">투표중인\n모이닷 스페이스는\n나갈 수 없어요.</string>
 </resources>

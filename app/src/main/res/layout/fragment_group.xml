@@ -100,7 +100,6 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
@@ -113,6 +112,8 @@
                 android:id="@+id/fg_group_cv_container_group_empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:strokeWidth="0dp">
@@ -153,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="40dp"
                         android:layout_marginTop="16dp"
-                        android:backgroundTint="#33F97316"
+                        android:backgroundTint="@color/orange500_20"
                         android:text="@string/group_empty_btn_add_group"
                         android:textColor="@color/orange500" />
 
@@ -163,8 +164,39 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fg_group_cl_container_group_exist"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fg_group_rv_my_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="2dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@+id/fg_group_tv_exit_group"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_my_group" />
+
+                <TextView
+                    android:id="@+id/fg_group_tv_exit_group"
+                    style="@style/c1_reg_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingHorizontal="12dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/group_exist_exit_group"
+                    android:textColor="@color/gray400"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
 
