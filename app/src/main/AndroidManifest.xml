@@ -43,6 +43,7 @@
 
         <activity
             android:name=".presentation.ui.main.MainActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
 
         <activity
