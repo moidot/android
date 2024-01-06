@@ -1,7 +1,6 @@
 package com.moidot.moidot.presentation.ui.main.group
 
-import android.os.Bundle
-import android.view.View
+import android.content.Context
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
@@ -10,13 +9,14 @@ import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.DARK_ICO
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
 
 class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group) {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         setStatusBarState(STATUS_BAR_LIGHT)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         setStatusBarState(STATUS_BAR_DARK)
     }
 
