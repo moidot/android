@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.ui.main.group.GroupFragment" />
 
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.ui.main.group.GroupViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fg_group_ll_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,16 +50,32 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="12dp"
-                android:background="@drawable/bg_white_12"
+                android:background="@{viewModel.isSearchActive ? @drawable/bg_group_search_active : @drawable/bg_group_search_normal}"
                 android:hint="@string/group_search_hint"
-                android:imeOptions="actionDone"
+                android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLength="20"
                 android:maxLines="1"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="13dp"
-                android:textColorHint="@color/slate400" />
-        </LinearLayout>
+                android:textColorHint="@color/slate400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/fg_group_iv_search_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:onClick="@{() -> fragment.onCancelSearch()}"
+                android:src="@drawable/ic_group_search_cancel"
+                android:visibility="@{viewModel.searchWord.length() > 0 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/fg_group_etv_search"
+                app:layout_constraintEnd_toEndOf="@id/fg_group_etv_search"
+                app:layout_constraintTop_toTopOf="@id/fg_group_etv_search" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/fg_group_cv_filter"
