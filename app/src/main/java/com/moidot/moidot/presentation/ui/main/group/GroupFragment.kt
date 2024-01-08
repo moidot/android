@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.moidot.moidot.R
+import com.moidot.moidot.data.remote.response.ResponseMyGroupList
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
 import com.moidot.moidot.presentation.ui.main.group.adater.MyGroupAdapter
@@ -12,6 +13,8 @@ import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.DARK_ICO
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
 
 class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group) {
+
+    private lateinit var myGroupAdapter: MyGroupAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -24,8 +27,16 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     }
 
     private fun initAdapter() {
-        val myGroupAdapter = MyGroupAdapter()
-        myGroupAdapter.submitList(listOf<String>("모이닷 팀 스페이스", "여기어때", "야놀자", "오늘의집", "모이닷 팀 스페이스", "오늘의집", "오늘의집", "네이버", "카카오", "다음", "쿠팡"))
+        myGroupAdapter = MyGroupAdapter()
+
+        val tempList = mutableListOf<ResponseMyGroupList.Data>()
+        tempList.add(ResponseMyGroupList.Data(groupId = 0, groupName = "모이닷 스페이스", groupDate = "2022.08.21"))
+        tempList.add(ResponseMyGroupList.Data(groupId = 1, groupName = "네이버", groupDate = "2022.04.12"))
+        tempList.add(ResponseMyGroupList.Data(groupId = 2, groupName = "오늘의집", groupDate = "2024.01.02"))
+        tempList.add(ResponseMyGroupList.Data(groupId = 3, groupName = "ABC초콜릿", groupDate = "2024.01.01"))
+        tempList.add(ResponseMyGroupList.Data(groupId = 4, groupName = "1등하자", groupDate = "2022.03.12"))
+
+        myGroupAdapter.submitList(tempList.toList())
         binding.fgGroupRvMyGroup.adapter = myGroupAdapter
     }
 
