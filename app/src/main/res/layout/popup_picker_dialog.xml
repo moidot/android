@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dialog"
+            type="com.moidot.moidot.presentation.util.popup.PopupPickerDialog" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/bg_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/popup_picker_dialog_tv_title"
+            style="@style/b1_bold_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:text="@{dialog.title}"
+            android:textColor="@color/gray600"
+            app:layout_constraintBottom_toTopOf="@id/popup_picker_dialog_rv_items"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="모임 정렬" />
+
+        <ImageView
+            android:id="@+id/popup_picker_dialog_btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> dialog.dismiss()}"
+            android:padding="16dp"
+            android:src="@drawable/ic_popup_close"
+            app:layout_constraintBottom_toBottomOf="@id/popup_picker_dialog_tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/popup_picker_dialog_tv_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popup_picker_dialog_rv_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            android:clipToPadding="false"
+            android:layout_marginHorizontal="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/popup_picker_dialog_tv_title"
+            tools:listitem="@layout/item_popup_picker" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

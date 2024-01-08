@@ -15,6 +15,7 @@ import com.moidot.moidot.presentation.util.StatusBarColorUtil
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
 import com.moidot.moidot.presentation.util.hideKeyboard
+import com.moidot.moidot.presentation.util.popup.PopupPickerDialog
 
 class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group) {
 
@@ -81,6 +82,12 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
             this.hideKeyboard()
         }
     }
+
+    fun onSearchFilterListener() {
+        val filters = listOf("가나다순", "최신순", "오래된순")
+        PopupPickerDialog(requireContext(), "모임 정렬", filters).show()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

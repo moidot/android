@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="fragment"
             type="com.moidot.moidot.presentation.ui.main.group.GroupFragment" />
@@ -68,8 +69,8 @@
                 android:id="@+id/fg_group_iv_search_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
                 android:onClick="@{() -> fragment.onCancelSearch()}"
+                android:padding="16dp"
                 android:src="@drawable/ic_group_search_cancel"
                 android:visibility="@{viewModel.searchWord.length() > 0 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@id/fg_group_etv_search"
@@ -84,6 +85,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:background="@color/white"
+            android:onClick="@{() -> fragment.onSearchFilterListener()}"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="12dp"
             app:layout_constraintStart_toStartOf="parent"
