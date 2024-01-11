@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moidot.moidot.data.remote.response.ResponseMyGroupList
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.domain.repository.GroupRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,7 +34,6 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
         viewModelScope.launch {
             groupRepository.getMyGroupList().onSuccess {
                 _myGroupList.value = it.data
-                Log.d("kite", it.data.toString())
             }
         }
     }

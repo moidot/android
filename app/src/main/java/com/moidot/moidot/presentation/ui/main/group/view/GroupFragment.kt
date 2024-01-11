@@ -17,7 +17,9 @@ import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.DARK_ICO
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
 import com.moidot.moidot.presentation.util.hideKeyboard
 import com.moidot.moidot.presentation.util.popup.PopupPickerDialog
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group) {
 
     private lateinit var myGroupAdapter: MyGroupAdapter
