@@ -1,13 +1,19 @@
-package com.moidot.moidot.presentation.ui.main.group
+package com.moidot.moidot.presentation.ui.main.group.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.remote.response.ResponseMyGroupList
+import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
+import com.moidot.moidot.domain.repository.GroupRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class GroupViewModel @Inject constructor() : ViewModel() {
+class GroupViewModel @Inject constructor(private val groupRepository: GroupRepository) : ViewModel() {
 
     private val _searchWord = MutableLiveData<String>()
     val searchWord: LiveData<String> = _searchWord
@@ -17,6 +23,22 @@ class GroupViewModel @Inject constructor() : ViewModel() {
 
     private val _currentFilterTxt = MutableLiveData<String>("최신순")
     val currentFilterTxt: LiveData<String> = _currentFilterTxt
+
+    private val _myGroupList = MutableLiveData<List<ResponseParticipateGroup.Data>>()
+    val myGroupList: LiveData<List<ResponseParticipateGroup.Data>> = _myGroupList
+
+    init {
+        loadMyGroupList()
+    }
+
+    private fun loadMyGroupList() {
+        viewModelScope.launch {
+            groupRepository.getMyGroupList().onSuccess {
+                _myGroupList.value = it.data
+                Log.d("kite", it.data.toString())
+            }
+        }
+    }
 
     fun setSearchWord(word: String) {
         _searchWord.value = word
@@ -34,7 +56,7 @@ class GroupViewModel @Inject constructor() : ViewModel() {
         return _currentFilterTxt.value!!
     }
 
-    fun setCurrentFilterTxt(filterTxt:String) {
+    fun setCurrentFilterTxt(filterTxt: String) {
         _currentFilterTxt.value = filterTxt
     }
 
