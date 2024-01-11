@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 class PopupPickerDialog(
     context: Context,
     val title: String,
-    val popupItems: List<String>,
-    var currentSelectedTxt: String,
+    private val popupItems: List<String>,
+    private var currentSelectedTxt: String,
     private val onItemSelectedListener: PopupPickerDialogListener
 ) : Dialog(context, R.style.custom_dialog) {
     private lateinit var binding: PopupPickerDialogBinding
@@ -55,15 +55,16 @@ class PopupPickerDialog(
         pickerAdapter = PickerAdapter(popupItems, currentSelectedTxt, ::onSelectItem)
         binding.popupPickerDialogRvItems.apply {
             setHasFixedSize(true)
+            itemAnimator = null
             adapter = pickerAdapter
         }
     }
 
     private fun onSelectItem(selectedTxt: String) {
-        currentSelectedTxt = selectedTxt
+        pickerAdapter.updateCurrentSelectedTxt(selectedTxt)
         CoroutineScope(Dispatchers.Main).launch {
-            delay(2000)
-            onItemSelectedListener.onSelectedTextListener(currentSelectedTxt)
+            delay(500)
+            onItemSelectedListener.onSelectedTextListener(selectedTxt)
             dismiss()
         }
     }

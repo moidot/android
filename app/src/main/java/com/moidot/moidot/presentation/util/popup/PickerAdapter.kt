@@ -8,22 +8,18 @@ import com.moidot.moidot.databinding.ItemPopupPickerBinding
 
 class PickerAdapter(
     private val popupItems: List<String>,
-    private val currentSelectedTxt: String,
+    private var currentSelectedTxt: String,
     private val onSelectItem: (String) -> Unit
 ) : RecyclerView.Adapter<PickerAdapter.PickerViewHolder>() {
 
     class PickerViewHolder(
         private val binding: ItemPopupPickerBinding,
-        private val currentSelectedTxt: String,
         private val onSelectItem: (String) -> Unit,
     ) : ViewHolder(binding.root) {
-        init {
-            onSelectItem(currentSelectedTxt)
-        }
 
-        fun bind(content: String) {
+        fun bind(content: String, selectedTxt: String) {
             binding.data = content
-            binding.selectedTxt = currentSelectedTxt // 배경 활성화
+            binding.selectedTxt = selectedTxt
             binding.root.setOnClickListener {
                 onSelectItem(content)
             }
@@ -32,12 +28,17 @@ class PickerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickerViewHolder {
         val binding = ItemPopupPickerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PickerViewHolder(binding, currentSelectedTxt, onSelectItem)
+        return PickerViewHolder(binding, onSelectItem)
     }
 
     override fun getItemCount(): Int = popupItems.size
 
     override fun onBindViewHolder(holder: PickerViewHolder, position: Int) {
-        holder.bind(popupItems[position])
+        holder.bind(popupItems[position], currentSelectedTxt)
+    }
+
+    fun updateCurrentSelectedTxt(newSelectedTxt: String) {
+        currentSelectedTxt = newSelectedTxt
+        notifyDataSetChanged()
     }
 }
