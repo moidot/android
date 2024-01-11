@@ -31,6 +31,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
         super.onViewCreated(view, savedInstanceState)
         initBinding()
         initView()
+        setupObservers()
     }
 
     private fun initBinding() {
@@ -85,9 +86,19 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
 
     fun onSearchFilterListener() {
         val filters = listOf("가나다순", "최신순", "오래된순")
-        PopupPickerDialog(requireContext(), "모임 정렬", filters).show()
+        val onItemSelectedListener = object : PopupPickerDialog.PopupPickerDialogListener {
+            override fun onSelectedTextListener(selectedTxt: String) {
+                viewModel.setCurrentFilterTxt(selectedTxt)
+            }
+        }
+        PopupPickerDialog(requireContext(), "모임 정렬", filters, viewModel.getCurrentFilterTxt(), onItemSelectedListener).show()
     }
 
+    private fun setupObservers() {
+        viewModel.currentFilterTxt.observe(viewLifecycleOwner) {
+            binding.fgGroupFilterTxt.text = it
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

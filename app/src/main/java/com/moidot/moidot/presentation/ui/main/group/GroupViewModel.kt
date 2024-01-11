@@ -15,15 +15,27 @@ class GroupViewModel @Inject constructor() : ViewModel() {
     private val _isSearchActive = MutableLiveData<Boolean>()
     val isSearchActive: LiveData<Boolean> = _isSearchActive
 
+    private val _currentFilterTxt = MutableLiveData<String>("최신순")
+    val currentFilterTxt: LiveData<String> = _currentFilterTxt
+
     fun setSearchWord(word: String) {
-         _searchWord.value = word
+        _searchWord.value = word
     }
 
-    fun setSearchActive(word:String) {
+    fun setSearchActive(word: String) {
         _isSearchActive.value = word.isNotEmpty()
     }
 
     fun setSearchActive(isActive: Boolean) {
         _isSearchActive.value = isActive
     }
+
+    fun getCurrentFilterTxt(): String {
+        return _currentFilterTxt.value!!
+    }
+
+    fun setCurrentFilterTxt(filterTxt:String) {
+        _currentFilterTxt.value = filterTxt
+    }
+
 }

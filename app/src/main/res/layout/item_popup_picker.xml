@@ -4,25 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="data"
             type="String" />
+
+        <variable
+            name="selectedTxt"
+            type="String" />
+
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null">
+        android:background="@{data == selectedTxt ? @drawable/bg_popup_picker_selected : null}">
 
         <TextView
             android:id="@+id/item_popup_picker_tv_content"
             style="@style/b2_reg_14"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
             android:paddingVertical="13dp"
             android:text="@{data}"
-            android:paddingHorizontal="12dp"
             android:textColor="@color/popup_picker_txt_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/item_popup_picker_iv_check"
@@ -35,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_chevron_down"
-            android:visibility="visible"
+            android:visibility="@{data == selectedTxt ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
