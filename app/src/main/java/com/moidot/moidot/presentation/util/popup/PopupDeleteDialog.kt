@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.util
+package com.moidot.moidot.presentation.util.popup
 
 import android.app.Dialog
 import android.content.Context

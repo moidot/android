@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="data"
+            type="com.moidot.moidot.data.remote.response.ResponseMyGroupList.Data" />
 
     </data>
 
@@ -38,56 +41,79 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="11dp"
+                android:text="@{data.groupName}"
                 android:textColor="@color/gray600"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="모이닷 팀 프로젝트" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/item_my_group_cv_vote_state_voting"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="11dp"
-                android:visibility="gone"
-                app:cardCornerRadius="8dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/item_my_group_tv_name"
-                app:layout_constraintTop_toBottomOf="@id/item_my_group_tv_name"
-                app:strokeWidth="0dp">
+                app:layout_constraintTop_toBottomOf="@id/item_my_group_tv_name">
 
-                <TextView
-                    style="@style/c2_med_11"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/item_my_group_cv_vote_state_voting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="4dp"
-                    android:text="@string/group_vote_state_voting"
-                    android:textColor="@color/gray600" />
-            </com.google.android.material.card.MaterialCardView>
+                    android:visibility="invisible"
+                    android:layout_marginStart="4dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeWidth="0dp">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/item_my_group_cv_vote_state_done"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="11dp"
-                android:backgroundTint="@color/orange500_20"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/item_my_group_tv_name"
-                app:layout_constraintTop_toBottomOf="@id/item_my_group_tv_name"
-                app:strokeWidth="0dp">
+                    <TextView
+                        style="@style/c2_med_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="12dp"
+                        android:layout_marginVertical="4dp"
+                        android:text="@string/group_vote_state_voting"
+                        android:textColor="@color/gray600" />
+                </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    style="@style/c2_bold_11"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/item_my_group_cv_vote_state_done"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="4dp"
-                    android:text="@string/group_vote_state_done"
-                    android:textColor="@color/orange500" />
-            </com.google.android.material.card.MaterialCardView>
+                    android:backgroundTint="@color/orange500_20"
+                    app:cardCornerRadius="8dp"
+                    android:visibility="visible"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeWidth="0dp">
+
+                    <TextView
+                        style="@style/c2_bold_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="12dp"
+                        android:layout_marginVertical="4dp"
+                        android:text="@string/group_vote_state_done"
+                        android:textColor="@color/orange500" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/item_my_group_tv_create_date"
+                    style="@style/c2_reg_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/gray400"
+                    android:text="@{@string/group_create_date(data.groupDate)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/item_my_group_cv_vote_state_done"
+                    tools:text="생성일시: 2024.01.23" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/item_my_group_ll_container_add_mode"
@@ -133,14 +159,13 @@
                     android:textColor="@color/slate400" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/item_my_group_ll_container_exit_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginEnd="39dp"
-                android:orientation="vertical"
                 android:gravity="center"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">

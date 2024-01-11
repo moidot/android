@@ -60,4 +60,5 @@
     <string name="group_add_member">모임원 추가</string>
     <string name="group_exit">나가기</string>
     <string name="group_cannot_exit_info">투표중인\n모이닷 스페이스는\n나갈 수 없어요.</string>
+    <string name="group_create_date">생성일시: %s</string>
 </resources>

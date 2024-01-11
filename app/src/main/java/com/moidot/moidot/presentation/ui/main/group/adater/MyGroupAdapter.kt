@@ -5,13 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.moidot.moidot.data.remote.response.ResponseMyGroupList
 import com.moidot.moidot.databinding.ItemMyGroupBinding
 
 
-class MyGroupAdapter : ListAdapter<String, MyGroupAdapter.MyGroupViewHolder>(diffUtil) {
+class MyGroupAdapter : ListAdapter<ResponseMyGroupList.Data, MyGroupAdapter.MyGroupViewHolder>(diffUtil) {
 
     class MyGroupViewHolder(private val binding: ItemMyGroupBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: String) {
+        fun bind(data: ResponseMyGroupList.Data) {
+            binding.data = data
         }
     }
 
@@ -25,12 +27,12 @@ class MyGroupAdapter : ListAdapter<String, MyGroupAdapter.MyGroupViewHolder>(dif
     }
 
     companion object {
-        private val diffUtil = object : ItemCallback<String>() {
-            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-                return oldItem == newItem
+        private val diffUtil = object : ItemCallback<ResponseMyGroupList.Data>() {
+            override fun areItemsTheSame(oldItem: ResponseMyGroupList.Data, newItem: ResponseMyGroupList.Data): Boolean {
+                return oldItem.groupId == newItem.groupId
             }
 
-            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            override fun areContentsTheSame(oldItem: ResponseMyGroupList.Data, newItem: ResponseMyGroupList.Data): Boolean {
                 return oldItem == newItem
             }
         }
