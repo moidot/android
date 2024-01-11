@@ -1,5 +1,6 @@
 package com.moidot.moidot.data.api
 
+import com.moidot.moidot.data.remote.response.ResponseRefreshToken
 import com.moidot.moidot.data.remote.response.ResponseSignIn
 import retrofit2.Response
 import retrofit2.http.GET
@@ -9,4 +10,7 @@ interface AuthService {
 
     @GET("/auth/signin/token")
     suspend fun getSignIn(@Query("token") token: String, @Query("platform") platform: String): Response<ResponseSignIn>
+
+    @GET("/auth/refresh")
+    suspend fun getRefreshToken(): Response<ResponseRefreshToken>
 }
