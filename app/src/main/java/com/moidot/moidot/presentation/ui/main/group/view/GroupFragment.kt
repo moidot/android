@@ -43,6 +43,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     }
 
     private fun initView() {
+        viewModel.loadMyGroupList()
         initAdapter()
         setSearchTextChangeListener()
         setSearchDoneListener()

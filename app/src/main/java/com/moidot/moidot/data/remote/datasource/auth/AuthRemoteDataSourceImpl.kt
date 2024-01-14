@@ -6,8 +6,8 @@ import com.moidot.moidot.data.remote.response.ResponseSignIn
 import javax.inject.Inject
 
 class AuthRemoteDataSourceImpl @Inject constructor(private val authService: AuthService) : AuthRemoteDataSource {
-    override suspend fun refreshToken(): Result<ResponseRefreshToken> {
-        val response = authService.getRefreshToken()
+    override suspend fun refreshToken(refreshToken:String): Result<ResponseRefreshToken> {
+        val response = authService.getRefreshToken(refreshToken)
         if (response.isSuccessful) {
             response.body()?.let { return Result.success(it) }
         }

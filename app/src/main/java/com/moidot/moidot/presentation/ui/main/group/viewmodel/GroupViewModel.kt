@@ -26,11 +26,7 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
     private val _myGroupList = MutableLiveData<List<ResponseParticipateGroup.Data>>()
     val myGroupList: LiveData<List<ResponseParticipateGroup.Data>> = _myGroupList
 
-    init {
-        loadMyGroupList()
-    }
-
-    private fun loadMyGroupList() {
+    fun loadMyGroupList() {
         viewModelScope.launch {
             groupRepository.getMyGroupList().onSuccess {
                 _myGroupList.value = it.data

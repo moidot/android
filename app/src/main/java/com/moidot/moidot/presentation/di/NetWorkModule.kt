@@ -1,11 +1,15 @@
 package com.moidot.moidot.presentation.di
 
+import android.content.Context
 import android.content.SharedPreferences
 import com.moidot.moidot.BuildConfig.BASE_URL
 import com.moidot.moidot.data.remote.AccessTokenInterceptor
+import com.moidot.moidot.data.remote.TokenAuthenticator
+import com.moidot.moidot.domain.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -27,9 +31,16 @@ object NetWorkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(accessTokenInterceptor: AccessTokenInterceptor): OkHttpClient {
+    fun provideTokenAuthenticator(@ApplicationContext context: Context, sharedPreferences: SharedPreferences, authRepository: dagger.Lazy<AuthRepository>): TokenAuthenticator {
+        return TokenAuthenticator(context, sharedPreferences, authRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(accessTokenInterceptor: AccessTokenInterceptor, tokenAuthenticator: TokenAuthenticator): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .authenticator(tokenAuthenticator)
             .addNetworkInterceptor(accessTokenInterceptor)
             .readTimeout(5, TimeUnit.SECONDS)
             .connectTimeout(5, TimeUnit.SECONDS)

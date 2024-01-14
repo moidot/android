@@ -5,7 +5,7 @@ import com.moidot.moidot.data.remote.response.ResponseSignIn
 
 interface AuthRemoteDataSource {
 
-    suspend fun refreshToken(): Result<ResponseRefreshToken>
+    suspend fun refreshToken(refreshToken: String): Result<ResponseRefreshToken>
 
     suspend fun signIn(token: String, platform: String): Result<ResponseSignIn>
 }
