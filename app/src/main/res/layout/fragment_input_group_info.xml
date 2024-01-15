@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -139,6 +140,18 @@
             app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_tv_group_name_title"
             bind:InputTextFieldActive="@{viewModel.groupName.length()}" />
 
+        <TextView
+            android:id="@+id/fg_input_group_info_tv_group_name_error"
+            style="@style/c2_med_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{viewModel.groupNameErrorMsg}"
+            android:textColor="@color/red500"
+            app:layout_constraintStart_toStartOf="@id/fg_input_group_info_etv_group_name"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_etv_group_name"
+            tools:text="특수문자로만 이루어져서는 안됩니다." />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/fg_input_group_info_btn_next"
             style="@style/btn_main"
@@ -147,6 +160,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="24dp"
             android:enabled="@{viewModel.isGroupInfoNextBtnActive()}"
+            android:onClick="@{() -> viewModel.checkIsValidGroupName()}"
             android:text="@string/all_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

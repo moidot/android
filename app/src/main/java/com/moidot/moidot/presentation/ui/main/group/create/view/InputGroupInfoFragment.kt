@@ -5,6 +5,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentInputGroupInfoBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
@@ -19,6 +20,7 @@ class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.lay
         super.onViewCreated(view, savedInstanceState)
         initBinding()
         initView()
+        setupObserver()
     }
 
     private fun initBinding() {
@@ -48,5 +50,15 @@ class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.lay
             }
             return@setOnEditorActionListener false
         }
+    }
+
+    private fun setupObserver() {
+        viewModel.isNavigationToLeaderInfoAllowed.observe(viewLifecycleOwner) {
+            if (it) moveToInputLeaderInfo()
+        }
+    }
+
+    private fun moveToInputLeaderInfo() {
+        findNavController().navigate(InputGroupInfoFragmentDirections.actionInputGroupInfoFragmentToInputLeaderInfoFragment())
     }
 }
