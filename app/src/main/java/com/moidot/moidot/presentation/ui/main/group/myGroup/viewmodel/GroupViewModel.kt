@@ -42,8 +42,8 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
         _isSearchActive.value = word.isNotEmpty()
     }
 
-    fun setSearchActive(isActive: Boolean) {
-        _isSearchActive.value = isActive
+    fun setSearchActive(flag: Boolean) {
+        _isSearchActive.value = flag
     }
 
     fun getCurrentFilterTxt(): String {
