@@ -56,7 +56,7 @@
 
         <activity
             android:name=".presentation.ui.main.group.create.view.CreateGroupActivity"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 
 </manifest>

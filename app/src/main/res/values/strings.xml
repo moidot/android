@@ -61,4 +61,12 @@
     <string name="group_exit">나가기</string>
     <string name="group_cannot_exit_info">투표중인\n모이닷 스페이스는\n나갈 수 없어요.</string>
     <string name="group_create_date">생성일시: %s</string>
+
+    <!-- CreateGroup -->
+    <string name="input_group_name">모임명</string>
+    <string name="input_group_top_bar">모이닷 스페이스 만들기</string>
+    <string name="input_group_info_which_group">어떤 모임인가요?</string>
+    <string name="input_group_info_title">모임의 이름을 알려주세요.</string>
+    <string name="input_group_name_input_hint">15자 이내의 모임명을 입력해주세요.</string>
+    <string name="input_group_name_input_cnt">공백포함 %d / 15자</string>
 </resources>

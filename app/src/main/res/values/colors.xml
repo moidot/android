@@ -10,6 +10,7 @@
     <color name="orange300">#FDBA74</color>
     <color name="orange400">#FB923C</color>
     <color name="orange500">#F97316</color>
+    <color name="orange600">#EA580C</color>
     <color name="gray100">#F4F6FA</color>
     <color name="gray200">#E5E7EB</color>
     <color name="gray300">#D1D5DB</color>
@@ -25,4 +26,5 @@
     <color name="slate400">#94A3B8</color>
     <color name="slate800">#1E293B</color>
     <color name="orange500_20">#33F97316</color>
+    <color name="disabled_orange">#FFDAC1</color>
 </resources>

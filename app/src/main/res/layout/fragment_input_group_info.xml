@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,6 +9,140 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fg_input_group_info_top_bar"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/fg_input_group_info_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="8dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/b1_bold_16"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="@string/input_group_top_bar"
+                android:textColor="@color/gray700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fg_input_group_info_iv_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/fg_input_group_info_chip_group_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_top_bar"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fg_input_group_info_chip_indicator_one"
+                style="@style/chip_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="1" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fg_input_group_info_chip_indicator_two"
+                style="@style/chip_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="2" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/fg_input_group_info_tv_hint"
+            style="@style/b2_reg_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/input_group_info_which_group"
+            android:textColor="@color/gray400"
+            app:layout_constraintStart_toStartOf="@id/fg_input_group_info_chip_group_indicator"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_chip_group_indicator" />
+
+        <TextView
+            android:id="@+id/fg_input_group_info_tv_title"
+            style="@style/h1_bold_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_group_info_title"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/fg_input_group_info_tv_hint"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_tv_hint" />
+
+        <TextView
+            android:id="@+id/fg_input_group_info_tv_group_name_title"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/input_group_name"
+            android:textColor="@color/gray800"
+            app:layout_constraintStart_toStartOf="@id/fg_input_group_info_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_tv_title" />
+
+        <TextView
+            android:id="@+id/fg_input_group_info_tv_group_name_cnt"
+            style="@style/c1_reg_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="@string/input_group_name_input_cnt"
+            android:textColor="@color/gray400"
+            app:layout_constraintBottom_toBottomOf="@id/fg_input_group_info_tv_group_name_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/fg_input_group_info_tv_group_name_title" />
+
+        <EditText
+            android:id="@+id/fg_input_group_info_etv_group_name"
+            style="@style/c1_reg_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_input_info_normal"
+            android:hint="@string/input_group_name_input_hint"
+            android:maxLines="1"
+            android:inputType="text"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="13dp"
+            android:textColor="@color/gray800"
+            android:textColorHint="@color/gray400"
+            app:layout_constraintEnd_toEndOf="@id/fg_input_group_info_tv_group_name_cnt"
+            app:layout_constraintStart_toStartOf="@id/fg_input_group_info_tv_group_name_title"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_tv_group_name_title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fg_input_group_info_btn_next"
+            style="@style/btn_disabled"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/all_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
