@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_group_nav_graph"
+    app:startDestination="@id/inputGroupInfoFragment">
+
+    <fragment
+        android:id="@+id/inputGroupInfoFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.create.view.InputGroupInfoFragment"
+        android:label="fragment_input_group_info"
+        tools:layout="@layout/fragment_input_group_info">
+        <action
+            android:id="@+id/action_inputGroupInfoFragment_to_inputLeaderInfoFragment"
+            app:destination="@id/inputLeaderInfoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inputLeaderInfoFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.create.view.InputLeaderInfoFragment"
+        android:label="fragment_input_group_info"
+        tools:layout="@layout/fragment_input_leader_info" />
+</navigation>

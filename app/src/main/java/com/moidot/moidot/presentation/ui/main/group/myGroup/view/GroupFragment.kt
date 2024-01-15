@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.view
+package com.moidot.moidot.presentation.ui.main.group.myGroup.view
 
 import android.content.Context
 import android.os.Bundle
@@ -10,8 +10,8 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseMyGroupList
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
-import com.moidot.moidot.presentation.ui.main.group.viewmodel.GroupViewModel
-import com.moidot.moidot.presentation.ui.main.group.adater.MyGroupAdapter
+import com.moidot.moidot.presentation.ui.main.group.myGroup.viewmodel.GroupViewModel
+import com.moidot.moidot.presentation.ui.main.group.myGroup.adater.MyGroupAdapter
 import com.moidot.moidot.presentation.util.StatusBarColorUtil
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR

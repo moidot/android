@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="btn_orange500" parent="Widget.Material3.Button">
+    <style name="btn_main" parent="Widget.Material3.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:paddingVertical">13dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/main_btn_color</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <style name="btn_normal" parent="Widget.Material3.Button">
         <item name="cornerRadius">12dp</item>
         <item name="android:textSize">14dp</item>
         <item name="android:paddingVertical">13dp</item>
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">@color/orange500</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <style name="btn_disabled" parent="Widget.Material3.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:paddingVertical">13dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/disabled_orange</item>
         <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>

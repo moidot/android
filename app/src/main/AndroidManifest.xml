@@ -43,8 +43,8 @@
 
         <activity
             android:name=".presentation.ui.main.MainActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
 
         <activity
             android:name=".presentation.ui.onboard.view.OnboardActivity"
@@ -53,6 +53,10 @@
         <activity
             android:name=".presentation.ui.sign.view.SignInActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".presentation.ui.main.group.create.view.CreateGroupActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
