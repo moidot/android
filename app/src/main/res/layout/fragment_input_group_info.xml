@@ -124,9 +124,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:imeOptions="actionDone"
             android:background="@{viewModel.isGroupNameFieldActive() ? @drawable/bg_input_info_active : @drawable/bg_input_info_normal}"
             android:hint="@string/input_group_name_input_hint"
+            android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLength="15"
             android:maxLines="1"
@@ -137,7 +137,7 @@
             app:layout_constraintEnd_toEndOf="@id/fg_input_group_info_tv_group_name_cnt"
             app:layout_constraintStart_toStartOf="@id/fg_input_group_info_tv_group_name_title"
             app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_tv_group_name_title"
-            bind:InputTextFieldActive="@{viewModel.isGroupNameFieldActive()}" />
+            bind:InputTextFieldActive="@{viewModel.groupName.length()}" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/fg_input_group_info_btn_next"

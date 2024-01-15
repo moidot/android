@@ -26,7 +26,7 @@ fun ImageView.imageBind(drawable: Drawable?) {
 }
 
 @BindingAdapter("bind:InputTextFieldActive")
-fun EditText.setInputTextFieldActive(isActive: Boolean) {
-    val currentTextStyle = if (isActive) R.style.b2_reg_14 else R.style.c1_reg_12
+fun EditText.setInputTextFieldActive(textLength: Int) {
+    val currentTextStyle = if (textLength > 0) R.style.b2_reg_14 else R.style.c1_reg_12
     this.setTextAppearance(currentTextStyle)
 }
