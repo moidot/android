@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import com.moidot.moidot.BuildConfig
 import com.moidot.moidot.data.api.AuthService
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ACCESS_TOKEN
+import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ONBOARD_STATE
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.REFRESH_TOKEN
 import com.moidot.moidot.presentation.ui.sign.view.SignInActivity
 import kotlinx.coroutines.async
@@ -44,6 +45,7 @@ class TokenAuthenticator @Inject constructor(
 
     private fun moveToSignIn() {
         sharedPreferences.edit().clear().apply()
+        sharedPreferences.edit().putBoolean(ONBOARD_STATE, true).apply() // 온보딩 읽음 처리 유지
         Intent(context, SignInActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             context.startActivity(this)
