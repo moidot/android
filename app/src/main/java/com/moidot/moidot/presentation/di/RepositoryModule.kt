@@ -1,8 +1,10 @@
 package com.moidot.moidot.presentation.di
 
 import com.moidot.moidot.data.repository.AuthRepositoryImpl
+import com.moidot.moidot.data.repository.GroupRepositoryImpl
 import com.moidot.moidot.data.repository.UserRepositoryImpl
 import com.moidot.moidot.domain.repository.AuthRepository
+import com.moidot.moidot.domain.repository.GroupRepository
 import com.moidot.moidot.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
@@ -22,4 +24,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindAuthRepository(authRepositoryImpl: AuthRepositoryImpl): AuthRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindGroupRepository(groupRepositoryImpl: GroupRepositoryImpl): GroupRepository
 }
