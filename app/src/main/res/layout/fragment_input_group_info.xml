@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.ui.main.group.create.viewmodel.CreateGroupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -98,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/input_group_name"
-            android:textColor="@color/gray800"
+            android:textColor="@{viewModel.isGroupNameFieldActive() ? @color/orange500 : @color/gray800}"
             app:layout_constraintStart_toStartOf="@id/fg_input_group_info_tv_title"
             app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_tv_title" />
 
@@ -108,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="@string/input_group_name_input_cnt"
+            android:text="@{@string/input_group_name_input_cnt(viewModel.groupName.length)}"
             android:textColor="@color/gray400"
             app:layout_constraintBottom_toBottomOf="@id/fg_input_group_info_tv_group_name_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -116,14 +120,14 @@
 
         <EditText
             android:id="@+id/fg_input_group_info_etv_group_name"
-            style="@style/c1_reg_12"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:background="@drawable/bg_input_info_normal"
+            android:background="@{viewModel.isGroupNameFieldActive() ? @drawable/bg_input_info_active : @drawable/bg_input_info_normal}"
             android:hint="@string/input_group_name_input_hint"
-            android:maxLines="1"
             android:inputType="text"
+            android:maxLength="15"
+            android:maxLines="1"
             android:paddingHorizontal="12dp"
             android:paddingVertical="13dp"
             android:textColor="@color/gray800"
