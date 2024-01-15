@@ -28,8 +28,18 @@ class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.lay
     }
 
     private fun initView() {
+        setGroupNameFocusChangeListener()
         setGroupNameTextChangeListener()
         setGroupNameKeyListener()
+    }
+
+    private fun setGroupNameFocusChangeListener() {
+        binding.fgInputGroupInfoEtvGroupName.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                viewModel.setGroupNameFieldActive(true)
+                viewModel.groupNameErrorMsg.value = ""
+            }
+        }
     }
 
     private fun setGroupNameTextChangeListener() {
