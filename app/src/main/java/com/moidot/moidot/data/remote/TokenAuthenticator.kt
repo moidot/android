@@ -6,7 +6,10 @@ import android.content.SharedPreferences
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.REFRESH_TOKEN
 import com.moidot.moidot.domain.repository.AuthRepository
 import com.moidot.moidot.presentation.ui.sign.view.SignInActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -29,13 +32,14 @@ class TokenAuthenticator @Inject constructor(
     private suspend fun getNewAccessToken(): String? {
         val refreshToken: String = sharedPreferences.getString(REFRESH_TOKEN, null) ?: return null
         try {
-            val response = authRepository.get().refreshToken(refreshToken)
-            return response.getOrThrow().data.accessToken
+            val response = authRepository.get().refreshToken(refreshToken).getOrThrow()
+            return response.data.accessToken
         } catch (e: Exception) {
             moveToLogin()
         }
         return null
     }
+
 
     private fun moveToLogin() {
         Intent(context, SignInActivity::class.java).apply {
