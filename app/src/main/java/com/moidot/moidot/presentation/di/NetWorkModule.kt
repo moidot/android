@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import com.moidot.moidot.BuildConfig.BASE_URL
 import com.moidot.moidot.data.remote.AccessTokenInterceptor
 import com.moidot.moidot.data.remote.TokenAuthenticator
-import com.moidot.moidot.domain.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,8 +30,8 @@ object NetWorkModule {
 
     @Provides
     @Singleton
-    fun provideTokenAuthenticator(@ApplicationContext context: Context, sharedPreferences: SharedPreferences, authRepository: dagger.Lazy<AuthRepository>): TokenAuthenticator {
-        return TokenAuthenticator(context, sharedPreferences, authRepository)
+    fun provideTokenAuthenticator(@ApplicationContext context: Context, sharedPreferences: SharedPreferences): TokenAuthenticator {
+        return TokenAuthenticator(context, sharedPreferences)
     }
 
     @Provides

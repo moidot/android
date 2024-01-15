@@ -7,7 +7,6 @@ import com.moidot.moidot.BuildConfig
 import com.moidot.moidot.data.api.AuthService
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ACCESS_TOKEN
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.REFRESH_TOKEN
-import com.moidot.moidot.domain.repository.AuthRepository
 import com.moidot.moidot.presentation.ui.sign.view.SignInActivity
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
@@ -23,7 +22,6 @@ import javax.inject.Inject
 class TokenAuthenticator @Inject constructor(
     private val context: Context,
     private val sharedPreferences: SharedPreferences,
-    private val authRepository: dagger.Lazy<AuthRepository>,
 ) : Authenticator {
 
     @Synchronized
