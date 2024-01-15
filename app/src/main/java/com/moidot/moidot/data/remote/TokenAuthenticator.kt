@@ -3,13 +3,11 @@ package com.moidot.moidot.data.remote
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ACCESS_TOKEN
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.REFRESH_TOKEN
 import com.moidot.moidot.domain.repository.AuthRepository
 import com.moidot.moidot.presentation.ui.sign.view.SignInActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -34,14 +32,14 @@ class TokenAuthenticator @Inject constructor(
         try {
             val response = authRepository.get().refreshToken(refreshToken).getOrThrow()
             return response.data.accessToken
-        } catch (e: Exception) {
-            moveToLogin()
+        } catch (e: Exception) { // TODO 정상동작 테스트
+            // moveToSignIn()
         }
         return null
     }
 
-
-    private fun moveToLogin() {
+    private fun moveToSignIn() {
+        // sharedPreferences.edit().clear().apply()
         Intent(context, SignInActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             context.startActivity(this)
@@ -50,6 +48,7 @@ class TokenAuthenticator @Inject constructor(
 
     private fun refreshToken(newAccessToken: String?, response: Response): Request? {
         if (newAccessToken != null) {
+            sharedPreferences.edit().putString(ACCESS_TOKEN, newAccessToken).apply()
             return response.request.newBuilder()
                 .removeHeader("Authorization")
                 .addHeader("Authorization", newAccessToken)
