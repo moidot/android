@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface LocationService {
     @GET("v2/local/search/keyword.json")
     suspend fun searchPlace(
-        @Header("Authorization") authorization: String = KAKAO_REST_API_KEY,
+        @Header("Authorization") authorization: String = "KakaoAK $KAKAO_REST_API_KEY",
         @Query("query") query: String
     ): Response<ResponseSearchPlace>
 
