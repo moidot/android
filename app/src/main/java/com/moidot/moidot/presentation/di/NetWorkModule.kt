@@ -35,7 +35,6 @@ object NetWorkModule {
         return TokenAuthenticator(context, sharedPreferences)
     }
 
-    @MoidotHttpClient
     @Provides
     @Singleton
     fun provideOkHttpClient(accessTokenInterceptor: AccessTokenInterceptor, tokenAuthenticator: TokenAuthenticator): OkHttpClient {
@@ -49,11 +48,10 @@ object NetWorkModule {
             .build()
     }
 
-    @MoidotHttpClient
     @Singleton
     @Provides
     fun provideRetrofitInstance(
-        @MoidotHttpClient okHttpClient: OkHttpClient,
+        okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()

@@ -16,13 +16,13 @@ object ServiceModule {
 
     @Provides
     @Singleton
-    fun provideAuthService(@MoidotHttpClient retrofit: Retrofit): AuthService {
+    fun provideAuthService(retrofit: Retrofit): AuthService {
         return retrofit.create(AuthService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideGroupService(@MoidotHttpClient retrofit: Retrofit): GroupService {
+    fun provideGroupService(retrofit: Retrofit): GroupService {
         return retrofit.create(GroupService::class.java)
     }
 
