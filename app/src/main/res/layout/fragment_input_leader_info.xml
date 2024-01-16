@@ -1,13 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.ui.main.group.create.viewmodel.CreateGroupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fg_input_leader_info_top_bar"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/fg_input_leader_info_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="8dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/b1_bold_16"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="@string/input_group_top_bar"
+                android:textColor="@color/gray700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fg_input_leader_info_iv_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/fg_input_leader_info_chip_group_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_top_bar"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fg_input_leader_info_chip_indicator_one"
+                style="@style/chip_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="1" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fg_input_leader_info_chip_indicator_two"
+                style="@style/chip_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:checked="true"
+                android:text="2" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/fg_input_leader_info_ll_group_name_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/fg_input_leader_info_chip_group_indicator"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_chip_group_indicator">
+
+            <TextView
+                android:id="@+id/fg_input_leader_info_tv_group_name"
+                style="@style/b2_bold_14"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{viewModel.groupName}"
+                android:textColor="@color/orange500"
+                tools:text="모이닷 스페이스 팀 프로젝트" />
+
+            <TextView
+                style="@style/b2_reg_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:gravity="center"
+                android:text="@string/input_group_to_use"
+                android:textColor="@color/gray400" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_title_input_your_info"
+            style="@style/h1_bold_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_group_title_input_your_info"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/fg_input_leader_info_ll_group_name_container"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_ll_group_name_container" />
+
+
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_nickname_title"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/input_group_nickname"
+            android:textColor="@color/orange500"
+            app:layout_constraintStart_toStartOf="@id/fg_input_leader_info_tv_title_input_your_info"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_title_input_your_info" />
+
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_nickname_cnt"
+            style="@style/c1_reg_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="@string/input_group_nickname_input_cnt"
+            android:textColor="@color/gray400"
+            app:layout_constraintBottom_toBottomOf="@id/fg_input_leader_info_tv_nickname_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/fg_input_leader_info_tv_nickname_title" />
+
+        <EditText
+            android:id="@+id/fg_input_leader_info_etv_nickname"
+            style="@style/c1_reg_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_input_info_normal"
+            android:hint="@string/input_group_nickname_input_hint"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="13dp"
+            android:textColor="@color/gray800"
+            android:textColorHint="@color/gray400"
+            app:layout_constraintEnd_toEndOf="@id/fg_input_leader_info_tv_nickname_cnt"
+            app:layout_constraintStart_toStartOf="@id/fg_input_leader_info_tv_nickname_title"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_nickname_title" />
+
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_nickname_error"
+            style="@style/c2_med_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="에러 어쩌구"
+            android:textColor="@color/red500"
+            app:layout_constraintStart_toStartOf="@id/fg_input_leader_info_etv_nickname"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_etv_nickname"
+            tools:text="특수문자로만 이루어져서는 안됩니다." />
+
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_start_location"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/input_group_start_location"
+            android:textColor="@color/gray800"
+            app:layout_constraintStart_toStartOf="@+id/fg_input_leader_info_etv_nickname"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_etv_nickname" />
+
+
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_start_location_input"
+            style="@style/c1_reg_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_input_info_normal"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="13dp"
+            android:text="@string/input_group_start_location_hint"
+            android:textColor="@color/gray400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_start_location" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_location_pin"
+            app:layout_constraintBottom_toBottomOf="@id/fg_input_leader_info_tv_start_location_input"
+            app:layout_constraintEnd_toEndOf="@id/fg_input_leader_info_tv_start_location_input"
+            app:layout_constraintTop_toTopOf="@id/fg_input_leader_info_tv_start_location_input" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fg_input_leader_info_btn_next"
+            style="@style/btn_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/all_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_transportation_type"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/input_group_transportation_type"
+            android:textColor="@color/gray800"
+            app:layout_constraintStart_toStartOf="@+id/fg_input_leader_info_tv_start_location_input"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_start_location_input" />
+
+        <com.moidot.moidot.presentation.util.component.TransportationPickerComponent
+            android:id="@+id/fg_input_leader_info_component_transportation_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_transportation_type" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

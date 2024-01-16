@@ -18,8 +18,7 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
 
     val groupNameErrorMsg = MutableLiveData<String>()
 
-    private val _isNavigationToLeaderInfoAllowed = MutableLiveData<Boolean>(false)
-    val isNavigationToLeaderInfoAllowed: LiveData<Boolean> = _isNavigationToLeaderInfoAllowed
+    private val isUserInputAlreadyDone = MutableLiveData<Boolean>(false)
 
     fun setGroupName(name: String) {
         _groupName.value = name
@@ -41,7 +40,7 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun checkIsValidGroupName() {
+    fun checkIsValidGroupName(): Boolean {
         val groupName = groupName.value!!
         val specialChars = "!#$%&'()*+,/:;=?@[]_~-|{}" // 사용 가능한 특수문자
         val disallowedChars = groupName.filter { !it.isLetterOrDigit() && it !in specialChars }
@@ -52,9 +51,26 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
             else -> ""
         }
 
+        return updateGroupInfoStates(errorMsg)
+    }
+
+    private fun updateGroupInfoStates(errorMsg: String): Boolean {
         groupNameErrorMsg.value = errorMsg
-        _isGroupInfoNextBtnActive.value = errorMsg.isEmpty()
-        _isNavigationToLeaderInfoAllowed.value = errorMsg.isEmpty()
+
+        val isValid = errorMsg.isEmpty()
+        _isGroupInfoNextBtnActive.value = isValid
+
+        return isValid
+    }
+
+    fun updateUserInputAlreadyDoneState() {
+        isUserInputAlreadyDone.value = true
+    }
+
+    fun checkUserInputDoneState() {
+        if (isUserInputAlreadyDone.value!!) {
+            _isGroupNameFieldActive.value = false
+        }
     }
 
 }

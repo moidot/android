@@ -20,10 +20,10 @@ class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.lay
         super.onViewCreated(view, savedInstanceState)
         initBinding()
         initView()
-        setupObserver()
     }
 
     private fun initBinding() {
+        binding.fragment = this
         binding.viewModel = viewModel
     }
 
@@ -36,10 +36,16 @@ class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.lay
     private fun setGroupNameFocusChangeListener() {
         binding.fgInputGroupInfoEtvGroupName.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                viewModel.setGroupNameFieldActive(true)
-                viewModel.groupNameErrorMsg.value = ""
+                handleFocusChange(binding.fgInputGroupInfoEtvGroupName.text.toString())
             }
         }
+    }
+
+    private fun handleFocusChange(groupName: String) {
+        if (groupName.isNotEmpty()) {
+            viewModel.setGroupNameFieldActive(true)
+        }
+        viewModel.groupNameErrorMsg.value = ""
     }
 
     private fun setGroupNameTextChangeListener() {
@@ -62,13 +68,15 @@ class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.lay
         }
     }
 
-    private fun setupObserver() {
-        viewModel.isNavigationToLeaderInfoAllowed.observe(viewLifecycleOwner) {
-            if (it) moveToInputLeaderInfo()
-        }
+    override fun onResume() {
+        super.onResume()
+        viewModel.checkUserInputDoneState()
     }
 
-    private fun moveToInputLeaderInfo() {
-        findNavController().navigate(InputGroupInfoFragmentDirections.actionInputGroupInfoFragmentToInputLeaderInfoFragment())
+    fun moveToInputLeaderInfo() {
+        if (viewModel.checkIsValidGroupName()) {
+            findNavController().navigate(InputGroupInfoFragmentDirections.actionInputGroupInfoFragmentToInputLeaderInfoFragment())
+            viewModel.updateUserInputAlreadyDoneState()
+        }
     }
 }

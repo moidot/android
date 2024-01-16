@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.ui.main.group.create.view.InputGroupInfoFragment" />
+
+        <variable
             name="viewModel"
             type="com.moidot.moidot.presentation.ui.main.group.create.viewmodel.CreateGroupViewModel" />
     </data>
@@ -51,7 +55,7 @@
             android:id="@+id/fg_input_group_info_chip_group_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +164,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="24dp"
             android:enabled="@{viewModel.isGroupInfoNextBtnActive()}"
-            android:onClick="@{() -> viewModel.checkIsValidGroupName()}"
+            android:onClick="@{() -> fragment.moveToInputLeaderInfo()}"
             android:text="@string/all_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
