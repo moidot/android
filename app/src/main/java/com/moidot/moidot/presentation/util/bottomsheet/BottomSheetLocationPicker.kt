@@ -53,7 +53,8 @@ class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocat
 
     private fun setSearchKeyListener() {
         binding.bottomSheetLocationPickerEtvSearch.setOnEditorActionListener { it, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) { // TODO 검색 진행
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.searchPlace()
                 viewModel.setSearchWordFieldActive(false)
                 it.hideKeyboard()
                 return@setOnEditorActionListener true
@@ -62,7 +63,8 @@ class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocat
         }
     }
 
-    fun onClickSearchListener() { // TODO 검색 진행
+    fun onClickSearchListener() {
+        viewModel.searchPlace()
         viewModel.setSearchWordFieldActive(false)
         binding.bottomSheetLocationPickerEtvSearch.apply {
             hideKeyboard()

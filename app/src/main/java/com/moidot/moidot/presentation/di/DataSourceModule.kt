@@ -6,8 +6,11 @@ import com.moidot.moidot.data.remote.datasource.auth.AuthRemoteDataSource
 import com.moidot.moidot.data.remote.datasource.auth.AuthRemoteDataSourceImpl
 import com.moidot.moidot.data.remote.datasource.group.GroupRemoteDataSource
 import com.moidot.moidot.data.remote.datasource.group.GroupRemoteDataSourceImpl
+import com.moidot.moidot.data.remote.datasource.location.LocationRemoteDataSource
+import com.moidot.moidot.data.remote.datasource.location.LocationRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
@@ -23,4 +26,7 @@ abstract class DataSourceModule {
 
     @Binds
     abstract fun bindGroupRemoteSource(groupRemoteDataSourceImpl: GroupRemoteDataSourceImpl): GroupRemoteDataSource
+
+    @Binds
+    abstract fun bindLocationRemoteSource(locationRemoteDataSourceImpl: LocationRemoteDataSourceImpl): LocationRemoteDataSource
 }
