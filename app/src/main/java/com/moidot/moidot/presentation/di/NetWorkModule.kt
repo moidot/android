@@ -3,6 +3,7 @@ package com.moidot.moidot.presentation.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.moidot.moidot.BuildConfig.BASE_URL
+import com.moidot.moidot.BuildConfig.KAKAO_URL
 import com.moidot.moidot.data.remote.AccessTokenInterceptor
 import com.moidot.moidot.data.remote.TokenAuthenticator
 import dagger.Module
@@ -55,6 +56,31 @@ object NetWorkModule {
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(gsonConverterFactory).build()
+    }
+
+    @KakaoHttpClient
+    @Provides
+    @Singleton
+    fun provideKakaoHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .readTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .writeTimeout(5, TimeUnit.SECONDS)
+            .build()
+    }
+
+    @KakaoHttpClient
+    @Singleton
+    @Provides
+    fun provideKakaoRetrofitInstance(
+        @KakaoHttpClient okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(KAKAO_URL)
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory).build()
     }
