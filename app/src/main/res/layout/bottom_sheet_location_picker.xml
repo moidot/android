@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,5 +15,102 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_bottom_sheet"
         android:minHeight="540dp">
+
+        <TextView
+            android:id="@+id/bottom_sheet_location_picker_tv_title"
+            style="@style/h3_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/bottom_sheet_location_picker_title"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bottom_sheet_location_picker_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:onClick="@{() -> fragment.dismiss()}"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="@+id/bottom_sheet_location_picker_tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottom_sheet_location_picker_tv_title" />
+
+        <EditText
+            android:id="@+id/bottom_sheet_location_picker_etv_search"
+            style="@style/c1_reg_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="28dp"
+            android:background="@{fragment.isSearchWordFieldActive() ? @drawable/bg_input_info_active : @drawable/bg_input_info_normal}"
+            android:hint="@string/bottom_sheet_location_picker_search_hint"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="13dp"
+            android:textColor="@color/gray800"
+            android:textColorHint="@color/gray400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_tv_title"
+            bind:InputTextFieldActive="@{fragment.searchWord.length()}" />
+
+        <ImageView
+            android:id="@+id/bottom_sheet_location_picker_iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:onClick="@{()->fragment.onClickSearchListener()}"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_sheet_location_picker_etv_search"
+            app:layout_constraintEnd_toEndOf="@id/bottom_sheet_location_picker_etv_search"
+            app:layout_constraintTop_toTopOf="@id/bottom_sheet_location_picker_etv_search" />
+
+        <LinearLayout
+            android:id="@+id/bottom_sheet_location_picker_container_load_current_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.5dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/bottom_sheet_location_picker_etv_search"
+            app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_etv_search">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_current_location" />
+
+            <TextView
+                style="@style/c1_reg_12"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/bottom_sheet_location_picker_load_current_location"
+                android:textColor="@color/orange500" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/bottom_sheet_location_picker_view_line"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray100"
+            app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_container_load_current_location" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_view_line" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

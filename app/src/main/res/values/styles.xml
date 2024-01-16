@@ -52,6 +52,7 @@
 
     <style name="custom_bottom_sheet" parent="Theme.Material3.Light.BottomSheetDialog">
         <item name="behavior_draggable">false</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
     </style>
 
     <style name="MaterialButton.12.14.M" parent="Widget.Material3.Button">

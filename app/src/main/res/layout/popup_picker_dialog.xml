@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> dialog.dismiss()}"
             android:padding="16dp"
-            android:src="@drawable/ic_popup_close"
+            android:src="@drawable/ic_close"
             app:layout_constraintBottom_toBottomOf="@id/popup_picker_dialog_tv_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/popup_picker_dialog_tv_title" />
