@@ -50,6 +50,10 @@
         <item name="android:layout_marginHorizontal">20dp</item>
     </style>
 
+    <style name="custom_bottom_sheet" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="behavior_draggable">false</item>
+    </style>
+
     <style name="MaterialButton.12.14.M" parent="Widget.Material3.Button">
         <item name="cornerRadius">12dp</item>
         <item name="android:textSize">14dp</item>
@@ -57,6 +61,11 @@
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:paddingVertical">12dp</item>
+    </style>
+
+    <style name="bottom_sheet_animation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
 </resources>

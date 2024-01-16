@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.ui.main.group.create.view.InputLeaderInfoFragment" />
 
         <variable
             name="viewModel"
@@ -192,6 +195,7 @@
             android:background="@drawable/bg_input_info_normal"
             android:maxLength="15"
             android:maxLines="1"
+            android:onClick="@{() -> fragment.onClickStartLocationPicker()}"
             android:paddingHorizontal="12dp"
             android:paddingVertical="13dp"
             android:text="@string/input_group_start_location_hint"
