@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="fragment"
             type="com.moidot.moidot.presentation.ui.main.group.create.view.InputGroupInfoFragment" />
@@ -74,7 +75,7 @@
                 style="@style/chip_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="12dp"
                 android:text="2" />
         </com.google.android.material.chip.ChipGroup>
 

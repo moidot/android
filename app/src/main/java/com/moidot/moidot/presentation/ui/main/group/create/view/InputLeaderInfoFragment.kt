@@ -15,10 +15,19 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBinding()
+        initView()
     }
 
     private fun initBinding() {
         binding.viewModel = viewModel
+    }
+
+    private fun initView() {
+        setupTransportationPickerView()
+    }
+
+    private fun setupTransportationPickerView() {
+        binding.fgInputLeaderInfoComponentTransportationPicker.setLifecycleOwner(this)
     }
 
 }

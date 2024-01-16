@@ -6,6 +6,10 @@
     <string name="all_next">다음</string>
     <string name="all_cancel">취소하기</string><!-- error -->
 
+    <!-- component -->
+    <string name="component_transportation_public">대중교통</string>
+    <string name="component_transportation_car">자동차</string>
+
     <!-- MainActivity -->
     <string name="main_btm_nav_home_title">홈</string>
     <string name="main_btm_nav_noti_title">모임</string>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="layout"
+            type="com.moidot.moidot.presentation.util.component.TransportationPickerComponent" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/component_transportation_picker_container_public"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input_info_normal"
+            android:onClick="@{() -> layout.onPublicSelectedListener()}"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            app:layout_constraintEnd_toStartOf="@id/component_transportation_picker_container_car"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/component_transportation_picker_iv_public"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:src="@{layout.isPublicSelected() ? @drawable/ic_transportation_public_selected : @drawable/ic_transportation_public_normal}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/component_transportation_picker_tv_public"
+                style="@style/b2_reg_14"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/component_transportation_public"
+                android:textColor="@{layout.isPublicSelected() ? @color/orange500 : @color/gray400}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/component_transportation_picker_iv_public"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:checkBoxTextFieldActive="@{layout.isPublicSelected()}" />
+
+            <ImageView
+                android:id="@+id/component_transportation_picker_btn_public"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_checkbox_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:setCheckBoxImage="@{layout.isPublicSelected()}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/component_transportation_picker_container_car"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_input_info_normal"
+            android:onClick="@{() -> layout.onCarSelectedListener()}"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/component_transportation_picker_container_public"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/component_transportation_picker_iv_car"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:src="@{layout.isCarSelected() ? @drawable/ic_transportation_car_selected : @drawable/ic_transportation_car_normal}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/component_transportation_picker_tv_car"
+                style="@style/b2_reg_14"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/component_transportation_car"
+                android:textColor="@{layout.isCarSelected() ? @color/orange500 : @color/gray400}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/component_transportation_picker_iv_car"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:checkBoxTextFieldActive="@{layout.isCarSelected()}" />
+
+            <ImageView
+                android:id="@+id/component_transportation_picker_btn_car"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:background="@drawable/btn_checkbox_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:setCheckBoxImage="@{layout.isCarSelected()}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
