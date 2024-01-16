@@ -10,6 +10,11 @@
     <string name="component_transportation_public">대중교통</string>
     <string name="component_transportation_car">자동차</string>
 
+    <!-- bottom sheet -->
+    <string name="bottom_sheet_location_picker_title">출발위치를 등록해주세요</string>
+    <string name="bottom_sheet_location_picker_load_current_location">현재 위치 불러오기</string>
+    <string name="bottom_sheet_location_picker_search_hint">위치를 입력해주세요.</string>
+
     <!-- MainActivity -->
     <string name="main_btm_nav_home_title">홈</string>
     <string name="main_btm_nav_noti_title">모임</string>
