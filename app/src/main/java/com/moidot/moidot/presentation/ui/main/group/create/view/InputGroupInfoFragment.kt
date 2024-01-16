@@ -36,10 +36,16 @@ class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.lay
     private fun setGroupNameFocusChangeListener() {
         binding.fgInputGroupInfoEtvGroupName.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                viewModel.setGroupNameFieldActive(true)
-                viewModel.groupNameErrorMsg.value = ""
+                handleFocusChange(binding.fgInputGroupInfoEtvGroupName.text.toString())
             }
         }
+    }
+
+    private fun handleFocusChange(groupName: String) {
+        if (groupName.isNotEmpty()) {
+            viewModel.setGroupNameFieldActive(true)
+        }
+        viewModel.groupNameErrorMsg.value = ""
     }
 
     private fun setGroupNameTextChangeListener() {
