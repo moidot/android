@@ -47,7 +47,7 @@
             android:id="@+id/fg_input_leader_info_chip_group_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,7 @@
                 style="@style/chip_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="14dp"
                 android:checked="true"
                 android:text="2" />
         </com.google.android.material.chip.ChipGroup>
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:gravity="center"
-                android:text="@string/input_leader_info_to_use"
+                android:text="@string/input_group_to_use"
                 android:textColor="@color/gray400" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -105,7 +105,7 @@
             style="@style/h1_bold_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/input_leader_info_title_input_your_info"
+            android:text="@string/input_group_title_input_your_info"
             android:textColor="@color/gray700"
             app:layout_constraintStart_toStartOf="@id/fg_input_leader_info_ll_group_name_container"
             app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_ll_group_name_container" />
@@ -128,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="@string/input_leader_info_nickname_input_cnt"
+            android:text="@string/input_group_nickname_input_cnt"
             android:textColor="@color/gray400"
             app:layout_constraintBottom_toBottomOf="@id/fg_input_leader_info_tv_nickname_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="@drawable/bg_input_info_normal"
-            android:hint="@string/input_leader_info_nickname_input_hint"
+            android:hint="@string/input_group_nickname_input_hint"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLength="15"
@@ -166,5 +166,67 @@
             app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_etv_nickname"
             tools:text="특수문자로만 이루어져서는 안됩니다." />
 
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_start_location"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/input_group_start_location"
+            android:textColor="@color/gray800"
+            app:layout_constraintStart_toStartOf="@+id/fg_input_leader_info_etv_nickname"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_etv_nickname" />
+
+
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_start_location_input"
+            style="@style/c1_reg_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_input_info_normal"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="13dp"
+            android:text="@string/input_group_start_location_hint"
+            android:textColor="@color/gray400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_start_location" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_location_pin"
+            app:layout_constraintBottom_toBottomOf="@id/fg_input_leader_info_tv_start_location_input"
+            app:layout_constraintEnd_toEndOf="@id/fg_input_leader_info_tv_start_location_input"
+            app:layout_constraintTop_toTopOf="@id/fg_input_leader_info_tv_start_location_input" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fg_input_leader_info_btn_next"
+            style="@style/btn_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/all_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/fg_input_leader_info_tv_transportation_type"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/input_group_transportation_type"
+            android:textColor="@color/gray800"
+            app:layout_constraintStart_toStartOf="@+id/fg_input_leader_info_tv_start_location_input"
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_start_location_input" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

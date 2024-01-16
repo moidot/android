@@ -63,15 +63,18 @@
     <string name="group_create_date">생성일시: %s</string>
 
     <!-- CreateGroup -->
+    <string name="input_group_top_bar">모이닷 스페이스 만들기</string>
     <string name="input_group_name">모임명</string>
     <string name="input_group_nickname">닉네임</string>
-    <string name="input_group_top_bar">모이닷 스페이스 만들기</string>
+    <string name="input_group_start_location">출발위치</string>
+    <string name="input_group_nickname_input_cnt">공백포함 %d / 8자</string>
+    <string name="input_group_nickname_input_hint">8자 이내의 닉네임을 입력해주세요.</string>
+    <string name="input_group_start_location_hint">주소를 입력해주세요.</string>
+    <string name="input_group_to_use">에서 사용할</string>
+    <string name="input_group_transportation_type">이동수단을 선택해주세요.</string>
+    <string name="input_group_title_input_your_info">당신의 정보를 알려주세요.</string>
     <string name="input_group_info_which_group">어떤 모임인가요?</string>
     <string name="input_group_info_title">모임의 이름을 알려주세요.</string>
     <string name="input_group_name_input_hint">15자 이내의 모임명을 입력해주세요.</string>
     <string name="input_group_name_input_cnt">공백포함 %d / 15자</string>
-    <string name="input_leader_info_to_use">에서 사용할</string>
-    <string name="input_leader_info_title_input_your_info">당신의 정보를 알려주세요.</string>
-    <string name="input_leader_info_nickname_input_cnt">공백포함 %d / 8자</string>
-    <string name="input_leader_info_nickname_input_hint">8자 이내의 닉네임을 입력해주세요.</string>
 </resources>

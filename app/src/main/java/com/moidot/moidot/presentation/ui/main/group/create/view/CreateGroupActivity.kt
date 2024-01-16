@@ -16,6 +16,6 @@ class CreateGroupActivity : BaseActivity<ActivityCreateGroupBinding>(R.layout.ac
 
     private fun initNavigation() {
         val navHost = supportFragmentManager.findFragmentById(R.id.create_group_fcv) as NavHostFragment
-        navHost.findNavController().setGraph(R.navigation.create_group_nav_graph)
+        navHost.findNavController().setGraph(R.navigation.create_group_nav_graph, intent.extras)
     }
 }
