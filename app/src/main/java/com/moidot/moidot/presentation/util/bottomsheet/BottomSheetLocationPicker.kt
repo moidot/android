@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.MutableLiveData
+import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
 import com.moidot.moidot.presentation.ui.base.BaseBottomSheetDialogFragment
 import com.moidot.moidot.presentation.util.hideKeyboard
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocationPickerBinding>(R.layout.bottom_sheet_location_picker) {
 
-    val searchWord = MutableLiveData<String>("")
-    val isSearchWordFieldActive = MutableLiveData<Boolean>(false)
+    private val viewModel: BottomSheetLocationViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,6 +24,7 @@ class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocat
 
     private fun initBinding() {
         binding.fragment = this
+        binding.viewModel = viewModel
     }
 
     private fun initView() {
@@ -34,8 +36,8 @@ class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocat
     private fun setSearchTextFocusChangeListener() {
         binding.bottomSheetLocationPickerEtvSearch.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                if (searchWord.value!!.isNotEmpty()) {
-                    isSearchWordFieldActive.value = true
+                if (binding.bottomSheetLocationPickerEtvSearch.text.isNotEmpty()) {
+                    viewModel.setSearchWordFieldActive(true)
                 }
             }
         }
@@ -43,16 +45,16 @@ class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocat
 
     private fun setSearchTextChangeListener() {
         binding.bottomSheetLocationPickerEtvSearch.addTextChangedListener {
-            val location = it.toString()
-            isSearchWordFieldActive.value = location.isNotEmpty()
-            searchWord.value = location
+            val word = it.toString()
+            viewModel.setSearchWord(word)
+            viewModel.setSearchWordFieldActive(word.isNotEmpty())
         }
     }
 
     private fun setSearchKeyListener() {
         binding.bottomSheetLocationPickerEtvSearch.setOnEditorActionListener { it, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) { // TODO 검색 진행
-                isSearchWordFieldActive.value = false
+                viewModel.setSearchWordFieldActive(false)
                 it.hideKeyboard()
                 return@setOnEditorActionListener true
             }
@@ -61,7 +63,7 @@ class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocat
     }
 
     fun onClickSearchListener() { // TODO 검색 진행
-        isSearchWordFieldActive.value = false
+        viewModel.setSearchWordFieldActive(false)
         binding.bottomSheetLocationPickerEtvSearch.apply {
             hideKeyboard()
             clearFocus()

@@ -6,7 +6,9 @@ import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityCreateGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateGroupActivity : BaseActivity<ActivityCreateGroupBinding>(R.layout.activity_create_group) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationViewModel" />
+
+        <variable
             name="fragment"
             type="com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker" />
     </data>
@@ -46,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="28dp"
-            android:background="@{fragment.isSearchWordFieldActive() ? @drawable/bg_input_info_active : @drawable/bg_input_info_normal}"
+            android:background="@{viewModel.isSearchWordFieldActive() ? @drawable/bg_input_info_active : @drawable/bg_input_info_normal}"
             android:hint="@string/bottom_sheet_location_picker_search_hint"
             android:imeOptions="actionSearch"
             android:inputType="text"
@@ -59,7 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_tv_title"
-            bind:InputTextFieldActive="@{fragment.searchWord.length()}" />
+            bind:InputTextFieldActive="@{viewModel.searchWord.length()}" />
 
         <ImageView
             android:id="@+id/bottom_sheet_location_picker_iv_search"
