@@ -18,11 +18,7 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
 
     val groupNameErrorMsg = MutableLiveData<String>()
 
-    private val _isNavigationToLeaderInfoAllowed = MutableLiveData<Boolean>(false)
-    val isNavigationToLeaderInfoAllowed: LiveData<Boolean> = _isNavigationToLeaderInfoAllowed
-
-    private val _isUserInputAlreadyDone = MutableLiveData<Boolean>(false)
-    val isUserInputAlreadyDone: LiveData<Boolean> = _isUserInputAlreadyDone
+    private val isUserInputAlreadyDone = MutableLiveData<Boolean>(false)
 
     fun setGroupName(name: String) {
         _groupName.value = name
@@ -63,17 +59,16 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
 
         val isValid = errorMsg.isEmpty()
         _isGroupInfoNextBtnActive.value = isValid
-        _isNavigationToLeaderInfoAllowed.value = isValid
 
         return isValid
     }
 
     fun updateUserInputAlreadyDoneState() {
-        _isUserInputAlreadyDone.value = true
+        isUserInputAlreadyDone.value = true
     }
 
     fun checkUserInputDoneState() {
-        if (_isUserInputAlreadyDone.value!!) {
+        if (isUserInputAlreadyDone.value!!) {
             _isGroupNameFieldActive.value = false
         }
     }
