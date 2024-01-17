@@ -11,11 +11,13 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/item_location_cv_container_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
+        app:rippleColor="@android:color/transparent"
         app:strokeColor="@android:color/transparent"
         app:strokeWidth="1dp">
 

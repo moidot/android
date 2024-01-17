@@ -38,5 +38,4 @@ class BottomSheetLocationViewModel @Inject constructor(private val locationRepos
             }
         }
     }
-
 }

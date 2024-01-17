@@ -2,9 +2,12 @@ package com.moidot.moidot.presentation.util.bottomsheet
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
+import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.ItemLocationBinding
 
@@ -13,12 +16,15 @@ class BottomSheetLocationAdapter(
 ) : ListAdapter<ResponseSearchPlace.Document, BottomSheetLocationAdapter.LocationViewHolder>(diffUtil) {
 
     class LocationViewHolder(
-        private val binding: ItemLocationBinding,
-        private val onItemSelected: (ResponseSearchPlace.Document) -> Unit
+        private val binding: ItemLocationBinding, private val onItemSelected: (ResponseSearchPlace.Document) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ResponseSearchPlace.Document) {
             binding.data = data
-            binding.root.setOnClickListener {
+            binding.itemLocationCvContainerRoot.setOnClickListener {
+                (it as MaterialCardView).apply {
+                    setCardBackgroundColor(ContextCompat.getColor(it.context, R.color.orange100))
+                    strokeColor = ContextCompat.getColor(it.context, R.color.orange500)
+                }
                 onItemSelected(data)
             }
         }

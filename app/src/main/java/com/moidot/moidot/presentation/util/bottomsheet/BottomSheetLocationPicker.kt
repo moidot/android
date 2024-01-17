@@ -106,5 +106,4 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
             clearFocus()
         }
     }
-
 }
