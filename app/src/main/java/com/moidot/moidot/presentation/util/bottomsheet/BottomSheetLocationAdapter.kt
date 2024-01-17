@@ -3,8 +3,6 @@ package com.moidot.moidot.presentation.util.bottomsheet
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.moidot.moidot.R
@@ -14,9 +12,15 @@ import com.moidot.moidot.databinding.ItemLocationBinding
 class BottomSheetLocationAdapter(
     private val onItemSelectListener: (ResponseSearchPlace.Document) -> Unit,
     private val onFavoriteSelectListener: (Int, ResponseSearchPlace.Document) -> Unit
-) : ListAdapter<ResponseSearchPlace.Document, BottomSheetLocationAdapter.LocationViewHolder>(diffUtil) {
+) : RecyclerView.Adapter<BottomSheetLocationAdapter.LocationViewHolder>() {
 
     var savedFavorites = listOf<ResponseSearchPlace.Document>()
+    private var placeItems = listOf<ResponseSearchPlace.Document>()
+
+    fun setPlaceItems(newData: List<ResponseSearchPlace.Document>) {
+        placeItems = newData
+        notifyDataSetChanged()
+    }
 
     class LocationViewHolder(
         private val binding: ItemLocationBinding,
@@ -49,20 +53,11 @@ class BottomSheetLocationAdapter(
     }
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
-        holder.bind(currentList[position])
-        holder.invokeItemSelectListener(currentList[position])
-        holder.invokeItemFavoriteListener(position, currentList[position])
+        holder.bind(placeItems[position])
+        holder.invokeItemSelectListener(placeItems[position])
+        holder.invokeItemFavoriteListener(position, placeItems[position])
     }
 
-    companion object {
-        private val diffUtil = object : DiffUtil.ItemCallback<ResponseSearchPlace.Document>() {
-            override fun areItemsTheSame(oldItem: ResponseSearchPlace.Document, newItem: ResponseSearchPlace.Document): Boolean {
-                return oldItem.placeName == newItem.placeName
-            }
+    override fun getItemCount(): Int = placeItems.size
 
-            override fun areContentsTheSame(oldItem: ResponseSearchPlace.Document, newItem: ResponseSearchPlace.Document): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
 }
