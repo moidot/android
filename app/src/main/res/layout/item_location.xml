@@ -18,7 +18,7 @@
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
         app:rippleColor="@android:color/transparent"
-        app:strokeColor="@android:color/transparent"
+        app:strokeColor="@{data.isFavorite ? @color/orange500 : @android:color/transparent}"
         app:strokeWidth="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="15dp"
-                android:src="@{data.isFavorite ? @drawable/ic_location_pin_normal :  @drawable/ic_location_pin_normal}"
+                android:src="@{data.isFavorite ? @drawable/ic_location_pin_selected :  @drawable/ic_location_pin_normal}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

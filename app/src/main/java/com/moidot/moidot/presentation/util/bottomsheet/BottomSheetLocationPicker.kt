@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPickerListener) : BaseBottomSheetDialogFragment<BottomSheetLocationPickerBinding>(R.layout.bottom_sheet_location_picker) {
 
     private val viewModel: BottomSheetLocationViewModel by viewModels()
-    private val locationAdapter: BottomSheetLocationAdapter by lazy { BottomSheetLocationAdapter(::onItemSelected) }
+    private val locationAdapter: BottomSheetLocationAdapter by lazy { BottomSheetLocationAdapter(::onItemSelectListener, ::onFavoriteSelectListener) }
 
     interface LocationPickerListener {
         fun onSelectedItemListener(data: ResponseSearchPlace.Document)
@@ -84,12 +84,17 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         }
     }
 
-    private fun onItemSelected(data: ResponseSearchPlace.Document) {
+    private fun onItemSelectListener(data: ResponseSearchPlace.Document) {
         CoroutineScope(Dispatchers.Main).launch {
             onLocationSelectListener.onSelectedItemListener(data)
             delay(500)
             dismiss()
         }
+    }
+
+    private fun onFavoriteSelectListener(position:Int, data: ResponseSearchPlace.Document) {
+        locationAdapter.notifyItemChanged(position)
+
     }
 
     private fun setupObservers() {

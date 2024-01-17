@@ -9,6 +9,7 @@ data class PlaceEntity(
     val roadAddressName: String?,
     val longitude: Double,
     val latitude: Double,
+    var isFavorite: Boolean = true
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
