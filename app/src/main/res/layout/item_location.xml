@@ -56,7 +56,7 @@
             <ImageView
                 android:id="@+id/item_location_iv_pin"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:src="@{data.isFavorite ? @drawable/ic_location_pin_selected :  @drawable/ic_location_pin_normal}"
                 app:layout_constraintBottom_toBottomOf="parent"

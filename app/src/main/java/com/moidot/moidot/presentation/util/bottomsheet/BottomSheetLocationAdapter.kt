@@ -1,6 +1,5 @@
 package com.moidot.moidot.presentation.util.bottomsheet
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -38,7 +37,6 @@ class BottomSheetLocationAdapter(
 
         fun invokeItemFavoriteListener(position: Int, data: ResponseSearchPlace.Document) {
             binding.itemLocationIvPin.setOnClickListener {
-                data.isFavorite = !data.isFavorite
                 onFavoriteSelectListener(position, data)
             }
         }

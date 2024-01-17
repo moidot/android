@@ -3,12 +3,14 @@ package com.moidot.moidot.presentation.util.bottomsheet
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
 import com.moidot.moidot.presentation.ui.base.BaseBottomSheetDialogFragment
+import com.moidot.moidot.presentation.util.CustomSnackBar
 import com.moidot.moidot.presentation.util.VerticalSpaceItemDecoration
 import com.moidot.moidot.presentation.util.dpToPx
 import com.moidot.moidot.presentation.util.hideKeyboard
@@ -93,8 +95,13 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
     }
 
     private fun onFavoriteSelectListener(position:Int, data: ResponseSearchPlace.Document) {
+        if (data.isFavorite) {
+            data.isFavorite =false
+        } else {
+            CustomSnackBar.makeSnackBar(binding.root, SNACK_BAR_FAVORITE_MSG).show()
+            data.isFavorite = true
+        }
         locationAdapter.notifyItemChanged(position)
-
     }
 
     private fun setupObservers() {
@@ -110,5 +117,9 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
             hideKeyboard()
             clearFocus()
         }
+    }
+
+    companion object {
+        const val SNACK_BAR_FAVORITE_MSG = "장소를 즐겨찾기에 저장했어요!"
     }
 }
