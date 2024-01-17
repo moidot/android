@@ -1,7 +1,6 @@
 package com.moidot.moidot.presentation.util.bottomsheet
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -14,12 +13,20 @@ import com.moidot.moidot.presentation.util.VerticalSpaceItemDecoration
 import com.moidot.moidot.presentation.util.dpToPx
 import com.moidot.moidot.presentation.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocationPickerBinding>(R.layout.bottom_sheet_location_picker) {
+class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPickerListener) : BaseBottomSheetDialogFragment<BottomSheetLocationPickerBinding>(R.layout.bottom_sheet_location_picker) {
 
     private val viewModel: BottomSheetLocationViewModel by viewModels()
     private val locationAdapter: BottomSheetLocationAdapter by lazy { BottomSheetLocationAdapter(::onItemSelected) }
+
+    interface LocationPickerListener {
+        fun onSelectedItemListener(data: ResponseSearchPlace.Document)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -78,7 +85,11 @@ class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocat
     }
 
     private fun onItemSelected(data: ResponseSearchPlace.Document) {
-        Log.d("kite", data.toString())
+        CoroutineScope(Dispatchers.Main).launch {
+            onLocationSelectListener.onSelectedItemListener(data)
+            delay(500)
+            dismiss()
+        }
     }
 
     private fun setupObservers() {
