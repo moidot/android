@@ -3,10 +3,10 @@ package com.moidot.moidot.presentation.util.bottomsheet
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
+import com.moidot.moidot.data.local.toPlaceEntity
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
 import com.moidot.moidot.presentation.ui.base.BaseBottomSheetDialogFragment
@@ -80,9 +80,16 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
     }
 
     private fun initAdapter() {
+        loadSavedFavoritePlace()
         binding.bottomSheetLocationPickerRvPlace.apply {
             adapter = locationAdapter
             addItemDecoration(VerticalSpaceItemDecoration(8.dpToPx(this.context)))
+        }
+    }
+
+    private fun loadSavedFavoritePlace() {
+        CoroutineScope(Dispatchers.IO).launch {
+            locationAdapter.submitList(viewModel.getSavedFavoritePlaces())
         }
     }
 
@@ -94,12 +101,14 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         }
     }
 
-    private fun onFavoriteSelectListener(position:Int, data: ResponseSearchPlace.Document) {
+    private fun onFavoriteSelectListener(position: Int, data: ResponseSearchPlace.Document) {
         if (data.isFavorite) {
-            data.isFavorite =false
+            viewModel.deleteFavorite(data.toPlaceEntity())
+            data.isFavorite = false
         } else {
             CustomSnackBar.makeSnackBar(binding.root, SNACK_BAR_FAVORITE_MSG).show()
             data.isFavorite = true
+            viewModel.addFavorite(data.toPlaceEntity())
         }
         locationAdapter.notifyItemChanged(position)
     }
