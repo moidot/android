@@ -1,4 +1,38 @@
 package com.moidot.moidot.presentation.util.bottomsheet
 
-class BottomSheetLocationAdapter {
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.moidot.moidot.data.remote.response.ResponseSearchPlace
+import com.moidot.moidot.databinding.ItemLocationBinding
+
+class BottomSheetLocationAdapter: ListAdapter<ResponseSearchPlace.Document, BottomSheetLocationAdapter.LocationViewHolder>(diffUtil) {
+
+    class LocationViewHolder(private val binding: ItemLocationBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: ResponseSearchPlace.Document) {
+            binding.data = data
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
+        return LocationViewHolder(ItemLocationBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    }
+
+    override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
+        holder.bind(currentList[position])
+    }
+
+    companion object {
+        private val diffUtil = object : DiffUtil.ItemCallback<ResponseSearchPlace.Document>() {
+            override fun areItemsTheSame(oldItem: ResponseSearchPlace.Document, newItem: ResponseSearchPlace.Document): Boolean {
+                return oldItem.placeName == newItem.placeName
+            }
+
+            override fun areContentsTheSame(oldItem: ResponseSearchPlace.Document, newItem: ResponseSearchPlace.Document): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

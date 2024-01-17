@@ -9,6 +9,7 @@ data class ResponseSearchPlace(
         @SerializedName("place_name") val placeName: String,
         @SerializedName("road_address_name") val roadAddressName: String?,
         @SerializedName("x") val longitude: Double,
-        @SerializedName("y") val latitude: Double
+        @SerializedName("y") val latitude: Double,
+        val isFavorite: Boolean = false
     )
 }

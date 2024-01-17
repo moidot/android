@@ -1,53 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="0dp"
-    app:strokeColor="@color/orange500"
-    app:strokeWidth="1dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="data"
+            type="com.moidot.moidot.data.remote.response.ResponseSearchPlace.Document" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="12dp">
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="1dp">
 
-        <TextView
-            android:id="@+id/item_location_tv_place_name"
-            style="@style/b2_med_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/gray700"
-            app:layout_constraintBottom_toTopOf="@id/item_location_tv_road_address_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="신촌역 2호선" />
-
-        <TextView
-            android:id="@+id/item_location_tv_road_address_name"
-            style="@style/c2_reg_11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/gray400"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/item_location_tv_place_name"
-            app:layout_constraintTop_toBottomOf="@id/item_location_tv_place_name"
-            tools:text="서울 성북구 보문로34다길 2" />
-
-        <ImageView
-            android:id="@+id/item_location_iv_pin"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"
-            android:src="@drawable/ic_location_pin_normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingHorizontal="12dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/item_location_tv_place_name"
+                style="@style/b2_med_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{data.placeName}"
+                android:textColor="@color/gray700"
+                app:layout_constraintBottom_toTopOf="@id/item_location_tv_road_address_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="신촌역 2호선" />
+
+            <TextView
+                android:id="@+id/item_location_tv_road_address_name"
+                style="@style/c2_reg_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@{data.roadAddressName}"
+                android:textColor="@color/gray400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/item_location_tv_place_name"
+                app:layout_constraintTop_toBottomOf="@id/item_location_tv_place_name"
+                tools:text="서울 성북구 보문로34다길 2" />
+
+            <ImageView
+                android:id="@+id/item_location_iv_pin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:src="@{data.isFavorite ? @drawable/ic_location_pin_normal :  @drawable/ic_location_pin_normal}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

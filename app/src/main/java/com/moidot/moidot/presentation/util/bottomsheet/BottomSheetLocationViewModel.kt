@@ -1,6 +1,5 @@
 package com.moidot.moidot.presentation.util.bottomsheet
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,7 +34,7 @@ class BottomSheetLocationViewModel @Inject constructor(private val locationRepos
     fun searchPlace() {
         viewModelScope.launch {
             locationRepository.searchPlace(searchWord.value!!).onSuccess {
-                Log.d("kite", it.toString())
+                _searchResults.value = it.places
             }
         }
     }

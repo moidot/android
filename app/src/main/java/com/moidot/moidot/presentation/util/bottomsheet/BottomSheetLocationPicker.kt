@@ -8,6 +8,8 @@ import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
 import com.moidot.moidot.presentation.ui.base.BaseBottomSheetDialogFragment
+import com.moidot.moidot.presentation.util.VerticalSpaceItemDecoration
+import com.moidot.moidot.presentation.util.dpToPx
 import com.moidot.moidot.presentation.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,11 +17,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocationPickerBinding>(R.layout.bottom_sheet_location_picker) {
 
     private val viewModel: BottomSheetLocationViewModel by viewModels()
+    private val locationAdapter: BottomSheetLocationAdapter by lazy { BottomSheetLocationAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBinding()
         initView()
+        setupObservers()
     }
 
     private fun initBinding() {
@@ -31,6 +35,7 @@ class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocat
         setSearchTextFocusChangeListener()
         setSearchTextChangeListener()
         setSearchKeyListener()
+        initAdapter()
     }
 
     private fun setSearchTextFocusChangeListener() {
@@ -60,6 +65,19 @@ class BottomSheetLocationPicker : BaseBottomSheetDialogFragment<BottomSheetLocat
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
+        }
+    }
+
+    private fun initAdapter() {
+        binding.bottomSheetLocationPickerRvPlace.apply {
+            adapter = locationAdapter
+            addItemDecoration(VerticalSpaceItemDecoration(8.dpToPx(this.context)))
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.searchResults.observe(viewLifecycleOwner) {
+            locationAdapter.submitList(it)
         }
     }
 
