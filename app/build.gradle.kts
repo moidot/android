@@ -28,6 +28,7 @@ android {
         buildConfigField("String", "NAVER_CLIENT_ID", properties.getProperty("naver_client_id"))
         buildConfigField("String", "NAVER_CLIENT_SECRET_KEY", properties.getProperty("naver_client_secret_key"))
         buildConfigField("String", "BASE_URL", properties.getProperty("base_url"))
+        buildConfigField("String", "KAKAO_URL", properties.getProperty("kakao_url"))
         manifestPlaceholders["MANIFEST_KAKAO_NATIVE_APP_KEY"] = properties.getProperty("manifest_kakao_native_app_key")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -96,6 +97,11 @@ dependencies {
 
     // Naver
     implementation("com.navercorp.nid:oauth:5.9.0")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
 }
 
 kapt {

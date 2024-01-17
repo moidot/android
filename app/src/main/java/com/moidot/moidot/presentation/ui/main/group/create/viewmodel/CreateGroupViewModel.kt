@@ -3,12 +3,16 @@ package com.moidot.moidot.presentation.ui.main.group.create.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import javax.inject.Inject
 
 class CreateGroupViewModel @Inject constructor() : ViewModel() {
 
     private val _groupName = MutableLiveData<String>()
     val groupName: LiveData<String> = _groupName
+
+    private val _locationInfo = MutableLiveData<ResponseSearchPlace.Document>()
+    val locationInfo: LiveData<ResponseSearchPlace.Document> = _locationInfo
 
     private val _isGroupNameFieldActive = MutableLiveData<Boolean>(false)
     val isGroupNameFieldActive: LiveData<Boolean> = _isGroupNameFieldActive
@@ -71,6 +75,10 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
         if (isUserInputAlreadyDone.value!!) {
             _isGroupNameFieldActive.value = false
         }
+    }
+
+    fun setLocationInfo(data: ResponseSearchPlace.Document) {
+        _locationInfo.value = data
     }
 
 }
