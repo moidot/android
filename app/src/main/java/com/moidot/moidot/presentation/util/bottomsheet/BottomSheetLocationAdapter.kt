@@ -8,16 +8,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.ItemLocationBinding
 
-class BottomSheetLocationAdapter: ListAdapter<ResponseSearchPlace.Document, BottomSheetLocationAdapter.LocationViewHolder>(diffUtil) {
+class BottomSheetLocationAdapter(
+    private val onItemSelected: (ResponseSearchPlace.Document) -> Unit
+) : ListAdapter<ResponseSearchPlace.Document, BottomSheetLocationAdapter.LocationViewHolder>(diffUtil) {
 
-    class LocationViewHolder(private val binding: ItemLocationBinding) : RecyclerView.ViewHolder(binding.root) {
+    class LocationViewHolder(
+        private val binding: ItemLocationBinding,
+        private val onItemSelected: (ResponseSearchPlace.Document) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ResponseSearchPlace.Document) {
             binding.data = data
+            binding.root.setOnClickListener {
+                onItemSelected(data)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
-        return LocationViewHolder(ItemLocationBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return LocationViewHolder(ItemLocationBinding.inflate(LayoutInflater.from(parent.context), parent, false), onItemSelected)
     }
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
