@@ -16,6 +16,8 @@ class BottomSheetLocationAdapter(
     private val onFavoriteSelectListener: (Int, ResponseSearchPlace.Document) -> Unit
 ) : ListAdapter<ResponseSearchPlace.Document, BottomSheetLocationAdapter.LocationViewHolder>(diffUtil) {
 
+    var savedFavorites = listOf<ResponseSearchPlace.Document>()
+
     class LocationViewHolder(
         private val binding: ItemLocationBinding,
         private val onItemSelectListener: (ResponseSearchPlace.Document) -> Unit,

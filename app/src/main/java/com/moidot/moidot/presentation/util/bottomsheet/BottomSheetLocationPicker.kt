@@ -83,13 +83,17 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         loadSavedFavoritePlace()
         binding.bottomSheetLocationPickerRvPlace.apply {
             adapter = locationAdapter
+            itemAnimator = null
             addItemDecoration(VerticalSpaceItemDecoration(8.dpToPx(this.context)))
         }
     }
 
     private fun loadSavedFavoritePlace() {
         CoroutineScope(Dispatchers.IO).launch {
-            locationAdapter.submitList(viewModel.getSavedFavoritePlaces())
+            viewModel.getSavedFavoritePlaces().apply {
+                locationAdapter.submitList(this)
+                locationAdapter.savedFavorites = this
+            }
         }
     }
 
@@ -115,7 +119,12 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
 
     private fun setupObservers() {
         viewModel.searchResults.observe(viewLifecycleOwner) {
-            locationAdapter.submitList(it)
+            val updatedResults = it.map { result ->  // isFavorite 빼고 나머지 요소가 같은지 비교
+                locationAdapter.savedFavorites.find { savedPlace ->
+                    savedPlace.copy(isFavorite = result.isFavorite) == result
+                } ?: result
+            }
+            locationAdapter.submitList(updatedResults)
         }
     }
 
