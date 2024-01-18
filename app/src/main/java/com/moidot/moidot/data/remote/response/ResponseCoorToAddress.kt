@@ -9,11 +9,11 @@ data class ResponseCoorToAddress(
         @SerializedName("address") val address: Address,
         @SerializedName("road_address") val roadAddress: RoadAddress?
     ) {
-        data class RoadAddress(
+        data class Address(
             @SerializedName("address_name") val addressName: String,
         )
 
-        data class Address(
+        data class RoadAddress(
             @SerializedName("address_name") val roadAddressName: String,
         )
     }

@@ -132,6 +132,11 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
     }
 
     private fun setupObservers() {
+        updateViewFromSearch() // 키워드 기준 장소 검색
+        updateViewFromCurrentLocation() // 현재위치 좌표 기준 장소 반환
+    }
+
+    private fun updateViewFromSearch() {
         viewModel.searchResults.observe(viewLifecycleOwner) {
             uploadSavedFavoritePlace()
             val updatedResults = it.map { result ->  // isFavorite 빼고 나머지 요소가 같은지 비교
@@ -143,6 +148,17 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         }
     }
 
+    private fun updateViewFromCurrentLocation() {
+        viewModel.currentLocationResults.observe(viewLifecycleOwner) {
+            uploadSavedFavoritePlace()
+            val updatedResults = it.map { result ->  // isFavorite 빼고 나머지 요소가 같은지 비교
+                locationAdapter.savedFavorites.find { savedPlace ->
+                    savedPlace.copy(isFavorite = result.isFavorite) == result
+                } ?: result
+            }
+            locationAdapter.setPlaceItems(updatedResults)
+        }
+    }
 
     fun onClickSearchListener() {
         viewModel.searchPlace()
@@ -159,10 +175,7 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         val currentLocationCoordinate: Location? = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             ?: lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
         if (currentLocationCoordinate != null) {
-            currentLocationCoordinate.apply {
-                viewModel.setCurrentCoordinateInfo(longitude, latitude)
-                viewModel.getCurrentLocations(longitude, latitude)
-            }
+            currentLocationCoordinate.apply { viewModel.getCurrentLocations(longitude, latitude) }
         } else {
             Toast.makeText(requireContext(), CURRENT_LOCATION_ERROR_MSG, Toast.LENGTH_SHORT).show()
         }
