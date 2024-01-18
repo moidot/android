@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="fragment"
             type="com.moidot.moidot.presentation.ui.main.group.create.view.InputLeaderInfoFragment" />
@@ -198,11 +200,12 @@
             android:onClick="@{() -> fragment.onClickStartLocationPicker()}"
             android:paddingHorizontal="12dp"
             android:paddingVertical="13dp"
-            android:text="@string/input_group_start_location_hint"
+            android:text="@{viewModel.isLocationInputComplete() ? viewModel.locationInfo.placeName : @string/input_group_start_location_hint }"
             android:textColor="@color/gray400"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_start_location" />
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_start_location"
+            bind:InputTextFieldActive="@{viewModel.isLocationInputComplete()}" />
 
         <ImageView
             android:layout_width="wrap_content"
