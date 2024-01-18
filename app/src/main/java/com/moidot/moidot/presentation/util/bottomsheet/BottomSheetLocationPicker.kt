@@ -1,8 +1,13 @@
 package com.moidot.moidot.presentation.util.bottomsheet
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
@@ -148,7 +153,19 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         }
     }
 
+    @SuppressLint("MissingPermission") // TODO 위치 권한 부여 예정
+    fun getMyCurrentLocation() {
+        val lm: LocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val currentLocationCoordinate: Location? = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            ?: lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+
+
+
+    }
+
     companion object {
         const val SNACK_BAR_FAVORITE_MSG = "장소를 즐겨찾기에 저장했어요!"
+        const val CURRENT_LOCATION_ERROR_MSG = "현재 위치를 불러올 수 없습니다."
     }
 }
