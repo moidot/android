@@ -102,7 +102,7 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         }
     }
 
-    private fun uploadSavedFavoritePlace() {
+    private fun updateSavedFavoritePlace() {
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.getSavedFavoritePlaces().apply {
                 locationAdapter.savedFavorites = this
@@ -138,7 +138,7 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
 
     private fun updateViewFromSearch() {
         viewModel.searchResults.observe(viewLifecycleOwner) {
-            uploadSavedFavoritePlace()
+            updateSavedFavoritePlace()
             val updatedResults = it.map { result ->  // isFavorite 빼고 나머지 요소가 같은지 비교
                 locationAdapter.savedFavorites.find { savedPlace ->
                     savedPlace.copy(isFavorite = result.isFavorite) == result
@@ -150,7 +150,7 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
 
     private fun updateViewFromCurrentLocation() {
         viewModel.currentLocationResults.observe(viewLifecycleOwner) {
-            uploadSavedFavoritePlace()
+            updateSavedFavoritePlace()
             val updatedResults = it.map { result ->  // isFavorite 빼고 나머지 요소가 같은지 비교
                 locationAdapter.savedFavorites.find { savedPlace ->
                     savedPlace.copy(isFavorite = result.isFavorite) == result
