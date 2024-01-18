@@ -30,12 +30,24 @@ fun ImageView.imageBind(drawable: Drawable?) {
 
 @BindingAdapter("bind:InputEditTextFieldActive")
 fun EditText.setInputEditTextFieldActive(textLength: Int) {
+    val horizontalPadding = resources.getDimensionPixelSize(R.dimen.input_field_horizontal_padding)
+    val verticalPadding = resources.getDimensionPixelSize(
+        if (textLength > 0) R.dimen.input_field_active_vertical_padding
+        else R.dimen.input_field_normal_vertical_padding
+    )
+    this.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
     val currentTextStyle = if (textLength > 0) R.style.b2_reg_14 else R.style.c1_reg_12
     this.setTextAppearance(currentTextStyle)
 }
 
 @BindingAdapter("bind:InputTextFieldActive")
 fun TextView.setInputTextFieldActive(flag: Boolean) {
+    val horizontalPadding = resources.getDimensionPixelSize(R.dimen.input_field_horizontal_padding)
+    val verticalPadding = resources.getDimensionPixelSize(
+        if (flag) R.dimen.input_field_active_vertical_padding
+        else R.dimen.input_field_normal_vertical_padding
+    )
+    this.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
     val currentTextStyle = if (flag) R.style.b2_reg_14 else R.style.c1_reg_12
     val textColor = if (flag) R.color.gray800 else R.color.gray400
     this.setTextColor(ResourcesCompat.getColor(resources, textColor, null))
