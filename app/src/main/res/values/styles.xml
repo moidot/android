@@ -40,6 +40,7 @@
         <item name="android:paddingVertical">2dp</item>
         <item name="android:paddingHorizontal">1dp</item>
         <item name="chipCornerRadius">12dp</item>
+        <item name="android:clickable">false</item>
         <item name="chipMinTouchTargetSize">0dp</item>
         <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/indicator_txt_color</item>
