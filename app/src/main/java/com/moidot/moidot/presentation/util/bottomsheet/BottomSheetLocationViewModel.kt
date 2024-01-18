@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.airbnb.lottie.model.MutablePair
 import com.moidot.moidot.data.local.entity.PlaceEntity
 import com.moidot.moidot.data.local.toDocument
 import com.moidot.moidot.data.remote.response.ResponseCoorToAddress
@@ -29,6 +30,9 @@ class BottomSheetLocationViewModel @Inject constructor(private val locationRepos
 
     private val _currentLocationResults = MutableLiveData<List<ResponseCoorToAddress.Document>>()
     val currentLocationResults: LiveData<List<ResponseCoorToAddress.Document>> = _currentLocationResults
+
+    private val _currentLocationCoordinateInfo = MutableLiveData<Pair<Double, Double>>()
+    val currentLocationCoordinateInfo: LiveData<Pair<Double, Double>> = _currentLocationCoordinateInfo
 
     fun setSearchWord(word: String) {
         _searchWord.value = word
@@ -63,6 +67,10 @@ class BottomSheetLocationViewModel @Inject constructor(private val locationRepos
             }
         }
         return savedFavorites
+    }
+
+    fun setCurrentCoordinateInfo(longitude: Double, latitude: Double) {
+        _currentLocationCoordinateInfo.value = Pair(longitude, latitude)
     }
 
     fun getCurrentLocations(longitude: Double, latitude: Double) {

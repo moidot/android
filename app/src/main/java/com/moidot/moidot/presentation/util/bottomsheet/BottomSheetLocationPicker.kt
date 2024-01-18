@@ -7,7 +7,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.core.content.ContextCompat.getSystemService
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
@@ -158,10 +158,14 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         val lm: LocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val currentLocationCoordinate: Location? = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             ?: lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-
-
-
-
+        if (currentLocationCoordinate != null) {
+            currentLocationCoordinate.apply {
+                viewModel.setCurrentCoordinateInfo(longitude, latitude)
+                viewModel.getCurrentLocations(longitude, latitude)
+            }
+        } else {
+            Toast.makeText(requireContext(), CURRENT_LOCATION_ERROR_MSG, Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object {
