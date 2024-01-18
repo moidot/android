@@ -46,7 +46,7 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
 
     fun checkIsValidGroupName(): Boolean {
         val groupName = groupName.value!!
-        val specialChars = "!#$%&'()*+,/:;=?@[]_~-|{}" // 사용 가능한 특수문자
+        val specialChars = "!#$%&'()*+,/:;=?@[]_~-|{} " // 사용 가능한 특수문자
         val disallowedChars = groupName.filter { !it.isLetterOrDigit() && it !in specialChars }
 
         val errorMsg = when {
