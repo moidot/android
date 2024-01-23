@@ -64,7 +64,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_tv_title"
-            bind:InputTextFieldActive="@{viewModel.searchWord.length()}" />
+            bind:InputEditTextFieldActive="@{viewModel.searchWord.length()}" />
 
         <ImageView
             android:id="@+id/bottom_sheet_location_picker_iv_search"
@@ -83,6 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12.5dp"
             android:orientation="horizontal"
+            android:onClick="@{() -> fragment.checkLocationPermission()}"
             app:layout_constraintStart_toStartOf="@id/bottom_sheet_location_picker_etv_search"
             app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_etv_search">
 

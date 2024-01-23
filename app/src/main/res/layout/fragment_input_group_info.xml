@@ -142,7 +142,7 @@
             app:layout_constraintEnd_toEndOf="@id/fg_input_group_info_tv_group_name_cnt"
             app:layout_constraintStart_toStartOf="@id/fg_input_group_info_tv_group_name_title"
             app:layout_constraintTop_toBottomOf="@id/fg_input_group_info_tv_group_name_title"
-            bind:InputTextFieldActive="@{viewModel.groupName.length()}" />
+            bind:InputEditTextFieldActive="@{viewModel.groupName.length()}" />
 
         <TextView
             android:id="@+id/fg_input_group_info_tv_group_name_error"

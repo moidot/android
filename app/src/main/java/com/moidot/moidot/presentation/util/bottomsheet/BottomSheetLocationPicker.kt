@@ -1,15 +1,20 @@
 package com.moidot.moidot.presentation.util.bottomsheet
 
+import android.annotation.SuppressLint
+import android.location.Location
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import com.google.android.gms.location.LocationServices
 import com.moidot.moidot.R
 import com.moidot.moidot.data.local.toPlaceEntity
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
 import com.moidot.moidot.presentation.ui.base.BaseBottomSheetDialogFragment
+import com.moidot.moidot.presentation.ui.main.group.create.view.CreateGroupActivity
 import com.moidot.moidot.presentation.util.CustomSnackBar
 import com.moidot.moidot.presentation.util.VerticalSpaceItemDecoration
 import com.moidot.moidot.presentation.util.dpToPx
@@ -97,7 +102,7 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         }
     }
 
-    private fun uploadSavedFavoritePlace() {
+    private fun updateSavedFavoritePlace() {
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.getSavedFavoritePlaces().apply {
                 locationAdapter.savedFavorites = this
@@ -127,8 +132,13 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
     }
 
     private fun setupObservers() {
+        updateViewFromSearch() // 키워드 기준 장소 검색
+        updateViewFromCurrentLocation() // 현재위치 좌표 기준 장소 반환
+    }
+
+    private fun updateViewFromSearch() {
         viewModel.searchResults.observe(viewLifecycleOwner) {
-            uploadSavedFavoritePlace()
+            updateSavedFavoritePlace()
             val updatedResults = it.map { result ->  // isFavorite 빼고 나머지 요소가 같은지 비교
                 locationAdapter.savedFavorites.find { savedPlace ->
                     savedPlace.copy(isFavorite = result.isFavorite) == result
@@ -138,6 +148,17 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         }
     }
 
+    private fun updateViewFromCurrentLocation() {
+        viewModel.currentLocationResults.observe(viewLifecycleOwner) {
+            val currentLocationName = it[0].placeName
+            binding.bottomSheetLocationPickerEtvSearch.apply {
+                setText(currentLocationName)
+                clearFocus()
+            }
+            viewModel.setSearchWord(currentLocationName)
+            viewModel.setSearchWordFieldActive(true)
+        }
+    }
 
     fun onClickSearchListener() {
         viewModel.searchPlace()
@@ -148,7 +169,26 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         }
     }
 
+    fun checkLocationPermission() {
+        (activity as CreateGroupActivity).getPermissionUtil().requestLocationPermission { getMyCurrentLocation() }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getMyCurrentLocation() {
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            location?.let {
+                viewModel.getCurrentLocations(it.longitude, it.latitude)
+            } ?: run {
+                Toast.makeText(requireContext(), CURRENT_LOCATION_ERROR_MSG, Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { exception ->
+            Toast.makeText(requireContext(), CURRENT_LOCATION_ERROR_MSG, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     companion object {
         const val SNACK_BAR_FAVORITE_MSG = "장소를 즐겨찾기에 저장했어요!"
+        const val CURRENT_LOCATION_ERROR_MSG = "현재 위치를 불러올 수 없습니다."
     }
 }

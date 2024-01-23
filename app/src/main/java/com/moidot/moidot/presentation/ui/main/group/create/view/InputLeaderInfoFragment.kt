@@ -36,7 +36,8 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
     fun onClickStartLocationPicker() {
         val locationPickerListener = object : BottomSheetLocationPicker.LocationPickerListener {
             override fun onSelectedItemListener(data: ResponseSearchPlace.Document) {
-                viewModel.setLocationInfo(data) // TODO 위치 텍스트 반영
+                viewModel.setLocationInfo(data)
+                viewModel.updateLocationInputComplete() // 위치 정보 입력 완료
             }
         }
         val bottomSheet = BottomSheetLocationPicker(locationPickerListener)

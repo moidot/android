@@ -3,6 +3,7 @@ package com.moidot.moidot.data.repository
 import com.moidot.moidot.data.local.datasource.location.LocationLocalDataSource
 import com.moidot.moidot.data.local.entity.PlaceEntity
 import com.moidot.moidot.data.remote.datasource.location.LocationRemoteDataSource
+import com.moidot.moidot.data.remote.response.ResponseCoorToAddress
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.domain.repository.LocationRepository
 import javax.inject.Inject
@@ -17,6 +18,10 @@ class LocationRepositoryImpl @Inject constructor(
         query: String,
     ): Result<ResponseSearchPlace> {
         return locationRemoteDataSource.searchPlace(query = query)
+    }
+
+    override suspend fun getAddressFromCoord(longitude: Double, latitude: Double): Result<ResponseCoorToAddress> {
+        return locationRemoteDataSource.getAddressFromCoord(longitude, latitude)
     }
 
     override suspend fun insertPlace(place: PlaceEntity) {

@@ -14,14 +14,25 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
     private val _locationInfo = MutableLiveData<ResponseSearchPlace.Document>()
     val locationInfo: LiveData<ResponseSearchPlace.Document> = _locationInfo
 
+    // 필드 활성화
     private val _isGroupNameFieldActive = MutableLiveData<Boolean>(false)
     val isGroupNameFieldActive: LiveData<Boolean> = _isGroupNameFieldActive
 
+    // 버튼 활성화 조건
+    private val _isLocationInputComplete = MutableLiveData<Boolean>(false) // 장소
+    val isLocationInputComplete: LiveData<Boolean> = _isLocationInputComplete
+
+    // 버튼 활성화
     private val _isGroupInfoNextBtnActive = MutableLiveData<Boolean>(false)
     val isGroupInfoNextBtnActive: LiveData<Boolean> = _isGroupInfoNextBtnActive
 
+    private val _isLeaderInfoNextBtnActive = MutableLiveData<Boolean>(false)
+    val isLeaderInfoNextBtnActive: LiveData<Boolean> = _isLeaderInfoNextBtnActive
+
+    // 에러 메세지
     val groupNameErrorMsg = MutableLiveData<String>()
 
+    // 이전 화면 작업 완료 여부 체크
     private val isUserInputAlreadyDone = MutableLiveData<Boolean>(false)
 
     fun setGroupName(name: String) {
@@ -79,6 +90,10 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
 
     fun setLocationInfo(data: ResponseSearchPlace.Document) {
         _locationInfo.value = data
+    }
+
+    fun updateLocationInputComplete() {
+        _isLocationInputComplete.value = true
     }
 
 }

@@ -9,9 +9,7 @@ import com.moidot.moidot.data.local.toDocument
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.domain.repository.LocationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -27,6 +25,9 @@ class BottomSheetLocationViewModel @Inject constructor(private val locationRepos
 
     private val _searchResults = MutableLiveData<List<ResponseSearchPlace.Document>>()
     val searchResults: LiveData<List<ResponseSearchPlace.Document>> = _searchResults
+
+    private val _currentLocationResults = MutableLiveData<List<ResponseSearchPlace.Document>>()
+    val currentLocationResults: LiveData<List<ResponseSearchPlace.Document>> = _currentLocationResults
 
     fun setSearchWord(word: String) {
         _searchWord.value = word
@@ -62,5 +63,16 @@ class BottomSheetLocationViewModel @Inject constructor(private val locationRepos
         }
         return savedFavorites
     }
+
+    fun getCurrentLocations(longitude: Double, latitude: Double) {
+        viewModelScope.launch {
+            locationRepository.getAddressFromCoord(longitude, latitude).onSuccess { response ->
+                _currentLocationResults.value = response.documents.map { result ->
+                    result.toDocument(longitude, latitude)
+                }
+            }
+        }
+    }
+
 
 }
