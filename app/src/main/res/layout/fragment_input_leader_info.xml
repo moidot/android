@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/input_group_nickname"
-            android:textColor="@color/orange500"
+            android:textColor="@{viewModel.isNickNameFieldActive() ? @color/orange500 : @color/gray800}"
             app:layout_constraintStart_toStartOf="@id/fg_input_leader_info_tv_title_input_your_info"
             app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_title_input_your_info" />
 
@@ -137,7 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="@string/input_group_nickname_input_cnt"
+            android:text="@{@string/input_group_nickname_input_cnt(viewModel.nickName.length)}"
             android:textColor="@color/gray400"
             app:layout_constraintBottom_toBottomOf="@id/fg_input_leader_info_tv_nickname_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,11 +149,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:background="@drawable/bg_input_info_normal"
+            android:background="@{viewModel.isNickNameFieldActive() ? @drawable/bg_input_info_active : @drawable/bg_input_info_normal}"
             android:hint="@string/input_group_nickname_input_hint"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:maxLength="15"
+            android:maxLength="8"
             android:maxLines="1"
             android:paddingHorizontal="12dp"
             android:paddingVertical="13dp"
@@ -161,7 +161,8 @@
             android:textColorHint="@color/gray400"
             app:layout_constraintEnd_toEndOf="@id/fg_input_leader_info_tv_nickname_cnt"
             app:layout_constraintStart_toStartOf="@id/fg_input_leader_info_tv_nickname_title"
-            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_nickname_title" />
+            app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_nickname_title"
+            bind:InputEditTextFieldActive="@{viewModel.nickName.length()}" />
 
         <TextView
             android:id="@+id/fg_input_leader_info_tv_nickname_error"
@@ -169,11 +170,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="에러 어쩌구"
             android:textColor="@color/red500"
             app:layout_constraintStart_toStartOf="@id/fg_input_leader_info_etv_nickname"
             app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_etv_nickname"
-            tools:text="특수문자로만 이루어져서는 안됩니다." />
+            tools:text="중복된 닉네임입니다." />
 
         <TextView
             android:id="@+id/fg_input_leader_info_tv_start_location"
@@ -224,8 +224,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="24dp"
-            android:text="@string/all_next"
             android:enabled="@{viewModel.isLeaderInfoNextBtnActive()}"
+            android:text="@string/all_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

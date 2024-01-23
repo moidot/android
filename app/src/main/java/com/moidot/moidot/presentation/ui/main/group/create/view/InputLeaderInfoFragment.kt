@@ -3,6 +3,8 @@ package com.moidot.moidot.presentation.ui.main.group.create.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
@@ -13,6 +15,7 @@ import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.L
 import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.TRANSPORTATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.create.viewmodel.CreateGroupViewModel
 import com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker
+import com.moidot.moidot.presentation.util.hideKeyboard
 
 class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.layout.fragment_input_leader_info) {
 
@@ -22,6 +25,7 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
         super.onViewCreated(view, savedInstanceState)
         initBinding()
         initView()
+        setupObserver()
     }
 
     private fun initBinding() {
@@ -30,7 +34,49 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
     }
 
     private fun initView() {
+        setupNickNameInputView()
         setupTransportationPickerView()
+    }
+
+    private fun setupNickNameInputView() {
+        setNickNameFocusChangeListener()
+        setNickNameTextChangeListener()
+        setNickNameKeyListener()
+    }
+
+    private fun setNickNameFocusChangeListener() {
+        binding.fgInputLeaderInfoEtvNickname.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                handleFocusChange(binding.fgInputLeaderInfoEtvNickname.text.toString())
+            }
+        }
+    }
+
+    private fun handleFocusChange(nickName: String) {
+        if (nickName.isNotEmpty()) {
+            viewModel.setNickNameFieldActive(true)
+        }
+        viewModel.nickNameErrorMsg.value = ""
+    }
+
+    private fun setNickNameTextChangeListener() {
+        binding.fgInputLeaderInfoEtvNickname.addTextChangedListener {
+            val name = it.toString()
+            viewModel.setNickName(name)
+            viewModel.setNickNameFieldActive(name)
+            viewModel.updateInputInfoComplete(NICKNAME_INPUT, name.isNotEmpty())
+        }
+    }
+
+    private fun setNickNameKeyListener() {
+        binding.fgInputLeaderInfoEtvNickname.setOnEditorActionListener { it, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.setNickNameFieldActive(false)
+                it.hideKeyboard()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
     }
 
     private fun setupTransportationPickerView() {
@@ -46,5 +92,21 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
         }
         val bottomSheet = BottomSheetLocationPicker(locationPickerListener)
         bottomSheet.show(childFragmentManager, "BottomSheetLocationPicker")
+    }
+
+    private fun setupObserver() {
+        getTransportationSelectedType()
+    }
+
+    private fun getTransportationSelectedType() { // TODO 교통수단 받기
+        binding.fgInputLeaderInfoComponentTransportationPicker.apply {
+            isPublicSelected.observe(viewLifecycleOwner) {
+
+            }
+
+            isCarSelected.observe(viewLifecycleOwner) {
+
+            }
+        }
     }
 }
