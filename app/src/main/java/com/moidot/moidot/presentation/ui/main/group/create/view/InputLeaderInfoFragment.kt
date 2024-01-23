@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.FragmentInputLeaderInfoBinding
@@ -116,5 +117,9 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
             // TODO 서버 통신
             Log.d("kite", "서버 통신하기")
         }
+    }
+
+    fun goBack() {
+        findNavController().navigateUp()
     }
 }
