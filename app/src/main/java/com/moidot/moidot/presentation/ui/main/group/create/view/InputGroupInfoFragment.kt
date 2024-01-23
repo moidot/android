@@ -79,4 +79,8 @@ class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.lay
             viewModel.updateUserInputAlreadyDoneState()
         }
     }
+
+    fun goBack() {
+        activity?.finish()
+    }
 }

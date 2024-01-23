@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.ui.main.group.myGroup.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -10,6 +11,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseMyGroupList
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
+import com.moidot.moidot.presentation.ui.main.group.create.view.CreateGroupActivity
 import com.moidot.moidot.presentation.ui.main.group.myGroup.viewmodel.GroupViewModel
 import com.moidot.moidot.presentation.ui.main.group.myGroup.adater.MyGroupAdapter
 import com.moidot.moidot.presentation.util.StatusBarColorUtil
@@ -96,6 +98,10 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
             }
         }
         PopupPickerDialog(requireContext(), "모임 정렬", filters, viewModel.getCurrentFilterTxt(), onItemSelectedListener).show()
+    }
+
+    fun moveToCreateGroup() {
+        startActivity(Intent(requireContext(), CreateGroupActivity::class.java))
     }
 
     private fun setupObservers() {
