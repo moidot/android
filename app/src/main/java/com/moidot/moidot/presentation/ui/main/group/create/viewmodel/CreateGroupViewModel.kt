@@ -32,14 +32,12 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
     val isNickNameFieldActive: LiveData<Boolean> = _isNickNameFieldActive
 
     // 버튼 활성화 조건
-    private val _isNickNameInputComplete = MutableLiveData<Boolean>(false) // 닉네임
-    val isNickNameInputComplete: LiveData<Boolean> = _isNickNameInputComplete
+    private val isNickNameInputComplete = MutableLiveData<Boolean>(false) // 닉네임
 
     private val _isLocationInputComplete = MutableLiveData<Boolean>(false) // 장소
     val isLocationInputComplete: LiveData<Boolean> = _isLocationInputComplete
 
-    private val _isTransportationInputComplete = MutableLiveData<Boolean>(false) // 교통 수단
-    val isTransportationInputComplete: LiveData<Boolean> = _isTransportationInputComplete
+    private val isTransportationInputComplete = MutableLiveData<Boolean>(false) // 교통 수단
 
     // 버튼 활성화
     private val _isGroupInfoNextBtnActive = MutableLiveData<Boolean>(false)
@@ -126,17 +124,16 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
 
     fun updateInputInfoComplete(infoType: InputInfoType, state: Boolean) { // 입력 상태 갱신
         when (infoType) {
-            NICKNAME_INPUT -> _isNickNameInputComplete.value = state
+            NICKNAME_INPUT -> isNickNameInputComplete.value = state
             LOCATION_INPUT -> _isLocationInputComplete.value = state
-            TRANSPORTATION_INPUT -> _isTransportationInputComplete.value = state
+            TRANSPORTATION_INPUT -> isTransportationInputComplete.value = state
         }
         checkLeaderInfoNextBtnActive()
     }
 
     private fun checkLeaderInfoNextBtnActive() {
-        /* _isLeaderInfoNextBtnActive.value = isNickNameInputComplete.value!!
-                && isLocationInputComplete.value!! && isTransportationInputComplete.value!! */
-        _isLeaderInfoNextBtnActive.value = isNickNameInputComplete.value!! && isTransportationInputComplete.value!!
+        _isLeaderInfoNextBtnActive.value = isNickNameInputComplete.value!!
+                && isLocationInputComplete.value!! && isTransportationInputComplete.value!!
     }
 
 }
