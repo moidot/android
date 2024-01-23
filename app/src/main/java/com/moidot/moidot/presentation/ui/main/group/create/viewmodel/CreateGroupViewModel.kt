@@ -1,16 +1,24 @@
 package com.moidot.moidot.presentation.ui.main.group.create.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.remote.request.RequestCreateGroup
+import com.moidot.moidot.data.remote.response.ResponseCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
+import com.moidot.moidot.domain.repository.GroupRepository
 import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType
 import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.NICKNAME_INPUT
 import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.LOCATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.TRANSPORTATION_INPUT
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CreateGroupViewModel @Inject constructor() : ViewModel() {
+@HiltViewModel
+class CreateGroupViewModel @Inject constructor(private val groupRepository: GroupRepository) : ViewModel() {
 
     private val _groupName = MutableLiveData<String>()
     val groupName: LiveData<String> = _groupName
@@ -52,6 +60,10 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
 
     // 이전 화면 작업 완료 여부 체크
     private val isUserInputAlreadyDone = MutableLiveData<Boolean>(false)
+
+    // 그룹 생성 서버 통신 결과
+    private val _createGroupResult = MutableLiveData<ResponseCreateGroup>()
+    val createGroupResult: LiveData<ResponseCreateGroup> = _createGroupResult
 
     fun setGroupName(name: String) {
         _groupName.value = name
@@ -157,6 +169,28 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
     private fun checkLeaderInfoNextBtnActive() {
         _isLeaderInfoNextBtnActive.value = isNickNameInputComplete.value!!
                 && isLocationInputComplete.value!! && isTransportationInputComplete.value!!
+    }
+
+    fun createGroup() {
+        val requestCreateGroup = prepareCreateGroupRequest()
+        viewModelScope.launch {
+            groupRepository.createGroup(requestCreateGroup).onSuccess {
+                Log.d("kite", it.toString())
+            }.onFailure {
+                Log.d("kite", it.toString())
+            }
+        }
+    }
+
+    private fun prepareCreateGroupRequest(): RequestCreateGroup {
+        return RequestCreateGroup(
+            name = groupName.value!!,
+            userName = nickname.value!!,
+            locationName = locationInfo.value!!.placeName,
+            latitude = locationInfo.value!!.latitude,
+            longitude = locationInfo.value!!.longitude,
+            transportationType = transportationTypeTxt.value!!
+        )
     }
 
 }

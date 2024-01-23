@@ -7,6 +7,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
+import com.moidot.moidot.data.remote.request.RequestCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.FragmentInputLeaderInfoBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
@@ -126,7 +127,7 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
 
     fun createGroup() {
         if (viewModel.checkIsValidNickName()) {
-            // TODO 서버 통신
+            viewModel.createGroup()
         }
     }
 

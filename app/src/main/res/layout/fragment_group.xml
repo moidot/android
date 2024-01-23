@@ -234,6 +234,7 @@
             android:backgroundTint="@color/orange500"
             app:elevation="0dp"
             app:fabCustomSize="60dp"
+            android:onClick="@{() -> fragment.moveToCreateGroup()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
@@ -245,6 +246,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
