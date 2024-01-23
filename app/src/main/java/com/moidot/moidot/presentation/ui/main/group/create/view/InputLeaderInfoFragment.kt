@@ -1,7 +1,6 @@
 package com.moidot.moidot.presentation.ui.main.group.create.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -16,6 +15,8 @@ import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.L
 import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.TRANSPORTATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.create.viewmodel.CreateGroupViewModel
 import com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker
+import com.moidot.moidot.presentation.util.component.TransportationPickerComponent.Companion.TYPE_PERSONAL
+import com.moidot.moidot.presentation.util.component.TransportationPickerComponent.Companion.TYPE_PUBLIC
 import com.moidot.moidot.presentation.util.hideKeyboard
 
 class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.layout.fragment_input_leader_info) {
@@ -35,8 +36,19 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
     }
 
     private fun initView() {
+        checkPreviousInputData()
         setupNickNameInputView()
         setupTransportationPickerView()
+    }
+
+    // 입력 하다가 뒤로 가기 버튼을 눌렀을 때
+    // 기존에 입력된 데이터를 유지시키기 위해 사용하는 함수
+    private fun checkPreviousInputData() {
+        binding.fgInputLeaderInfoEtvNickname.setText(viewModel.nickname.value)
+        when (viewModel.transportationTypeTxt.value) {
+            TYPE_PERSONAL -> binding.fgInputLeaderInfoComponentTransportationPicker.isCarSelected.value = true
+            TYPE_PUBLIC -> binding.fgInputLeaderInfoComponentTransportationPicker.isPublicSelected.value = true
+        }
     }
 
     private fun setupNickNameInputView() {
@@ -96,10 +108,10 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
     }
 
     private fun setupObserver() {
-        getTransportationSelectedType()
+        setTransportationSelectedType()
     }
 
-    private fun getTransportationSelectedType() {
+    private fun setTransportationSelectedType() {
         binding.fgInputLeaderInfoComponentTransportationPicker.apply {
             selectedTransportationTypeTxt.observe(viewLifecycleOwner) {
                 if (it.isNotEmpty()) {
@@ -115,7 +127,6 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
     fun createGroup() {
         if (viewModel.checkIsValidNickName()) {
             // TODO 서버 통신
-            Log.d("kite", "서버 통신하기")
         }
     }
 

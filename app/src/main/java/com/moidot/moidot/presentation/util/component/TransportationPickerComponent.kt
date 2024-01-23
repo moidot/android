@@ -50,9 +50,14 @@ class TransportationPickerComponent(context: Context, attrs: AttributeSet) :
 
     private fun setSelectedTransportationTxt() {
         selectedTransportationTypeTxt.value = when {
-            isCarSelected.value == true -> "PERSONAL"
-            isPublicSelected.value == true -> "PUBLIC"
+            isCarSelected.value == true -> TYPE_PERSONAL
+            isPublicSelected.value == true -> TYPE_PUBLIC
             else -> ""
         }
+    }
+
+    companion object {
+        const val TYPE_PERSONAL = "PERSONAL"
+        const val TYPE_PUBLIC = "PUBLIC"
     }
 }
