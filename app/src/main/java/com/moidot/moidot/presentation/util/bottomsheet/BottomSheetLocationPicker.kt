@@ -5,6 +5,7 @@ import android.content.Context
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -150,13 +151,13 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
 
     private fun updateViewFromCurrentLocation() {
         viewModel.currentLocationResults.observe(viewLifecycleOwner) {
-            updateSavedFavoritePlace()
-            val updatedResults = it.map { result ->  // isFavorite 빼고 나머지 요소가 같은지 비교
-                locationAdapter.savedFavorites.find { savedPlace ->
-                    savedPlace.copy(isFavorite = result.isFavorite) == result
-                } ?: result
+            val currentLocationName = it[0].placeName
+            binding.bottomSheetLocationPickerEtvSearch.apply {
+                setText(currentLocationName)
+                clearFocus()
             }
-            locationAdapter.setPlaceItems(updatedResults)
+            viewModel.setSearchWord(currentLocationName)
+            viewModel.setSearchWordFieldActive(true)
         }
     }
 
@@ -175,7 +176,9 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         val currentLocationCoordinate: Location? = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             ?: lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
         if (currentLocationCoordinate != null) {
-            currentLocationCoordinate.apply { viewModel.getCurrentLocations(longitude, latitude) }
+            currentLocationCoordinate.apply {
+                viewModel.getCurrentLocations(longitude, latitude)
+            }
         } else {
             Toast.makeText(requireContext(), CURRENT_LOCATION_ERROR_MSG, Toast.LENGTH_SHORT).show()
         }
