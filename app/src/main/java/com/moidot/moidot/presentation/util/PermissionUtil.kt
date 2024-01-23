@@ -6,6 +6,8 @@ import android.net.Uri
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import com.moidot.moidot.R
 import com.moidot.moidot.presentation.util.popup.PopupTwoButtonDialog
 
 class PermissionUtil(
@@ -55,9 +57,9 @@ class PermissionUtil(
 
         val dialog = PopupTwoButtonDialog(
             mActivity,
-            "위치 접근 권한",
-            "위치 접근 권한이 필요합니다.\n확인을 누르면 설정화면으로 이동합니다.",
-            "확인",
+            mActivity.getString(R.string.permission_dialog_location_title),
+            mActivity.getString(R.string.permission_dialog_location_content),
+            mActivity.getString(R.string.permission_dialog_ok),
         ) { doPositiveClick() }
         dialog.show()
     }
