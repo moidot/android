@@ -15,8 +15,8 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
     private val _groupName = MutableLiveData<String>()
     val groupName: LiveData<String> = _groupName
 
-    private val _nickName = MutableLiveData<String>()
-    val nickName: LiveData<String> = _nickName
+    private val _nickname = MutableLiveData<String>()
+    val nickname: LiveData<String> = _nickname
 
     private val _transportationTypeTxt = MutableLiveData<String>()
     val transportationTypeTxt: LiveData<String> = _transportationTypeTxt
@@ -58,7 +58,7 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
     }
 
     fun setNickName(name: String) {
-        _nickName.value = name
+        _nickname.value = name
     }
 
     fun setTransportationTypeTxt(transportationType: String) {
@@ -99,11 +99,34 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
         return updateGroupInfoStates(errorMsg)
     }
 
+    fun checkIsValidNickName(): Boolean {
+        val nickname = _nickname.value!!
+        val specialChars = "!#$%&'()*+,/:;=?@[]_~-|{} " // 사용 가능한 특수문자
+        val disallowedChars = nickname.filter { !it.isLetterOrDigit() && it !in specialChars }
+
+        val errorMsg = when {
+            disallowedChars.isNotEmpty() -> "'${disallowedChars}'는(은) 사용할 수 없습니다."
+            nickname.all { !it.isLetterOrDigit() } -> "특수 문자만으로는 닉네임을 만들 수 없습니다."
+            else -> ""
+        }
+
+        return updateNickNameInfoStates(errorMsg)
+    }
+
     private fun updateGroupInfoStates(errorMsg: String): Boolean {
         groupNameErrorMsg.value = errorMsg
 
         val isValid = errorMsg.isEmpty()
         _isGroupInfoNextBtnActive.value = isValid
+
+        return isValid
+    }
+
+    private fun updateNickNameInfoStates(errorMsg: String): Boolean {
+        nickNameErrorMsg.value = errorMsg
+
+        val isValid = errorMsg.isEmpty()
+        updateInputInfoComplete(NICKNAME_INPUT, isValid)
 
         return isValid
     }

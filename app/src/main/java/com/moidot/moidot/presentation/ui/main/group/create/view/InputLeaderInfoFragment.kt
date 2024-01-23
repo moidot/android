@@ -110,4 +110,11 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
             }
         }
     }
+
+    fun createGroup() {
+        if (viewModel.checkIsValidNickName()) {
+            // TODO 서버 통신
+            Log.d("kite", "서버 통신하기")
+        }
+    }
 }
