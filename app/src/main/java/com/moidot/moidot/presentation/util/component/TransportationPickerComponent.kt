@@ -17,6 +17,7 @@ class TransportationPickerComponent(context: Context, attrs: AttributeSet) :
 
     val isPublicSelected = MutableLiveData<Boolean>(false)
     val isCarSelected = MutableLiveData<Boolean>(false)
+    val selectedTransportationTypeTxt = MutableLiveData<String>("")
 
     init {
         initBinding()
@@ -38,10 +39,20 @@ class TransportationPickerComponent(context: Context, attrs: AttributeSet) :
     fun onPublicSelectedListener() {
         isPublicSelected.value = !isPublicSelected.value!!
         isCarSelected.value = false
+        setSelectedTransportationTxt()
     }
 
     fun onCarSelectedListener() {
         isCarSelected.value = !isCarSelected.value!!
         isPublicSelected.value = false
+        setSelectedTransportationTxt()
+    }
+
+    private fun setSelectedTransportationTxt() {
+        selectedTransportationTypeTxt.value = when {
+            isCarSelected.value == true -> "PERSONAL"
+            isPublicSelected.value == true -> "PUBLIC"
+            else -> ""
+        }
     }
 }

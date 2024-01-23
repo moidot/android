@@ -98,14 +98,15 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
         getTransportationSelectedType()
     }
 
-    private fun getTransportationSelectedType() { // TODO 교통수단 받기
+    private fun getTransportationSelectedType() {
         binding.fgInputLeaderInfoComponentTransportationPicker.apply {
-            isPublicSelected.observe(viewLifecycleOwner) {
-
-            }
-
-            isCarSelected.observe(viewLifecycleOwner) {
-
+            selectedTransportationTypeTxt.observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    viewModel.setTransportationTypeTxt(it)
+                    viewModel.updateInputInfoComplete(TRANSPORTATION_INPUT, true)
+                } else {
+                    viewModel.updateInputInfoComplete(TRANSPORTATION_INPUT, false)
+                }
             }
         }
     }

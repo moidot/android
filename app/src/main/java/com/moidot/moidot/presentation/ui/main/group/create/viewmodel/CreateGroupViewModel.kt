@@ -18,6 +18,9 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
     private val _nickName = MutableLiveData<String>()
     val nickName: LiveData<String> = _nickName
 
+    private val _transportationTypeTxt = MutableLiveData<String>()
+    val transportationTypeTxt: LiveData<String> = _transportationTypeTxt
+
     private val _locationInfo = MutableLiveData<ResponseSearchPlace.Document>()
     val locationInfo: LiveData<ResponseSearchPlace.Document> = _locationInfo
 
@@ -58,6 +61,10 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
 
     fun setNickName(name: String) {
         _nickName.value = name
+    }
+
+    fun setTransportationTypeTxt(transportationType: String) {
+        _transportationTypeTxt.value = transportationType
     }
 
     fun setGroupNameFieldActive(value: Any) {
@@ -129,7 +136,7 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
     private fun checkLeaderInfoNextBtnActive() {
         /* _isLeaderInfoNextBtnActive.value = isNickNameInputComplete.value!!
                 && isLocationInputComplete.value!! && isTransportationInputComplete.value!! */
-        _isLeaderInfoNextBtnActive.value = isNickNameInputComplete.value!!
+        _isLeaderInfoNextBtnActive.value = isNickNameInputComplete.value!! && isTransportationInputComplete.value!!
     }
 
 }
