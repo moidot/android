@@ -1,15 +1,14 @@
 package com.moidot.moidot.presentation.util.bottomsheet
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import com.google.android.gms.location.LocationServices
 import com.moidot.moidot.R
 import com.moidot.moidot.data.local.toPlaceEntity
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
@@ -176,14 +175,14 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
 
     @SuppressLint("MissingPermission")
     private fun getMyCurrentLocation() {
-        val lm: LocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val currentLocationCoordinate: Location? = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            ?: lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-        if (currentLocationCoordinate != null) {
-            currentLocationCoordinate.apply {
-                viewModel.getCurrentLocations(longitude, latitude)
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            location?.let {
+                viewModel.getCurrentLocations(it.longitude, it.latitude)
+            } ?: run {
+                Toast.makeText(requireContext(), CURRENT_LOCATION_ERROR_MSG, Toast.LENGTH_SHORT).show()
             }
-        } else {
+        }.addOnFailureListener { exception ->
             Toast.makeText(requireContext(), CURRENT_LOCATION_ERROR_MSG, Toast.LENGTH_SHORT).show()
         }
     }
