@@ -7,7 +7,7 @@
 
         <variable
             name="dialog"
-            type="com.moidot.moidot.presentation.util.popup.PopupDeleteDialog" />
+            type="com.moidot.moidot.presentation.util.popup.PopupTwoButtonDialog" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
