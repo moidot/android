@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
+import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType
+import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.NICKNAME_INPUT
+import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.LOCATION_INPUT
+import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.TRANSPORTATION_INPUT
 import javax.inject.Inject
 
 class CreateGroupViewModel @Inject constructor() : ViewModel() {
@@ -19,8 +23,14 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
     val isGroupNameFieldActive: LiveData<Boolean> = _isGroupNameFieldActive
 
     // 버튼 활성화 조건
+    private val _isNickNameInputComplete = MutableLiveData<Boolean>(false) // 닉네임
+    val isNickNameInputComplete: LiveData<Boolean> = _isNickNameInputComplete
+
     private val _isLocationInputComplete = MutableLiveData<Boolean>(false) // 장소
     val isLocationInputComplete: LiveData<Boolean> = _isLocationInputComplete
+
+    private val _isTransportationInputComplete = MutableLiveData<Boolean>(false) // 교통 수단
+    val isTransportationInputComplete: LiveData<Boolean> = _isTransportationInputComplete
 
     // 버튼 활성화
     private val _isGroupInfoNextBtnActive = MutableLiveData<Boolean>(false)
@@ -92,8 +102,18 @@ class CreateGroupViewModel @Inject constructor() : ViewModel() {
         _locationInfo.value = data
     }
 
-    fun updateLocationInputComplete() {
-        _isLocationInputComplete.value = true
+    fun updateInputInfoComplete(infoType: InputInfoType, state: Boolean) { // 입력 상태 갱신
+        when (infoType) {
+            NICKNAME_INPUT -> _isNickNameInputComplete.value = state
+            LOCATION_INPUT -> _isLocationInputComplete.value = state
+            TRANSPORTATION_INPUT -> _isTransportationInputComplete.value = state
+        }
+        checkLeaderInfoNextBtnActive()
+    }
+
+    private fun checkLeaderInfoNextBtnActive() {
+        _isLeaderInfoNextBtnActive.value = isNickNameInputComplete.value!!
+                && isLocationInputComplete.value!! && isTransportationInputComplete.value!!
     }
 
 }
