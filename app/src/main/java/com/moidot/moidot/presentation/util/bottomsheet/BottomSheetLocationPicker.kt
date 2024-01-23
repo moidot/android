@@ -5,7 +5,6 @@ import android.content.Context
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -16,6 +15,7 @@ import com.moidot.moidot.data.local.toPlaceEntity
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
 import com.moidot.moidot.presentation.ui.base.BaseBottomSheetDialogFragment
+import com.moidot.moidot.presentation.ui.main.group.create.view.CreateGroupActivity
 import com.moidot.moidot.presentation.util.CustomSnackBar
 import com.moidot.moidot.presentation.util.VerticalSpaceItemDecoration
 import com.moidot.moidot.presentation.util.dpToPx
@@ -170,8 +170,12 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         }
     }
 
-    @SuppressLint("MissingPermission") // TODO 위치 권한 부여 예정
-    fun getMyCurrentLocation() {
+    fun checkLocationPermission() {
+        (activity as CreateGroupActivity).getPermissionUtil().requestLocationPermission { getMyCurrentLocation() }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getMyCurrentLocation() {
         val lm: LocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val currentLocationCoordinate: Location? = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             ?: lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
