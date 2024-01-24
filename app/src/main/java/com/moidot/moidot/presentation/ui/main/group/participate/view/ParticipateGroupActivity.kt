@@ -9,7 +9,9 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.ActivityParticipateGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType
+import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.NICKNAME_INPUT
+import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.TRANSPORTATION_INPUT
+import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.LOCATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.participate.viewmodel.ParticipateGroupViewModel
 import com.moidot.moidot.presentation.util.PermissionUtil
 import com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker
@@ -27,6 +29,7 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
         initBinding()
         initPermissionUtil()
         initView()
+        setupObserver()
     }
 
     private fun initBinding() {
@@ -70,7 +73,7 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
             val name = it.toString()
             viewModel.setNickName(name)
             viewModel.setNickNameFieldActive(name)
-            viewModel.updateInputInfoComplete(InputInfoType.NICKNAME_INPUT, name.isNotEmpty())
+            viewModel.updateInputInfoComplete(NICKNAME_INPUT, name.isNotEmpty())
         }
     }
 
@@ -93,7 +96,7 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
         val locationPickerListener = object : BottomSheetLocationPicker.LocationPickerListener {
             override fun onSelectedItemListener(data: ResponseSearchPlace.Document) {
                 viewModel.setLocationInfo(data)
-                viewModel.updateInputInfoComplete(InputInfoType.LOCATION_INPUT, true)  // 위치 정보 입력 완료
+                viewModel.updateInputInfoComplete(LOCATION_INPUT, true)  // 위치 정보 입력 완료
             }
         }
         val bottomSheet = BottomSheetLocationPicker(locationPickerListener)
@@ -105,17 +108,30 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
             selectedTransportationTypeTxt.observe(this@ParticipateGroupActivity) {
                 if (it.isNotEmpty()) {
                     viewModel.setTransportationTypeTxt(it)
-                    viewModel.updateInputInfoComplete(InputInfoType.TRANSPORTATION_INPUT, true)
+                    viewModel.updateInputInfoComplete(TRANSPORTATION_INPUT, true)
                 } else {
-                    viewModel.updateInputInfoComplete(InputInfoType.TRANSPORTATION_INPUT, false)
+                    viewModel.updateInputInfoComplete(TRANSPORTATION_INPUT, false)
                 }
+            }
+        }
+    }
+
+    private fun setupObserver() {
+        setDuplicateNicknameView()
+    }
+
+    private fun setDuplicateNicknameView() {
+        viewModel.nicknameDuplicated.observe(this) {
+            if (it) {
+                viewModel.nickNameErrorMsg.value = getString(R.string.participate_group_nickname_duplicate_error)
+                viewModel.updateInputInfoComplete(NICKNAME_INPUT, false)
             }
         }
     }
 
     fun participateGroup() {
         if (viewModel.checkIsValidNickName()) {
-
+            viewModel.participateGroup()
         }
     }
 }
