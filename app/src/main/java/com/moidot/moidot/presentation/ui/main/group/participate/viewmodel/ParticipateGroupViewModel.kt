@@ -57,13 +57,35 @@ class ParticipateGroupViewModel @Inject constructor() : ViewModel() {
         setFieldActive(_isNickNameFieldActive, value)
     }
 
-
     private fun setFieldActive(field: MutableLiveData<Boolean>, value: Any) {
         field.value = when (value) {
             is String -> value.isNotEmpty()
             is Boolean -> value
             else -> throw IllegalArgumentException("Value Error!")
         }
+    }
+
+    fun checkIsValidNickName(): Boolean {
+        val nickname = _nickname.value!!
+        val specialChars = "!#$%&'()*+,/:;=?@[]_~-|{} " // 사용 가능한 특수문자
+        val disallowedChars = nickname.filter { !it.isLetterOrDigit() && it !in specialChars }
+
+        val errorMsg = when {
+            disallowedChars.isNotEmpty() -> "'${disallowedChars}'는(은) 사용할 수 없습니다."
+            nickname.all { !it.isLetterOrDigit() } -> "특수 문자만으로는 닉네임을 만들 수 없습니다."
+            else -> ""
+        }
+
+        return updateNickNameInfoStates(errorMsg)
+    }
+
+    private fun updateNickNameInfoStates(errorMsg: String): Boolean {
+        nickNameErrorMsg.value = errorMsg
+
+        val isValid = errorMsg.isEmpty()
+        updateInputInfoComplete(InputInfoType.NICKNAME_INPUT, isValid)
+
+        return isValid
     }
 
     fun updateInputInfoComplete(infoType: InputInfoType, state: Boolean) { // 입력 상태 갱신

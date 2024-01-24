@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.ui.main.group.participate.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
@@ -109,6 +110,12 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
                     viewModel.updateInputInfoComplete(InputInfoType.TRANSPORTATION_INPUT, false)
                 }
             }
+        }
+    }
+
+    fun participateGroup() {
+        if (viewModel.checkIsValidNickName()) {
+
         }
     }
 }
