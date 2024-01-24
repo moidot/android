@@ -41,8 +41,29 @@ class ParticipateGroupViewModel @Inject constructor() : ViewModel() {
     // 에러 메세지
     val nickNameErrorMsg = MutableLiveData<String>()
 
+    fun setNickName(name: String) {
+        _nickname.value = name
+    }
+
     fun setLocationInfo(data: ResponseSearchPlace.Document) {
         _locationInfo.value = data
+    }
+
+    fun setTransportationTypeTxt(transportationType: String) {
+        _transportationTypeTxt.value = transportationType
+    }
+
+    fun setNickNameFieldActive(value: Any) {
+        setFieldActive(_isNickNameFieldActive, value)
+    }
+
+
+    private fun setFieldActive(field: MutableLiveData<Boolean>, value: Any) {
+        field.value = when (value) {
+            is String -> value.isNotEmpty()
+            is Boolean -> value
+            else -> throw IllegalArgumentException("Value Error!")
+        }
     }
 
     fun updateInputInfoComplete(infoType: InputInfoType, state: Boolean) { // 입력 상태 갱신
