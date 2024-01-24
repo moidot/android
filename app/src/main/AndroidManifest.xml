@@ -58,7 +58,10 @@
 
         <activity
             android:name=".presentation.ui.main.group.create.view.CreateGroupActivity"
-            android:exported="false"/>
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.main.group.participate.view.ParticipateGroupActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
