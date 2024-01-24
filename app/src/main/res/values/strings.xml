@@ -91,4 +91,7 @@
     <string name="input_group_info_title">모임의 이름을 알려주세요.</string>
     <string name="input_group_name_input_hint">15자 이내의 모임명을 입력해주세요.</string>
     <string name="input_group_name_input_cnt">공백포함 %d / 15자</string>
+
+    <!--ParticipateGroup -->
+    <string name="participate_group_nickname_duplicate_error">중복된 닉네임이 있습니다.</string>
 </resources>

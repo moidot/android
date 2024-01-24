@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="activity"
             type="com.moidot.moidot.presentation.ui.main.group.participate.view.ParticipateGroupActivity" />
@@ -198,6 +199,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="24dp"
             android:enabled="@{viewModel.isParticipateBtnActive()}"
+            android:onClick="@{() -> activity.participateGroup()}"
             android:text="@string/all_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
