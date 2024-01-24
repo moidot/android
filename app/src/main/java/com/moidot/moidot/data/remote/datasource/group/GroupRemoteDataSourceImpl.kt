@@ -5,7 +5,7 @@ import com.moidot.moidot.data.remote.datasource.getResultFromResponse
 import com.moidot.moidot.data.remote.request.RequestCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
-import com.moidot.moidot.data.remote.response.ResponseValidateNickname
+import com.moidot.moidot.data.remote.response.ResponseCheckNicknameDuplication
 import javax.inject.Inject
 
 class GroupRemoteDataSourceImpl @Inject constructor(private val groupService: GroupService) : GroupRemoteDataSource {
@@ -17,7 +17,7 @@ class GroupRemoteDataSourceImpl @Inject constructor(private val groupService: Gr
         return groupService.createGroup(requestCreateGroup).getResultFromResponse()
     }
 
-    override suspend fun validateNickname(groupId: Int, nickname: String): Result<ResponseValidateNickname> {
-        return groupService.validateNickname(groupId, nickname).getResultFromResponse()
+    override suspend fun checkNicknameDuplication(groupId: Int, nickname: String): Result<ResponseCheckNicknameDuplication> {
+        return groupService.checkNicknameDuplication(groupId, nickname).getResultFromResponse()
     }
 }

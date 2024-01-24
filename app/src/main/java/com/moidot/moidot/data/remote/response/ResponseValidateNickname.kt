@@ -1,6 +1,6 @@
 package com.moidot.moidot.data.remote.response
 
-data class ResponseValidateNickname(
+data class ResponseCheckNicknameDuplication(
     val `data`: Data,
 ) : BaseResponse() {
     data class Data(
