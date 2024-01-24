@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CreateGroupActivity : BaseActivity<ActivityCreateGroupBinding>(R.layout.activity_create_group) {
 
-    private lateinit var permissionUtil: PermissionUtil
+    lateinit var permissionUtil: PermissionUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,4 @@ class CreateGroupActivity : BaseActivity<ActivityCreateGroupBinding>(R.layout.ac
         navHost.findNavController().setGraph(R.navigation.create_group_nav_graph, intent.extras)
     }
 
-    fun getPermissionUtil(): PermissionUtil {
-        return permissionUtil
-    }
 }

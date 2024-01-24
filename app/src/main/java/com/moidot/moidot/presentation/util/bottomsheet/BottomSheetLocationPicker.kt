@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.util.bottomsheet
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.location.Location
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
 import com.moidot.moidot.presentation.ui.base.BaseBottomSheetDialogFragment
 import com.moidot.moidot.presentation.ui.main.group.create.view.CreateGroupActivity
+import com.moidot.moidot.presentation.ui.main.group.participate.view.ParticipateGroupActivity
 import com.moidot.moidot.presentation.util.CustomSnackBar
 import com.moidot.moidot.presentation.util.VerticalSpaceItemDecoration
 import com.moidot.moidot.presentation.util.dpToPx
@@ -170,7 +172,10 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
     }
 
     fun checkLocationPermission() {
-        (activity as CreateGroupActivity).getPermissionUtil().requestLocationPermission { getMyCurrentLocation() }
+        when (val currentActivity = activity) {
+            is CreateGroupActivity -> currentActivity.permissionUtil.requestLocationPermission { getMyCurrentLocation() }
+            is ParticipateGroupActivity -> currentActivity.permissionUtil.requestLocationPermission { getMyCurrentLocation() }
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -190,5 +195,7 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
     companion object {
         const val SNACK_BAR_FAVORITE_MSG = "장소를 즐겨찾기에 저장했어요!"
         const val CURRENT_LOCATION_ERROR_MSG = "현재 위치를 불러올 수 없습니다."
+        const val CREATE_GROUP = "CREATE_GROUP"
+        const val PARTICIPATE_GROUP = "PARTICIPATE_GROUP"
     }
 }
