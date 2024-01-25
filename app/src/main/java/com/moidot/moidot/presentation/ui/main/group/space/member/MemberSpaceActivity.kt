@@ -35,12 +35,13 @@ class MemberSpaceActivity : BaseActivity<ActivityMemeberSpaceBinding>(R.layout.a
     }
 
     private fun initTabSelectedListener() {
+        val navController = findNavController(R.id.member_space_fcv)
         binding.memberSpaceTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> findNavController(R.id.member_space_fcv).navigate(R.id.memberPlaceFragment)
-                    1 -> findNavController(R.id.member_space_fcv).navigate(R.id.memberVoteFragment)
-                    2 -> findNavController(R.id.member_space_fcv).navigate(R.id.memberInfoFragment)
+                    0 -> navController.navigate(R.id.memberPlaceFragment)
+                    1 -> navController.navigate(R.id.memberVoteFragment)
+                    2 -> navController.navigate(R.id.memberInfoFragment)
                 }
             }
 

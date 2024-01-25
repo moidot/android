@@ -1,7 +1,6 @@
 package com.moidot.moidot.presentation.ui.main.group.space.leader
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -38,12 +37,13 @@ class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.ac
     }
 
     private fun initTabSelectedListener() {
+        val navController = findNavController(R.id.leader_space_fcv)
         binding.leaderSpaceTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> findNavController(R.id.leader_space_fcv).navigate(R.id.leaderPlaceFragment)
-                    1 -> findNavController(R.id.leader_space_fcv).navigate(R.id.leaderVoteFragment)
-                    2 -> findNavController(R.id.leader_space_fcv).navigate(R.id.leaderInfoFragment)
+                    0 -> navController.navigate(R.id.leaderPlaceFragment)
+                    1 -> navController.navigate(R.id.leaderVoteFragment)
+                    2 -> navController.navigate(R.id.leaderInfoFragment)
                 }
             }
 
