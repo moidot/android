@@ -70,4 +70,17 @@
         <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
+    <style name="custom_tab_layout">
+        <item name="tabIndicatorColor">@color/orange500</item>
+        <item name="tabTextColor">@color/gray400</item>
+        <item name="tabSelectedTextColor">@color/orange500</item>
+        <item name="tabTextAppearance">@style/b2_reg_14</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabMaxWidth">0dp</item>
+        <item name="tabBackground">@color/white</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="tabIndicator">@drawable/bg_tab_indicator</item>
+        <item name="tabSelectedTextAppearance">@style/b2_bold_14</item>
+    </style>
 </resources>
