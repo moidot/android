@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red400">#F87171</color>
+    <color name="red50">#FEF2F2</color>
     <color name="red500">#EF4444</color>
     <color name="orange50">#FFF7ED</color>
     <color name="orange100">#FFEDD5</color>
@@ -26,5 +27,6 @@
     <color name="slate400">#94A3B8</color>
     <color name="slate800">#1E293B</color>
     <color name="orange500_20">#33F97316</color>
+    <color name="alert_delete">#FF5555</color>
     <color name="disabled_orange">#FFDAC1</color>
 </resources>

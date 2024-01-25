@@ -104,4 +104,6 @@
 
     <!--Space - InfoFragment -->
     <string name="space_info_group_name_title">모이닷 스페이스 이름</string>
+    <string name="space_info_member_remove">모임원 내보내기</string>
+    <string name="space_info_edit_my_info">내 정보 편집하기</string>
 </resources>
