@@ -22,4 +22,6 @@
         android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.view.LeaderInfoFragment"
         android:label="fragment_leader_info"
         tools:layout="@layout/fragment_leader_info" />
+
+
 </navigation>

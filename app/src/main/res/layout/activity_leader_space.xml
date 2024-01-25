@@ -25,6 +25,7 @@
                 android:id="@+id/leader_space_iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                android:onClick="@{() -> activity.finish()}"
                 android:paddingStart="12dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/ic_back"
@@ -84,26 +85,24 @@
                 android:id="@+id/leader_space_tab_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> activity.showGroupPlaceView()}"
                 android:text="@string/space_tab_place" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/leader_space_tab_vote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> activity.showGroupVoteView()}"
                 android:text="@string/space_tab_vote" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/leader_space_tab_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> activity.showGroupInfoView()}"
                 android:text="@string/space_tab_info" />
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/leader_space_fcv"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
