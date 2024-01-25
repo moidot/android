@@ -62,7 +62,14 @@
         <activity
             android:name=".presentation.ui.main.group.join.participate.view.ParticipateGroupActivity"
             android:exported="false" />
-        <activity android:name=""
+
+        <activity
+            android:name=".presentation.ui.main.group.space.leader.LeaderSpaceActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.ui.main.group.space.member.MemberSpaceActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
