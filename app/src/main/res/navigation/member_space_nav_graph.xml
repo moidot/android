@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/member_space_nav_graph"
+    app:startDestination="@id/memberPlaceFragment">
+
+    <fragment
+        android:id="@+id/memberPlaceFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.space.member.view.MemberPlaceFragment"
+        android:label="fragment_member_place"
+        tools:layout="@layout/fragment_member_place" />
+
+    <fragment
+        android:id="@+id/memberVoteFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.space.member.view.MemberVoteFragment"
+        android:label="fragment_member_vote"
+        tools:layout="@layout/fragment_member_vote" />
+
+    <fragment
+        android:id="@+id/memberInfoFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.space.member.view.MemberInfoFragment"
+        android:label="fragment_member_info"
+        tools:layout="@layout/fragment_member_info" />
+</navigation>
