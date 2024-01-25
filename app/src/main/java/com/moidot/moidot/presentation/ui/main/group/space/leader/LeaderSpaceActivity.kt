@@ -40,6 +40,7 @@ class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.ac
     }
 
     private fun initTabSelectedListener() {
+        val navController = findNavController(R.id.leader_space_fcv)
         binding.leaderSpaceTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {

@@ -38,6 +38,7 @@ class MemberSpaceActivity : BaseActivity<ActivityMemeberSpaceBinding>(R.layout.a
     }
 
     private fun initTabSelectedListener() {
+        val navController = findNavController(R.id.member_space_fcv)
         binding.memberSpaceTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
