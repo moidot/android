@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.create.view
+package com.moidot.moidot.presentation.ui.main.group.join.create.view
 
 import android.os.Bundle
 import android.view.View
@@ -11,10 +11,10 @@ import com.moidot.moidot.data.remote.request.RequestCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.FragmentInputLeaderInfoBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.NICKNAME_INPUT
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.LOCATION_INPUT
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.TRANSPORTATION_INPUT
-import com.moidot.moidot.presentation.ui.main.group.create.viewmodel.CreateGroupViewModel
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.NICKNAME_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.LOCATION_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.TRANSPORTATION_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.create.viewmodel.CreateGroupViewModel
 import com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker
 import com.moidot.moidot.presentation.util.component.TransportationPickerComponent.Companion.TYPE_PERSONAL
 import com.moidot.moidot.presentation.util.component.TransportationPickerComponent.Companion.TYPE_PUBLIC

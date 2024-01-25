@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.create.viewmodel
+package com.moidot.moidot.presentation.ui.main.group.join.create.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -9,10 +9,10 @@ import com.moidot.moidot.data.remote.request.RequestCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.domain.repository.GroupRepository
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.NICKNAME_INPUT
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.LOCATION_INPUT
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.TRANSPORTATION_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.NICKNAME_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.LOCATION_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.TRANSPORTATION_INPUT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

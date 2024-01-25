@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.create.view
+package com.moidot.moidot.presentation.ui.main.group.join.create.view
 
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment

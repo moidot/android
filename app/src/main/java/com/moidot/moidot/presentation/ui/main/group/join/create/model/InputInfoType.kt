@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.create.model
+package com.moidot.moidot.presentation.ui.main.group.join.create.model
 
 enum class InputInfoType {
     NICKNAME_INPUT,

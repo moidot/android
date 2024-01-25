@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/inputGroupInfoFragment"
-        android:name="com.moidot.moidot.presentation.ui.main.group.create.view.InputGroupInfoFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.join.create.view.InputGroupInfoFragment"
         android:label="fragment_input_group_info"
         tools:layout="@layout/fragment_input_group_info">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/inputLeaderInfoFragment"
-        android:name="com.moidot.moidot.presentation.ui.main.group.create.view.InputLeaderInfoFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.join.create.view.InputLeaderInfoFragment"
         android:label="fragment_input_leader_info"
         tools:layout="@layout/fragment_input_leader_info" />
 </navigation>
