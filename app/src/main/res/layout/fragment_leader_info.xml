@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.ui.main.group.space.leader.view.LeaderInfoFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -245,6 +247,7 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingVertical="4dp"
+                    android:onClick="@{()->fragment.shareInvitationWithKakao()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/fg_leader_info_view_share"
                     app:layout_constraintTop_toBottomOf="@id/fg_leader_info_tv_share_title">

@@ -93,7 +93,8 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 
     // Kakao
-    implementation("com.kakao.sdk:v2-user:2.19.0") // signin
+    implementation("com.kakao.sdk:v2-user:2.19.0") // 로그인
+    implementation ("com.kakao.sdk:v2-share:2.19.0") // 메시지(카카오톡 공유)
 
     // Naver
     implementation("com.navercorp.nid:oauth:5.9.0")
