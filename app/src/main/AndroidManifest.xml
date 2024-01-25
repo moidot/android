@@ -65,7 +65,7 @@
 
         <activity
             android:name=".presentation.ui.main.group.space.leader.LeaderSpaceActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".presentation.ui.main.group.space.member.MemberSpaceActivity"

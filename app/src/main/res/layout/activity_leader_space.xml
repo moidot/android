@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="activity"
+            type="com.moidot.moidot.presentation.ui.main.group.space.leader.LeaderSpaceActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,18 +84,21 @@
                 android:id="@+id/leader_space_tab_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> activity.showGroupPlaceView()}"
                 android:text="@string/space_tab_place" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/leader_space_tab_vote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> activity.showGroupVoteView()}"
                 android:text="@string/space_tab_vote" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/leader_space_tab_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> activity.showGroupInfoView()}"
                 android:text="@string/space_tab_info" />
         </com.google.android.material.tabs.TabLayout>
 
