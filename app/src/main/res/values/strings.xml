@@ -94,4 +94,12 @@
 
     <!--ParticipateGroup -->
     <string name="participate_group_nickname_duplicate_error">중복된 닉네임이 있습니다.</string>
+
+    <!-- Space -->
+    <string name="space_top_bar">모이닷 팀 프로젝트</string>
+    <string name="space_timeline">타임라인</string>
+    <string name="space_tab_place">모임 장소</string>
+    <string name="space_tab_vote">장소 투표</string>
+    <string name="space_tab_info">모임 정보</string>
+
 </resources>

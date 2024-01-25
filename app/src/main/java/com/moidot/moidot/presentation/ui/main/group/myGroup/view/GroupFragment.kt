@@ -11,7 +11,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseMyGroupList
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
-import com.moidot.moidot.presentation.ui.main.group.create.view.CreateGroupActivity
+import com.moidot.moidot.presentation.ui.main.group.join.create.view.CreateGroupActivity
 import com.moidot.moidot.presentation.ui.main.group.myGroup.viewmodel.GroupViewModel
 import com.moidot.moidot.presentation.ui.main.group.myGroup.adater.MyGroupAdapter
 import com.moidot.moidot.presentation.util.StatusBarColorUtil

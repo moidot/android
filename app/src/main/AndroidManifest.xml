@@ -57,10 +57,18 @@
             android:exported="false" />
 
         <activity
-            android:name=".presentation.ui.main.group.create.view.CreateGroupActivity"
+            android:name=".presentation.ui.main.group.join.create.view.CreateGroupActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.main.group.participate.view.ParticipateGroupActivity"
+            android:name=".presentation.ui.main.group.join.participate.view.ParticipateGroupActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.ui.main.group.space.leader.LeaderSpaceActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".presentation.ui.main.group.space.member.MemberSpaceActivity"
             android:exported="false" />
     </application>
 

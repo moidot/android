@@ -15,8 +15,8 @@ import com.moidot.moidot.data.local.toPlaceEntity
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
 import com.moidot.moidot.presentation.ui.base.BaseBottomSheetDialogFragment
-import com.moidot.moidot.presentation.ui.main.group.create.view.CreateGroupActivity
-import com.moidot.moidot.presentation.ui.main.group.participate.view.ParticipateGroupActivity
+import com.moidot.moidot.presentation.ui.main.group.join.create.view.CreateGroupActivity
+import com.moidot.moidot.presentation.ui.main.group.join.participate.view.ParticipateGroupActivity
 import com.moidot.moidot.presentation.util.CustomSnackBar
 import com.moidot.moidot.presentation.util.VerticalSpaceItemDecoration
 import com.moidot.moidot.presentation.util.dpToPx

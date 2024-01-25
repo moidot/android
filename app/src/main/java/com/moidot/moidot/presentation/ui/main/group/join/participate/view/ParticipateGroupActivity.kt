@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.participate.view
+package com.moidot.moidot.presentation.ui.main.group.join.participate.view
 
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +9,10 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.ActivityParticipateGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.NICKNAME_INPUT
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.TRANSPORTATION_INPUT
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType.LOCATION_INPUT
-import com.moidot.moidot.presentation.ui.main.group.participate.viewmodel.ParticipateGroupViewModel
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.NICKNAME_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.TRANSPORTATION_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.LOCATION_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.participate.viewmodel.ParticipateGroupViewModel
 import com.moidot.moidot.presentation.util.PermissionUtil
 import com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker
 import com.moidot.moidot.presentation.util.hideKeyboard

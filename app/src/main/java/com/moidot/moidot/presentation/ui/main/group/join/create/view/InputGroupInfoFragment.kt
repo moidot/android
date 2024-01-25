@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.create.view
+package com.moidot.moidot.presentation.ui.main.group.join.create.view
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentInputGroupInfoBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
-import com.moidot.moidot.presentation.ui.main.group.create.viewmodel.CreateGroupViewModel
+import com.moidot.moidot.presentation.ui.main.group.join.create.viewmodel.CreateGroupViewModel
 import com.moidot.moidot.presentation.util.hideKeyboard
 
 class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.layout.fragment_input_group_info) {

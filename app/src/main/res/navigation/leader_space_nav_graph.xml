@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/leader_space_nav_graph"
+    app:startDestination="@id/leaderPlaceFragment">
+
+    <fragment
+        android:id="@+id/leaderPlaceFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.view.LeaderPlaceFragment"
+        android:label="fragment_leader_place"
+        tools:layout="@layout/fragment_leader_place" />
+
+    <fragment
+        android:id="@+id/leaderVoteFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.view.LeaderVoteFragment"
+        android:label="fragment_leader_vote"
+        tools:layout="@layout/fragment_leader_vote" />
+
+    <fragment
+        android:id="@+id/leaderInfoFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.view.LeaderInfoFragment"
+        android:label="fragment_leader_info"
+        tools:layout="@layout/fragment_leader_info" />
+
+
+</navigation>

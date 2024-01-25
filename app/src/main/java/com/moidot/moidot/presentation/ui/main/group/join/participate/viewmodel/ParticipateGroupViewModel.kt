@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.participate.viewmodel
+package com.moidot.moidot.presentation.ui.main.group.join.participate.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.domain.repository.GroupRepository
-import com.moidot.moidot.presentation.ui.main.group.create.model.InputInfoType
+import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
