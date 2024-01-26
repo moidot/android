@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.util.kakaourl
+package com.moidot.moidot.presentation.util.share
 
 import com.kakao.sdk.template.model.Button
 import com.kakao.sdk.template.model.Content

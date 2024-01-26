@@ -5,8 +5,8 @@ import android.view.View
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderInfoBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
-import com.moidot.moidot.presentation.util.kakaourl.KakaoFeedSetting
-import com.moidot.moidot.presentation.util.kakaourl.KakaoShareManager
+import com.moidot.moidot.presentation.util.share.KakaoFeedSetting
+import com.moidot.moidot.presentation.util.share.KakaoShareManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

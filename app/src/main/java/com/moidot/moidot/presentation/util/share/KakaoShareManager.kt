@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.util.kakaourl
+package com.moidot.moidot.presentation.util.share
 
 import android.content.ActivityNotFoundException
 import android.content.ContentValues.TAG

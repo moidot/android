@@ -31,11 +31,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}"/>
-                <data android:host="oauth"/>
+                <data android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
+                <data android:host="oauth" />
 
-                <data android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}"/>
-                <data android:host="kakaolink"/>
+                <data android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
+                <data android:host="kakaolink" />
             </intent-filter>
         </activity>
 
@@ -51,8 +51,15 @@
 
         <activity
             android:name=".presentation.ui.main.MainActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustNothing" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="moidot" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".presentation.ui.onboard.view.OnboardActivity"
@@ -65,6 +72,7 @@
         <activity
             android:name=".presentation.ui.main.group.join.create.view.CreateGroupActivity"
             android:exported="false" />
+
         <activity
             android:name=".presentation.ui.main.group.join.participate.view.ParticipateGroupActivity"
             android:exported="false" />
