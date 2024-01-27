@@ -7,6 +7,7 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.gms.google-services")
 }
 
 val properties = Properties()
@@ -106,6 +107,9 @@ dependencies {
 
     // Location
     implementation ("com.google.android.gms:play-services-location:21.1.0")
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1")) // dynamic link
 }
 
 kapt {
