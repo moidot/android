@@ -7,7 +7,7 @@
 
         <variable
             name="fragment"
-            type="com.moidot.moidot.presentation.ui.main.group.space.leader.info.LeaderInfoFragment" />
+            type="com.moidot.moidot.presentation.ui.main.group.space.leader.info.view.LeaderInfoFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
