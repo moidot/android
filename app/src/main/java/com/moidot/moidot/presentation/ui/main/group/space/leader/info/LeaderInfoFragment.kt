@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.space.leader.view
+package com.moidot.moidot.presentation.ui.main.group.space.leader.info
 
 import android.os.Bundle
 import android.view.View

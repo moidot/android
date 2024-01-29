@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.space.leader.view
+package com.moidot.moidot.presentation.ui.main.group.space.leader.vote
 
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderVoteBinding

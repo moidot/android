@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.space.leader.viewmodel
+package com.moidot.moidot.presentation.ui.main.group.space.leader.info
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
