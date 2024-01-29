@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moidot.moidot.data.remote.response.ResponseGroupInfo
 import com.moidot.moidot.databinding.ItemGroupInfoHeaderBinding
+import com.moidot.moidot.presentation.util.VerticalSpaceItemDecoration
+import com.moidot.moidot.presentation.util.dpToPx
 
 class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderAdapter.LeaderGroupInfoHeaderViewHolder>() {
 
-    var participantsByRegion = mutableListOf<ResponseGroupInfo.Data.ParticipantsByRegion>()
+    var participantsByRegion = listOf<ResponseGroupInfo.Data.ParticipantsByRegion>()
 
     class LeaderGroupInfoHeaderViewHolder(private val binding: ItemGroupInfoHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ResponseGroupInfo.Data.ParticipantsByRegion) {
@@ -16,9 +18,16 @@ class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderA
         }
 
         fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?) {
-            if (members == null) return
-            val leaderGroupInfoAdapter = LeaderGroupInfoAdapter()
-            leaderGroupInfoAdapter.members = members.participations
+            members?.let {
+                val leaderGroupInfoAdapter = LeaderGroupInfoAdapter().apply {
+                    this.members = it.participations
+                }
+                binding.itemGroupInfoHeaderRvGroupInfo.apply {
+                    adapter = leaderGroupInfoAdapter
+                    itemAnimator = null
+                    addItemDecoration(VerticalSpaceItemDecoration(8.dpToPx(this.context)))
+                }
+            }
         }
     }
 

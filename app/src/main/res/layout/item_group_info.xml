@@ -29,8 +29,7 @@
                 android:background="@drawable/bg_item_cover"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                bind:coverVisible="true" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/item_group_tv_member_name"
@@ -52,8 +51,7 @@
                 android:src="@drawable/ic_leader"
                 app:layout_constraintBottom_toBottomOf="@id/item_group_tv_member_name"
                 app:layout_constraintStart_toEndOf="@id/item_group_tv_member_name"
-                app:layout_constraintTop_toTopOf="@id/item_group_tv_member_name"
-                bind:leaderBadgeVisible="true" />
+                app:layout_constraintTop_toTopOf="@id/item_group_tv_member_name" />
 
             <LinearLayout
                 android:id="@+id/item_group_container_member_info"
