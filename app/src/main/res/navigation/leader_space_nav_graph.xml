@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/leaderPlaceFragment"
-        android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.view.LeaderPlaceFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.place.LeaderPlaceFragment"
         android:label="fragment_leader_place"
         tools:layout="@layout/fragment_leader_place" />
 
     <fragment
         android:id="@+id/leaderVoteFragment"
-        android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.view.LeaderVoteFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.vote.LeaderVoteFragment"
         android:label="fragment_leader_vote"
         tools:layout="@layout/fragment_leader_vote" />
 
     <fragment
         android:id="@+id/leaderInfoFragment"
-        android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.view.LeaderInfoFragment"
+        android:name="com.moidot.moidot.presentation.ui.main.group.space.leader.info.view.LeaderInfoFragment"
         android:label="fragment_leader_info"
         tools:layout="@layout/fragment_leader_info" />
 

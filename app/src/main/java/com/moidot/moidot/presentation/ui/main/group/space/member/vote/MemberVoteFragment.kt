@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.space.member.view
+package com.moidot.moidot.presentation.ui.main.group.space.member.vote
 
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentMemberVoteBinding

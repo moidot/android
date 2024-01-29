@@ -1,11 +1,13 @@
 package com.moidot.moidot.presentation.util
 
 import android.graphics.drawable.Drawable
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.moidot.moidot.R
@@ -65,4 +67,22 @@ fun ImageView.setCheckBoxImage(checkedState: Boolean) {
 fun TextView.setCheckBoxTextFieldActive(checkedState: Boolean) {
     val currentTextStyle = if (checkedState) R.style.b2_bold_14 else R.style.b2_reg_14
     this.setTextAppearance(currentTextStyle)
+}
+
+@BindingAdapter("bind:TransportationType")
+fun ImageView.transportationImageBind(type: String) {
+    when (type) {
+        "PUBLIC" -> Glide.with(this.context).load(R.drawable.ic_group_info_transportation).into(this)
+        "PERSONAL" -> Glide.with(this.context).load(R.drawable.ic_group_info_car).into(this)
+    }
+}
+
+@BindingAdapter("bind:leaderBadgeVisible")
+fun ImageView.leaderBadgeVisible(flag: Boolean) {
+    this.isVisible = flag
+}
+
+@BindingAdapter("bind:coverVisible")
+fun View.coverVisible(flag: Boolean) {
+    this.isVisible = flag
 }

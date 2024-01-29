@@ -1,10 +1,12 @@
 package com.moidot.moidot.presentation.di
 
 import com.moidot.moidot.data.repository.AuthRepositoryImpl
+import com.moidot.moidot.data.repository.GroupInfoRepositoryImpl
 import com.moidot.moidot.data.repository.GroupRepositoryImpl
 import com.moidot.moidot.data.repository.LocationRepositoryImpl
 import com.moidot.moidot.data.repository.UserRepositoryImpl
 import com.moidot.moidot.domain.repository.AuthRepository
+import com.moidot.moidot.domain.repository.GroupInfoRepository
 import com.moidot.moidot.domain.repository.GroupRepository
 import com.moidot.moidot.domain.repository.LocationRepository
 import com.moidot.moidot.domain.repository.UserRepository
@@ -35,4 +37,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindLocationRepository(locationRepositoryImpl: LocationRepositoryImpl): LocationRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindGroupInfoRepository(groupInfoRepositoryImpl: GroupInfoRepositoryImpl): GroupInfoRepository
 }

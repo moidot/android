@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.space.leader.view
+package com.moidot.moidot.presentation.ui.main.group.space.leader.place
 
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderPlaceBinding

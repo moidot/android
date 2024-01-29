@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.ui.main.group.space.member.view
+package com.moidot.moidot.presentation.ui.main.group.space.member.info
 
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentMemberInfoBinding
