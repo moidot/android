@@ -17,8 +17,21 @@ import dagger.hilt.android.AndroidEntryPoint
 class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.activity_leader_space) {
 
     val groupId by lazy { intent.getIntExtra(GROUP_ID, 0) }
-    val groupName by lazy { intent.getStringExtra(GROUP_NAME) }
-    val groupLeaderName by lazy { intent.getStringExtra(GROUP_LEADER_NAME) }
+    var groupName: String? = null
+        get() {
+            if (field == null) {
+                field = intent.getStringExtra(GROUP_NAME)
+            }
+            return field
+        }
+
+    var groupLeaderName: String? = null
+        get() {
+            if (field == null) {
+                field = intent.getStringExtra(GROUP_LEADER_NAME)
+            }
+            return field
+        }
 
     private val navController by lazy { findNavController(R.id.leader_space_fcv) }
 
@@ -59,6 +72,15 @@ class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.ac
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
+    }
+
+    // 그룹 정보 탭에서 정보가 수정될 것을 대비
+    fun changeGroupName(newGroupName: String) {
+        groupName = newGroupName
+    }
+
+    fun changeGroupLeaderName(newLeaderName: String) {
+        groupLeaderName = newLeaderName
     }
 
 }

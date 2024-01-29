@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:text="@string/space_top_bar"
+                android:text="@{activity.groupName}"
                 android:textColor="@color/gray700"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/leader_space_iv_back"
