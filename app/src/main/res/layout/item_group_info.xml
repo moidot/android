@@ -1,100 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/gray100"
-    app:cardCornerRadius="8dp"
-    app:strokeWidth="0dp">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="data"
+            type="com.moidot.moidot.data.remote.response.ResponseGroupInfo.Data.ParticipantsByRegion.Participation" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/gray100"
+        app:cardCornerRadius="8dp"
+        app:strokeWidth="0dp">
 
-        <View
-            android:id="@+id/item_group_view_cover"
-            android:layout_width="6dp"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_item_cover"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/item_group_tv_member_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="17dp"
-            android:layout_marginStart="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_group_view_cover"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="김모임엘렐레와" />
-
-        <ImageView
-            android:id="@+id/item_group_iv_leader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:src="@drawable/ic_leader"
-            app:layout_constraintBottom_toBottomOf="@id/item_group_tv_member_name"
-            app:layout_constraintStart_toEndOf="@id/item_group_tv_member_name"
-            app:layout_constraintTop_toTopOf="@id/item_group_tv_member_name" />
-
-        <LinearLayout
-            android:id="@+id/item_group_container_member_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <View
+                android:id="@+id/item_group_view_cover"
+                android:layout_width="6dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_item_cover"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:coverVisible="true" />
 
             <TextView
-                android:id="@+id/item_group_container_tv_location"
-                style="@style/c2_reg_11"
+                android:id="@+id/item_group_tv_member_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/gray400"
-                tools:text="서울 성북구 보문로34다길 2" />
+                android:layout_marginVertical="17dp"
+                android:layout_marginStart="6dp"
+                android:text="@{data.userName}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_group_view_cover"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="김모임엘렐레와" />
 
             <ImageView
-                android:id="@+id/item_group_iv_transportation_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_group_info_car" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/item_group_container_remove_member"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                style="@style/c1_med_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/all_remove"
-                android:textColor="@color/red500" />
-
-
-            <ImageView
+                android:id="@+id/item_group_iv_leader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:src="@drawable/ic_remove_fill_circle" />
+                android:src="@drawable/ic_leader"
+                app:layout_constraintBottom_toBottomOf="@id/item_group_tv_member_name"
+                app:layout_constraintStart_toEndOf="@id/item_group_tv_member_name"
+                app:layout_constraintTop_toTopOf="@id/item_group_tv_member_name"
+                bind:leaderBadgeVisible="true" />
 
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <LinearLayout
+                android:id="@+id/item_group_container_member_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/item_group_container_tv_location"
+                    style="@style/c2_reg_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{data.locationName}"
+                    android:textColor="@color/gray400"
+                    tools:text="서울 성북구 보문로34다길 2" />
+
+                <ImageView
+                    android:id="@+id/item_group_iv_transportation_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    bind:TransportationType="@{data.transportation}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/item_group_container_remove_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/c1_med_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/all_remove"
+                    android:textColor="@color/red500" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/ic_remove_fill_circle" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

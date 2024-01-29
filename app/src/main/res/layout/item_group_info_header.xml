@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/item_group_info_header_tv_region"
-        style="@style/b2_med_14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/orange500"
-        tools:text="서울특별시 성동구" />
+    <data>
+        <variable
+            name="data"
+            type="com.moidot.moidot.data.remote.response.ResponseGroupInfo.Data.ParticipantsByRegion" />
+    </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/item_group_info_header_rv_group_info"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_group_info" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_group_info_header_tv_region"
+            style="@style/b2_med_14"
+            android:text="@{data.regionName}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/orange500"
+            tools:text="서울특별시 성동구" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/item_group_info_header_rv_group_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_group_info" />
+    </LinearLayout>
+</layout>
