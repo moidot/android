@@ -8,13 +8,15 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
-import com.moidot.moidot.data.remote.response.ResponseMyGroupList
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
 import com.moidot.moidot.presentation.ui.main.group.join.create.view.CreateGroupActivity
 import com.moidot.moidot.presentation.ui.main.group.myGroup.viewmodel.GroupViewModel
 import com.moidot.moidot.presentation.ui.main.group.myGroup.adater.MyGroupAdapter
 import com.moidot.moidot.presentation.ui.main.group.space.leader.LeaderSpaceActivity
+import com.moidot.moidot.presentation.util.Constant.GROUP_ID
+import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
+import com.moidot.moidot.presentation.util.Constant.GROUP_LEADER_NAME
 import com.moidot.moidot.presentation.util.StatusBarColorUtil
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
@@ -64,9 +66,9 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
 
     private fun onGroupItemClickListener(groupId: Int, groupName: String, groupAdminName: String) {
         Intent(requireContext(), LeaderSpaceActivity::class.java).apply { // TODO 추후 변수 추가 시 값 대응 예정
-            this.putExtra("groupId", groupId)
-            this.putExtra("groupName", groupName)
-            this.putExtra("groupAdminName", groupAdminName)
+            this.putExtra(GROUP_ID, groupId)
+            this.putExtra(GROUP_NAME, groupName)
+            this.putExtra(GROUP_LEADER_NAME, groupAdminName)
             startActivity(this)
         }
     }

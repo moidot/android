@@ -8,10 +8,17 @@ import com.google.android.material.tabs.TabLayout
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityLeaderSpaceBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
+import com.moidot.moidot.presentation.util.Constant.GROUP_LEADER_NAME
+import com.moidot.moidot.presentation.util.Constant.GROUP_ID
+import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.activity_leader_space) {
+
+    val groupId by lazy { intent.getIntExtra(GROUP_ID, 0) }
+    val groupName by lazy { intent.getStringExtra(GROUP_NAME) }
+    val groupLeaderName by lazy { intent.getStringExtra(GROUP_LEADER_NAME) }
 
     private val navController by lazy { findNavController(R.id.leader_space_fcv) }
 
