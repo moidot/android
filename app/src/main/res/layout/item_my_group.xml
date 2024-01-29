@@ -7,13 +7,12 @@
 
         <variable
             name="data"
-            type="com.moidot.moidot.data.remote.response.ResponseMyGroupList.Data" />
+            type="com.moidot.moidot.data.remote.response.ResponseParticipateGroup.Data" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         app:cardElevation="6dp"
         app:strokeWidth="0dp">
 
