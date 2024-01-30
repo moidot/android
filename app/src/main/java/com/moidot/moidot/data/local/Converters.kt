@@ -7,7 +7,7 @@ import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 fun PlaceEntity.toDocument(): ResponseSearchPlace.Document {
     return ResponseSearchPlace.Document(
         placeName = this.placeName,
-        roadAddressName = this.roadAddressName,
+        addressName = this.addressName,
         longitude = this.longitude,
         latitude = this.latitude,
         isFavorite = this.isFavorite
@@ -17,7 +17,7 @@ fun PlaceEntity.toDocument(): ResponseSearchPlace.Document {
 fun ResponseSearchPlace.Document.toPlaceEntity(): PlaceEntity {
     return PlaceEntity(
         placeName = this.placeName,
-        roadAddressName = this.roadAddressName,
+        addressName = this.addressName,
         longitude = this.longitude,
         latitude = this.latitude,
         isFavorite = this.isFavorite
@@ -27,7 +27,7 @@ fun ResponseSearchPlace.Document.toPlaceEntity(): PlaceEntity {
 fun ResponseCoorToAddress.Document.toDocument(longitude: Double, latitude: Double): ResponseSearchPlace.Document {
     return ResponseSearchPlace.Document(
         placeName = this.address.addressName,
-        roadAddressName = this.roadAddress?.roadAddressName ?: "",
+        addressName = this.address.addressName,
         longitude = longitude,
         latitude = latitude,
         isFavorite = false

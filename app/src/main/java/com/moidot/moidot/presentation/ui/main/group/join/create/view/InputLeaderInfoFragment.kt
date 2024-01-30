@@ -1,13 +1,14 @@
 package com.moidot.moidot.presentation.ui.main.group.join.create.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.moidot.moidot.R
-import com.moidot.moidot.data.remote.request.RequestCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.FragmentInputLeaderInfoBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
@@ -15,6 +16,9 @@ import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoT
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.LOCATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.TRANSPORTATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.join.create.viewmodel.CreateGroupViewModel
+import com.moidot.moidot.presentation.ui.main.group.space.leader.LeaderSpaceActivity
+import com.moidot.moidot.presentation.util.Constant.GROUP_ID
+import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
 import com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker
 import com.moidot.moidot.presentation.util.component.TransportationPickerComponent.Companion.TYPE_PERSONAL
 import com.moidot.moidot.presentation.util.component.TransportationPickerComponent.Companion.TYPE_PUBLIC
@@ -28,7 +32,7 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
         super.onViewCreated(view, savedInstanceState)
         initBinding()
         initView()
-        setupObserver()
+        setupObservers()
     }
 
     private fun initBinding() {
@@ -108,8 +112,24 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
         bottomSheet.show(childFragmentManager, "BottomSheetLocationPicker")
     }
 
-    private fun setupObserver() {
+    private fun setupObservers() {
         setTransportationSelectedType()
+        moveToMoidotSpace()
+    }
+
+    private fun moveToMoidotSpace() {
+        viewModel.groupId.observe(viewLifecycleOwner) {
+            if (it != ERROR_GROUP_IDX) {
+                Intent(requireContext(), LeaderSpaceActivity::class.java).apply {
+                    putExtra(GROUP_ID, it)
+                    putExtra(GROUP_NAME, viewModel.groupName.value)
+                    startActivity(this)
+                }
+                (activity as CreateGroupActivity).finish()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.network_error_msg), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setTransportationSelectedType() {
@@ -133,5 +153,9 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
 
     fun goBack() {
         findNavController().navigateUp()
+    }
+
+    companion object {
+        const val ERROR_GROUP_IDX = -1
     }
 }

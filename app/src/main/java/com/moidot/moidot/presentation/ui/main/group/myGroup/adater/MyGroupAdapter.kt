@@ -9,11 +9,11 @@ import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.databinding.ItemMyGroupBinding
 
 
-class MyGroupAdapter(private val onItemClickListener: (Int, String, String) -> Unit) : ListAdapter<ResponseParticipateGroup.Data, MyGroupAdapter.MyGroupViewHolder>(diffUtil) {
+class MyGroupAdapter(private val onItemClickListener: (Int, String) -> Unit) : ListAdapter<ResponseParticipateGroup.Data, MyGroupAdapter.MyGroupViewHolder>(diffUtil) {
 
     class MyGroupViewHolder(
         private val binding: ItemMyGroupBinding,
-        private val onItemClickListener: (Int, String, String) -> Unit
+        private val onItemClickListener: (Int, String) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ResponseParticipateGroup.Data) {
             binding.data = data
@@ -21,7 +21,7 @@ class MyGroupAdapter(private val onItemClickListener: (Int, String, String) -> U
 
         fun invokeItemClickListener(data: ResponseParticipateGroup.Data) {
             binding.root.setOnClickListener {
-                onItemClickListener(data.groupId, data.groupName, data.groupAdminName)
+                onItemClickListener(data.groupId, data.groupName)
             }
         }
     }
