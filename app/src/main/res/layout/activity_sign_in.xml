@@ -6,11 +6,11 @@
 
         <variable
             name="activity"
-            type="com.moidot.moidot.presentation.ui.sign.view.SignInActivity" />
+            type="com.moidot.moidot.ui.sign.view.SignInActivity" />
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.ui.sign.viewmodel.SignInViewModel" />
+            type="com.moidot.moidot.ui.sign.viewmodel.SignInViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

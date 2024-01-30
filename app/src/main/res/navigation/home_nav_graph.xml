@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.moidot.moidot.presentation.ui.main.home.HomeFragment"
+        android:name="com.moidot.moidot.ui.main.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 

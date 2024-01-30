@@ -5,7 +5,7 @@ import com.moidot.moidot.data.local.entity.PlaceEntity
 import com.moidot.moidot.data.remote.datasource.location.LocationRemoteDataSource
 import com.moidot.moidot.data.remote.response.ResponseCoorToAddress
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
-import com.moidot.moidot.domain.repository.LocationRepository
+import com.moidot.moidot.repository.LocationRepository
 import javax.inject.Inject
 
 class LocationRepositoryImpl @Inject constructor(

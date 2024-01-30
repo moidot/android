@@ -8,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationViewModel" />
+            type="com.moidot.moidot.util.bottomsheet.BottomSheetLocationViewModel" />
 
         <variable
             name="fragment"
-            type="com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker" />
+            type="com.moidot.moidot.util.bottomsheet.BottomSheetLocationPicker" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

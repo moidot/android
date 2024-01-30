@@ -7,7 +7,7 @@
 
         <variable
             name="layout"
-            type="com.moidot.moidot.presentation.util.component.TransportationPickerComponent" />
+            type="com.moidot.moidot.util.component.TransportationPickerComponent" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
