@@ -9,6 +9,7 @@ import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Comp
 import com.moidot.moidot.presentation.ui.main.MainActivity
 import com.moidot.moidot.presentation.util.Constant.GROUP_ID
 import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
+import com.moidot.moidot.presentation.util.Constant.SCHEME_URL_STRING
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,13 +25,14 @@ class SchemeActivity : AppCompatActivity() {
         handleDeepLink()
     }
 
-    /** 로그인하지 않은 유저일 때 -> 로그인 화면에서 딥링크요소 검사 -> 해당 딥링크 화면으로 이동
-     * 로그인 후 SchemeActivity 재호출시 else로 빠져서 한 번 더 검사가 진행되기 때문에 stack 문제를 해결할 수 있다. */
     private fun handleDeepLink() {
-        val deepLinkUrl = intent.data
-        val deepLinkIntent = getSchemeIntent(deepLinkUrl.toString())
+        val deepLinkUrlStr = getDeepLinkUrl()
+        val deepLinkIntent = getSchemeIntent(deepLinkUrlStr)
         if (sharedPreferences.getString(ACCESS_TOKEN, null) == null) { // 로그인된 상태가 아닐 때 필터링
-            startActivity(DeepLinkInfo.SIGN_IN.getIntent(this))
+            DeepLinkInfo.SIGN_IN.getIntent(this).apply {
+                putExtra(SCHEME_URL_STRING, deepLinkUrlStr)
+                startActivity(this)
+            }
         } else {
             if (isTaskRoot) { // 이미 앱이 실행중 -> 사용자가 앱을 실행한 상태에서 들어왔을 때
                 TaskStackBuilder.create(this).apply {
@@ -44,6 +46,16 @@ class SchemeActivity : AppCompatActivity() {
             }
         }
         finish()
+    }
+
+    /** 로그인하지 않은 유저일 때 -> 로그인 화면에서 딥링크요소 검사 -> 해당 딥링크 화면으로 이동
+     * 로그인 후 SchemeActivity 재호출시 else로 빠져서 한 번 더 검사가 진행되기 때문에 stack 문제를 해결할 수 있다. */
+    private fun getDeepLinkUrl(): String {
+        return if (intent.getStringExtra(SCHEME_URL_STRING) != null) {
+            intent.getStringExtra(SCHEME_URL_STRING) ?: intent.data.toString()
+        } else {
+            intent.data.toString()
+        }
     }
 
     private fun getSchemeIntent(deepLinkUrlStr: String?): Intent {
