@@ -11,7 +11,7 @@
     </queries>
 
     <application
-        android:name=".ui.MoidotApplication"
+        android:name=".MoidotApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -47,7 +47,7 @@
         </activity>
 
         <activity
-            android:name=".presentation.util.deeplink.SchemeActivity"
+            android:name=".util.deeplink.SchemeActivity"
             android:launchMode="singleTask"
             android:exported="true">
             <intent-filter android:autoVerify="true">

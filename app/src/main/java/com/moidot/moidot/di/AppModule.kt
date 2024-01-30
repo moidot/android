@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.moidot.moidot.data.local.dao.PlaceDao
 import com.moidot.moidot.data.local.db.PlaceDatabase
-import com.moidot.moidot.ui.MoidotApplication.Companion.MOIDOT_APP
+import com.moidot.moidot.MoidotApplication.Companion.MOIDOT_APP
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

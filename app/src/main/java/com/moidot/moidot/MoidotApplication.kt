@@ -1,4 +1,4 @@
-package com.moidot.moidot.ui
+package com.moidot.moidot
 
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
