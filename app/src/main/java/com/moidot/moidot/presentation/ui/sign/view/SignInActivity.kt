@@ -34,7 +34,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         initBinding()
         initSdk()
         setupObserver()
-        Log.d("kite", "로그인: " + schemeUrl)
     }
 
     private fun initBinding() {
@@ -60,7 +59,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private fun moveToScheme() {
         Intent(this, SchemeActivity::class.java).apply {
-            Log.d("kite", "로그인: " + schemeUrl)
             putExtra(SCHEME_URL_STRING, schemeUrl)
             startActivity(this)
         }
