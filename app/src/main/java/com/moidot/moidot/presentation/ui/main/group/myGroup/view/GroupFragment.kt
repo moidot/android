@@ -16,7 +16,6 @@ import com.moidot.moidot.presentation.ui.main.group.myGroup.adater.MyGroupAdapte
 import com.moidot.moidot.presentation.ui.main.group.space.leader.LeaderSpaceActivity
 import com.moidot.moidot.presentation.util.Constant.GROUP_ID
 import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
-import com.moidot.moidot.presentation.util.Constant.GROUP_LEADER_NAME
 import com.moidot.moidot.presentation.util.StatusBarColorUtil
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
@@ -34,7 +33,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        // setStatusBarState(STATUS_BAR_LIGHT)
+        setStatusBarState(STATUS_BAR_LIGHT)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
