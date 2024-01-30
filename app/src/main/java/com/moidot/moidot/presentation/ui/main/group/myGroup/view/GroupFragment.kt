@@ -34,7 +34,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        setStatusBarState(STATUS_BAR_LIGHT)
+        // setStatusBarState(STATUS_BAR_LIGHT)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,11 +64,10 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
         }
     }
 
-    private fun onGroupItemClickListener(groupId: Int, groupName: String, groupAdminName: String) {
+    private fun onGroupItemClickListener(groupId: Int, groupName: String) {
         Intent(requireContext(), LeaderSpaceActivity::class.java).apply { // TODO 추후 변수 추가 시 값 대응 예정
             this.putExtra(GROUP_ID, groupId)
             this.putExtra(GROUP_NAME, groupName)
-            this.putExtra(GROUP_LEADER_NAME, groupAdminName)
             startActivity(this)
         }
     }

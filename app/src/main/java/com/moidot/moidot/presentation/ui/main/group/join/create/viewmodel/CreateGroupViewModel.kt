@@ -13,12 +13,17 @@ import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoT
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.NICKNAME_INPUT
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.LOCATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.TRANSPORTATION_INPUT
+import com.moidot.moidot.presentation.ui.main.group.join.create.view.InputLeaderInfoFragment.Companion.ERROR_GROUP_IDX
+import com.moidot.moidot.presentation.util.TimeUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CreateGroupViewModel @Inject constructor(private val groupRepository: GroupRepository) : ViewModel() {
+
+    private val _groupId = MutableLiveData<Int>()
+    val groupId: LiveData<Int> = _groupId
 
     private val _groupName = MutableLiveData<String>()
     val groupName: LiveData<String> = _groupName
@@ -175,18 +180,19 @@ class CreateGroupViewModel @Inject constructor(private val groupRepository: Grou
         val requestCreateGroup = prepareCreateGroupRequest()
         viewModelScope.launch {
             groupRepository.createGroup(requestCreateGroup).onSuccess {
-                Log.d("kite", it.toString())
+                _groupId.value = it.data.groupId
             }.onFailure {
-                Log.d("kite", it.toString())
+                _groupId.value = ERROR_GROUP_IDX
             }
         }
     }
 
     private fun prepareCreateGroupRequest(): RequestCreateGroup {
         return RequestCreateGroup(
+            date = TimeUtil.getCurrentDateTime(),
             name = groupName.value!!,
             userName = nickname.value!!,
-            locationName = locationInfo.value!!.placeName,
+            locationName = locationInfo.value!!.addressName ?: "",
             latitude = locationInfo.value!!.latitude,
             longitude = locationInfo.value!!.longitude,
             transportationType = transportationTypeTxt.value!!

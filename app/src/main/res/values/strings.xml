@@ -4,8 +4,11 @@
     <!-- common, all -->
     <string name="binding_error_msg">binding이 초기화되지 않았습니다.</string>
     <string name="all_next">다음</string>
-    <string name="all_cancel">취소하기</string><!-- error -->
+    <string name="all_cancel">취소하기</string>
     <string name="all_remove">내보내기</string>
+
+    <!-- error -->
+    <string name="network_error_msg">네트워크 통신오류!</string>
 
     <!-- component -->
     <string name="component_transportation_public">대중교통</string>
