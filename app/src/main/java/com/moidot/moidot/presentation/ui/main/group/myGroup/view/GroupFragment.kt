@@ -14,6 +14,7 @@ import com.moidot.moidot.presentation.ui.main.group.join.create.view.CreateGroup
 import com.moidot.moidot.presentation.ui.main.group.myGroup.viewmodel.GroupViewModel
 import com.moidot.moidot.presentation.ui.main.group.myGroup.adater.MyGroupAdapter
 import com.moidot.moidot.presentation.ui.main.group.space.leader.LeaderSpaceActivity
+import com.moidot.moidot.presentation.ui.main.group.space.member.MemberSpaceActivity
 import com.moidot.moidot.presentation.util.Constant.GROUP_ID
 import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
 import com.moidot.moidot.presentation.util.StatusBarColorUtil
@@ -63,8 +64,9 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
         }
     }
 
-    private fun onGroupItemClickListener(groupId: Int, groupName: String) {
-        Intent(requireContext(), LeaderSpaceActivity::class.java).apply { // TODO 추후 변수 추가 시 값 대응 예정
+    private fun onGroupItemClickListener(isAdmin:Boolean, groupId: Int, groupName: String) {
+        val packageClass = if (isAdmin) LeaderSpaceActivity::class.java else MemberSpaceActivity::class.java
+        Intent(requireContext(), packageClass).apply {
             this.putExtra(GROUP_ID, groupId)
             this.putExtra(GROUP_NAME, groupName)
             startActivity(this)
