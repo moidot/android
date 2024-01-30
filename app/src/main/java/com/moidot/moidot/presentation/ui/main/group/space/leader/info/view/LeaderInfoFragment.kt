@@ -63,7 +63,7 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
 
     private fun setupGroupInfoRecyclerview() {
         viewModel.participantsByRegion.observe(viewLifecycleOwner) {
-            leaderGroupInfoHeaderAdapter.participantsByRegion = it
+            leaderGroupInfoHeaderAdapter.updateItems(it)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.moidot.moidot.presentation.ui.main.group.space.leader.info.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,7 @@ import com.moidot.moidot.presentation.util.dpToPx
 
 class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderAdapter.LeaderGroupInfoHeaderViewHolder>() {
 
-    var participantsByRegion = listOf<ResponseGroupInfo.Data.ParticipantsByRegion>()
+    private var participantsByRegion = listOf<ResponseGroupInfo.Data.ParticipantsByRegion>()
 
     class LeaderGroupInfoHeaderViewHolder(private val binding: ItemGroupInfoHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ResponseGroupInfo.Data.ParticipantsByRegion) {
@@ -41,6 +42,12 @@ class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderA
     override fun onBindViewHolder(holder: LeaderGroupInfoHeaderViewHolder, position: Int) {
         holder.bind(participantsByRegion[position])
         holder.initGroupInfoAdapter(participantsByRegion[position])
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateItems(items:List<ResponseGroupInfo.Data.ParticipantsByRegion>) {
+        participantsByRegion = items
+        notifyDataSetChanged()
     }
 
 }
