@@ -8,15 +8,19 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
-import com.moidot.moidot.data.remote.response.ResponseMyGroupList
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.ui.base.BaseFragment
 import com.moidot.moidot.presentation.ui.main.group.join.create.view.CreateGroupActivity
 import com.moidot.moidot.presentation.ui.main.group.myGroup.viewmodel.GroupViewModel
 import com.moidot.moidot.presentation.ui.main.group.myGroup.adater.MyGroupAdapter
+import com.moidot.moidot.presentation.ui.main.group.space.leader.LeaderSpaceActivity
+import com.moidot.moidot.presentation.util.Constant.GROUP_ID
+import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
 import com.moidot.moidot.presentation.util.StatusBarColorUtil
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.presentation.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
+import com.moidot.moidot.presentation.util.VerticalSpaceItemDecoration
+import com.moidot.moidot.presentation.util.dpToPx
 import com.moidot.moidot.presentation.util.hideKeyboard
 import com.moidot.moidot.presentation.util.popup.PopupPickerDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,22 +49,26 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     }
 
     private fun initView() {
-        viewModel.loadMyGroupList()
         initAdapter()
         setSearchTextChangeListener()
         setSearchDoneListener()
     }
 
     private fun initAdapter() {
-        myGroupAdapter = MyGroupAdapter()
-        val tempList = mutableListOf<ResponseMyGroupList.Data>()
-        tempList.add(ResponseMyGroupList.Data(groupId = 0, groupName = "모이닷 스페이스", groupDate = "2022.08.21"))
-        tempList.add(ResponseMyGroupList.Data(groupId = 1, groupName = "네이버", groupDate = "2022.04.12"))
-        tempList.add(ResponseMyGroupList.Data(groupId = 2, groupName = "오늘의집", groupDate = "2024.01.02"))
-        tempList.add(ResponseMyGroupList.Data(groupId = 3, groupName = "ABC초콜릿", groupDate = "2024.01.01"))
-        tempList.add(ResponseMyGroupList.Data(groupId = 4, groupName = "1등하자", groupDate = "2022.03.12"))
-        myGroupAdapter.submitList(tempList.toList())
-        binding.fgGroupRvMyGroup.adapter = myGroupAdapter
+        myGroupAdapter = MyGroupAdapter(::onGroupItemClickListener)
+        binding.fgGroupRvMyGroup.apply {
+            adapter = myGroupAdapter
+            itemAnimator = null
+            addItemDecoration(VerticalSpaceItemDecoration(8.dpToPx(this.context)))
+        }
+    }
+
+    private fun onGroupItemClickListener(groupId: Int, groupName: String) {
+        Intent(requireContext(), LeaderSpaceActivity::class.java).apply { // TODO 추후 변수 추가 시 값 대응 예정
+            this.putExtra(GROUP_ID, groupId)
+            this.putExtra(GROUP_NAME, groupName)
+            startActivity(this)
+        }
     }
 
     private fun setSearchTextChangeListener() {
@@ -105,10 +113,27 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     }
 
     private fun setupObservers() {
+        setupCurrentFilterTxt()
+        setupGroupRecyclerView()
+    }
+
+    private fun setupCurrentFilterTxt() {
         viewModel.currentFilterTxt.observe(viewLifecycleOwner) {
             binding.fgGroupFilterTxt.text = it
         }
     }
+
+    private fun setupGroupRecyclerView() {
+        viewModel.myGroupList.observe(viewLifecycleOwner) {
+            myGroupAdapter.submitList(it)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadMyGroupList()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

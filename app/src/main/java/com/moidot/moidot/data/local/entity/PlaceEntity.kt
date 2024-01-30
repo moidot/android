@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class PlaceEntity(
     @PrimaryKey
     val placeName: String,
-    val roadAddressName: String?,
+    val addressName: String?,
     val longitude: Double,
     val latitude: Double,
     var isFavorite: Boolean = true

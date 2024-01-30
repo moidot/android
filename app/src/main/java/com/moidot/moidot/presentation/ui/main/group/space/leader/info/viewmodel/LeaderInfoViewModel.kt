@@ -13,12 +13,16 @@ import javax.inject.Inject
 @HiltViewModel
 class LeaderInfoViewModel @Inject constructor(private val groupInfoRepository: GroupInfoRepository) : ViewModel() {
 
+    private val _groupName = MutableLiveData<String>()
+    val groupName: LiveData<String> = _groupName
+
     private val _participantsByRegion = MutableLiveData<List<ResponseGroupInfo.Data.ParticipantsByRegion>>()
     val participantsByRegion: LiveData<List<ResponseGroupInfo.Data.ParticipantsByRegion>> = _participantsByRegion
 
     fun getGroupInfo(groupId: Int) {
         viewModelScope.launch {
             groupInfoRepository.getGroupInfo(groupId).onSuccess {
+                _groupName.value = it.data.name
                 _participantsByRegion.value = it.data.participantsByRegion
             }
         }

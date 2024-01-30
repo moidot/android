@@ -96,7 +96,7 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
     }
 
     private fun loadSavedFavoritePlace() {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             viewModel.getSavedFavoritePlaces().apply {
                 locationAdapter.setPlaceItems(this)
                 locationAdapter.savedFavorites = this

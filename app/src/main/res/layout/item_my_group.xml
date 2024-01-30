@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
-            type="com.moidot.moidot.data.remote.response.ResponseMyGroupList.Data" />
-
+            type="com.moidot.moidot.data.remote.response.ResponseParticipateGroup.Data" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         app:cardElevation="6dp"
         app:strokeWidth="0dp">
 
@@ -50,19 +49,19 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="11dp"
-                android:layout_marginStart="4dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/item_my_group_tv_name">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/item_my_group_cv_vote_state_voting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
                     android:layout_marginStart="4dp"
+                    android:visibility="invisible"
                     app:cardCornerRadius="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -82,10 +81,10 @@
                     android:id="@+id/item_my_group_cv_vote_state_done"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/orange500_20"
-                    app:cardCornerRadius="8dp"
-                    android:visibility="visible"
                     android:layout_marginStart="4dp"
+                    android:backgroundTint="@color/orange500_20"
+                    android:visibility="visible"
+                    app:cardCornerRadius="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -107,37 +106,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:textColor="@color/gray400"
                     android:text="@{@string/group_create_date(data.groupDate)}"
+                    android:textColor="@color/gray400"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/item_my_group_cv_vote_state_done"
                     tools:text="생성일시: 2024.01.23" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/item_my_group_ll_container_add_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+            <ImageView
+                android:id="@+id/item_my_group_iv_alert"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_margin="12dp"
+                android:src="@drawable/ic_alert"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/item_my_group_tv_name">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_group_add_member" />
-
-                <TextView
-                    style="@style/c2_reg_11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="6dp"
-                    android:text="@string/group_add_member"
-                    android:textColor="@color/gray500" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/item_my_group_ll_container_cannot_exit_mode"
@@ -166,6 +151,7 @@
                 android:layout_marginEnd="39dp"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
