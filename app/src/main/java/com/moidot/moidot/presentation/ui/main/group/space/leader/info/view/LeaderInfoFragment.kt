@@ -69,7 +69,7 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
 
 
     fun shareInvitationWithKakao() {
-        val kakaoFeedSetting = KakaoFeedSetting(groupId, "모이닷 팀 스페이스") // TODO 그룹 정보 반영
+        val kakaoFeedSetting = KakaoFeedSetting(groupId, viewModel.groupName.value!!)
         KakaoShareManager(requireContext(), kakaoFeedSetting).shareLink()
     }
 }

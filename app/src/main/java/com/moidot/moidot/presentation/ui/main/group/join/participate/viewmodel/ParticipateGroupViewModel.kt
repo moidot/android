@@ -14,10 +14,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ParticipateGroupViewModel @Inject constructor(private val groupRepository: GroupRepository) : ViewModel() {
 
-    val groupId = MutableLiveData<Int>(37)
-
-    private val _groupName = MutableLiveData<String>("")
-    val groupName: LiveData<String> = _groupName
+    val groupId = MutableLiveData<Int>()
+    val groupName = MutableLiveData<String>("")
 
     private val _nickname = MutableLiveData<String>("")
     val nickname: LiveData<String> = _nickname

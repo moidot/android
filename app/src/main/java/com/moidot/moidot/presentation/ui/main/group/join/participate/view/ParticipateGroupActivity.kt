@@ -1,7 +1,6 @@
 package com.moidot.moidot.presentation.ui.main.group.join.participate.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
@@ -13,6 +12,8 @@ import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoT
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.TRANSPORTATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.LOCATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.join.participate.viewmodel.ParticipateGroupViewModel
+import com.moidot.moidot.presentation.util.Constant.GROUP_ID
+import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
 import com.moidot.moidot.presentation.util.PermissionUtil
 import com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker
 import com.moidot.moidot.presentation.util.hideKeyboard
@@ -20,6 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R.layout.activity_participate_group) {
+
+    private val groupId by lazy { intent.getIntExtra(GROUP_ID, 0) }
+    private val groupName by lazy { intent.getStringExtra(GROUP_NAME) }
 
     private val viewModel: ParticipateGroupViewModel by viewModels()
     lateinit var permissionUtil: PermissionUtil
@@ -42,9 +46,15 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
     }
 
     private fun initView() {
+        setupGroupInfoView()
         setupNickNameInputView()
         setupTransportationPickerView()
         setTransportationSelectedType()
+    }
+
+    private fun setupGroupInfoView() {
+        viewModel.groupId.value = groupId
+        viewModel.groupName.value = groupName
     }
 
     private fun setupNickNameInputView() {
