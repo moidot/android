@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.remote.request.RequestCreateGroup
+import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
+import com.moidot.moidot.data.remote.response.ResponsePostParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.domain.repository.GroupRepository
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType
+import com.moidot.moidot.presentation.util.TimeUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,10 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ParticipateGroupViewModel @Inject constructor(private val groupRepository: GroupRepository) : ViewModel() {
 
-    val groupId = MutableLiveData<Int>(37)
-
-    private val _groupName = MutableLiveData<String>("")
-    val groupName: LiveData<String> = _groupName
+    val groupId = MutableLiveData<Int>()
+    val groupName = MutableLiveData<String>("")
 
     private val _nickname = MutableLiveData<String>("")
     val nickname: LiveData<String> = _nickname
@@ -48,6 +50,12 @@ class ParticipateGroupViewModel @Inject constructor(private val groupRepository:
 
     // 에러 메세지
     val nickNameErrorMsg = MutableLiveData<String>()
+
+    private val _responsePostParticipateGroup = MutableLiveData<ResponsePostParticipateGroup>()
+    val responsePostParticipateGroup: LiveData<ResponsePostParticipateGroup> = _responsePostParticipateGroup
+
+    private val _isParticipateGroupSuccess = MutableLiveData<Boolean>()
+    val isParticipateGroupSuccess: LiveData<Boolean> = _isParticipateGroupSuccess
 
     fun setNickName(name: String) {
         _nickname.value = name
@@ -110,13 +118,39 @@ class ParticipateGroupViewModel @Inject constructor(private val groupRepository:
                 && isLocationInputComplete.value!! && isTransportationInputComplete.value!!
     }
 
-    fun participateGroup() {
+    fun checkNickNameDuplicate() {
         viewModelScope.launch {
             groupRepository.checkNicknameDuplication(groupId.value!!, nickname.value!!).onSuccess {
-                if (it.data.duplicated) _nicknameDuplicated.value = true
-                // TODO 서버 통신
+                if (it.data.duplicated) {
+                    _nicknameDuplicated.value = true
+                } else {
+                    participateGroup()
+                }
             }
         }
+    }
+
+    private fun participateGroup() {
+        viewModelScope.launch {
+            val requestParticipateGroup = prepareParticipateGroupRequest()
+            groupRepository.participateGroup(requestParticipateGroup).onSuccess {
+                _responsePostParticipateGroup.value = it
+                _isParticipateGroupSuccess.value = true
+            }.onFailure {
+                _isParticipateGroupSuccess.value = false
+            }
+        }
+    }
+
+    private fun prepareParticipateGroupRequest(): RequestPostParticipateGroup {
+        return RequestPostParticipateGroup(
+            groupId = groupId.value!!,
+            userName = nickname.value!!,
+            locationName = locationInfo.value!!.addressName ?: "",
+            latitude = locationInfo.value!!.latitude,
+            longitude = locationInfo.value!!.longitude,
+            transportationType = transportationTypeTxt.value!!
+        )
     }
 
 }

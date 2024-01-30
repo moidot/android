@@ -1,8 +1,9 @@
 package com.moidot.moidot.presentation.ui.main.group.join.participate.view
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import com.moidot.moidot.R
@@ -13,6 +14,9 @@ import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoT
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.TRANSPORTATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.join.create.model.InputInfoType.LOCATION_INPUT
 import com.moidot.moidot.presentation.ui.main.group.join.participate.viewmodel.ParticipateGroupViewModel
+import com.moidot.moidot.presentation.ui.main.group.space.member.MemberSpaceActivity
+import com.moidot.moidot.presentation.util.Constant.GROUP_ID
+import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
 import com.moidot.moidot.presentation.util.PermissionUtil
 import com.moidot.moidot.presentation.util.bottomsheet.BottomSheetLocationPicker
 import com.moidot.moidot.presentation.util.hideKeyboard
@@ -20,6 +24,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R.layout.activity_participate_group) {
+
+    private val groupId by lazy { intent.getIntExtra(GROUP_ID, 0) }
+    private val groupName by lazy { intent.getStringExtra(GROUP_NAME) }
 
     private val viewModel: ParticipateGroupViewModel by viewModels()
     lateinit var permissionUtil: PermissionUtil
@@ -42,9 +49,15 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
     }
 
     private fun initView() {
+        setupGroupInfoView()
         setupNickNameInputView()
         setupTransportationPickerView()
         setTransportationSelectedType()
+    }
+
+    private fun setupGroupInfoView() {
+        viewModel.groupId.value = groupId
+        viewModel.groupName.value = groupName
     }
 
     private fun setupNickNameInputView() {
@@ -118,6 +131,7 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
 
     private fun setupObserver() {
         setDuplicateNicknameView()
+        checkParticipateDoneState()
     }
 
     private fun setDuplicateNicknameView() {
@@ -129,9 +143,28 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
         }
     }
 
+    private fun checkParticipateDoneState() {
+        viewModel.isParticipateGroupSuccess.observe(this) {
+            if (it) {
+                moveToMoidotSpace()
+            } else {
+                Toast.makeText(this, getString(R.string.network_error_msg), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun moveToMoidotSpace() {
+        Intent(this, MemberSpaceActivity::class.java).apply {
+            putExtra(GROUP_ID, viewModel.groupId.value)
+            putExtra(GROUP_NAME, viewModel.groupName.value)
+            startActivity(this)
+        }
+        finish()
+    }
+
     fun participateGroup() {
         if (viewModel.checkIsValidNickName()) {
-            viewModel.participateGroup()
+            viewModel.checkNickNameDuplicate()
         }
     }
 }

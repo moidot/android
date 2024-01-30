@@ -25,14 +25,6 @@ class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.ac
             return field
         }
 
-    var groupLeaderName: String? = null
-        get() {
-            if (field == null) {
-                field = intent.getStringExtra(GROUP_LEADER_NAME)
-            }
-            return field
-        }
-
     private val navController by lazy { findNavController(R.id.leader_space_fcv) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,10 +69,6 @@ class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.ac
     // 그룹 정보 탭에서 정보가 수정될 것을 대비
     fun changeGroupName(newGroupName: String) {
         groupName = newGroupName
-    }
-
-    fun changeGroupLeaderName(newLeaderName: String) {
-        groupLeaderName = newLeaderName
     }
 
 }

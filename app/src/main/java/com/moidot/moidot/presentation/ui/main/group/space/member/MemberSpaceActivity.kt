@@ -8,8 +8,20 @@ import com.google.android.material.tabs.TabLayout
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityMemeberSpaceBinding
 import com.moidot.moidot.presentation.ui.base.BaseActivity
+import com.moidot.moidot.presentation.util.Constant
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MemberSpaceActivity : BaseActivity<ActivityMemeberSpaceBinding>(R.layout.activity_memeber_space) {
+
+    val groupId by lazy { intent.getIntExtra(Constant.GROUP_ID, 0) }
+    var groupName: String? = null
+        get() {
+            if (field == null) {
+                field = intent.getStringExtra(Constant.GROUP_NAME)
+            }
+            return field
+        }
 
     private val navController by lazy { findNavController(R.id.member_space_fcv) }
 

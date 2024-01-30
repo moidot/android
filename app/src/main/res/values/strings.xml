@@ -9,6 +9,12 @@
 
     <!-- error -->
     <string name="network_error_msg">네트워크 통신오류!</string>
+    
+    <!-- scheme -->
+    <string name="scheme_sign_in">scheme_sign_in</string>
+    <string name="scheme_main">scheme_main</string>
+    <string name="scheme_kakao_invite">scheme_kakao_invite</string>
+    <string name="scheme_url_invite">scheme_url_invite</string>
 
     <!-- component -->
     <string name="component_transportation_public">대중교통</string>

@@ -2,6 +2,7 @@ package com.moidot.moidot.presentation.ui.sign.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -16,6 +17,8 @@ import com.moidot.moidot.presentation.ui.main.MainActivity
 import com.moidot.moidot.presentation.ui.sign.model.Platform.KAKAO
 import com.moidot.moidot.presentation.ui.sign.model.Platform.NAVER
 import com.moidot.moidot.presentation.ui.sign.viewmodel.SignInViewModel
+import com.moidot.moidot.presentation.util.Constant.SCHEME_URL_STRING
+import com.moidot.moidot.presentation.util.deeplink.SchemeActivity
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.OAuthLoginCallback
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
 
+    private val schemeUrl by lazy { intent.getStringExtra(SCHEME_URL_STRING) }
     private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +44,25 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         NaverIdLoginSDK.initialize(this, NAVER_CLIENT_ID, NAVER_CLIENT_SECRET_KEY, getString(R.string.app_name))
     }
 
+    /**
+     * scheme 을 통해 들어온 유저들은 로그인 후 해당화면으로 바로 이동한다.
+     * [SchemeActivity]에서 바로 로그인 후 해당 화면으로 이동하는 로직이 구현되어 있습니다.
+     */
     private fun setupObserver() {
         viewModel.loginSuccessState.observe(this) {
-            if (it) moveToHome()
+            if (it) {
+                if (schemeUrl != null) moveToScheme()
+                else moveToHome()
+            }
         }
+    }
+
+    private fun moveToScheme() {
+        Intent(this, SchemeActivity::class.java).apply {
+            putExtra(SCHEME_URL_STRING, schemeUrl)
+            startActivity(this)
+        }
+        finish()
     }
 
     private fun moveToHome() {

@@ -33,9 +33,6 @@
 
                 <data android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
                 <data android:host="oauth" />
-
-                <data android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
-                <data android:host="kakaolink" />
             </intent-filter>
         </activity>
 
@@ -50,17 +47,22 @@
         </activity>
 
         <activity
-            android:name=".presentation.ui.main.MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
+            android:name=".presentation.util.deeplink.SchemeActivity"
+            android:launchMode="singleTask"
+            android:exported="true">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data
-                    android:host="moidot.com"
-                    android:scheme="https"/>
+                <data android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
+                <data android:host="kakaolink" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".presentation.ui.main.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
 
         <activity
