@@ -3,9 +3,11 @@ package com.moidot.moidot.data.remote.datasource.group
 import com.moidot.moidot.data.api.GroupService
 import com.moidot.moidot.data.remote.datasource.getResultFromResponse
 import com.moidot.moidot.data.remote.request.RequestCreateGroup
+import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCheckNicknameDuplication
+import com.moidot.moidot.data.remote.response.ResponsePostParticipateGroup
 import javax.inject.Inject
 
 class GroupRemoteDataSourceImpl @Inject constructor(private val groupService: GroupService) : GroupRemoteDataSource {
@@ -17,7 +19,13 @@ class GroupRemoteDataSourceImpl @Inject constructor(private val groupService: Gr
         return groupService.createGroup(requestCreateGroup).getResultFromResponse()
     }
 
+    override suspend fun participateGroup(requestPostParticipateGroup: RequestPostParticipateGroup): Result<ResponsePostParticipateGroup> {
+        return groupService.participateGroup(requestPostParticipateGroup).getResultFromResponse()
+    }
+
     override suspend fun checkNicknameDuplication(groupId: Int, nickname: String): Result<ResponseCheckNicknameDuplication> {
         return groupService.checkNicknameDuplication(groupId, nickname).getResultFromResponse()
     }
+
+
 }
