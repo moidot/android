@@ -2,13 +2,21 @@ package com.moidot.moidot.presentation.util.deeplink
 
 import android.app.TaskStackBuilder
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ACCESS_TOKEN
 import com.moidot.moidot.presentation.ui.main.MainActivity
 import com.moidot.moidot.presentation.util.Constant.GROUP_ID
 import com.moidot.moidot.presentation.util.Constant.GROUP_NAME
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SchemeActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     // TODO FCM 알림도 enum class 로 관리 예정
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,18 +24,24 @@ class SchemeActivity : AppCompatActivity() {
         handleDeepLink()
     }
 
+    /** 로그인하지 않은 유저일 때 -> 로그인 화면에서 딥링크요소 검사 -> 해당 딥링크 화면으로 이동
+     * 로그인 후 SchemeActivity 재호출시 else로 빠져서 한 번 더 검사가 진행되기 때문에 stack 문제를 해결할 수 있다. */
     private fun handleDeepLink() {
         val deepLinkUrl = intent.data
         val deepLinkIntent = getSchemeIntent(deepLinkUrl.toString())
-        if (isTaskRoot) { // 이미 앱이 실행중 -> 사용자가 앱을 실행한 상태에서 들어왔을 때
-            TaskStackBuilder.create(this).apply {
-                if (needAddMainForParent(deepLinkIntent)) { // 부모 activity로 Main 액티비티를 띠워야할 때
-                    addNextIntentWithParentStack(DeepLinkInfo.MAIN.getIntent(this@SchemeActivity))
-                }
-                addNextIntent(deepLinkIntent)
-            }.startActivities()
+        if (sharedPreferences.getString(ACCESS_TOKEN, null) == null) { // 로그인된 상태가 아닐 때 필터링
+            startActivity(DeepLinkInfo.SIGN_IN.getIntent(this))
         } else {
-            startActivity(deepLinkIntent)
+            if (isTaskRoot) { // 이미 앱이 실행중 -> 사용자가 앱을 실행한 상태에서 들어왔을 때
+                TaskStackBuilder.create(this).apply {
+                    if (needAddMainForParent(deepLinkIntent)) { // 부모 activity로 Main 액티비티를 띠워야할 때
+                        addNextIntentWithParentStack(DeepLinkInfo.MAIN.getIntent(this@SchemeActivity))
+                    }
+                    addNextIntent(deepLinkIntent)
+                }.startActivities()
+            } else { // 앱이 실행되지 않는 경우
+                startActivity(deepLinkIntent)
+            }
         }
         finish()
     }
@@ -55,7 +69,7 @@ class SchemeActivity : AppCompatActivity() {
             else -> true
         }
 
-    private fun getParams(uri:String?): Map<String, String> {
+    private fun getParams(uri: String?): Map<String, String> {
         val param = uri?.substring(uri.indexOf("?") + 1, uri.length)
         val result = HashMap<String, String>()
         param?.let {

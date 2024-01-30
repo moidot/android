@@ -6,8 +6,14 @@ import androidx.annotation.StringRes
 import com.moidot.moidot.R
 import com.moidot.moidot.presentation.ui.main.MainActivity
 import com.moidot.moidot.presentation.ui.main.group.join.participate.view.ParticipateGroupActivity
+import com.moidot.moidot.presentation.ui.sign.view.SignInActivity
 
 enum class DeepLinkInfo(@StringRes val hostStringResId: Int) {
+
+    SIGN_IN(R.string.scheme_sign_in) {
+        override fun getIntent(context: Context) =
+            Intent(context, SignInActivity::class.java)
+    },
 
     MAIN(R.string.scheme_main) {
         override fun getIntent(context: Context) =
