@@ -11,7 +11,7 @@
     </queries>
 
     <application
-        android:name=".presentation.ui.MoidotApplication"
+        android:name=".MoidotApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -37,7 +37,7 @@
         </activity>
 
         <activity
-            android:name=".presentation.ui.splash.view.SplashActivity"
+            android:name=".ui.splash.view.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -47,7 +47,7 @@
         </activity>
 
         <activity
-            android:name=".presentation.util.deeplink.SchemeActivity"
+            android:name=".util.deeplink.SchemeActivity"
             android:launchMode="singleTask"
             android:exported="true">
             <intent-filter android:autoVerify="true">
@@ -60,33 +60,33 @@
         </activity>
 
         <activity
-            android:name=".presentation.ui.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
         </activity>
 
         <activity
-            android:name=".presentation.ui.onboard.view.OnboardActivity"
+            android:name=".ui.onboard.view.OnboardActivity"
             android:exported="false" />
 
         <activity
-            android:name=".presentation.ui.sign.view.SignInActivity"
+            android:name=".ui.sign.view.SignInActivity"
             android:exported="false" />
 
         <activity
-            android:name=".presentation.ui.main.group.join.create.view.CreateGroupActivity"
+            android:name=".ui.main.group.join.create.view.CreateGroupActivity"
             android:exported="false" />
 
         <activity
-            android:name=".presentation.ui.main.group.join.participate.view.ParticipateGroupActivity"
+            android:name=".ui.main.group.join.participate.view.ParticipateGroupActivity"
             android:exported="false" />
 
         <activity
-            android:name=".presentation.ui.main.group.space.leader.LeaderSpaceActivity"
+            android:name=".ui.main.group.space.leader.LeaderSpaceActivity"
             android:exported="false" />
 
         <activity
-            android:name=".presentation.ui.main.group.space.member.MemberSpaceActivity"
+            android:name=".ui.main.group.space.member.MemberSpaceActivity"
             android:exported="false" />
     </application>
 

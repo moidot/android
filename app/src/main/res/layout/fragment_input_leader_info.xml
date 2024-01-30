@@ -8,11 +8,11 @@
 
         <variable
             name="fragment"
-            type="com.moidot.moidot.presentation.ui.main.group.join.create.view.InputLeaderInfoFragment" />
+            type="com.moidot.moidot.ui.main.group.join.create.view.InputLeaderInfoFragment" />
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.ui.main.group.join.create.viewmodel.CreateGroupViewModel" />
+            type="com.moidot.moidot.ui.main.group.join.create.viewmodel.CreateGroupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -244,7 +244,7 @@
             app:layout_constraintStart_toStartOf="@+id/fg_input_leader_info_tv_start_location_input"
             app:layout_constraintTop_toBottomOf="@id/fg_input_leader_info_tv_start_location_input" />
 
-        <com.moidot.moidot.presentation.util.component.TransportationPickerComponent
+        <com.moidot.moidot.util.component.TransportationPickerComponent
             android:id="@+id/fg_input_leader_info_component_transportation_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -8,11 +8,11 @@
 
         <variable
             name="activity"
-            type="com.moidot.moidot.presentation.ui.main.group.join.participate.view.ParticipateGroupActivity" />
+            type="com.moidot.moidot.ui.main.group.join.participate.view.ParticipateGroupActivity" />
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.ui.main.group.join.participate.viewmodel.ParticipateGroupViewModel" />
+            type="com.moidot.moidot.ui.main.group.join.participate.viewmodel.ParticipateGroupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -216,7 +216,7 @@
             app:layout_constraintStart_toStartOf="@+id/participate_group_tv_start_location_input"
             app:layout_constraintTop_toBottomOf="@id/participate_group_tv_start_location_input" />
 
-        <com.moidot.moidot.presentation.util.component.TransportationPickerComponent
+        <com.moidot.moidot.util.component.TransportationPickerComponent
             android:id="@+id/participate_group_component_transportation_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

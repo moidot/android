@@ -1,7 +1,7 @@
 package com.moidot.moidot.data.repository
 
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSource
-import com.moidot.moidot.domain.repository.UserRepository
+import com.moidot.moidot.repository.UserRepository
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(private val userLocalDataSource: UserLocalDataSource) : UserRepository {

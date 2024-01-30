@@ -5,11 +5,11 @@
     <data>
         <variable
             name="activity"
-            type="com.moidot.moidot.presentation.ui.onboard.view.OnboardActivity" />
+            type="com.moidot.moidot.ui.onboard.view.OnboardActivity" />
 
         <variable
             name="fragment"
-            type="com.moidot.moidot.presentation.ui.onboard.view.OnboardFirstFragment" />
+            type="com.moidot.moidot.ui.onboard.view.OnboardFirstFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
