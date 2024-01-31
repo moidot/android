@@ -2,6 +2,7 @@ package com.moidot.moidot.presentation.main.group.space.leader.info.edit.view
 
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import com.moidot.moidot.R
@@ -25,6 +26,7 @@ class EditGroupNameActivity : BaseActivity<ActivityEditGroupNameBinding>(R.layou
         super.onCreate(savedInstanceState)
         initBinding()
         initView()
+        setupObservers()
     }
 
     private fun initBinding() {
@@ -80,9 +82,19 @@ class EditGroupNameActivity : BaseActivity<ActivityEditGroupNameBinding>(R.layou
         }
     }
 
+    private fun setupObservers() {
+        viewModel.showToastEvent.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.isEditGroupSuccess.observe(this) {
+            if (it) finish()
+        }
+    }
+
     fun editGroupName() {
         if (viewModel.checkIsValidGroupName()) {
-
+            viewModel.editGroupName(groupId, viewModel.groupName.value!!)
         }
     }
 

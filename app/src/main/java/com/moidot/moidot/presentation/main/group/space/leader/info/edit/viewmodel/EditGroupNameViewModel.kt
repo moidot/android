@@ -3,11 +3,16 @@ package com.moidot.moidot.presentation.main.group.space.leader.info.edit.viewmod
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.repository.GroupInfoRepository
+import com.moidot.moidot.util.event.MutableSingleLiveData
+import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EditGroupNameViewModel @Inject constructor() : ViewModel() {
+class EditGroupNameViewModel @Inject constructor(private val groupInfoRepository: GroupInfoRepository) : ViewModel() {
 
     private val _groupName = MutableLiveData<String>()
     val groupName: LiveData<String> = _groupName
@@ -19,6 +24,24 @@ class EditGroupNameViewModel @Inject constructor() : ViewModel() {
     val isGroupInfoNextBtnActive: LiveData<Boolean> = _isGroupInfoNextBtnActive
 
     val groupNameErrorMsg = MutableLiveData<String>()
+
+    private val _showToastEvent = MutableSingleLiveData<String>()
+    val showToastEvent: SingleLiveData<String> = _showToastEvent
+
+    val isEditGroupSuccess = MutableLiveData<Boolean>()
+
+    fun editGroupName(groupId: Int, groupName: String) {
+        viewModelScope.launch {
+            groupInfoRepository.editGroupName(groupId, groupName).onSuccess {
+                if (it.code == 0) isEditGroupSuccess.value = true
+                else {
+                    _showToastEvent.setValue(it.message.toString())
+                }
+            }.onFailure {
+                _showToastEvent.setValue(it.message.toString())
+            }
+        }
+    }
 
     fun setGroupName(name: String) {
         _groupName.value = name
