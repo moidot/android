@@ -107,7 +107,8 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
         val defaultViews = mutableListOf<View>(
             binding.fgLeaderInfoContainerInfo,
             binding.fgLeaderInfoContainerMemberRemove,
-            binding.fgLeaderInfoContainerInfoEditMy
+            binding.fgLeaderInfoContainerInfoEditMy,
+            binding.fgLeaderInfoIvEditGroup
         )
         val removalViews = mutableListOf<View>(
             binding.fgLeaderInfoRvGroupInfo,
