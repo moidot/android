@@ -1,5 +1,6 @@
 package com.moidot.moidot.data.api
 
+import com.moidot.moidot.data.remote.response.BaseResponse
 import com.moidot.moidot.data.remote.response.ResponseDeleteParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseGroupInfo
 import retrofit2.Response
@@ -13,6 +14,10 @@ interface GroupInfoService {
 
     @GET("/group")
     suspend fun getGroupInfo(@Query("groupId") groupId: Int): Response<ResponseGroupInfo>
+
+    @DELETE("/group")
+    suspend fun deleteGroup(@Query("groupId") groupId: Int): Response<BaseResponse>
+
 
     @DELETE("/group/participate")
     suspend fun deleteParticipateGroup(@Query("participateId") participateId: Int): Response<ResponseDeleteParticipateGroup>
