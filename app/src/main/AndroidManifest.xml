@@ -85,6 +85,9 @@
             android:name=".presentation.main.group.space.leader.LeaderSpaceActivity"
             android:exported="false" />
 
+        <activity android:name=".presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".presentation.main.group.space.member.MemberSpaceActivity"
             android:exported="false" />

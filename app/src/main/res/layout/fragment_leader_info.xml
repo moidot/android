@@ -74,6 +74,7 @@
                         android:layout_margin="16dp"
                         android:background="@drawable/bg_icon_edit"
                         android:padding="7dp"
+                        android:onClick="@{()-> fragment.editGroupName()}"
                         android:src="@drawable/ic_edit"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

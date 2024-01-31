@@ -1,5 +1,6 @@
 package com.moidot.moidot.presentation.main.group.space.leader.info.main.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,8 +10,11 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderInfoBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceActivity
+import com.moidot.moidot.presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity
 import com.moidot.moidot.presentation.main.group.space.leader.info.main.adapter.LeaderGroupInfoHeaderAdapter
 import com.moidot.moidot.presentation.main.group.space.leader.info.main.viewmodel.LeaderInfoViewModel
+import com.moidot.moidot.util.Constant.GROUP_ID
+import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import com.moidot.moidot.util.share.KakaoFeedSetting
 import com.moidot.moidot.util.share.KakaoShareManager
@@ -126,6 +130,15 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
 
     private fun onMemberRemoveListener(participateId: Int) {
         viewModel.removeMember(groupId, participateId)
+    }
+
+    // 모임 이름 수정
+    fun editGroupName() {
+        Intent(requireContext(), EditGroupNameActivity::class.java).apply {
+            putExtra(GROUP_ID, groupId)
+            putExtra(GROUP_NAME, viewModel.groupName.value)
+            startActivity(this)
+        }
     }
 
     // 모임 초대
