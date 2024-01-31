@@ -1,6 +1,5 @@
 package com.moidot.moidot.ui.main.group.myGroup.view
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -30,13 +29,9 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     private lateinit var myGroupAdapter: MyGroupAdapter
     private val viewModel: GroupViewModel by viewModels()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        setStatusBarState(STATUS_BAR_LIGHT)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setStatusBarState(STATUS_BAR_LIGHT)
         initBinding()
         initView()
         setupObservers()
@@ -61,7 +56,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
         }
     }
 
-    private fun onGroupItemClickListener(isAdmin:Boolean, groupId: Int, groupName: String) {
+    private fun onGroupItemClickListener(isAdmin: Boolean, groupId: Int, groupName: String) {
         val packageClass = if (isAdmin) LeaderSpaceActivity::class.java else MemberSpaceActivity::class.java
         Intent(requireContext(), packageClass).apply {
             this.putExtra(GROUP_ID, groupId)
