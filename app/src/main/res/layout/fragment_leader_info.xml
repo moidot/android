@@ -86,8 +86,8 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
                     android:background="@color/red50"
-                    app:cardCornerRadius="8dp"
                     android:onClick="@{() -> fragment.activateMemberRemovalView()}"
+                    app:cardCornerRadius="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fg_leader_info_container_info"
                     app:strokeWidth="0dp">
@@ -292,12 +292,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="28dp"
                 android:onClick="@{() -> fragment.inActiveMemberRemovalView()}"
                 android:text="@string/space_leader_info_member_remove_exit"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

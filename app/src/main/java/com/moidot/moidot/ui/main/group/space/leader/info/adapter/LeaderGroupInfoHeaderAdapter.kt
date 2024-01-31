@@ -1,7 +1,6 @@
 package com.moidot.moidot.ui.main.group.space.leader.info.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +25,6 @@ class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderA
                     this.members = it.participations
                     setRemoveFlag(removeActivateFlag)
                 }
-                Log.d("kite", removeActivateFlag.toString())
                 binding.itemGroupInfoHeaderRvGroupInfo.apply {
                     adapter = leaderGroupInfoAdapter
                     itemAnimator = null
