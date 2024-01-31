@@ -123,6 +123,9 @@
 
     <!--Space - InfoFragment - Leader -->
     <string name="space_leader_info_member_remove_exit">내보내기 모드 나가기</string>
+    <string name="space_leader_info_dialog_remove_member_title">정말 모임원 ‘%s’ 을(를) 내보내시겠어요?</string>
+    <string name="space_leader_info_dialog_remove_member_content">모임원을 내보내시면 해당 모임원이 작성한 모든 정보가 삭제되며 다시 불러올 수 없습니다.</string>
+    <string name="space_leader_info_dialog_remove_member_btn">모임원 내보내기</string>
 
     <!--Space - InfoFragment - Member -->
     <string name="space_member_info_dialog_title">정말 ‘%s’ 에서 나가시겠어요?</string>

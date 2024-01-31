@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseGroupInfo
 import com.moidot.moidot.databinding.ItemGroupInfoBinding
 import com.moidot.moidot.util.addVerticalMargin
+import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 
 class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) : RecyclerView.Adapter<LeaderGroupInfoAdapter.LeaderGroupInfoViewHolder>() {
 
@@ -29,9 +31,14 @@ class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) 
         }
 
         // 멤버 내보내기
-        fun invokeItemRemoveListener(participateId: Int) {
+        fun invokeItemRemoveListener(userName:String, participateId: Int) {
             binding.itemGroupContainerRemoveMember.setOnClickListener {
-                onRemoveSelectListener(participateId)
+                PopupTwoButtonDialog(
+                    it.context,
+                    it.context.getString(R.string.space_leader_info_dialog_remove_member_title).format(userName),
+                    it.context.getString(R.string.space_leader_info_dialog_remove_member_content),
+                    it.context.getString(R.string.space_leader_info_dialog_remove_member_btn)
+                ) { onRemoveSelectListener(participateId) }.show()
             }
         }
     }
@@ -47,7 +54,7 @@ class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) 
         addVerticalMargin(holder.itemView, position, itemCount, 8)
         holder.bind(members[position])
         holder.setRemoveView()
-        holder.invokeItemRemoveListener(members[position].participationId)
+        holder.invokeItemRemoveListener(members[position].userName, members[position].participationId)
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -57,8 +57,4 @@ class LeaderGroupInfoHeaderAdapter(private val onRemoveSelectListener: (Int) -> 
         notifyDataSetChanged()
     }
 
-    fun removeMemberPosition(memberAdapterPosition: Int) {
-
-    }
-
 }
