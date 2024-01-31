@@ -16,7 +16,9 @@ import com.moidot.moidot.ui.main.MainActivity
 import com.moidot.moidot.ui.sign.model.Platform.KAKAO
 import com.moidot.moidot.ui.sign.model.Platform.NAVER
 import com.moidot.moidot.ui.sign.viewmodel.SignInViewModel
+import com.moidot.moidot.util.Constant.REFRESH_DONE_STATE
 import com.moidot.moidot.util.Constant.SCHEME_URL_STRING
+import com.moidot.moidot.util.CustomSnackBar
 import com.moidot.moidot.util.deeplink.SchemeActivity
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.OAuthLoginCallback
@@ -25,12 +27,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
 
+    private val refreshDoneState by lazy { intent.getBooleanExtra(REFRESH_DONE_STATE, false) }
     private val schemeUrl by lazy { intent.getStringExtra(SCHEME_URL_STRING) }
     private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
+        checkRefreshMsg()
         initSdk()
         setupObserver()
     }
@@ -41,6 +45,12 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private fun initSdk() {
         NaverIdLoginSDK.initialize(this, NAVER_CLIENT_ID, NAVER_CLIENT_SECRET_KEY, getString(R.string.app_name))
+    }
+
+    /** 로그인 만료시 얻는 재로그인 유도 메세지
+     * TokenAuthenticator로부터 refresh 만료 확인후 받아온 데이터입니다.*/
+    private fun checkRefreshMsg() {
+        if (refreshDoneState) CustomSnackBar.makeSnackBar(binding.root, getString(R.string.sign_in_re_sign_in_info_msg)).show()
     }
 
     /**
