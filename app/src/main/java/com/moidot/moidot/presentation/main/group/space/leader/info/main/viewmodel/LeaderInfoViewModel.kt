@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.group.space.leader.info.viewmodel
+package com.moidot.moidot.presentation.main.group.space.leader.info.main.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

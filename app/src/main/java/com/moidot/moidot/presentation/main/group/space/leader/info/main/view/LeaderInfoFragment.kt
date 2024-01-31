@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.group.space.leader.info.view
+package com.moidot.moidot.presentation.main.group.space.leader.info.main.view
 
 import android.os.Bundle
 import android.view.View
@@ -9,8 +9,8 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderInfoBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceActivity
-import com.moidot.moidot.presentation.main.group.space.leader.info.adapter.LeaderGroupInfoHeaderAdapter
-import com.moidot.moidot.presentation.main.group.space.leader.info.viewmodel.LeaderInfoViewModel
+import com.moidot.moidot.presentation.main.group.space.leader.info.main.adapter.LeaderGroupInfoHeaderAdapter
+import com.moidot.moidot.presentation.main.group.space.leader.info.main.viewmodel.LeaderInfoViewModel
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import com.moidot.moidot.util.share.KakaoFeedSetting
 import com.moidot.moidot.util.share.KakaoShareManager

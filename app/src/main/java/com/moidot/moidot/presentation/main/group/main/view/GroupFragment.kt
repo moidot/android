@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.group.my.view
+package com.moidot.moidot.presentation.main.group.main.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,8 +11,8 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.join.create.view.CreateGroupActivity
-import com.moidot.moidot.presentation.main.group.my.viewmodel.GroupViewModel
-import com.moidot.moidot.presentation.main.group.my.adater.MyGroupAdapter
+import com.moidot.moidot.presentation.main.group.main.viewmodel.GroupViewModel
+import com.moidot.moidot.presentation.main.group.main.adater.MyGroupAdapter
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceActivity
 import com.moidot.moidot.presentation.main.group.space.member.MemberSpaceActivity
 import com.moidot.moidot.util.Constant.GROUP_ID

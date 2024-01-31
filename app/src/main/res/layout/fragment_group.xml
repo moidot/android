@@ -7,11 +7,11 @@
 
         <variable
             name="fragment"
-            type="com.moidot.moidot.presentation.main.group.my.view.GroupFragment" />
+            type="com.moidot.moidot.presentation.main.group.main.view.GroupFragment" />
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.main.group.my.viewmodel.GroupViewModel" />
+            type="com.moidot.moidot.presentation.main.group.main.viewmodel.GroupViewModel" />
 
         <import type="android.view.View" />
     </data>

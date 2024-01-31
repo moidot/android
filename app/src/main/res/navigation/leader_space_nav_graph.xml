@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/leaderInfoFragment"
-        android:name="com.moidot.moidot.presentation.main.group.space.leader.info.view.LeaderInfoFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.leader.info.main.view.LeaderInfoFragment"
         android:label="fragment_leader_info"
         tools:layout="@layout/fragment_leader_info" />
 

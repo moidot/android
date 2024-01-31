@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/groupFragment"
-        android:name="com.moidot.moidot.presentation.main.group.my.view.GroupFragment"
+        android:name="com.moidot.moidot.presentation.main.group.main.view.GroupFragment"
         android:label="fragment_group"
         tools:layout="@layout/fragment_group" />
 

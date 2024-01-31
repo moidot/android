@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.group.my.adater
+package com.moidot.moidot.presentation.main.group.main.adater
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

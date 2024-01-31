@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.group.my.viewmodel
+package com.moidot.moidot.presentation.main.group.main.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
