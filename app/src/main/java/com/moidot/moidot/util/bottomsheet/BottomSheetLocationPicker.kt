@@ -1,7 +1,6 @@
 package com.moidot.moidot.util.bottomsheet
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.location.Location
 import android.os.Bundle
 import android.view.View
@@ -18,8 +17,6 @@ import com.moidot.moidot.ui.base.BaseBottomSheetDialogFragment
 import com.moidot.moidot.ui.main.group.join.create.view.CreateGroupActivity
 import com.moidot.moidot.ui.main.group.join.participate.view.ParticipateGroupActivity
 import com.moidot.moidot.util.CustomSnackBar
-import com.moidot.moidot.util.VerticalSpaceItemDecoration
-import com.moidot.moidot.util.dpToPx
 import com.moidot.moidot.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -91,7 +88,6 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
         binding.bottomSheetLocationPickerRvPlace.apply {
             adapter = locationAdapter
             itemAnimator = null
-            addItemDecoration(VerticalSpaceItemDecoration(8.dpToPx(this.context)))
         }
     }
 

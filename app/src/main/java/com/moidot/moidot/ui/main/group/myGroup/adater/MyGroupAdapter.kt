@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.databinding.ItemMyGroupBinding
+import com.moidot.moidot.util.addVerticalMargin
 
 
 class MyGroupAdapter(private val onItemClickListener: (Boolean, Int, String) -> Unit) : ListAdapter<ResponseParticipateGroup.Data, MyGroupAdapter.MyGroupViewHolder>(diffUtil) {
@@ -32,6 +33,7 @@ class MyGroupAdapter(private val onItemClickListener: (Boolean, Int, String) -> 
     }
 
     override fun onBindViewHolder(holder: MyGroupViewHolder, position: Int) {
+        addVerticalMargin(holder.itemView, position, itemCount, 8)
         holder.bind(currentList[position])
         holder.invokeItemClickListener(currentList[position])
     }

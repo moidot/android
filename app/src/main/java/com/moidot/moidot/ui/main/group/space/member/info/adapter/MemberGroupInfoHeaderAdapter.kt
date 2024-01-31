@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moidot.moidot.data.remote.response.ResponseGroupInfo
 import com.moidot.moidot.databinding.ItemGroupInfoHeaderBinding
-import com.moidot.moidot.util.VerticalSpaceItemDecoration
-import com.moidot.moidot.util.dpToPx
+import com.moidot.moidot.util.addVerticalMargin
 
 class MemberGroupInfoHeaderAdapter : RecyclerView.Adapter<MemberGroupInfoHeaderAdapter.MemberGroupInfoHeaderViewHolder>() {
 
@@ -26,7 +25,6 @@ class MemberGroupInfoHeaderAdapter : RecyclerView.Adapter<MemberGroupInfoHeaderA
                 binding.itemGroupInfoHeaderRvGroupInfo.apply {
                     adapter = memberGroupInfoAdapter
                     itemAnimator = null
-                    addItemDecoration(VerticalSpaceItemDecoration(8.dpToPx(this.context)))
                 }
             }
         }
@@ -40,6 +38,7 @@ class MemberGroupInfoHeaderAdapter : RecyclerView.Adapter<MemberGroupInfoHeaderA
     override fun getItemCount(): Int = participantsByRegion.size
 
     override fun onBindViewHolder(holder: MemberGroupInfoHeaderViewHolder, position: Int) {
+        addVerticalMargin(holder.itemView, position, itemCount, 24)
         holder.bind(participantsByRegion[position])
         holder.initGroupInfoAdapter(participantsByRegion[position])
     }

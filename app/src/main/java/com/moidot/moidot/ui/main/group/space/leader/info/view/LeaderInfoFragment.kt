@@ -5,15 +5,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.viewbinding.ViewBinding
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderInfoBinding
 import com.moidot.moidot.ui.base.BaseFragment
 import com.moidot.moidot.ui.main.group.space.leader.LeaderSpaceActivity
 import com.moidot.moidot.ui.main.group.space.leader.info.adapter.LeaderGroupInfoHeaderAdapter
 import com.moidot.moidot.ui.main.group.space.leader.info.viewmodel.LeaderInfoViewModel
-import com.moidot.moidot.util.VerticalSpaceItemDecoration
-import com.moidot.moidot.util.dpToPx
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import com.moidot.moidot.util.share.KakaoFeedSetting
 import com.moidot.moidot.util.share.KakaoShareManager

@@ -20,8 +20,6 @@ import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.StatusBarColorUtil
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
-import com.moidot.moidot.util.VerticalSpaceItemDecoration
-import com.moidot.moidot.util.dpToPx
 import com.moidot.moidot.util.hideKeyboard
 import com.moidot.moidot.util.popup.PopupPickerDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,7 +58,6 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
         binding.fgGroupRvMyGroup.apply {
             adapter = myGroupAdapter
             itemAnimator = null
-            addItemDecoration(VerticalSpaceItemDecoration(8.dpToPx(this.context)))
         }
     }
 
