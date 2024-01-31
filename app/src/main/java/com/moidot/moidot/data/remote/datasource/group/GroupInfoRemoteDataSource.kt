@@ -7,5 +7,5 @@ interface GroupInfoRemoteDataSource {
 
     suspend fun getGroupInfo(groupId: Int): Result<ResponseGroupInfo>
 
-    suspend fun deleteParticipateGroup(participateId: String): Result<ResponseDeleteParticipateGroup>
+    suspend fun deleteParticipateGroup(participateId: Int): Result<ResponseDeleteParticipateGroup>
 }

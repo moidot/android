@@ -15,5 +15,5 @@ interface GroupInfoService {
     suspend fun getGroupInfo(@Query("groupId") groupId: Int): Response<ResponseGroupInfo>
 
     @DELETE("/group/participate")
-    suspend fun deleteParticipateGroup(@Body participateId: String): Response<ResponseDeleteParticipateGroup>
+    suspend fun deleteParticipateGroup(@Query("participateId") participateId: Int): Response<ResponseDeleteParticipateGroup>
 }
