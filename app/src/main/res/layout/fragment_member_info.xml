@@ -127,6 +127,7 @@
                 android:layout_marginBottom="24dp"
                 android:text="@string/space_info_delete_space"
                 android:textColor="@color/gray400"
+                android:onClick="@{() -> fragment.showGroupDeleteDialog()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
