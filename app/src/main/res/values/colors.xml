@@ -26,6 +26,7 @@
     <color name="slate300">#CBD5E1</color>
     <color name="slate400">#94A3B8</color>
     <color name="slate800">#1E293B</color>
+    <color name="orange500_10">#1AF97316</color>
     <color name="orange500_20">#33F97316</color>
     <color name="alert_delete">#FF5555</color>
     <color name="disabled_orange">#FFDAC1</color>
