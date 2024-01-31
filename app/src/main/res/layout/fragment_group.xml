@@ -181,6 +181,7 @@
                         android:layout_marginHorizontal="40dp"
                         android:layout_marginTop="16dp"
                         android:backgroundTint="@color/orange500_20"
+                        android:onClick="@{() -> fragment.moveToCreateGroup()}"
                         android:text="@string/group_empty_btn_add_group"
                         android:textColor="@color/orange500" />
 
