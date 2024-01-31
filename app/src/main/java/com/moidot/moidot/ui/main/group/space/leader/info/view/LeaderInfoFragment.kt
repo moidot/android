@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.fragment_leader_info) {
 
     private val groupId by lazy { (activity as LeaderSpaceActivity).groupId }
-    private val leaderGroupInfoHeaderAdapter by lazy { LeaderGroupInfoHeaderAdapter() }
+    private val leaderGroupInfoHeaderAdapter by lazy { LeaderGroupInfoHeaderAdapter(::onMemberRemoveListener) }
     private val viewModel: LeaderInfoViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -124,6 +124,9 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
         }
     }
 
+    private fun onMemberRemoveListener(participateId: Int) {
+        viewModel.removeMember(groupId, participateId)
+    }
 
     // 모임 초대
     fun shareInvitationWithKakao() {

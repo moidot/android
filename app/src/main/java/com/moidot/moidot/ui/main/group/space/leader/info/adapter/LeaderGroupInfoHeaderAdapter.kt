@@ -8,19 +8,19 @@ import com.moidot.moidot.data.remote.response.ResponseGroupInfo
 import com.moidot.moidot.databinding.ItemGroupInfoHeaderBinding
 import com.moidot.moidot.util.addVerticalMargin
 
-class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderAdapter.LeaderGroupInfoHeaderViewHolder>() {
+class LeaderGroupInfoHeaderAdapter(private val onRemoveSelectListener: (Int) -> Unit) : RecyclerView.Adapter<LeaderGroupInfoHeaderAdapter.LeaderGroupInfoHeaderViewHolder>() {
 
     private var removeActivateFlag = false
     private var participantsByRegion = listOf<ResponseGroupInfo.Data.ParticipantsByRegion>()
 
-    class LeaderGroupInfoHeaderViewHolder(private val binding: ItemGroupInfoHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
+    class LeaderGroupInfoHeaderViewHolder(private val binding: ItemGroupInfoHeaderBinding, private val onRemoveSelectListener: (Int) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ResponseGroupInfo.Data.ParticipantsByRegion) {
             binding.data = data
         }
 
-        fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?, removeActivateFlag:Boolean) {
+        fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?, removeActivateFlag: Boolean) {
             members?.let {
-                val leaderGroupInfoAdapter = LeaderGroupInfoAdapter().apply {
+                val leaderGroupInfoAdapter = LeaderGroupInfoAdapter(onRemoveSelectListener).apply {
                     this.members = it.participations
                     setRemoveFlag(removeActivateFlag)
                 }
@@ -34,7 +34,7 @@ class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderA
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderGroupInfoHeaderViewHolder {
         val binding = ItemGroupInfoHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return LeaderGroupInfoHeaderViewHolder(binding)
+        return LeaderGroupInfoHeaderViewHolder(binding, onRemoveSelectListener)
     }
 
     override fun getItemCount(): Int = participantsByRegion.size
@@ -55,6 +55,10 @@ class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderA
     fun setRemoveMode(flag: Boolean) {
         removeActivateFlag = flag
         notifyDataSetChanged()
+    }
+
+    fun removeMemberPosition(memberAdapterPosition: Int) {
+
     }
 
 }

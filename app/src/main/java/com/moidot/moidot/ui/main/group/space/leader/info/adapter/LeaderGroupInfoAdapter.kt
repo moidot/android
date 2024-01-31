@@ -9,12 +9,16 @@ import com.moidot.moidot.data.remote.response.ResponseGroupInfo
 import com.moidot.moidot.databinding.ItemGroupInfoBinding
 import com.moidot.moidot.util.addVerticalMargin
 
-class LeaderGroupInfoAdapter : RecyclerView.Adapter<LeaderGroupInfoAdapter.LeaderGroupInfoViewHolder>() {
+class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) : RecyclerView.Adapter<LeaderGroupInfoAdapter.LeaderGroupInfoViewHolder>() {
 
     private var removeActivateFlag = false
     var members = listOf<ResponseGroupInfo.Data.ParticipantsByRegion.Participation>()
 
-    class LeaderGroupInfoViewHolder(private val binding: ItemGroupInfoBinding, private val removeActivateFlag: Boolean) : RecyclerView.ViewHolder(binding.root) {
+    class LeaderGroupInfoViewHolder(
+        private val binding: ItemGroupInfoBinding,
+        private val removeActivateFlag: Boolean,
+        private val onRemoveSelectListener: (Int) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ResponseGroupInfo.Data.ParticipantsByRegion.Participation) {
             binding.data = data
         }
@@ -23,11 +27,18 @@ class LeaderGroupInfoAdapter : RecyclerView.Adapter<LeaderGroupInfoAdapter.Leade
             binding.itemGroupContainerRemoveMember.isVisible = removeActivateFlag
             binding.itemGroupContainerMemberInfo.isVisible = !removeActivateFlag
         }
+
+        // 멤버 내보내기
+        fun invokeItemRemoveListener(participateId: Int) {
+            binding.itemGroupContainerRemoveMember.setOnClickListener {
+                onRemoveSelectListener(participateId)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderGroupInfoViewHolder {
         val binding = ItemGroupInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return LeaderGroupInfoViewHolder(binding, removeActivateFlag)
+        return LeaderGroupInfoViewHolder(binding, removeActivateFlag, onRemoveSelectListener)
     }
 
     override fun getItemCount(): Int = members.size
@@ -36,10 +47,11 @@ class LeaderGroupInfoAdapter : RecyclerView.Adapter<LeaderGroupInfoAdapter.Leade
         addVerticalMargin(holder.itemView, position, itemCount, 8)
         holder.bind(members[position])
         holder.setRemoveView()
+        holder.invokeItemRemoveListener(members[position].participationId)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setRemoveFlag(flag:Boolean) {
+    fun setRemoveFlag(flag: Boolean) {
         removeActivateFlag = flag
         notifyDataSetChanged()
     }
