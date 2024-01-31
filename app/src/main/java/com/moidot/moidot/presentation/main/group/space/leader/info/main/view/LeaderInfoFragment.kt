@@ -64,6 +64,7 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     private fun setupGroupDefaultInfoView() {
         viewModel.groupName.observe(viewLifecycleOwner) {
             binding.fgLeaderInfoTvGroupName.text = it
+            (activity as LeaderSpaceActivity).changeGroupName(it)
         }
     }
 
