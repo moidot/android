@@ -10,5 +10,7 @@ interface GroupInfoRepository {
 
     suspend fun deleteGroup(groupId: Int): Result<BaseResponse>
 
+    suspend fun removeMember(participateId:Int): Result<BaseResponse>
+
     suspend fun deleteParticipateGroup(participateId:Int): Result<ResponseDeleteParticipateGroup>
 }

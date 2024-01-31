@@ -8,6 +8,7 @@ import com.google.android.material.card.MaterialCardView
 import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.ItemLocationBinding
+import com.moidot.moidot.util.addVerticalMargin
 
 class BottomSheetLocationAdapter(
     private val onItemSelectListener: (ResponseSearchPlace.Document) -> Unit,
@@ -53,6 +54,7 @@ class BottomSheetLocationAdapter(
     }
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
+        addVerticalMargin(holder.itemView, position, itemCount, 8)
         holder.bind(placeItems[position])
         holder.invokeItemSelectListener(placeItems[position])
         holder.invokeItemFavoriteListener(position, placeItems[position])

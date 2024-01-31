@@ -9,8 +9,6 @@ import com.moidot.moidot.databinding.FragmentMemberInfoBinding
 import com.moidot.moidot.ui.base.BaseFragment
 import com.moidot.moidot.ui.main.group.space.member.MemberSpaceActivity
 import com.moidot.moidot.ui.main.group.space.member.info.adapter.MemberGroupInfoHeaderAdapter
-import com.moidot.moidot.util.VerticalSpaceItemDecoration
-import com.moidot.moidot.util.dpToPx
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import com.moidot.moidot.util.share.KakaoFeedSetting
 import com.moidot.moidot.util.share.KakaoShareManager
@@ -42,7 +40,6 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
         binding.fgMemberInfoRvGroupInfo.apply {
             adapter = memberGroupInfoHeaderAdapter
             itemAnimator = null
-            addItemDecoration(VerticalSpaceItemDecoration(24.dpToPx(this.context)))
         }
     }
 

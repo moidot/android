@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moidot.moidot.data.remote.response.ResponseGroupInfo
 import com.moidot.moidot.databinding.ItemGroupInfoBinding
+import com.moidot.moidot.util.addVerticalMargin
 
 class MemberGroupInfoAdapter : RecyclerView.Adapter<MemberGroupInfoAdapter.MemberGroupInfoViewHolder>() {
 
@@ -24,6 +25,7 @@ class MemberGroupInfoAdapter : RecyclerView.Adapter<MemberGroupInfoAdapter.Membe
     override fun getItemCount(): Int = members.size
 
     override fun onBindViewHolder(holder: MemberGroupInfoViewHolder, position: Int) {
+        addVerticalMargin(holder.itemView, position, itemCount, 8)
         holder.bind(members[position])
     }
 

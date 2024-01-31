@@ -19,4 +19,8 @@ class GroupInfoRemoteDataSourceImpl @Inject constructor(private val groupInfoSer
     override suspend fun deleteParticipateGroup(participateId: Int): Result<ResponseDeleteParticipateGroup> {
        return groupInfoService.deleteParticipateGroup(participateId).getResultFromResponse()
     }
+
+    override suspend fun removeMember(participateId: Int): Result<BaseResponse> {
+        return groupInfoService.removeMember(participateId).getResultFromResponse()
+    }
 }
