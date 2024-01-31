@@ -18,6 +18,8 @@ interface GroupInfoService {
     @DELETE("/group")
     suspend fun deleteGroup(@Query("groupId") groupId: Int): Response<BaseResponse>
 
+    @DELETE("/group/participate/removal")
+    suspend fun removeMember(@Query("participateId") participateId: Int): Response<BaseResponse>
 
     @DELETE("/group/participate")
     suspend fun deleteParticipateGroup(@Query("participateId") participateId: Int): Response<ResponseDeleteParticipateGroup>
