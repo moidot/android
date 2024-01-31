@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moidot.moidot.data.remote.response.ResponseGroupInfo
 import com.moidot.moidot.databinding.ItemGroupInfoHeaderBinding
-import com.moidot.moidot.ui.main.group.space.leader.info.adapter.LeaderGroupInfoAdapter
 import com.moidot.moidot.util.VerticalSpaceItemDecoration
 import com.moidot.moidot.util.dpToPx
 
@@ -21,11 +20,11 @@ class MemberGroupInfoHeaderAdapter : RecyclerView.Adapter<MemberGroupInfoHeaderA
 
         fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?) {
             members?.let {
-                val leaderGroupInfoAdapter = LeaderGroupInfoAdapter().apply {
+                val memberGroupInfoAdapter = MemberGroupInfoAdapter().apply {
                     this.members = it.participations
                 }
                 binding.itemGroupInfoHeaderRvGroupInfo.apply {
-                    adapter = leaderGroupInfoAdapter
+                    adapter = memberGroupInfoAdapter
                     itemAnimator = null
                     addItemDecoration(VerticalSpaceItemDecoration(8.dpToPx(this.context)))
                 }
