@@ -1,5 +1,6 @@
 package com.moidot.moidot.ui.main.group.join.participate.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,8 @@ import com.moidot.moidot.data.remote.response.ResponsePostParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.repository.GroupRepository
 import com.moidot.moidot.ui.main.group.join.create.model.InputInfoType
+import com.moidot.moidot.util.event.MutableSingleLiveData
+import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -54,6 +57,9 @@ class ParticipateGroupViewModel @Inject constructor(private val groupRepository:
 
     private val _isParticipateGroupSuccess = MutableLiveData<Boolean>()
     val isParticipateGroupSuccess: LiveData<Boolean> = _isParticipateGroupSuccess
+
+    private val _showToastEvent = MutableSingleLiveData<String>()
+    val showToastEvent: SingleLiveData<String> = _showToastEvent
 
     fun setNickName(name: String) {
         _nickname.value = name
@@ -119,11 +125,13 @@ class ParticipateGroupViewModel @Inject constructor(private val groupRepository:
     fun checkNickNameDuplicate() {
         viewModelScope.launch {
             groupRepository.checkNicknameDuplication(groupId.value!!, nickname.value!!).onSuccess {
-                if (it.data.duplicated) {
-                    _nicknameDuplicated.value = true
+                if (it.code == 0) {
+                    if (it.data.duplicated) { _nicknameDuplicated.value = true } else { participateGroup() }
                 } else {
-                    participateGroup()
+                    _showToastEvent.setValue(it.message.toString())
                 }
+            }.onFailure {
+                _showToastEvent.setValue(it.message.toString())
             }
         }
     }
@@ -132,10 +140,14 @@ class ParticipateGroupViewModel @Inject constructor(private val groupRepository:
         viewModelScope.launch {
             val requestParticipateGroup = prepareParticipateGroupRequest()
             groupRepository.participateGroup(requestParticipateGroup).onSuccess {
-                _responsePostParticipateGroup.value = it
-                _isParticipateGroupSuccess.value = true
+                if (it.code == 0) {
+                    _responsePostParticipateGroup.value = it
+                    _isParticipateGroupSuccess.value = true
+                } else {
+                    _showToastEvent.setValue(it.message.toString())
+                }
             }.onFailure {
-                _isParticipateGroupSuccess.value = false
+                _showToastEvent.setValue(it.message.toString())
             }
         }
     }

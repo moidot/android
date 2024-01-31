@@ -132,6 +132,7 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
     private fun setupObserver() {
         setDuplicateNicknameView()
         checkParticipateDoneState()
+        setupToastEventObserver()
     }
 
     private fun setDuplicateNicknameView() {
@@ -147,9 +148,13 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
         viewModel.isParticipateGroupSuccess.observe(this) {
             if (it) {
                 moveToMoidotSpace()
-            } else {
-                Toast.makeText(this, getString(R.string.network_error_msg), Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun setupToastEventObserver() {
+        viewModel.showToastEvent.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
     }
 
