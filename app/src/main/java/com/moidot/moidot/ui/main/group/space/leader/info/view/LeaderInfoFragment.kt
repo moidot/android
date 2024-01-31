@@ -45,7 +45,6 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
         binding.fgLeaderInfoRvGroupInfo.apply {
             adapter = leaderGroupInfoHeaderAdapter
             itemAnimator = null
-            addItemDecoration(VerticalSpaceItemDecoration(24.dpToPx(this.context)))
         }
     }
 

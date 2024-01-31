@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.moidot.moidot.data.remote.response.ResponseGroupInfo
 import com.moidot.moidot.databinding.ItemGroupInfoBinding
+import com.moidot.moidot.util.addVerticalMargin
 
 class LeaderGroupInfoAdapter : RecyclerView.Adapter<LeaderGroupInfoAdapter.LeaderGroupInfoViewHolder>() {
 
@@ -32,6 +33,7 @@ class LeaderGroupInfoAdapter : RecyclerView.Adapter<LeaderGroupInfoAdapter.Leade
     override fun getItemCount(): Int = members.size
 
     override fun onBindViewHolder(holder: LeaderGroupInfoViewHolder, position: Int) {
+        addVerticalMargin(holder.itemView, position, itemCount, 8)
         holder.bind(members[position])
         holder.setRemoveView()
     }
