@@ -1,6 +1,7 @@
 package com.moidot.moidot.ui.main.group.space.leader.info.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ import com.moidot.moidot.util.dpToPx
 
 class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderAdapter.LeaderGroupInfoHeaderViewHolder>() {
 
+    private var removeActivateFlag = false
     private var participantsByRegion = listOf<ResponseGroupInfo.Data.ParticipantsByRegion>()
 
     class LeaderGroupInfoHeaderViewHolder(private val binding: ItemGroupInfoHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -18,11 +20,13 @@ class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderA
             binding.data = data
         }
 
-        fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?) {
+        fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?, removeActivateFlag:Boolean) {
             members?.let {
                 val leaderGroupInfoAdapter = LeaderGroupInfoAdapter().apply {
                     this.members = it.participations
+                    setRemoveFlag(removeActivateFlag)
                 }
+                Log.d("kite", removeActivateFlag.toString())
                 binding.itemGroupInfoHeaderRvGroupInfo.apply {
                     adapter = leaderGroupInfoAdapter
                     itemAnimator = null
@@ -41,12 +45,18 @@ class LeaderGroupInfoHeaderAdapter : RecyclerView.Adapter<LeaderGroupInfoHeaderA
 
     override fun onBindViewHolder(holder: LeaderGroupInfoHeaderViewHolder, position: Int) {
         holder.bind(participantsByRegion[position])
-        holder.initGroupInfoAdapter(participantsByRegion[position])
+        holder.initGroupInfoAdapter(participantsByRegion[position], removeActivateFlag)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateItems(items:List<ResponseGroupInfo.Data.ParticipantsByRegion>) {
+    fun updateItems(items: List<ResponseGroupInfo.Data.ParticipantsByRegion>) {
         participantsByRegion = items
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setRemoveMode(flag: Boolean) {
+        removeActivateFlag = flag
         notifyDataSetChanged()
     }
 

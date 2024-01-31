@@ -88,12 +88,14 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     // 모임원 내보내기 뷰 활성화
     fun activateMemberRemovalView() {
         binding.fgLeaderInfoContainerMemberRemoveExit.isVisible = true
+        leaderGroupInfoHeaderAdapter.setRemoveMode(ACTIVATE_FLAG)
         setViewTransparencyAndDisable(ACTIVATE_FLAG)
     }
 
     // 모임원 내보내기 뷰 비활성화
     fun inActiveMemberRemovalView() {
         binding.fgLeaderInfoContainerMemberRemoveExit.isVisible = false
+        leaderGroupInfoHeaderAdapter.setRemoveMode(INACTIVATE_FLAG)
         setViewTransparencyAndDisable(INACTIVATE_FLAG)
     }
 
