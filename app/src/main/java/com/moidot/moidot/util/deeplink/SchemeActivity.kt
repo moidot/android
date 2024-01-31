@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ACCESS_TOKEN
-import com.moidot.moidot.ui.main.MainActivity
+import com.moidot.moidot.presentation.main.MainActivity
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.Constant.SCHEME_URL_STRING

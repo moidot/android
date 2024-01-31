@@ -8,11 +8,11 @@
 
         <variable
             name="fragment"
-            type="com.moidot.moidot.ui.main.group.join.create.view.InputLeaderInfoFragment" />
+            type="com.moidot.moidot.presentation.main.group.join.create.view.InputLeaderInfoFragment" />
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.ui.main.group.join.create.viewmodel.CreateGroupViewModel" />
+            type="com.moidot.moidot.presentation.main.group.join.create.viewmodel.CreateGroupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -6,7 +6,7 @@
 
         <variable
             name="activity"
-            type="com.moidot.moidot.ui.main.group.space.leader.LeaderSpaceActivity" />
+            type="com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

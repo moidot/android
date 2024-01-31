@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onboardFirstFragment"
-        android:name="com.moidot.moidot.ui.onboard.view.OnboardFirstFragment"
+        android:name="com.moidot.moidot.presentation.onboard.view.OnboardFirstFragment"
         android:label="fragment_onboard_first"
         tools:layout="@layout/fragment_onboard_first">
         <action
@@ -18,6 +18,6 @@
     <fragment
         android:id="@+id/onboardSecondFragment"
         android:label="fragment_onboard_second"
-        android:name="com.moidot.moidot.ui.onboard.view.OnboardSecondFragment"
+        android:name="com.moidot.moidot.presentation.onboard.view.OnboardSecondFragment"
         tools:layout="@layout/fragment_onboard_second" />
 </navigation>

@@ -8,7 +8,7 @@ import com.moidot.moidot.data.api.AuthService
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ACCESS_TOKEN
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ONBOARD_STATE
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.REFRESH_TOKEN
-import com.moidot.moidot.ui.sign.view.SignInActivity
+import com.moidot.moidot.presentation.sign.view.SignInActivity
 import com.moidot.moidot.util.Constant.REFRESH_DONE_STATE
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking

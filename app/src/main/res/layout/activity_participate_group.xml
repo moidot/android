@@ -8,11 +8,11 @@
 
         <variable
             name="activity"
-            type="com.moidot.moidot.ui.main.group.join.participate.view.ParticipateGroupActivity" />
+            type="com.moidot.moidot.presentation.main.group.join.participate.view.ParticipateGroupActivity" />
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.ui.main.group.join.participate.viewmodel.ParticipateGroupViewModel" />
+            type="com.moidot.moidot.presentation.main.group.join.participate.viewmodel.ParticipateGroupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
