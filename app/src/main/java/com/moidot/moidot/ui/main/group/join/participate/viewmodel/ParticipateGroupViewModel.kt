@@ -1,5 +1,6 @@
 package com.moidot.moidot.ui.main.group.join.participate.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -124,11 +125,13 @@ class ParticipateGroupViewModel @Inject constructor(private val groupRepository:
     fun checkNickNameDuplicate() {
         viewModelScope.launch {
             groupRepository.checkNicknameDuplication(groupId.value!!, nickname.value!!).onSuccess {
-                if (it.data.duplicated) {
-                    _nicknameDuplicated.value = true
+                if (it.code == 0) {
+                    if (it.data.duplicated) { _nicknameDuplicated.value = true } else { participateGroup() }
                 } else {
-                    participateGroup()
+                    _showToastEvent.setValue(it.message.toString())
                 }
+            }.onFailure {
+                _showToastEvent.setValue(it.message.toString())
             }
         }
     }
@@ -140,8 +143,7 @@ class ParticipateGroupViewModel @Inject constructor(private val groupRepository:
                 if (it.code == 0) {
                     _responsePostParticipateGroup.value = it
                     _isParticipateGroupSuccess.value = true
-                }
-                else {
+                } else {
                     _showToastEvent.setValue(it.message.toString())
                 }
             }.onFailure {
