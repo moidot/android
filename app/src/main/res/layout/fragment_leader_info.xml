@@ -87,6 +87,7 @@
                     android:layout_marginTop="16dp"
                     android:background="@color/red50"
                     app:cardCornerRadius="8dp"
+                    android:onClick="@{() -> fragment.activateMemberRemovalView()}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fg_leader_info_container_info"
                     app:strokeWidth="0dp">
@@ -122,6 +123,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/fg_leader_info_container_info_edit_my"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
@@ -175,8 +177,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="24dp"
-                android:text="@string/space_info_delete_space"
                 android:onClick="@{() -> fragment.showGroupDeleteDialog()}"
+                android:text="@string/space_info_delete_space"
                 android:textColor="@color/gray400"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -272,6 +274,30 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fg_leader_info_container_member_remove_exit"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/fg_leader_info_container_bottom_fixed">
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/btn_main"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:onClick="@{() -> fragment.inActiveMemberRemovalView()}"
+                android:text="@string/space_leader_info_member_remove_exit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

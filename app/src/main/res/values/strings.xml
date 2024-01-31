@@ -121,6 +121,9 @@
     <string name="space_info_copy_url">URL 복사하기</string>
     <string name="space_info_share_with_kakao">카카오톡 공유하기</string>
 
+    <!--Space - InfoFragment - Leader -->
+    <string name="space_leader_info_member_remove_exit">내보내기 모드 나가기</string>
+
     <!--Space - InfoFragment - Member -->
     <string name="space_member_info_dialog_title">정말 ‘%s’ 에서 나가시겠어요?</string>
     <string name="space_member_info_dialog_content">모이닷 스페이스를 나가게 되면 입력하신 정보가 삭제되고 스페이스 리스트에서 조회가 불가능합니다.</string>
