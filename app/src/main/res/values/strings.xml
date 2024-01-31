@@ -61,6 +61,7 @@
     <string name="onboard_second_content_vote_place">추천된 장소 중에서도 고민된다면?\n장소 투표를 진행하여 모임장소를 확정해보세요!</string>
 
     <!-- SignInActivity -->
+    <string name="sign_in_re_sign_in_info_msg">접속한지 오래되어 자동 로그아웃이 되었어요\n다시 로그인해주세요</string>
     <string name="sign_in_kakao_btn">카카오로 시작하기</string>
     <string name="sign_in_naver_btn">네이버로 시작하기</string>
     <string name="sign_in_google_btn">Google로 시작하기</string>

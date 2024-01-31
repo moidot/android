@@ -9,6 +9,7 @@ import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Comp
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ONBOARD_STATE
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.REFRESH_TOKEN
 import com.moidot.moidot.ui.sign.view.SignInActivity
+import com.moidot.moidot.util.Constant.REFRESH_DONE_STATE
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
@@ -48,6 +49,7 @@ class TokenAuthenticator @Inject constructor(
         sharedPreferences.edit().putBoolean(ONBOARD_STATE, true).apply() // 온보딩 읽음 처리 유지
         Intent(context, SignInActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            this.putExtra(REFRESH_DONE_STATE, true)
             context.startActivity(this)
         }
     }

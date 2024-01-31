@@ -7,21 +7,40 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         android:paddingTop="20dp">
 
-        <TextView
-            android:id="@+id/custom_snack_bar_tv_msg"
-            style="@style/b2_med_14"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_custom_snackbar"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="8dp"
-            android:textColor="@color/white"
-            tools:text="장소를 즐겨찾기에 저장했어요!" />
-    </LinearLayout>
+            android:background="@drawable/bg_custom_snackbar">
+
+            <TextView
+                android:id="@+id/custom_snack_bar_tv_msg"
+                style="@style/b2_med_14"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/custom_snack_bar_iv_exit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="접속한지 오래되어 자동 로그아웃이 되었어요 다시 로그인해주세요" />
+
+            <ImageView
+                android:id="@+id/custom_snack_bar_iv_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_snackbar_exit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

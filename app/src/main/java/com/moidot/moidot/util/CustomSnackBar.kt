@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.moidot.moidot.databinding.CustomSnackBarBinding
 
@@ -23,6 +24,7 @@ object CustomSnackBar {
         val binding = CustomSnackBarBinding.inflate(layoutInflater, null, false)
 
         binding.customSnackBarTvMsg.text = message
+        binding.customSnackBarIvExit.setOnClickListener { binding.root.isVisible = false }
         setupLayoutParams(snackBar)
         setupSnackBarLayout(snackBar, binding.root)
     }
