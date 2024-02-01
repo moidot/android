@@ -13,4 +13,6 @@ interface GroupInfoRemoteDataSource {
     suspend fun deleteParticipateGroup(participateId: Int): Result<ResponseDeleteParticipateGroup>
 
     suspend fun removeMember(participateId: Int): Result<BaseResponse>
+
+    suspend fun editGroupName(groupId: Int, groupName:String): Result<BaseResponse>
 }

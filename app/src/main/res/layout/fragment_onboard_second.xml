@@ -6,11 +6,11 @@
 
         <variable
             name="activity"
-            type="com.moidot.moidot.ui.onboard.view.OnboardActivity" />
+            type="com.moidot.moidot.presentation.onboard.view.OnboardActivity" />
 
         <variable
             name="fragment"
-            type="com.moidot.moidot.ui.onboard.view.OnboardSecondFragment" />
+            type="com.moidot.moidot.presentation.onboard.view.OnboardSecondFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

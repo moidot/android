@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.moidot.moidot.presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.main.group.space.leader.info.edit.viewmodel.EditGroupNameViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/edit_group_name_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> activity.finish()}"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="16dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/edit_group_name_tv_title"
+            style="@style/h1_bold_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/edit_group_name_new_group_name_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_group_name_iv_back" />
+
+        <TextView
+            android:id="@+id/edit_group_name_tv_content"
+            style="@style/b2_reg_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:bufferType="spannable"
+            android:textColor="@color/gray400"
+            app:layout_constraintStart_toStartOf="@id/edit_group_name_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/edit_group_name_tv_title"
+            tools:text="원래 이름은 모이닷 팀 프로젝트 였어요!" />
+
+        <TextView
+            android:id="@+id/edit_group_name_tv_group_name_title"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="@string/input_group_name"
+            android:textColor="@{viewModel.isGroupNameFieldActive() ? @color/orange500 : @color/gray800}"
+            app:layout_constraintStart_toStartOf="@id/edit_group_name_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/edit_group_name_tv_content" />
+
+        <TextView
+            android:id="@+id/edit_group_name_tv_group_name_cnt"
+            style="@style/c1_reg_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="@{@string/input_group_name_input_cnt(viewModel.groupName.length)}"
+            android:textColor="@color/gray400"
+            app:layout_constraintBottom_toBottomOf="@id/edit_group_name_tv_group_name_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/edit_group_name_tv_group_name_title" />
+
+        <EditText
+            android:id="@+id/edit_group_name_etv_group_name"
+            style="@style/c1_reg_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@{viewModel.isGroupNameFieldActive() ? @drawable/bg_input_info_active : @drawable/bg_input_info_normal}"
+            android:hint="@string/input_group_name_input_hint"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="13dp"
+            android:textColor="@color/gray800"
+            android:textColorHint="@color/gray400"
+            app:layout_constraintEnd_toEndOf="@id/edit_group_name_tv_group_name_cnt"
+            app:layout_constraintStart_toStartOf="@id/edit_group_name_tv_group_name_title"
+            app:layout_constraintTop_toBottomOf="@id/edit_group_name_tv_group_name_title"
+            bind:InputEditTextFieldActive="@{viewModel.groupName.length()}" />
+
+        <TextView
+            android:id="@+id/edit_group_name_tv_group_name_error"
+            style="@style/c2_med_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{viewModel.groupNameErrorMsg}"
+            android:textColor="@color/red500"
+            app:layout_constraintStart_toStartOf="@id/edit_group_name_etv_group_name"
+            app:layout_constraintTop_toBottomOf="@id/edit_group_name_etv_group_name"
+            tools:text="특수문자로만 이루어져서는 안됩니다." />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/edit_group_name_btn_next"
+            style="@style/btn_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="24dp"
+            android:enabled="@{viewModel.isGroupInfoNextBtnActive()}"
+            android:onClick="@{() -> activity.editGroupName()}"
+            android:text="@string/all_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

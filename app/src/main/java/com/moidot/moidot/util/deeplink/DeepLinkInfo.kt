@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.annotation.StringRes
 import com.moidot.moidot.R
-import com.moidot.moidot.ui.main.MainActivity
-import com.moidot.moidot.ui.main.group.join.participate.view.ParticipateGroupActivity
-import com.moidot.moidot.ui.sign.view.SignInActivity
+import com.moidot.moidot.presentation.main.MainActivity
+import com.moidot.moidot.presentation.main.group.join.participate.view.ParticipateGroupActivity
+import com.moidot.moidot.presentation.sign.view.SignInActivity
 
 enum class DeepLinkInfo(@StringRes val hostStringResId: Int) {
 

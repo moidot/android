@@ -37,7 +37,7 @@
         </activity>
 
         <activity
-            android:name=".ui.splash.view.SplashActivity"
+            android:name=".presentation.splash.view.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -60,33 +60,36 @@
         </activity>
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
         </activity>
 
         <activity
-            android:name=".ui.onboard.view.OnboardActivity"
+            android:name=".presentation.onboard.view.OnboardActivity"
             android:exported="false" />
 
         <activity
-            android:name=".ui.sign.view.SignInActivity"
+            android:name=".presentation.sign.view.SignInActivity"
             android:exported="false" />
 
         <activity
-            android:name=".ui.main.group.join.create.view.CreateGroupActivity"
+            android:name=".presentation.main.group.join.create.view.CreateGroupActivity"
             android:exported="false" />
 
         <activity
-            android:name=".ui.main.group.join.participate.view.ParticipateGroupActivity"
+            android:name=".presentation.main.group.join.participate.view.ParticipateGroupActivity"
             android:exported="false" />
 
         <activity
-            android:name=".ui.main.group.space.leader.LeaderSpaceActivity"
+            android:name=".presentation.main.group.space.leader.LeaderSpaceActivity"
             android:exported="false" />
 
+        <activity android:name=".presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity"
+            android:exported="false"/>
+
         <activity
-            android:name=".ui.main.group.space.member.MemberSpaceActivity"
+            android:name=".presentation.main.group.space.member.MemberSpaceActivity"
             android:exported="false" />
     </application>
 

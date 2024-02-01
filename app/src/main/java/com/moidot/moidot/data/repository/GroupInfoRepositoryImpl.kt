@@ -23,4 +23,8 @@ class GroupInfoRepositoryImpl @Inject constructor(private val groupInfoRemoteDat
     override suspend fun deleteParticipateGroup(participateId: Int): Result<ResponseDeleteParticipateGroup> {
         return groupInfoRemoteDataSource.deleteParticipateGroup(participateId)
     }
+
+    override suspend fun editGroupName(groupId: Int, groupName: String): Result<BaseResponse> {
+       return groupInfoRemoteDataSource.editGroupName(groupId, groupName)
+    }
 }

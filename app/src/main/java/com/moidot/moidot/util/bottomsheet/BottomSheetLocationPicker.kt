@@ -13,9 +13,9 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.local.toPlaceEntity
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
-import com.moidot.moidot.ui.base.BaseBottomSheetDialogFragment
-import com.moidot.moidot.ui.main.group.join.create.view.CreateGroupActivity
-import com.moidot.moidot.ui.main.group.join.participate.view.ParticipateGroupActivity
+import com.moidot.moidot.presentation.base.BaseBottomSheetDialogFragment
+import com.moidot.moidot.presentation.main.group.join.create.view.CreateGroupActivity
+import com.moidot.moidot.presentation.main.group.join.participate.view.ParticipateGroupActivity
 import com.moidot.moidot.util.CustomSnackBar
 import com.moidot.moidot.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint

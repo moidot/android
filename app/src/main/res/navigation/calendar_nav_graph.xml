@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.moidot.moidot.ui.main.calendar.CalendarFragment"
+        android:name="com.moidot.moidot.presentation.main.calendar.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
 
