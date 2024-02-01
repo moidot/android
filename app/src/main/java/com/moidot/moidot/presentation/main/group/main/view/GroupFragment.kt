@@ -122,7 +122,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
 
     private fun setupGroupRecyclerView() {
         viewModel.myGroupList.observe(viewLifecycleOwner) {
-            myGroupAdapter.submitList(it)
+            myGroupAdapter.updateItems(it)
             if (it.isEmpty()) {
                 binding.fgGroupCvContainerGroupEmpty.isVisible = true
                 binding.fgGroupClContainerGroupExist.isVisible = false
