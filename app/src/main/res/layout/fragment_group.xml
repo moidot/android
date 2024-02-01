@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="fragment"
             type="com.moidot.moidot.presentation.main.group.main.view.GroupFragment" />
@@ -139,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
-                android:visibility="gone"
+                android:visibility="@{viewModel.isGroupListEmpty()  ? View.VISIBLE : View.GONE}"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:strokeWidth="0dp">
@@ -190,6 +189,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fg_group_cl_container_group_exist"
+                android:visibility="@{viewModel.isGroupListEmpty() ? View.GONE : View.VISIBLE}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

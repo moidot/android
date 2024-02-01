@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -110,6 +111,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     private fun setupObservers() {
         setupCurrentFilterTxt()
         setupGroupRecyclerView()
+        setupToastEventObserver()
     }
 
     private fun setupCurrentFilterTxt() {
@@ -128,6 +130,12 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
                 binding.fgGroupCvContainerGroupEmpty.isVisible = false
                 binding.fgGroupClContainerGroupExist.isVisible = true
             }
+        }
+    }
+
+    private fun setupToastEventObserver() {
+        viewModel.showToastEvent.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
     }
 
