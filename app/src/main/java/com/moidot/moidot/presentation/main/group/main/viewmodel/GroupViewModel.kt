@@ -40,7 +40,10 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
                     isGroupListEmpty.value = it.data.isEmpty()
                 } else _showToastEvent.setValue(it.message.toString())
             }.onFailure {
-                _showToastEvent.setValue(it.message.toString())
+                // 사용자가 가장 먼저 접하는 화면이 모임탭 이기 때문에 여기서 토큰 토스트 메세지는 막아준다.
+                if (!it.message.toString().contains("토큰")) {
+                    _showToastEvent.setValue(it.message.toString())
+                }
             }
         }
     }
