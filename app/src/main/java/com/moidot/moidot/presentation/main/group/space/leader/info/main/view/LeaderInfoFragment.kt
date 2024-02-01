@@ -89,6 +89,7 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     // 모임원 내보내기 뷰 활성화
     fun activateMemberRemovalView() {
         binding.fgLeaderInfoContainerMemberRemoveExit.isVisible = true
+        binding.fgLeaderInfoContainerShareInfo.isVisible = false
         leaderGroupInfoHeaderAdapter.setRemoveMode(ACTIVATE_FLAG)
         setViewTransparencyAndDisable(ACTIVATE_FLAG)
     }
@@ -96,6 +97,7 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     // 모임원 내보내기 뷰 비활성화
     fun inActiveMemberRemovalView() {
         binding.fgLeaderInfoContainerMemberRemoveExit.isVisible = false
+        binding.fgLeaderInfoContainerShareInfo.isVisible = true
         leaderGroupInfoHeaderAdapter.setRemoveMode(INACTIVATE_FLAG)
         setViewTransparencyAndDisable(INACTIVATE_FLAG)
     }
