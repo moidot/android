@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
@@ -123,13 +122,6 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     private fun setupGroupRecyclerView() {
         viewModel.myGroupList.observe(viewLifecycleOwner) {
             myGroupAdapter.updateItems(it)
-            if (it.isEmpty()) {
-                binding.fgGroupCvContainerGroupEmpty.isVisible = true
-                binding.fgGroupClContainerGroupExist.isVisible = false
-            } else {
-                binding.fgGroupCvContainerGroupEmpty.isVisible = false
-                binding.fgGroupClContainerGroupExist.isVisible = true
-            }
         }
     }
 
