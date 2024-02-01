@@ -6,6 +6,7 @@
     <string name="all_next">다음</string>
     <string name="all_cancel">취소하기</string>
     <string name="all_remove">내보내기</string>
+    <string name="all_out">나가기</string>
 
     <!-- error -->
     <string name="network_error_msg">네트워크 통신오류!</string>
