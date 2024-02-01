@@ -152,13 +152,13 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     }
 
     // 모임 삭제
-    fun showGroupDeleteDialog() { // TODO 모임 삭제 멘트 수정 예정
+    fun showGroupDeleteDialog() {
         PopupTwoButtonDialog(
             requireContext(),
-            getString(R.string.space_member_info_dialog_title).format(viewModel.groupName.value),
-            getString(R.string.space_member_info_dialog_content),
-            getString(R.string.space_member_info_dialog_btn)
-        ) { viewModel.deleteGroup(groupId) }.show() // TODO 자신의 정보 받아오기
+            getString(R.string.space_leader_info_dialog_delete_title),
+            getString(R.string.space_leader_info_dialog_delete_content),
+            getString(R.string.space_leader_info_dialog_delete_btn)
+        ) { viewModel.deleteGroup(groupId) }.show()
     }
 
     companion object {
