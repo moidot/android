@@ -37,18 +37,12 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_bottom_sheet"
             app:behavior_hideable="false"
-            app:behavior_peekHeight="44dp"
+            app:behavior_peekHeight="48dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-            <ImageView
-                android:id="@+id/fg_leader_default_place_handle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="8dp"
-                android:src="@drawable/ic_bottom_sheet_handle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <include
+                android:id="@+id/include_bottom_leader_default_place"
+                layout="@layout/bottom_leader_default_place" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
