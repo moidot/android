@@ -1,7 +1,6 @@
 package com.moidot.moidot.presentation.main.group.space.leader.place.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -25,7 +24,12 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
 
     /** slideOffset: 0은 완전히 닫힌 상태 1은 완전 펼쳐진 상태이다. slideOffset가
      * 절반 높이인 0.5보다 작거나 같을 때는 (바텀시트의 높이 * slideOffset) 와 1의 값 중 큰 값을 높이로 설정해준다.
-     * 절반 보다 클 때는 바텀시트의 절반 높이 만큼을 높이로 설정해준다.*/
+     * 절반 보다 클 때는 바텀시트의 절반 높이 만큼을 높이로 설정해준다.
+     *
+     * 중간 높이 만큼 펼쳐진 상태를 얻기 위해선 behavior_fitToContents 를 사용한다.
+     * 이때, 중간 높이는 퍼센트로 지정이 가능하다.
+     * 따라서, STATE_HALF_EXPANDED 가 중간 높이에 도달했을 때 컨테이너 뷰를 펼쳐주는 조건을 넣어주었다.
+     * */
     private fun initBottomSheetBehavior() {
         val emptyMemberContainerView = binding.includeBottomLeaderDefaultPlace.bottomLeaderDefaultPlaceContainerEmptyMemeber
         BottomSheetBehavior.from(binding.fgLeaderDefaultPlaceBottomSheet).apply {
