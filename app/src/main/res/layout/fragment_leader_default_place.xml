@@ -10,7 +10,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/orange50">
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             <View
                 android:id="@+id/fg_leader_default_place_view_interaction"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="1dp"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -47,8 +47,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fg_leader_default_place_bottom_sheet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/bg_bottom_sheet"
+            app:behavior_expandedOffset="80dp"
+            app:behavior_fitToContents="false"
+            app:behavior_halfExpandedRatio="0.3"
             app:behavior_hideable="false"
             app:behavior_peekHeight="48dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
