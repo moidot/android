@@ -1,16 +1,21 @@
 package com.moidot.moidot.presentation.main.group.space.leader.place.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
-import com.kakao.vectormap.MapLifeCycleCallback
+import com.kakao.vectormap.LatLng
+import com.kakao.vectormap.label.LabelLayer
+import com.kakao.vectormap.label.LabelLayerOptions
+import com.kakao.vectormap.label.LabelOptions
+import com.kakao.vectormap.label.LabelStyle
+import com.kakao.vectormap.label.OrderingType
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderDefaultPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.util.MarkerManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.max
 
@@ -19,6 +24,8 @@ import kotlin.math.max
 class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBinding>(R.layout.fragment_leader_default_place) {
 
     private lateinit var kakaoMap: KakaoMap
+    private lateinit var labelLayer: LabelLayer
+    private lateinit var mapManager: MarkerManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,23 +34,32 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
     }
 
     private fun initMapView() {
-        binding.fgLeaderDefaultPlaceMapView.start(object : MapLifeCycleCallback() {
-            override fun onMapDestroy() {
-                Log.d("kite", "지도 종료")
-                // 지도 API 가 정상적으로 종료될 때 호출됨
+        mapManager = MarkerManager(requireContext())
+        binding.fgLeaderDefaultPlaceMapView.start(object : KakaoMapReadyCallback() {
+            override fun getPosition(): LatLng { // TODO 모임장의 위치 정보
+                 return LatLng.from(37.4005, 127.1101)
             }
 
-            override fun onMapError(error: Exception) {
-                Log.d("kite", error.toString())
-                // 인증 실패 및 지도 사용 중 에러가 발생할 때 호출됨
-            }
-        }, object : KakaoMapReadyCallback() {
             override fun onMapReady(map: KakaoMap) {
-                // 인증 후 API 가 정상적으로 실행될 때 호출됨
                 kakaoMap = map
+                addLeaderInfoMarker()
             }
         })
+    }
 
+    private fun addLeaderInfoMarker() {
+        labelLayer = kakaoMap.labelManager!!.addLayer(
+            LabelLayerOptions.from()
+                .setOrderingType(OrderingType.Rank)
+        )!!
+
+        labelLayer.addLabel(
+            LabelOptions.from( // TODO 모임장의 출발 위치
+                "default", LatLng.from(37.4005, 127.1101)
+            ).setStyles( // TODO 리더의 이름 정보
+                LabelStyle.from(mapManager.getDefaultPlaceMarker("정")).setApplyDpScale(false)
+            )
+        )
     }
 
     private fun initView() {
@@ -75,7 +91,6 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
                     val interactionView = binding.fgLeaderDefaultPlaceViewInteraction
                     interactionView.layoutParams = interactionView.layoutParams.apply {
                         height = if (slideOffset <= 0.5f) {
