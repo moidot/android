@@ -1,21 +1,49 @@
 package com.moidot.moidot.presentation.main.group.space.leader.place.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.kakao.vectormap.KakaoMap
+import com.kakao.vectormap.KakaoMapReadyCallback
+import com.kakao.vectormap.MapLifeCycleCallback
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderDefaultPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.max
 
+
 @AndroidEntryPoint
 class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBinding>(R.layout.fragment_leader_default_place) {
 
+    private lateinit var kakaoMap: KakaoMap
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initMapView()
         initView()
+    }
+
+    private fun initMapView() {
+        binding.fgLeaderDefaultPlaceMapView.start(object : MapLifeCycleCallback() {
+            override fun onMapDestroy() {
+                Log.d("kite", "지도 종료")
+                // 지도 API 가 정상적으로 종료될 때 호출됨
+            }
+
+            override fun onMapError(error: Exception) {
+                Log.d("kite", error.toString())
+                // 인증 실패 및 지도 사용 중 에러가 발생할 때 호출됨
+            }
+        }, object : KakaoMapReadyCallback() {
+            override fun onMapReady(map: KakaoMap) {
+                // 인증 후 API 가 정상적으로 실행될 때 호출됨
+                kakaoMap = map
+            }
+        })
+
     }
 
     private fun initView() {
@@ -36,8 +64,15 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     when (newState) {
-                        BottomSheetBehavior.STATE_EXPANDED -> { emptyMemberContainerView.isVisible = true }
-                        BottomSheetBehavior.STATE_HALF_EXPANDED -> { emptyMemberContainerView.isVisible = false }
+                        BottomSheetBehavior.STATE_EXPANDED -> {
+                            emptyMemberContainerView.isVisible = true
+                            kakaoMap.setViewport(binding.fgLeaderDefaultPlaceMapView.width, binding.fgLeaderDefaultPlaceMapView.height)
+                        }
+
+                        BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+                            emptyMemberContainerView.isVisible = false
+                            kakaoMap.setViewport(binding.fgLeaderDefaultPlaceMapView.width, binding.fgLeaderDefaultPlaceMapView.height)
+                        }
                     }
                 }
 
@@ -55,4 +90,5 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
             })
         }
     }
+
 }
