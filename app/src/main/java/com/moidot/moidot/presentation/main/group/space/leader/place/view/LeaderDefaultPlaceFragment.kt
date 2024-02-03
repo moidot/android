@@ -66,12 +66,10 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
                     when (newState) {
                         BottomSheetBehavior.STATE_EXPANDED -> {
                             emptyMemberContainerView.isVisible = true
-                            kakaoMap.setViewport(binding.fgLeaderDefaultPlaceMapView.width, binding.fgLeaderDefaultPlaceMapView.height)
                         }
 
                         BottomSheetBehavior.STATE_HALF_EXPANDED -> {
                             emptyMemberContainerView.isVisible = false
-                            kakaoMap.setViewport(binding.fgLeaderDefaultPlaceMapView.width, binding.fgLeaderDefaultPlaceMapView.height)
                         }
                     }
                 }
