@@ -20,7 +20,7 @@
             <com.kakao.vectormap.MapView
                 android:id="@+id/fg_leader_default_place_map_view"
                 android:layout_width="0dp"
-                android:layout_height="1000dp"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@id/fg_leader_default_place_view_interaction"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

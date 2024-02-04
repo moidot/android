@@ -10,7 +10,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentInputGroupInfoBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.join.create.viewmodel.CreateGroupViewModel
-import com.moidot.moidot.util.hideKeyboard
+import com.moidot.moidot.util.view.hideKeyboard
 
 class InputGroupInfoFragment : BaseFragment<FragmentInputGroupInfoBinding>(R.layout.fragment_input_group_info) {
 

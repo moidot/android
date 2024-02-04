@@ -22,7 +22,7 @@ import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.bottomsheet.BottomSheetLocationPicker
 import com.moidot.moidot.util.component.TransportationPickerComponent.Companion.TYPE_PERSONAL
 import com.moidot.moidot.util.component.TransportationPickerComponent.Companion.TYPE_PUBLIC
-import com.moidot.moidot.util.hideKeyboard
+import com.moidot.moidot.util.view.hideKeyboard
 
 class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.layout.fragment_input_leader_info) {
 

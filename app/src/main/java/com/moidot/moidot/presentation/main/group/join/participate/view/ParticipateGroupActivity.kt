@@ -19,7 +19,7 @@ import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.PermissionUtil
 import com.moidot.moidot.util.bottomsheet.BottomSheetLocationPicker
-import com.moidot.moidot.util.hideKeyboard
+import com.moidot.moidot.util.view.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

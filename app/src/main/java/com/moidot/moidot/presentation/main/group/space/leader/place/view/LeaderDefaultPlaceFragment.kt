@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.kakao.vectormap.GestureType
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -34,6 +35,7 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
     }
 
     private fun initMapView() {
+        // binding.fgLeaderDefaultPlaceMapView.layoutParams.height = getScreenHeight(requireContext())
         mapManager = MarkerManager(requireContext())
         binding.fgLeaderDefaultPlaceMapView.start(object : KakaoMapReadyCallback() {
             override fun getPosition(): LatLng { // TODO 모임장의 위치 정보
@@ -42,11 +44,18 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
 
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
+                disableGestures()
                 addLeaderInfoMarker()
             }
         })
     }
 
+    // 지도 터치 막기
+    private fun disableGestures() {
+        GestureType.values().forEach { kakaoMap.setGestureEnable(it, false) }
+    }
+
+    // 마커 추가
     private fun addLeaderInfoMarker() {
         labelLayer = kakaoMap.labelManager!!.addLayer(
             LabelLayerOptions.from()
@@ -75,6 +84,9 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
      * 따라서, STATE_HALF_EXPANDED 가 중간 높이에 도달했을 때 컨테이너 뷰를 펼쳐주는 조건을 넣어주었다.
      * */
     private fun initBottomSheetBehavior() {
+        val interactionView = binding.fgLeaderDefaultPlaceViewInteraction
+        // val gradientView = binding.fgLeaderDefaultPlaceGradientView
+
         val emptyMemberContainerView = binding.includeBottomLeaderDefaultPlace.bottomLeaderDefaultPlaceContainerEmptyMemeber
         BottomSheetBehavior.from(binding.fgLeaderDefaultPlaceBottomSheet).apply {
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
@@ -82,16 +94,17 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
                     when (newState) {
                         BottomSheetBehavior.STATE_EXPANDED -> {
                             emptyMemberContainerView.isVisible = true
+                            kakaoMap.setViewport(binding.fgLeaderDefaultPlaceMapView.width, binding.fgLeaderDefaultPlaceMapView.height)
                         }
 
                         BottomSheetBehavior.STATE_HALF_EXPANDED -> {
                             emptyMemberContainerView.isVisible = false
+                            kakaoMap.setViewport(binding.fgLeaderDefaultPlaceMapView.width, binding.fgLeaderDefaultPlaceMapView.height)
                         }
                     }
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    val interactionView = binding.fgLeaderDefaultPlaceViewInteraction
                     interactionView.layoutParams = interactionView.layoutParams.apply {
                         height = if (slideOffset <= 0.5f) {
                             max((bottomSheet.height * slideOffset).toInt(), 1)

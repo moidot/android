@@ -17,7 +17,7 @@ import com.moidot.moidot.presentation.base.BaseBottomSheetDialogFragment
 import com.moidot.moidot.presentation.main.group.join.create.view.CreateGroupActivity
 import com.moidot.moidot.presentation.main.group.join.participate.view.ParticipateGroupActivity
 import com.moidot.moidot.util.CustomSnackBar
-import com.moidot.moidot.util.hideKeyboard
+import com.moidot.moidot.util.view.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
