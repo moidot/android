@@ -40,11 +40,15 @@
             android:background="@drawable/bg_map_gradient"
             app:layout_anchor="@+id/fg_group_place_bottom_sheet" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/fg_group_place_bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="80dp"
             android:background="@drawable/bg_bottom_sheet"
+            android:fillViewport="true"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="28dp"
             app:behavior_expandedOffset="80dp"
             app:behavior_fitToContents="false"
             app:behavior_halfExpandedRatio="0.3"
@@ -52,11 +56,46 @@
             app:behavior_peekHeight="48dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-            <include
-                android:id="@+id/include_bottom_group_place"
-                layout="@layout/bottom_group_place" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/bottom_group_place_iv_place_handle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_bottom_sheet_handle"
+                    app:layout_constraintBottom_toTopOf="@id/bottom_group_place_rv_group_info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bottom_group_place_rv_group_info"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@color/red500"
+                    app:layout_constraintBottom_toTopOf="@id/bottom_group_place_btn_detail_search"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bottom_group_place_iv_place_handle" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bottom_group_place_btn_detail_search"
+                    style="@style/btn_main"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:bufferType="spannable"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bottom_group_place_rv_group_info"
+                    tools:text="성신여대입구역 상세 장소 검색하기" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

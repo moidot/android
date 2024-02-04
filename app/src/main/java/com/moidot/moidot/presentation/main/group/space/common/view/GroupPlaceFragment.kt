@@ -48,6 +48,7 @@ class GroupPlaceFragment: BaseFragment<FragmentGroupPlaceBinding>(R.layout.fragm
     private fun initBottomSheetBehavior() {
         val interactionView = binding.fgGroupPlaceViewInteraction
         BottomSheetBehavior.from(binding.fgGroupPlaceBottomSheet).apply {
+            state = BottomSheetBehavior.STATE_HALF_EXPANDED // 초기값 고정
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {}
 
