@@ -17,6 +17,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderDefaultPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.util.MarkerManager
+import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.max
 
@@ -35,7 +36,7 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
     }
 
     private fun initMapView() {
-        // binding.fgLeaderDefaultPlaceMapView.layoutParams.height = getScreenHeight(requireContext())
+        binding.fgLeaderDefaultPlaceMapView.layoutParams.height = getScreenHeight(requireContext())
         mapManager = MarkerManager(requireContext())
         binding.fgLeaderDefaultPlaceMapView.start(object : KakaoMapReadyCallback() {
             override fun getPosition(): LatLng { // TODO 모임장의 위치 정보
@@ -85,8 +86,6 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
      * */
     private fun initBottomSheetBehavior() {
         val interactionView = binding.fgLeaderDefaultPlaceViewInteraction
-        // val gradientView = binding.fgLeaderDefaultPlaceGradientView
-
         val emptyMemberContainerView = binding.includeBottomLeaderDefaultPlace.bottomLeaderDefaultPlaceContainerEmptyMemeber
         BottomSheetBehavior.from(binding.fgLeaderDefaultPlaceBottomSheet).apply {
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
@@ -94,12 +93,10 @@ class LeaderDefaultPlaceFragment : BaseFragment<FragmentLeaderDefaultPlaceBindin
                     when (newState) {
                         BottomSheetBehavior.STATE_EXPANDED -> {
                             emptyMemberContainerView.isVisible = true
-                            kakaoMap.setViewport(binding.fgLeaderDefaultPlaceMapView.width, binding.fgLeaderDefaultPlaceMapView.height)
                         }
 
                         BottomSheetBehavior.STATE_HALF_EXPANDED -> {
                             emptyMemberContainerView.isVisible = false
-                            kakaoMap.setViewport(binding.fgLeaderDefaultPlaceMapView.width, binding.fgLeaderDefaultPlaceMapView.height)
                         }
                     }
                 }

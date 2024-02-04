@@ -24,24 +24,21 @@
                 app:layout_constraintBottom_toTopOf="@id/fg_leader_default_place_view_interaction"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <View
-                android:id="@+id/fg_leader_default_place_gradient_view"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:background="@drawable/bg_map_gradient"
-                app:layout_constraintBottom_toBottomOf="@id/fg_leader_default_place_map_view"
-                app:layout_constraintEnd_toEndOf="@id/fg_leader_default_place_map_view"
-                app:layout_constraintStart_toStartOf="@id/fg_leader_default_place_map_view" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/fg_leader_default_place_view_interaction"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 app:layout_constraintBottom_toBottomOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/fg_leader_default_place_gradient_view"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:background="@drawable/bg_map_gradient"
+            app:layout_anchor="@+id/fg_leader_default_place_bottom_sheet" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fg_leader_default_place_bottom_sheet"
