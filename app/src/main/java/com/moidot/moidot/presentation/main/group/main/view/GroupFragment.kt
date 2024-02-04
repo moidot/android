@@ -20,7 +20,7 @@ import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.StatusBarColorUtil
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
-import com.moidot.moidot.util.hideKeyboard
+import com.moidot.moidot.util.view.hideKeyboard
 import com.moidot.moidot.util.popup.PopupPickerDialog
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -9,7 +9,7 @@ import android.view.Gravity
 import android.view.ViewGroup
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.PopupPickerDialogBinding
-import com.moidot.moidot.util.dpToPx
+import com.moidot.moidot.util.view.dpToPx
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

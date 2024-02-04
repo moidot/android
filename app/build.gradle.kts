@@ -96,6 +96,7 @@ dependencies {
     // Kakao
     implementation("com.kakao.sdk:v2-user:2.19.0") // 로그인
     implementation ("com.kakao.sdk:v2-share:2.19.0") // 메시지(카카오톡 공유)
+    implementation ("com.kakao.maps.open:android:2.6.0") // 지도
 
     // Naver
     implementation("com.navercorp.nid:oauth:5.9.0")

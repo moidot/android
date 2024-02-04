@@ -2,6 +2,7 @@ package com.moidot.moidot.util
 
 import android.view.View
 import android.view.ViewGroup
+import com.moidot.moidot.util.view.dpToPx
 
 /** 리사이클러뷰 아이템 마진을 설정하기 위해 만든 kt파일
  * onBindViewHolder에 선언해주면 된다.*/

@@ -1,4 +1,4 @@
-package com.moidot.moidot.util
+package com.moidot.moidot.util.view
 
 import android.content.Context
 import android.view.View

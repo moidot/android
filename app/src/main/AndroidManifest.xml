@@ -22,6 +22,11 @@
         android:theme="@style/Theme.Moidot"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.kakao.vectormap.APP_KEY"
+            android:value="${MANIFEST_KAKAO_NATIVE_APP_KEY}"/>
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -83,7 +88,7 @@
 
         <activity
             android:name=".presentation.main.group.space.leader.LeaderSpaceActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity android:name=".presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity"
             android:exported="false"/>

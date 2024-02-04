@@ -12,7 +12,7 @@ import com.moidot.moidot.presentation.main.group.space.leader.info.edit.viewmode
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.SpannableTxt
-import com.moidot.moidot.util.hideKeyboard
+import com.moidot.moidot.util.view.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
