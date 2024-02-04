@@ -2,6 +2,7 @@ package com.moidot.moidot.presentation.main.group.space.leader.place.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kakao.vectormap.GestureType
@@ -85,16 +86,19 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
      * */
     private fun initBottomSheetBehavior() {
         val interactionView = binding.fgLeaderPlaceViewInteraction
-        val emptyMemberContainerView = binding.includeBottomLeaderPlace.bottomLeaderPlaceContainerEmptyMemeber
+        val emptyMemberContainerView = binding.bottomLeaderPlaceContainerEmptyMemeber
         BottomSheetBehavior.from(binding.fgLeaderPlaceBottomSheet).apply {
+            state = BottomSheetBehavior.STATE_HALF_EXPANDED
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     when (newState) {
                         BottomSheetBehavior.STATE_EXPANDED -> {
+                            setExpandedConstraint()
                             emptyMemberContainerView.isVisible = true
                         }
 
                         BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+                            setHalfExpandedConstraint()
                             emptyMemberContainerView.isVisible = false
                         }
                     }
@@ -110,6 +114,20 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
                     }
                 }
             })
+        }
+    }
+
+    private fun setExpandedConstraint() {
+        (binding.bottomLeaderPlaceContainerShare.layoutParams as ConstraintLayout.LayoutParams).apply {
+            topToBottom = ConstraintLayout.LayoutParams.UNSET
+            bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
+        }
+    }
+
+    fun setHalfExpandedConstraint() {
+        (binding.bottomLeaderPlaceContainerShare.layoutParams as ConstraintLayout.LayoutParams).apply {
+            topToBottom = binding.bottomLeaderPlaceContainerInfo.id
+            bottomToBottom = ConstraintLayout.LayoutParams.UNSET
         }
     }
 
