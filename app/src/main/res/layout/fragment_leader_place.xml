@@ -53,8 +53,8 @@
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <include
-                android:id="@+id/include_bottom_leader_default_place"
-                layout="@layout/bottom_leader_default_place" />
+                android:id="@+id/include_bottom_leader_place"
+                layout="@layout/bottom_leader_place" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

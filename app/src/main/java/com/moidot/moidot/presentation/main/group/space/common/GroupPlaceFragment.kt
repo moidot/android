@@ -2,7 +2,6 @@ package com.moidot.moidot.presentation.main.group.space.common
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kakao.vectormap.GestureType
 import com.kakao.vectormap.KakaoMap
@@ -48,20 +47,9 @@ class GroupPlaceFragment: BaseFragment<FragmentGroupPlaceBinding>(R.layout.fragm
 
     private fun initBottomSheetBehavior() {
         val interactionView = binding.fgGroupPlaceViewInteraction
-        val emptyMemberContainerView = binding.includeBottomLeaderDefaultPlace.bottomLeaderDefaultPlaceContainerEmptyMemeber
         BottomSheetBehavior.from(binding.fgGroupPlaceBottomSheet).apply {
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when (newState) {
-                        BottomSheetBehavior.STATE_EXPANDED -> {
-                            emptyMemberContainerView.isVisible = true
-                        }
-
-                        BottomSheetBehavior.STATE_HALF_EXPANDED -> {
-                            emptyMemberContainerView.isVisible = false
-                        }
-                    }
-                }
+                override fun onStateChanged(bottomSheet: View, newState: Int) {}
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
                     interactionView.layoutParams = interactionView.layoutParams.apply {

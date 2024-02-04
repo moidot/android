@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_leader_place" />
 
     <fragment
+        android:id="@+id/groupPlaceFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.common.GroupPlaceFragment"
+        android:label="fragment_group_place"
+        tools:layout="@layout/fragment_group_place" />
+
+    <fragment
         android:id="@+id/leaderVoteFragment"
         android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.LeaderVoteFragment"
         android:label="fragment_leader_vote"

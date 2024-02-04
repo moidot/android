@@ -54,7 +54,7 @@ class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.ac
         binding.leaderSpaceTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> navController.navigate(R.id.leaderPlaceFragment)
+                    0 -> navController.navigate(R.id.groupPlaceFragment) // TODO 모임원 존재, 미존재에 따른 분기처리 예정
                     1 -> navController.navigate(R.id.leaderVoteFragment)
                     2 -> navController.navigate(R.id.leaderInfoFragment)
                 }

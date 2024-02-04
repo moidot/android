@@ -85,7 +85,7 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
      * */
     private fun initBottomSheetBehavior() {
         val interactionView = binding.fgLeaderPlaceViewInteraction
-        val emptyMemberContainerView = binding.includeBottomLeaderDefaultPlace.bottomLeaderDefaultPlaceContainerEmptyMemeber
+        val emptyMemberContainerView = binding.includeBottomLeaderPlace.bottomLeaderPlaceContainerEmptyMemeber
         BottomSheetBehavior.from(binding.fgLeaderPlaceBottomSheet).apply {
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
