@@ -2,12 +2,14 @@ package com.moidot.moidot.presentation.main.group.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
+import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.join.create.view.CreateGroupActivity
@@ -16,6 +18,7 @@ import com.moidot.moidot.presentation.main.group.main.adater.MyGroupAdapter
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceActivity
 import com.moidot.moidot.presentation.main.group.space.member.MemberSpaceActivity
 import com.moidot.moidot.util.Constant.GROUP_ID
+import com.moidot.moidot.util.Constant.GROUP_MEMBER_COUNT
 import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.StatusBarColorUtil
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
@@ -57,12 +60,15 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
         }
     }
 
-    private fun onGroupItemClickListener(isAdmin: Boolean, groupId: Int, groupName: String) {
-        val packageClass = if (isAdmin) LeaderSpaceActivity::class.java else MemberSpaceActivity::class.java
-        Intent(requireContext(), packageClass).apply {
-            this.putExtra(GROUP_ID, groupId)
-            this.putExtra(GROUP_NAME, groupName)
-            startActivity(this)
+    private fun onGroupItemClickListener(data: ResponseParticipateGroup.Data) {
+        data.apply {
+            val packageClass = if (isAdmin) LeaderSpaceActivity::class.java else MemberSpaceActivity::class.java
+            Intent(requireContext(), packageClass).apply {
+                this.putExtra(GROUP_ID, groupId)
+                this.putExtra(GROUP_NAME, groupName)
+                this.putExtra(GROUP_MEMBER_COUNT, groupParticipates)
+                startActivity(this)
+            }
         }
     }
 

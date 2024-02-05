@@ -9,13 +9,13 @@ import com.moidot.moidot.databinding.ItemMyGroupBinding
 import com.moidot.moidot.util.addVerticalMargin
 
 
-class MyGroupAdapter(private val onItemClickListener: (Boolean, Int, String) -> Unit) : RecyclerView.Adapter<MyGroupAdapter.MyGroupViewHolder>() {
+class MyGroupAdapter(private val onItemClickListener: (ResponseParticipateGroup.Data) -> Unit) : RecyclerView.Adapter<MyGroupAdapter.MyGroupViewHolder>() {
 
     private var groups: List<ResponseParticipateGroup.Data> = listOf()
 
     class MyGroupViewHolder(
         private val binding: ItemMyGroupBinding,
-        private val onItemClickListener: (Boolean, Int, String) -> Unit
+        private val onItemClickListener: (ResponseParticipateGroup.Data) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: ResponseParticipateGroup.Data) {
@@ -24,7 +24,8 @@ class MyGroupAdapter(private val onItemClickListener: (Boolean, Int, String) -> 
 
         fun invokeItemClickListener(data: ResponseParticipateGroup.Data) {
             binding.root.setOnClickListener {
-                onItemClickListener(data.isAdmin, data.groupId, data.groupName)
+                data.groupParticipates
+                onItemClickListener(data)
             }
         }
     }
