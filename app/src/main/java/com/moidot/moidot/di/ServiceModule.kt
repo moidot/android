@@ -2,6 +2,7 @@ package com.moidot.moidot.di
 
 import com.moidot.moidot.data.api.AuthService
 import com.moidot.moidot.data.api.GroupInfoService
+import com.moidot.moidot.data.api.GroupPlaceService
 import com.moidot.moidot.data.api.GroupService
 import com.moidot.moidot.data.api.LocationService
 import dagger.Module
@@ -9,6 +10,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -37,5 +39,11 @@ object ServiceModule {
     @Singleton
     fun provideGroupInfoService(retrofit: Retrofit): GroupInfoService {
         return retrofit.create(GroupInfoService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGroupPlaceService(retrofit: Retrofit): GroupPlaceService {
+        return retrofit.create(GroupPlaceService::class.java)
     }
 }
