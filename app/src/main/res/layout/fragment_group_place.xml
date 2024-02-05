@@ -33,6 +33,16 @@
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/fg_group_place_vp_recommend_location"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingTop="12dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/orange500"
+            app:layout_anchor="@+id/fg_group_place_map_view"
+            app:layout_anchorGravity="top" />
+
         <View
             android:id="@+id/fg_group_place_gradient_view"
             android:layout_width="wrap_content"
