@@ -1,15 +1,13 @@
 package com.moidot.moidot.presentation.main.group.space.leader
 
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityLeaderSpaceBinding
 import com.moidot.moidot.presentation.base.BaseActivity
-import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_MEMBER_COUNT
 import com.moidot.moidot.util.Constant.GROUP_NAME
@@ -18,26 +16,30 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.activity_leader_space) {
 
-    val groupId by lazy { intent.getIntExtra(GROUP_ID, 0) }
-    val groupParticipates by lazy { intent.getIntExtra(GROUP_MEMBER_COUNT, 1) }
-    var groupName: String? = null
-        get() {
-            if (field == null) {
-                field = intent.getStringExtra(GROUP_NAME)
-            }
-            return field
-        }
+    private val viewModel: LeaderSpaceViewModel by viewModels()
+
+    private val groupId by lazy { intent.getIntExtra(GROUP_ID, 0) }
+    private val groupParticipates by lazy { intent.getIntExtra(GROUP_MEMBER_COUNT, 1) }
+    private val groupName by lazy { intent.getStringExtra(GROUP_NAME) ?: "" }
 
     private val navController by lazy { findNavController(R.id.leader_space_fcv) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
+        setPrevData()
         initView()
     }
 
     private fun initBinding() {
         binding.activity = this
+        binding.viewModel = viewModel
+    }
+
+    private fun setPrevData() {
+        viewModel.setGroupId(groupId)
+        viewModel.setGroupName(groupName)
+        viewModel.setGroupParticipates(groupParticipates)
     }
 
     private fun initView() {
@@ -72,10 +74,4 @@ class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.ac
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
     }
-
-    // 그룹 정보 탭에서 정보가 수정될 것을 대비
-    fun changeGroupName(newGroupName: String) {
-        groupName = newGroupName
-    }
-
 }
