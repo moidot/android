@@ -7,11 +7,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.kakao.vectormap.GestureType
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
-import com.kakao.vectormap.camera.CameraUpdate
 import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.kakao.vectormap.label.LabelLayer
 import com.kakao.vectormap.label.LabelLayerOptions
@@ -33,6 +31,7 @@ import com.moidot.moidot.util.MarkerManager
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.max
+
 
 @AndroidEntryPoint
 class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.fragment_group_place) {
@@ -127,11 +126,13 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             val currentRegion = viewModel.bestRegions.value?.get(position)!! // 선택된 추천 지역 정보
             updateAdapterInfo(position, currentRegion) // rv, vp 정보 갱신
             if (viewModel.isMapInitialized.value == true) { // 지도 초기화 이후 작업
-                Log.d("kite", "찍히는건가?")
                 kakaoMap.labelManager!!.removeAllLabelLayer()
-                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(LatLng.from(currentRegion.latitude, currentRegion.longitude)))
+                initLabelLayer()
+                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(LatLng.from(currentRegion.latitude, currentRegion.longitude))) // 위치 좌표 설정
+                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(setZoomLevelByCheckMapPoints(currentRegion.moveUserInfo)))
+                Log.d("kite", "줌레벨 가져와: " + kakaoMap.zoomLevel.toString())
                 addBestRegionPlaceMarker(currentRegion.name, currentRegion.longitude, currentRegion.latitude)// 추천 장소 마커 추가
-                // 유저 정보 마커 추가
+                addUserInfoMarkers(currentRegion.moveUserInfo)// 유저 정보 마커 추가
                 // path 그리기
             }
         }
@@ -148,22 +149,38 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
                 viewModel.isMapInitialized.value = true // 맵 초기화 정보 설정
-                disableGestures()
+                initLabelLayer()
+                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(setZoomLevelByCheckMapPoints(bestRegions[0].moveUserInfo)))
                 addBestRegionPlaceMarker(bestRegions[0].name, bestRegions[0].longitude, bestRegions[0].latitude) // 추천 장소 마커
+                addUserInfoMarkers(bestRegions[0].moveUserInfo)
             }
         })
     }
 
-    private fun addBestRegionPlaceMarker(name: String, long: Double, lat: Double) {
+    // canShowMapPints를 사용하여 특정 zoom level에서 해당 좌표들이 다 보이는 지 확인한 후 zoomLevel을 계산하여 반환한다.
+    private fun setZoomLevelByCheckMapPoints(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>): Int {
+        val mapPoints = moveUserInfos.map { LatLng.from(it.path[0].y, it.path[0].x) }
+        for (level in kakaoMap.maxZoomLevel downTo kakaoMap.minZoomLevel) {
+            if (kakaoMap.canShowMapPoints(level, *mapPoints.toTypedArray())) {
+                return  level.minus(1)
+            }
+        }
+        return kakaoMap.zoomLevel
+    }
+
+    private fun initLabelLayer() {
         labelLayer = kakaoMap.labelManager!!.addLayer(
             LabelLayerOptions.from()
                 .setOrderingType(OrderingType.Rank)
         )!!
+    }
+
+    // 추천 장소 마커 추가
+    private fun addBestRegionPlaceMarker(name: String, long: Double, lat: Double) {
         labelLayer.addLabel(
-            LabelOptions.from( // TODO 모임장의 출발 위치
+            LabelOptions.from(
                 "bestRegion", LatLng.from(lat, long)
             ).setStyles(
-                // TODO 리더의 이름 정보
                 LabelStyle.from(mapManager.getBestRegionPlaceMarker(name))
                     .setApplyDpScale(false)
                     .setIconTransition(LabelTransition.from(Transition.Scale, Transition.Scale)),
@@ -171,18 +188,27 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         )
     }
 
-    private fun addUserInfoMarkers() {
-
-    }
-
-    private fun disableGestures() {
-        GestureType.values().forEach { kakaoMap.setGestureEnable(it, false) }
+    // 유저 위치 정보 마커 추가
+    private fun addUserInfoMarkers(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
+        for (i in moveUserInfos.indices) {
+            val moveUserInfo = moveUserInfos[i] // TODO 본인 위치의 마커는 주황색으로 분기처리 해주기 (API 대기중)₩
+            labelLayer.addLabel(
+                LabelOptions.from( // 첫번째 배열이 유저의 시작 위치
+                    moveUserInfo.userName, LatLng.from(moveUserInfo.path[0].y, moveUserInfo.path[0].x)
+                ).setStyles(
+                    LabelStyle.from(mapManager.getOtherPlaceMarker(moveUserInfo.userName))
+                        .setApplyDpScale(false)
+                        .setIconTransition(LabelTransition.from(Transition.Scale, Transition.Scale)),
+                )
+            )
+        }
     }
 
     private fun initBestRegionNameAdapter(regionsName: List<BestRegionItem>) {
         bestRegionNameAdapter.updateItems(regionsName)
         binding.fgGroupPlaceVpBestRegionName.adapter = bestRegionNameAdapter
     }
+
 
     private fun initBestRegionAdapter(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
         binding.bottomGroupPlaceRvGroupInfo.apply {

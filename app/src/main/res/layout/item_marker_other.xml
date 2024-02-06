@@ -14,13 +14,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_marker_my"
+            android:src="@drawable/ic_marker_other"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/item_marker_my_tv_name"
+            android:id="@+id/item_marker_other_tv_name"
             style="@style/b2_bold_14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
