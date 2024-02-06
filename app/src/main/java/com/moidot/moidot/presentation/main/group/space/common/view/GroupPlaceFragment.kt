@@ -17,6 +17,13 @@ import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.LabelTransition
 import com.kakao.vectormap.label.OrderingType
 import com.kakao.vectormap.label.Transition
+import com.kakao.vectormap.route.RouteLine
+import com.kakao.vectormap.route.RouteLineManager
+import com.kakao.vectormap.route.RouteLineOptions
+import com.kakao.vectormap.route.RouteLineSegment
+import com.kakao.vectormap.route.RouteLineStyle
+import com.kakao.vectormap.route.RouteLineStyles
+import com.kakao.vectormap.route.RouteLineStylesSet
 import com.moidot.moidot.R
 import com.moidot.moidot.data.data.BestRegionItem
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
@@ -38,6 +45,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private lateinit var kakaoMap: KakaoMap
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
+    private lateinit var routeLineManager: RouteLineManager
 
     private val viewModel: GroupPlaceViewModel by viewModels()
     private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
@@ -125,12 +133,13 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             updateAdapterInfo(position, currentRegion) // rv, vp 정보 갱신
             if (viewModel.isMapInitialized.value == true) { // 지도 초기화 이후 작업
                 kakaoMap.labelManager!!.removeAllLabelLayer()
-                initLabelLayer()
+                kakaoMap.routeLineManager!!.clearAll()
+                initLabelLayerAndRouteManager()
                 kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(LatLng.from(currentRegion.latitude, currentRegion.longitude))) // 위치 좌표 설정
                 kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(setZoomLevelByCheckMapPoints(currentRegion.moveUserInfo)))
                 addBestRegionPlaceMarker(currentRegion.name, currentRegion.longitude, currentRegion.latitude)// 추천 장소 마커 추가
                 addUserInfoMarkers(currentRegion.moveUserInfo)// 유저 정보 마커 추가
-                // path 그리기
+                addMovePathRoutineLines(currentRegion.moveUserInfo) // 유저 path 그리기
             }
         }
     }
@@ -146,10 +155,11 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
                 viewModel.isMapInitialized.value = true // 맵 초기화 정보 설정
-                initLabelLayer()
+                initLabelLayerAndRouteManager()
                 kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(setZoomLevelByCheckMapPoints(bestRegions[0].moveUserInfo)))
                 addBestRegionPlaceMarker(bestRegions[0].name, bestRegions[0].longitude, bestRegions[0].latitude) // 추천 장소 마커 추가
                 addUserInfoMarkers(bestRegions[0].moveUserInfo) // 유저 정보 마커 추가
+                addMovePathRoutineLines(bestRegions[0].moveUserInfo) // 루트 정보 추가
                 BottomSheetBehavior.from(binding.fgGroupPlaceBottomSheet).state = BottomSheetBehavior.STATE_HALF_EXPANDED // 바텀 시트 초가화
             }
         })
@@ -166,11 +176,12 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         return kakaoMap.zoomLevel
     }
 
-    private fun initLabelLayer() {
+    private fun initLabelLayerAndRouteManager() {
         labelLayer = kakaoMap.labelManager!!.addLayer(
             LabelLayerOptions.from()
                 .setOrderingType(OrderingType.Rank)
         )!!
+        routeLineManager = kakaoMap.routeLineManager!!
     }
 
     // 추천 장소 마커 추가
@@ -200,6 +211,17 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
                 )
             )
         }
+    }
+
+    // TODO 본인게 아닌건 분기처리
+    private fun addMovePathRoutineLines(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>){
+        val stylesSet = RouteLineStylesSet.from(
+            "orangeStyles",
+            RouteLineStyles.from(RouteLineStyle.from(13f, resources.getColor(R.color.orange500, null)))
+        )
+        val segment = RouteLineSegment.from(moveUserInfos.flatMap { it.path }.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
+        val options = RouteLineOptions.from(segment).setStylesSet(stylesSet)
+        val routeLine = routeLineManager.layer.addRouteLine(options)
     }
 
     private fun initBestRegionNameAdapter(regionsName: List<BestRegionItem>) {
