@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="data"
             type="com.moidot.moidot.data.data.BestRegionItem" />
@@ -19,9 +18,9 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@{data.isSelected ? @color/gray800 : @color/gray500}"
             app:cardCornerRadius="8dp"
+            app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.6"
             app:strokeWidth="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout

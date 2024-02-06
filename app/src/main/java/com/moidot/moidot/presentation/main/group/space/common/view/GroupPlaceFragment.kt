@@ -45,10 +45,12 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         initBottomSheetBehavior()
     }
 
+    /** dp로 설정하면 가로가 짧은 기기 혹은 긴 기기가 잘리는 현상이 있다.
+     * 그래서 기준을 screenWidth의 기준으로 설정해주었다.*/
     private fun setRegionNameVpEffect() {
-        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.view_pager_margin)
-        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.view_pager_width)
         val screenWidth = resources.displayMetrics.widthPixels
+        val pageMarginPx = (screenWidth * 0.05).toInt()
+        val pagerWidth = (screenWidth * 0.7).toInt()
         val offsetPx = screenWidth - pageMarginPx - pagerWidth
 
         binding.fgGroupPlaceVpBestRegionName.setPageTransformer { page, position ->
