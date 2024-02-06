@@ -23,7 +23,8 @@ class MarkerManager(private val mContext: Context) {
 
     // 추천 장소 마커
     fun getBestRegionPlaceMarker(name:String): Bitmap {
-        val binding: ItemMarkerBestRegionBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_marker_my, null, false)
+        val binding: ItemMarkerBestRegionBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_marker_best_region, null, false)
+        binding.itemMarkerBestRegionTvName.text = name
         return createBitMapFromView(binding.root)
     }
 

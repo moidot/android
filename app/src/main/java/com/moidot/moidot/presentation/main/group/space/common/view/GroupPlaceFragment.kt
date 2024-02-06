@@ -110,9 +110,10 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
 
     private fun initMapView(bestRegions: List<ResponseBestRegion.Data>) {
         binding.fgGroupPlaceMapView.layoutParams.height = getScreenHeight(requireContext())
+        mapManager = MarkerManager(requireContext())
         binding.fgGroupPlaceMapView.start(object : KakaoMapReadyCallback() {
             override fun getPosition(): LatLng { // 첫번째 지점 위치 받아오기
-                return LatLng.from(bestRegions[0].longitude, bestRegions[0].latitude)
+                return LatLng.from(bestRegions[0].latitude, bestRegions[0].longitude)
             }
 
             override fun onMapReady(map: KakaoMap) {
@@ -136,7 +137,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             LabelOptions.from( // TODO 모임장의 출발 위치
                 "bestRegion", LatLng.from(lat, long)
             ).setStyles( // TODO 리더의 이름 정보
-                LabelStyle.from(mapManager.getMyPlaceMarker("정")).setApplyDpScale(false)
+                LabelStyle.from(mapManager.getBestRegionPlaceMarker(name)).setApplyDpScale(false)
             )
         )
     }
