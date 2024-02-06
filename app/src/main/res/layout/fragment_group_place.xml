@@ -34,12 +34,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/fg_group_place_vp_recommend_location"
+            android:id="@+id/fg_group_place_vp_best_region_name"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingTop="12dp"
-            android:layout_marginStart="16dp"
-            android:background="@color/orange500"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
             app:layout_anchor="@+id/fg_group_place_map_view"
             app:layout_anchorGravity="top" />
 

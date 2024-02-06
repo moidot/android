@@ -11,3 +11,9 @@ fun addVerticalMargin(view: View, position: Int, itemCount: Int, marginInDp: Int
     layoutParams.bottomMargin = if (position == (itemCount - 1)) 0 else marginInDp.dpToPx(view.context)
     view.layoutParams = layoutParams
 }
+
+fun addHorizontalMargin(view: View, position: Int, itemCount: Int, marginInDp: Int) {
+    val layoutParams = (view.layoutParams as ViewGroup.MarginLayoutParams)
+    layoutParams.rightMargin = if (position == (itemCount - 1)) 0 else marginInDp.dpToPx(view.context)
+    view.layoutParams = layoutParams
+}

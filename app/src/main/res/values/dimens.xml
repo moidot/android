@@ -3,4 +3,6 @@
     <dimen name="input_field_active_vertical_padding">11dp</dimen>
     <dimen name="input_field_normal_vertical_padding">13dp</dimen>
     <dimen name="input_field_horizontal_padding">12dp</dimen>
+    <dimen name="view_pager_width">48dp</dimen>
+    <dimen name="view_pager_margin">12dp</dimen>
 </resources>
