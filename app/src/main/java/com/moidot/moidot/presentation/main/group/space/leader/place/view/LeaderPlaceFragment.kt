@@ -67,7 +67,7 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
             LabelOptions.from( // TODO 모임장의 출발 위치
                 "default", LatLng.from(37.4005, 127.1101)
             ).setStyles( // TODO 리더의 이름 정보
-                LabelStyle.from(mapManager.getDefaultPlaceMarker("정")).setApplyDpScale(false)
+                LabelStyle.from(mapManager.getMyPlaceMarker("정")).setApplyDpScale(false)
             )
         )
     }

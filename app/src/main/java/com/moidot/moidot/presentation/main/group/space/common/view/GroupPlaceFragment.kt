@@ -10,6 +10,11 @@ import com.kakao.vectormap.GestureType
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
+import com.kakao.vectormap.label.LabelLayer
+import com.kakao.vectormap.label.LabelLayerOptions
+import com.kakao.vectormap.label.LabelOptions
+import com.kakao.vectormap.label.LabelStyle
+import com.kakao.vectormap.label.OrderingType
 import com.moidot.moidot.R
 import com.moidot.moidot.data.data.BestRegionItem
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
@@ -19,6 +24,7 @@ import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegion
 import com.moidot.moidot.presentation.main.group.space.common.adapter.MoveUserInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.common.viewmodel.GroupPlaceViewModel
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
+import com.moidot.moidot.util.MarkerManager
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.max
@@ -27,6 +33,8 @@ import kotlin.math.max
 class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.fragment_group_place) {
 
     private lateinit var kakaoMap: KakaoMap
+    private lateinit var labelLayer: LabelLayer
+    private lateinit var mapManager: MarkerManager
 
     private val viewModel: GroupPlaceViewModel by viewModels()
     private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
@@ -94,24 +102,43 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
 
     private fun setupObserver() {
         viewModel.bestRegions.observe(viewLifecycleOwner) { data ->
-            initMapView()
+            initMapView(data)
             initBestRegionNameAdapter(data.map { BestRegionItem(it.name, false) })
             initBestRegionAdapter(data.map { it.moveUserInfo[0] })
         }
     }
 
-    private fun initMapView() {
+    private fun initMapView(bestRegions: List<ResponseBestRegion.Data>) {
         binding.fgGroupPlaceMapView.layoutParams.height = getScreenHeight(requireContext())
         binding.fgGroupPlaceMapView.start(object : KakaoMapReadyCallback() {
-            override fun getPosition(): LatLng {
-                return LatLng.from(37.4005, 127.1101)
+            override fun getPosition(): LatLng { // 첫번째 지점 위치 받아오기
+                return LatLng.from(bestRegions[0].longitude, bestRegions[0].latitude)
             }
 
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
                 disableGestures()
+                initBestRegionPlaceMarker() // 어떤것을 가장 먼저 올릴건지 todo
+                addBestRegionPlaceMarker(bestRegions[0].name, bestRegions[0].longitude, bestRegions[0].latitude) // 추천 장소 마커
             }
         })
+    }
+
+    private fun initBestRegionPlaceMarker() {
+        labelLayer = kakaoMap.labelManager!!.addLayer(
+            LabelLayerOptions.from()
+                .setOrderingType(OrderingType.Rank)
+        )!!
+    }
+
+    private fun addBestRegionPlaceMarker(name:String, long:Double, lat:Double) {
+        labelLayer.addLabel(
+            LabelOptions.from( // TODO 모임장의 출발 위치
+                "bestRegion", LatLng.from(lat, long)
+            ).setStyles( // TODO 리더의 이름 정보
+                LabelStyle.from(mapManager.getMyPlaceMarker("정")).setApplyDpScale(false)
+            )
+        )
     }
 
     private fun disableGestures() {
