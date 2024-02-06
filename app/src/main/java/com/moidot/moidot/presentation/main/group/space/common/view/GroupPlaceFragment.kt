@@ -45,6 +45,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private lateinit var kakaoMap: KakaoMap
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
+    private lateinit var routeLine: RouteLine
     private lateinit var routeLineManager: RouteLineManager
 
     private val viewModel: GroupPlaceViewModel by viewModels()
@@ -132,8 +133,8 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             val currentRegion = viewModel.bestRegions.value?.get(position)!! // 선택된 추천 지역 정보
             updateAdapterInfo(position, currentRegion) // rv, vp 정보 갱신
             if (viewModel.isMapInitialized.value == true) { // 지도 초기화 이후 작업
-                kakaoMap.labelManager!!.removeAllLabelLayer()
-                kakaoMap.routeLineManager!!.clearAll()
+                kakaoMap.labelManager!!.removeAllLabelLayer() // 기존 마커 삭제
+                routeLine.remove() // 기존 path 삭제
                 initLabelLayerAndRouteManager()
                 kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(LatLng.from(currentRegion.latitude, currentRegion.longitude))) // 위치 좌표 설정
                 kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(setZoomLevelByCheckMapPoints(currentRegion.moveUserInfo)))
@@ -221,7 +222,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         )
         val segment = RouteLineSegment.from(moveUserInfos.flatMap { it.path }.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
         val options = RouteLineOptions.from(segment).setStylesSet(stylesSet)
-        val routeLine = routeLineManager.layer.addRouteLine(options)
+        routeLine = routeLineManager.layer.addRouteLine(options)
     }
 
     private fun initBestRegionNameAdapter(regionsName: List<BestRegionItem>) {
