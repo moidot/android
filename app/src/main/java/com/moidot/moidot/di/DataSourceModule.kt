@@ -8,6 +8,8 @@ import com.moidot.moidot.data.remote.datasource.auth.AuthRemoteDataSource
 import com.moidot.moidot.data.remote.datasource.auth.AuthRemoteDataSourceImpl
 import com.moidot.moidot.data.remote.datasource.group.GroupInfoRemoteDataSource
 import com.moidot.moidot.data.remote.datasource.group.GroupInfoRemoteDataSourceImpl
+import com.moidot.moidot.data.remote.datasource.group.GroupPlaceRemoteDataSource
+import com.moidot.moidot.data.remote.datasource.group.GroupPlaceRemoteDataSourceImpl
 import com.moidot.moidot.data.remote.datasource.group.GroupRemoteDataSource
 import com.moidot.moidot.data.remote.datasource.group.GroupRemoteDataSourceImpl
 import com.moidot.moidot.data.remote.datasource.location.LocationRemoteDataSource
@@ -38,4 +40,7 @@ abstract class DataSourceModule {
 
     @Binds
     abstract fun bindGroupInfoRemoteSource(groupInfoRemoteDataSourceImpl: GroupInfoRemoteDataSourceImpl): GroupInfoRemoteDataSource
+
+    @Binds
+    abstract fun bindGroupPlaceRemoteSource(groupPlaceRemoteDataSourceImpl: GroupPlaceRemoteDataSourceImpl): GroupPlaceRemoteDataSource
 }

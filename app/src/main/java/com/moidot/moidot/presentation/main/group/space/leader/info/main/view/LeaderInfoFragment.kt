@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderInfoBinding
 import com.moidot.moidot.presentation.base.BaseFragment
-import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceActivity
+import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
 import com.moidot.moidot.presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity
 import com.moidot.moidot.presentation.main.group.space.leader.info.main.adapter.LeaderGroupInfoHeaderAdapter
 import com.moidot.moidot.presentation.main.group.space.leader.info.main.viewmodel.LeaderInfoViewModel
@@ -23,9 +24,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.fragment_leader_info) {
 
-    private val groupId by lazy { (activity as LeaderSpaceActivity).groupId }
-    private val leaderGroupInfoHeaderAdapter by lazy { LeaderGroupInfoHeaderAdapter(::onMemberRemoveListener) }
     private val viewModel: LeaderInfoViewModel by viewModels()
+    private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
+    private val leaderGroupInfoHeaderAdapter by lazy { LeaderGroupInfoHeaderAdapter(::onMemberRemoveListener) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +52,7 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
 
     override fun onResume() {
         super.onResume()
-        viewModel.getGroupInfo(groupId)
+        viewModel.getGroupInfo(activityViewModel.groupId.value!!)
     }
 
     private fun setupObservers() {
@@ -64,7 +65,7 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     private fun setupGroupDefaultInfoView() {
         viewModel.groupName.observe(viewLifecycleOwner) {
             binding.fgLeaderInfoTvGroupName.text = it
-            (activity as LeaderSpaceActivity).changeGroupName(it)
+            activityViewModel.setGroupName(it)
         }
     }
 
@@ -133,13 +134,13 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     }
 
     private fun onMemberRemoveListener(participateId: Int) {
-        viewModel.removeMember(groupId, participateId)
+        viewModel.removeMember(activityViewModel.groupId.value!!, participateId)
     }
 
     // 모임 이름 수정
     fun editGroupName() {
         Intent(requireContext(), EditGroupNameActivity::class.java).apply {
-            putExtra(GROUP_ID, groupId)
+            putExtra(GROUP_ID, activityViewModel.groupId.value!!)
             putExtra(GROUP_NAME, viewModel.groupName.value)
             startActivity(this)
         }
@@ -147,7 +148,7 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
 
     // 모임 초대
     fun shareInvitationWithKakao() {
-        val kakaoFeedSetting = KakaoFeedSetting(groupId, viewModel.groupName.value!!)
+        val kakaoFeedSetting = KakaoFeedSetting(activityViewModel.groupId.value!!, viewModel.groupName.value!!)
         KakaoShareManager(requireContext(), kakaoFeedSetting).shareLink()
     }
 
@@ -158,7 +159,7 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
             getString(R.string.space_leader_info_dialog_delete_title),
             getString(R.string.space_leader_info_dialog_delete_content),
             getString(R.string.space_leader_info_dialog_delete_btn)
-        ) { viewModel.deleteGroup(groupId) }.show()
+        ) { viewModel.deleteGroup(activityViewModel.groupId.value!!) }.show()
     }
 
     companion object {

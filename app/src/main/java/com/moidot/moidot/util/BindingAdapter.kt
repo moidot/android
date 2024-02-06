@@ -11,6 +11,8 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.moidot.moidot.R
+import com.moidot.moidot.util.unit.PriceUtil
+import com.moidot.moidot.util.unit.TimeUtil
 
 @BindingAdapter("bind:urlImageBinding")
 fun ImageView.imageBind(url: String?) {
@@ -69,7 +71,7 @@ fun TextView.setCheckBoxTextFieldActive(checkedState: Boolean) {
     this.setTextAppearance(currentTextStyle)
 }
 
-@BindingAdapter("bind:TransportationType")
+@BindingAdapter("bind:transportationType")
 fun ImageView.transportationImageBind(type: String) {
     when (type) {
         "PUBLIC" -> Glide.with(this.context).load(R.drawable.ic_group_info_transportation).into(this)
@@ -82,7 +84,26 @@ fun ImageView.leaderBadgeVisible(flag: Boolean) {
     this.isVisible = flag
 }
 
-@BindingAdapter("bind:coverVisible")
-fun View.coverVisible(flag: Boolean) {
+@BindingAdapter("bind:covertVisible")
+fun View.covertVisible(flag: Boolean) {
     this.isVisible = flag
+}
+
+// TODO 서버 분들의 답변에 따라 수정될 수도 있음
+@BindingAdapter("bind:convertToHoursAndMinutes")
+fun TextView.convertToHoursAndMinutes(totalMinutes: Int) {
+    val (hours, minutes) = TimeUtil.convertToHoursAndMinutes(totalMinutes)
+    this.text = if (hours == 0) {
+        "${minutes}분"
+    } else {
+        "${hours}시간 ${minutes}분"
+    }
+}
+
+@BindingAdapter("bind:transitCount", "bind:payment", "bind:transportationType")
+fun TextView.bestRegionInfoTxt(transitCount: Int, payment: Int, transportationType: String) {
+    when (transportationType) {
+        "PUBLIC" -> this.text = "환승 ${transitCount}번"
+        "PERSONAL" -> this.text = "통행료 ${PriceUtil.changePriceString(payment)}원"
+    }
 }

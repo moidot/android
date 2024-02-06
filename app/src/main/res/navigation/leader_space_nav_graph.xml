@@ -2,8 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/leader_space_nav_graph"
-    app:startDestination="@id/leaderPlaceFragment">
+    android:id="@+id/leader_space_nav_graph">
 
     <fragment
         android:id="@+id/leaderPlaceFragment"
@@ -12,10 +11,10 @@
         tools:layout="@layout/fragment_leader_place" />
 
     <fragment
-        android:id="@+id/leaderDefaultPlaceFragment"
-        android:name="com.moidot.moidot.presentation.main.group.space.leader.place.view.LeaderDefaultPlaceFragment"
-        android:label="fragment_ledaer_default_place"
-        tools:layout="@layout/fragment_leader_default_place"/>
+        android:id="@+id/groupPlaceFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.common.view.GroupPlaceFragment"
+        android:label="fragment_group_place"
+        tools:layout="@layout/fragment_group_place" />
 
     <fragment
         android:id="@+id/leaderVoteFragment"

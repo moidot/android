@@ -12,7 +12,7 @@ import com.moidot.moidot.presentation.main.group.join.create.model.InputInfoType
 import com.moidot.moidot.presentation.main.group.join.create.model.InputInfoType.NICKNAME_INPUT
 import com.moidot.moidot.presentation.main.group.join.create.model.InputInfoType.LOCATION_INPUT
 import com.moidot.moidot.presentation.main.group.join.create.model.InputInfoType.TRANSPORTATION_INPUT
-import com.moidot.moidot.util.TimeUtil
+import com.moidot.moidot.util.unit.TimeUtil
 import com.moidot.moidot.presentation.main.group.join.create.view.InputLeaderInfoFragment.Companion.ERROR_GROUP_IDX
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -77,7 +77,7 @@ class CreateGroupViewModel @Inject constructor(private val groupRepository: Grou
         _nickname.value = name
     }
 
-    fun setTransportationTypeTxt(transportationType: String) {
+    fun settransportationTypeTxt(transportationType: String) {
         _transportationTypeTxt.value = transportationType
     }
 
