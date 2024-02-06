@@ -68,7 +68,7 @@ class ParticipateGroupViewModel @Inject constructor(private val groupRepository:
         _locationInfo.value = data
     }
 
-    fun setTransportationTypeTxt(transportationType: String) {
+    fun settransportationTypeTxt(transportationType: String) {
         _transportationTypeTxt.value = transportationType
     }
 

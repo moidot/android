@@ -76,6 +76,9 @@
                     app:layout_constraintBottom_toTopOf="@id/item_best_region_tv_transportation_time"
                     app:layout_constraintEnd_toStartOf="@id/item_best_region_iv_transportation_type"
                     app:layout_constraintTop_toTopOf="parent"
+                    bind:payment="@{data.payment}"
+                    bind:transitCount="@{data.transitCount}"
+                    bind:transportationType="@{data.transportationType}"
                     tools:text="환승 1번" />
 
                 <TextView
@@ -85,10 +88,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textColor="@color/orange500"
-                    bind:convertToHoursAndMinutes="@{data.totalTime}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/item_best_region_tv_transportation_info"
                     app:layout_constraintTop_toBottomOf="@id/item_best_region_tv_transportation_info"
+                    bind:convertToHoursAndMinutes="@{data.totalTime}"
                     tools:text="1시간 12분" />
 
                 <ImageView
@@ -96,10 +99,10 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="8dp"
-                    bind:TransportationType="@{data.transportationType}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/item_best_region_tv_transportation_info"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    bind:transportationType="@{data.transportationType}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -118,9 +118,9 @@ class ParticipateGroupActivity : BaseActivity<ActivityParticipateGroupBinding>(R
 
     private fun setTransportationSelectedType() {
         binding.participateGroupComponentTransportationPicker.apply {
-            selectedTransportationTypeTxt.observe(this@ParticipateGroupActivity) {
+            selectedtransportationTypeTxt.observe(this@ParticipateGroupActivity) {
                 if (it.isNotEmpty()) {
-                    viewModel.setTransportationTypeTxt(it)
+                    viewModel.settransportationTypeTxt(it)
                     viewModel.updateInputInfoComplete(TRANSPORTATION_INPUT, true)
                 } else {
                     viewModel.updateInputInfoComplete(TRANSPORTATION_INPUT, false)

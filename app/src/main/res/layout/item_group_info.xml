@@ -78,7 +78,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="8dp"
-                    bind:TransportationType="@{data.transportation}" />
+                    bind:transportationType="@{data.transportation}" />
             </LinearLayout>
 
             <LinearLayout

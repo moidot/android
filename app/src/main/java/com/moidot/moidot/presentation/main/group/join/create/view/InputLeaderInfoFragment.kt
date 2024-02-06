@@ -134,9 +134,9 @@ class InputLeaderInfoFragment : BaseFragment<FragmentInputLeaderInfoBinding>(R.l
 
     private fun setTransportationSelectedType() {
         binding.fgInputLeaderInfoComponentTransportationPicker.apply {
-            selectedTransportationTypeTxt.observe(viewLifecycleOwner) {
+            selectedtransportationTypeTxt.observe(viewLifecycleOwner) {
                 if (it.isNotEmpty()) {
-                    viewModel.setTransportationTypeTxt(it)
+                    viewModel.settransportationTypeTxt(it)
                     viewModel.updateInputInfoComplete(TRANSPORTATION_INPUT, true)
                 } else {
                     viewModel.updateInputInfoComplete(TRANSPORTATION_INPUT, false)

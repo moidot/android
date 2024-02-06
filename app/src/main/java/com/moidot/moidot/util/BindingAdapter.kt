@@ -70,7 +70,7 @@ fun TextView.setCheckBoxTextFieldActive(checkedState: Boolean) {
     this.setTextAppearance(currentTextStyle)
 }
 
-@BindingAdapter("bind:TransportationType")
+@BindingAdapter("bind:transportationType")
 fun ImageView.transportationImageBind(type: String) {
     when (type) {
         "PUBLIC" -> Glide.with(this.context).load(R.drawable.ic_group_info_transportation).into(this)
@@ -96,5 +96,13 @@ fun TextView.convertToHoursAndMinutes(totalMinutes: Int) {
         "${minutes}분"
     } else {
         "${hours}시간 ${minutes}분"
+    }
+}
+
+@BindingAdapter("bind:transitCount", "bind:payment", "bind:transportationType")
+fun TextView.bestRegionInfoTxt(transitCount: Int, payment: Int, transportationType: String) {
+    when (transportationType) {
+        "PUBLIC" -> this.text = "환승 ${transitCount}번"
+        "PERSONAL" -> this.text = "통행료 ${PriceUtil.changePriceString(payment)}원"
     }
 }

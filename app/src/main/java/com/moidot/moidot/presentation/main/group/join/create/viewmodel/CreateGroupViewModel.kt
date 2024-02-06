@@ -77,7 +77,7 @@ class CreateGroupViewModel @Inject constructor(private val groupRepository: Grou
         _nickname.value = name
     }
 
-    fun setTransportationTypeTxt(transportationType: String) {
+    fun settransportationTypeTxt(transportationType: String) {
         _transportationTypeTxt.value = transportationType
     }
 
