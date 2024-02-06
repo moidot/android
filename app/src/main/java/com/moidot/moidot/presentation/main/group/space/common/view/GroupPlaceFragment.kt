@@ -15,8 +15,8 @@ import com.moidot.moidot.data.data.BestRegionItem
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentGroupPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
-import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegionAdapter
 import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegionNameAdapter
+import com.moidot.moidot.presentation.main.group.space.common.adapter.MoveUserInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.common.viewmodel.GroupPlaceViewModel
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
 import com.moidot.moidot.util.view.getScreenHeight
@@ -32,7 +32,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
 
     private val bestRegionNameAdapter by lazy { BestRegionNameAdapter() }
-    private val bestRegionAdapter by lazy { BestRegionAdapter() }
+    private val moveUserInfoAdapter by lazy { MoveUserInfoAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +67,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
                 super.onPageSelected(position)
                 bestRegionNameAdapter.updateSelectedPosition(position)
                 val selectedMoveUserInfo = viewModel.bestRegions.value?.get(position)!!.moveUserInfo
-                bestRegionAdapter.submitList(selectedMoveUserInfo)
+                moveUserInfoAdapter.submitList(selectedMoveUserInfo)
             }
         })
     }
@@ -103,7 +103,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private fun initMapView() {
         binding.fgGroupPlaceMapView.layoutParams.height = getScreenHeight(requireContext())
         binding.fgGroupPlaceMapView.start(object : KakaoMapReadyCallback() {
-            override fun getPosition(): LatLng { // TODO 모임 중심위치 정보
+            override fun getPosition(): LatLng {
                 return LatLng.from(37.4005, 127.1101)
             }
 
@@ -123,11 +123,11 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         binding.fgGroupPlaceVpBestRegionName.adapter = bestRegionNameAdapter
     }
 
-    private fun initBestRegionAdapter(regions: List<ResponseBestRegion.Data.MoveUserInfo>) {
+    private fun initBestRegionAdapter(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
         binding.bottomGroupPlaceRvGroupInfo.apply {
             itemAnimator = null
-            adapter = bestRegionAdapter
+            adapter = moveUserInfoAdapter
         }
-        bestRegionAdapter.submitList(regions)
+        moveUserInfoAdapter.submitList(moveUserInfos)
     }
 }
