@@ -1,7 +1,6 @@
 package com.moidot.moidot.presentation.main.group.space.common.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -13,8 +12,10 @@ import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
 import com.moidot.moidot.R
 import com.moidot.moidot.data.data.BestRegionItem
+import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentGroupPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegionAdapter
 import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegionNameAdapter
 import com.moidot.moidot.presentation.main.group.space.common.viewmodel.GroupPlaceViewModel
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
@@ -31,6 +32,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
 
     private val bestRegionNameAdapter by lazy { BestRegionNameAdapter() }
+    private val bestRegionAdapter by lazy { BestRegionAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,8 +64,10 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private fun setBestRegionNameVpEvent() {
         binding.fgGroupPlaceVpBestRegionName.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)  // TODO 바텀시트 정보 갱신하기
+                super.onPageSelected(position)
                 bestRegionNameAdapter.updateSelectedPosition(position)
+                val selectedMoveUserInfo = viewModel.bestRegions.value?.get(position)!!.moveUserInfo
+                bestRegionAdapter.submitList(selectedMoveUserInfo)
             }
         })
     }
@@ -92,6 +96,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         viewModel.bestRegions.observe(viewLifecycleOwner) { data ->
             initMapView()
             initBestRegionNameAdapter(data.map { BestRegionItem(it.name, false) })
+            initBestRegionAdapter(data.map { it.moveUserInfo[0] })
         }
     }
 
@@ -116,5 +121,13 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private fun initBestRegionNameAdapter(regionsName: List<BestRegionItem>) {
         bestRegionNameAdapter.updateItems(regionsName)
         binding.fgGroupPlaceVpBestRegionName.adapter = bestRegionNameAdapter
+    }
+
+    private fun initBestRegionAdapter(regions: List<ResponseBestRegion.Data.MoveUserInfo>) {
+        binding.bottomGroupPlaceRvGroupInfo.apply {
+            itemAnimator = null
+            adapter = bestRegionAdapter
+        }
+        bestRegionAdapter.submitList(regions)
     }
 }
