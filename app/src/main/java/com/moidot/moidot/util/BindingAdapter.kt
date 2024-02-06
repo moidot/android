@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.moidot.moidot.R
+import kotlin.math.min
 
 @BindingAdapter("bind:urlImageBinding")
 fun ImageView.imageBind(url: String?) {
@@ -82,7 +83,18 @@ fun ImageView.leaderBadgeVisible(flag: Boolean) {
     this.isVisible = flag
 }
 
-@BindingAdapter("bind:coverVisible")
-fun View.coverVisible(flag: Boolean) {
+@BindingAdapter("bind:covertVisible")
+fun View.covertVisible(flag: Boolean) {
     this.isVisible = flag
+}
+
+// TODO 서버 분들의 답변에 따라 수정될 수도 있음
+@BindingAdapter("bind:convertToHoursAndMinutes")
+fun TextView.convertToHoursAndMinutes(totalMinutes: Int) {
+    val (hours, minutes) = TimeUtil.convertToHoursAndMinutes(totalMinutes)
+    this.text = if (hours == 0) {
+        "${minutes}분"
+    } else {
+        "${hours}시간 ${minutes}분"
+    }
 }
