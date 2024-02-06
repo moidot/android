@@ -64,7 +64,7 @@ class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.ac
         binding.leaderSpaceTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> if (viewModel.groupParticipates.value!! > 1) navController.navigate(R.id.groupPlaceFragment) else navController.navigate(R.id.groupPlaceFragment)
+                    0 -> if (viewModel.groupParticipates.value!! < 1) navController.navigate(R.id.groupPlaceFragment) else navController.navigate(R.id.groupPlaceFragment)
                     1 -> navController.navigate(R.id.leaderVoteFragment)
                     2 -> navController.navigate(R.id.leaderInfoFragment)
                 }

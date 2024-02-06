@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moidot.moidot.databinding.ItemBestRegionNameBinding
-import com.moidot.moidot.util.addHorizontalMargin
 
 class BestRegionNameAdapter : RecyclerView.Adapter<BestRegionNameAdapter.BestRegionNameViewHolder>() {
 
@@ -26,7 +25,6 @@ class BestRegionNameAdapter : RecyclerView.Adapter<BestRegionNameAdapter.BestReg
     override fun getItemCount(): Int = regions.size
 
     override fun onBindViewHolder(holder: BestRegionNameViewHolder, position: Int) {
-        addHorizontalMargin(holder.itemView, position, itemCount, 12)
         holder.bind(position, regions[position])
     }
 

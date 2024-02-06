@@ -16,7 +16,6 @@ import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegionNameAdapter
 import com.moidot.moidot.presentation.main.group.space.common.viewmodel.GroupPlaceViewModel
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
-import com.moidot.moidot.util.view.dpToPx
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.max
@@ -45,31 +44,19 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     }
 
     private fun setRegionNameVpEffect() {
-        val prevViewWidth = resources.getDimensionPixelOffset(R.dimen.view_pager_width)
-        val itemMargin = 12.dpToPx(requireContext())
-
-        val decoMargin = prevViewWidth + itemMargin
-        val pageTransX = decoMargin + prevViewWidth
-
-        binding.fgGroupPlaceVpBestRegionName.also {
-            it.offscreenPageLimit = 1
-            it.setPageTransformer { page, position ->
-                page.translationX = position * - pageTransX
-            }
-        }
-
-        /*val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.view_pager_margin)
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.view_pager_margin)
         val pagerWidth = resources.getDimensionPixelOffset(R.dimen.view_pager_width)
         val screenWidth = resources.displayMetrics.widthPixels
         val offsetPx = screenWidth - pageMarginPx - pagerWidth
 
         binding.fgGroupPlaceVpBestRegionName.setPageTransformer { page, position ->
             page.translationX = position * -offsetPx
-        }*/
+        }
+        binding.fgGroupPlaceVpBestRegionName.offscreenPageLimit = 2
     }
 
     private fun setBestRegionNameVpEvent() {
-        binding.fgGroupPlaceVpBestRegionName.registerOnPageChangeCallback(object  : ViewPager2.OnPageChangeCallback(){
+        binding.fgGroupPlaceVpBestRegionName.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)  // TODO 바텀시트 정보 갱신하기
 
