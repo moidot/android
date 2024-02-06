@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.common.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -10,11 +11,15 @@ import com.kakao.vectormap.GestureType
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
+import com.kakao.vectormap.camera.CameraUpdate
+import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.kakao.vectormap.label.LabelLayer
 import com.kakao.vectormap.label.LabelLayerOptions
 import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
+import com.kakao.vectormap.label.LabelTransition
 import com.kakao.vectormap.label.OrderingType
+import com.kakao.vectormap.label.Transition
 import com.moidot.moidot.R
 import com.moidot.moidot.data.data.BestRegionItem
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
@@ -46,7 +51,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         super.onViewCreated(view, savedInstanceState)
         viewModel.getBestRegions(activityViewModel.groupId.value!!)
         initView()
-        setupObserver()
+        setupObservers()
     }
 
     private fun initView() {
@@ -73,11 +78,15 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         binding.fgGroupPlaceVpBestRegionName.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                bestRegionNameAdapter.updateSelectedPosition(position)
-                val selectedMoveUserInfo = viewModel.bestRegions.value?.get(position)!!.moveUserInfo
-                moveUserInfoAdapter.submitList(selectedMoveUserInfo)
+                viewModel.setCurrentPos(position)
             }
         })
+    }
+
+    private fun updateAdapterInfo(position: Int, currentRegion: ResponseBestRegion.Data) {
+        bestRegionNameAdapter.updateSelectedPosition(position)
+        val selectedMoveUserInfo = currentRegion.moveUserInfo
+        moveUserInfoAdapter.submitList(selectedMoveUserInfo)
     }
 
     private fun initBottomSheetBehavior() {
@@ -100,11 +109,31 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         }
     }
 
-    private fun setupObserver() {
+    private fun setupObservers() {
+        setupBestRegionsObserver()
+        setupCurPosObserver()
+    }
+
+    private fun setupBestRegionsObserver() {
         viewModel.bestRegions.observe(viewLifecycleOwner) { data ->
             initMapView(data)
             initBestRegionNameAdapter(data.map { BestRegionItem(it.name, false) })
             initBestRegionAdapter(data.map { it.moveUserInfo[0] })
+        }
+    }
+
+    private fun setupCurPosObserver() {
+        viewModel.currentPos.observe(viewLifecycleOwner) { position ->
+            val currentRegion = viewModel.bestRegions.value?.get(position)!! // 선택된 추천 지역 정보
+            updateAdapterInfo(position, currentRegion) // rv, vp 정보 갱신
+            if (viewModel.isMapInitialized.value == true) { // 지도 초기화 이후 작업
+                Log.d("kite", "찍히는건가?")
+                kakaoMap.labelManager!!.removeAllLabelLayer()
+                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(LatLng.from(currentRegion.latitude, currentRegion.longitude)))
+                addBestRegionPlaceMarker(currentRegion.name, currentRegion.longitude, currentRegion.latitude)// 추천 장소 마커 추가
+                // 유저 정보 마커 추가
+                // path 그리기
+            }
         }
     }
 
@@ -118,28 +147,32 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
 
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
+                viewModel.isMapInitialized.value = true // 맵 초기화 정보 설정
                 disableGestures()
-                initBestRegionPlaceMarker() // 어떤것을 가장 먼저 올릴건지 todo
                 addBestRegionPlaceMarker(bestRegions[0].name, bestRegions[0].longitude, bestRegions[0].latitude) // 추천 장소 마커
             }
         })
     }
 
-    private fun initBestRegionPlaceMarker() {
+    private fun addBestRegionPlaceMarker(name: String, long: Double, lat: Double) {
         labelLayer = kakaoMap.labelManager!!.addLayer(
             LabelLayerOptions.from()
                 .setOrderingType(OrderingType.Rank)
         )!!
-    }
-
-    private fun addBestRegionPlaceMarker(name:String, long:Double, lat:Double) {
         labelLayer.addLabel(
             LabelOptions.from( // TODO 모임장의 출발 위치
                 "bestRegion", LatLng.from(lat, long)
-            ).setStyles( // TODO 리더의 이름 정보
-                LabelStyle.from(mapManager.getBestRegionPlaceMarker(name)).setApplyDpScale(false)
+            ).setStyles(
+                // TODO 리더의 이름 정보
+                LabelStyle.from(mapManager.getBestRegionPlaceMarker(name))
+                    .setApplyDpScale(false)
+                    .setIconTransition(LabelTransition.from(Transition.Scale, Transition.Scale)),
             )
         )
+    }
+
+    private fun addUserInfoMarkers() {
+
     }
 
     private fun disableGestures() {
