@@ -4,16 +4,17 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.moidot.moidot.data.data.BestRegionItem
 import com.moidot.moidot.databinding.ItemBestRegionNameBinding
 
 class BestRegionNameAdapter : RecyclerView.Adapter<BestRegionNameAdapter.BestRegionNameViewHolder>() {
 
-    private var regions = listOf<String>()
+    private var regions = listOf<BestRegionItem>()
 
     class BestRegionNameViewHolder(private val binding: ItemBestRegionNameBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(position: Int, name: String) {
+        fun bind(position: Int, data: BestRegionItem) {
+            binding.data = data
             binding.itemBestRegionNameTvNumber.text = position.plus(1).toString()
-            binding.itemBestRegionNameTvName.text = name
         }
     }
 
@@ -29,8 +30,16 @@ class BestRegionNameAdapter : RecyclerView.Adapter<BestRegionNameAdapter.BestReg
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateItems(newData: List<String>) {
+    fun updateItems(newData: List<BestRegionItem>) {
         regions = newData
         notifyDataSetChanged()
+    }
+
+    // UI 업데이트를 위한 isSelected 변수 변경
+    fun updateSelectedPosition(position: Int) {
+        regions.forEachIndexed { index, _ ->
+            regions[index].isSelected = (index == position)
+        }
+        notifyItemRangeChanged(0, regions.size)
     }
 }

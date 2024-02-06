@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.common.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -11,6 +12,7 @@ import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
 import com.moidot.moidot.R
+import com.moidot.moidot.data.data.BestRegionItem
 import com.moidot.moidot.databinding.FragmentGroupPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegionNameAdapter
@@ -59,7 +61,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         binding.fgGroupPlaceVpBestRegionName.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)  // TODO 바텀시트 정보 갱신하기
-
+                bestRegionNameAdapter.updateSelectedPosition(position)
             }
         })
     }
@@ -87,7 +89,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private fun setupObserver() {
         viewModel.bestRegions.observe(viewLifecycleOwner) { data ->
             initMapView()
-            initBestRegionNameAdapter(data.map { it.name })
+            initBestRegionNameAdapter(data.map { BestRegionItem(it.name, false) })
         }
     }
 
@@ -109,7 +111,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         GestureType.values().forEach { kakaoMap.setGestureEnable(it, false) }
     }
 
-    private fun initBestRegionNameAdapter(regionsName: List<String>) {
+    private fun initBestRegionNameAdapter(regionsName: List<BestRegionItem>) {
         bestRegionNameAdapter.updateItems(regionsName)
         binding.fgGroupPlaceVpBestRegionName.adapter = bestRegionNameAdapter
     }
