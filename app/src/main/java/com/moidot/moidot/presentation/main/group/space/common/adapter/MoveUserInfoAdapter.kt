@@ -6,19 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
-import com.moidot.moidot.databinding.ItemBestRegionBinding
+import com.moidot.moidot.databinding.ItemMoveUserInfoBinding
 import com.moidot.moidot.util.addVerticalMargin
 
-class BestRegionAdapter : ListAdapter<ResponseBestRegion.Data.MoveUserInfo, BestRegionAdapter.BestRegionViewHolder>(bestRegionDiffUtil) {
+class MoveUserInfoAdapter : ListAdapter<ResponseBestRegion.Data.MoveUserInfo, MoveUserInfoAdapter.BestRegionViewHolder>(bestRegionDiffUtil) {
 
-    class BestRegionViewHolder(val binding: ItemBestRegionBinding) : RecyclerView.ViewHolder(binding.root) {
+    class BestRegionViewHolder(val binding: ItemMoveUserInfoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ResponseBestRegion.Data.MoveUserInfo) {
             binding.data = data
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestRegionViewHolder {
-        val binding = ItemBestRegionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemMoveUserInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BestRegionViewHolder(binding)
     }
 

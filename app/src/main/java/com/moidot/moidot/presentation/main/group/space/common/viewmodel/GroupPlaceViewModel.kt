@@ -13,8 +13,17 @@ import javax.inject.Inject
 @HiltViewModel
 class GroupPlaceViewModel @Inject constructor(private val groupPlaceRepository: GroupPlaceRepository) : ViewModel() {
 
+    val isMapInitialized = MutableLiveData<Boolean>(false)
+
+    private val _currentPos = MutableLiveData<Int>()
+    val currentPos: LiveData<Int> = _currentPos
+
     private val _bestRegions = MutableLiveData<List<ResponseBestRegion.Data>>()
     val bestRegions: LiveData<List<ResponseBestRegion.Data>> = _bestRegions
+
+    fun setCurrentPos(posValue: Int) {
+        _currentPos.value = posValue
+    }
 
     fun getBestRegions(groupId: Int) {
         viewModelScope.launch {
@@ -25,5 +34,4 @@ class GroupPlaceViewModel @Inject constructor(private val groupPlaceRepository: 
             }
         }
     }
-
 }
