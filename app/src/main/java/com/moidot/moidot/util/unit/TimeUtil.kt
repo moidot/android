@@ -1,4 +1,4 @@
-package com.moidot.moidot.util
+package com.moidot.moidot.util.unit
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

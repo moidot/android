@@ -11,7 +11,8 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.moidot.moidot.R
-import kotlin.math.min
+import com.moidot.moidot.util.unit.PriceUtil
+import com.moidot.moidot.util.unit.TimeUtil
 
 @BindingAdapter("bind:urlImageBinding")
 fun ImageView.imageBind(url: String?) {
