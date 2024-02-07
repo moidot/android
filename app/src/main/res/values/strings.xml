@@ -144,4 +144,18 @@
     <!-- LeaderDefaultPlace -->
     <string name="space_leader_default_no_member_input_location">아직 출발 위치를 입력한\n모임원이 없어요!</string>
 
+    <!-- CreateVote -->
+    <string name="create_vote_top_bar">투표 시작하기</string>
+    <string name="create_vote_title">투표로 장소를 확정해 보세요.</string>
+    <string name="create_vote_content">투표를 시작하면 모임원의 참여 정보 변경이 어려워요.</string>
+    <string name="create_vote_has_end_time">종료시간이 있는 투표인가요?</string>
+    <string name="create_vote_set_end_time">종료시간을 설정할래요.</string>
+    <string name="create_vote_set_date">날짜를 설정해주세요.</string>
+    <string name="create_vote_set_time">시간을 설정해주세요.</string>
+    <string name="create_vote_has_else_setting">그외 다른 설정사항들이 있나요?</string>
+    <string name="create_vote_multiple_selections">복수선택</string>
+    <string name="create_vote_anonymous_vote">익명투표</string>
+    <string name="create_vote_start_vote">투표 시작하기</string>
+    <string name="create_vote_date_picker_title">날짜 선택</string>
+    <string name="create_vote_time_picker_title">시간 선택</string>
 </resources>
