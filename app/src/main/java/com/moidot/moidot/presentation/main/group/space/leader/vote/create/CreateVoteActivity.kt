@@ -35,15 +35,9 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     }
 
     // yyyy-MM-ddTHH:mm:ss”
-    fun setDateInfoListener() {
+    fun setEndTimeInfoListener() {
         if (viewModel.hasEndTime.value == true) {
             showDatePicker()
-        }
-    }
-
-    fun setTimeInfoListener() {
-        if (viewModel.hasEndTime.value == true) {
-            showTimePicker()
         }
     }
 
