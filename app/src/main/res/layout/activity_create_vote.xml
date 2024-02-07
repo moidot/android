@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <variable
+            name="activity"
+            type="com.moidot.moidot.presentation.main.group.space.leader.vote.create.CreateVoteActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.main.group.space.leader.vote.create.CreateVoteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +30,7 @@
                 android:id="@+id/create_vote_iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                android:onClick="@{() -> activity.finish()}"
                 android:paddingStart="12dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/ic_back"
@@ -81,41 +90,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_end_time_normal"
+            android:onClick="@{() -> activity.endTimeCheckListener()}"
             app:layout_constraintEnd_toEndOf="@id/create_vote_tv_title_has_end_time"
             app:layout_constraintStart_toStartOf="@id/create_vote_tv_title_has_end_time"
             app:layout_constraintTop_toBottomOf="@id/create_vote_tv_title_has_end_time">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:alpha="0.5"
-                android:background="@drawable/bg_input_info_disabled"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/create_vote_tv_set_end_time_input"
-                style="@style/b2_reg_14"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="11dp"
                 android:text="@string/create_vote_set_end_time"
-                android:textColor="@color/gray400"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                bind:voteEndTimeTextFieldActive="@{viewModel.hasEndTime}" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:src="@drawable/btn_checkbox_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                bind:setCheckBoxImage="@{viewModel.hasEndTime}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -124,8 +124,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:alpha="0.5"
-            android:background="@drawable/bg_input_info_disabled"
+            android:alpha="@{viewModel.hasEndTime ? 1.0f : 0.5f}"
+            android:background="@drawable/bg_input_end_time_active"
+            android:onClick="@{() -> activity.setDateInfoListener()}"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
             android:text="@string/create_vote_set_date"
@@ -139,8 +140,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:alpha="0.5"
-            android:background="@drawable/bg_input_info_disabled"
+            android:alpha="@{viewModel.hasEndTime ? 1.0f : 0.5f}"
+            android:background="@drawable/bg_input_end_time_active"
+            android:onClick="@{() -> activity.setTimeInfoListener()}"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
             android:text="@string/create_vote_set_time"

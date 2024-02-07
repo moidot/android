@@ -107,3 +107,12 @@ fun TextView.bestRegionInfoTxt(transitCount: Int, payment: Int, transportationTy
         "PERSONAL" -> this.text = "통행료 ${PriceUtil.changePriceString(payment)}원"
     }
 }
+
+@BindingAdapter("bind:voteEndTimeTextFieldActive")
+fun TextView.setVoteEndTimeTextFieldActive(flag: Boolean) {
+    val currentTextStyle = if (flag) R.style.b2_bold_14 else R.style.b2_reg_14
+    val textColor = if (flag) R.color.orange500 else R.color.gray400
+    this.setTextColor(ResourcesCompat.getColor(resources, textColor, null))
+    this.setTextAppearance(currentTextStyle)
+}
+
