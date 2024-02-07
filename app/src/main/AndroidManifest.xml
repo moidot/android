@@ -88,14 +88,18 @@
 
         <activity
             android:name=".presentation.main.group.space.leader.LeaderSpaceActivity"
-            android:exported="true" />
+            android:exported="false" />
 
+        <activity android:name=".presentation.main.group.space.leader.vote.create.CreateVoteActivity"
+            android:exported="true"/>
+        
         <activity android:name=".presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity"
             android:exported="false"/>
 
         <activity
             android:name=".presentation.main.group.space.member.MemberSpaceActivity"
             android:exported="false" />
+        
     </application>
 
 </manifest>
