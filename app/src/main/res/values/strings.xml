@@ -157,4 +157,5 @@
     <string name="create_vote_anonymous_vote">익명투표</string>
     <string name="create_vote_start_vote">투표 시작하기</string>
     <string name="create_vote_date_picker_title">날짜 선택</string>
+    <string name="create_vote_time_picker_title">시간 선택</string>
 </resources>

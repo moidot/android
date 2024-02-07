@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityCreateVoteBinding
 import com.moidot.moidot.presentation.base.BaseActivity
@@ -73,7 +75,24 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     }
 
     private fun showTimePicker() {
+        val timePicker =
+            MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_12H)
+                .setHour(12)
+                .setMinute(10)
+                .setTheme(R.style.custom_time_picker)
+                .setTitleText(R.string.create_vote_time_picker_title)
+                .build()
 
+        timePicker.addOnPositiveButtonClickListener {
+            val selectedHour = timePicker.hour
+            val selectedMinute = timePicker.minute
+
+            // TODO 선택된 시간에 대한 작업 수행
+            Log.d("kite", "Selected time: $selectedHour:$selectedMinute")
+        }
+
+        timePicker.show(supportFragmentManager, "timePicker")
     }
 
 }
