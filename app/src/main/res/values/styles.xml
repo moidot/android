@@ -110,6 +110,7 @@
     <style name="custom_button_outline" parent="Widget.MaterialComponents.TimePicker.Button">
         <item name="android:textColor">@color/clock_btn_txt_color</item>
         <item name="strokeColor">@color/orange500</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="backgroundTint">@color/clock_btn_color</item>
     </style>
 
