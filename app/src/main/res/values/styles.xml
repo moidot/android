@@ -83,4 +83,12 @@
         <item name="tabIndicator">@drawable/bg_tab_indicator</item>
         <item name="tabSelectedTextAppearance">@style/b2_bold_14</item>
     </style>
+
+    <style name="custom_date_picker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/orange500</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:textColorPrimary">@color/material_on_surface_emphasis_medium</item>
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
 </resources>
