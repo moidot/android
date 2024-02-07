@@ -29,15 +29,20 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
 
     fun setDateInfoListener() {
         if (viewModel.hasEndTime.value == true) {
-
         }
     }
 
     fun setTimeInfoListener() {
         if (viewModel.hasEndTime.value == true) {
-
         }
     }
 
+    fun setMultipleSelectionCheckListener() {
+        viewModel.setMultipleSelectionsCheckState(!viewModel.multipleSelectionsState.value!!)
+    }
+
+    fun setAnonymousVoteCheckListener() {
+        viewModel.setAnonymousVoteState(!viewModel.anonymousVoteState.value!!)
+    }
 
 }
