@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,6 +9,225 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/create_vote_container_top_bar"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/create_vote_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="8dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/b1_bold_16"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="@string/create_vote_top_bar"
+                android:textColor="@color/gray700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/create_vote_iv_back"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/create_vote_tv_title"
+            style="@style/h1_bold_24"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/create_vote_title"
+            android:textColor="@color/gray700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_vote_container_top_bar" />
+
+        <TextView
+            android:id="@+id/create_vote_tv_content"
+            style="@style/b2_reg_14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/create_vote_content"
+            android:textColor="@color/gray400"
+            app:layout_constraintEnd_toEndOf="@+id/create_vote_tv_title"
+            app:layout_constraintStart_toStartOf="@id/create_vote_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/create_vote_tv_title" />
+
+        <TextView
+            android:id="@+id/create_vote_tv_title_has_end_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:text="@string/create_vote_has_end_time"
+            app:layout_constraintEnd_toEndOf="@id/create_vote_tv_content"
+            app:layout_constraintStart_toStartOf="@id/create_vote_tv_content"
+            app:layout_constraintTop_toBottomOf="@id/create_vote_tv_content" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/create_vote_container_set_end_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/create_vote_tv_title_has_end_time"
+            app:layout_constraintStart_toStartOf="@id/create_vote_tv_title_has_end_time"
+            app:layout_constraintTop_toBottomOf="@id/create_vote_tv_title_has_end_time">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.5"
+                android:background="@drawable/bg_input_info_disabled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/create_vote_tv_set_end_time_input"
+                style="@style/b2_reg_14"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="11dp"
+                android:text="@string/create_vote_set_end_time"
+                android:textColor="@color/gray400"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/btn_checkbox_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/create_vote_tv_set_date"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="0.5"
+            android:background="@drawable/bg_input_info_disabled"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="@string/create_vote_set_date"
+            android:textColor="@color/orange500"
+            app:layout_constraintStart_toStartOf="@id/create_vote_container_set_end_time"
+            app:layout_constraintTop_toBottomOf="@id/create_vote_container_set_end_time" />
+
+        <TextView
+            android:id="@+id/create_vote_tv_set_time"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:alpha="0.5"
+            android:background="@drawable/bg_input_info_disabled"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="@string/create_vote_set_time"
+            android:textColor="@color/orange500"
+            app:layout_constraintStart_toEndOf="@id/create_vote_tv_set_date"
+            app:layout_constraintTop_toTopOf="@id/create_vote_tv_set_date" />
+
+        <TextView
+            android:id="@+id/create_vote_tv_has_else_setting"
+            style="@style/b2_med_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/create_vote_has_else_setting"
+            android:textColor="@color/gray800"
+            app:layout_constraintStart_toStartOf="@id/create_vote_tv_set_date"
+            app:layout_constraintTop_toBottomOf="@id/create_vote_tv_set_date" />
+
+        <LinearLayout
+            android:id="@+id/create_vote_container_multiple_selections"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/create_vote_tv_has_else_setting"
+            app:layout_constraintTop_toBottomOf="@id/create_vote_tv_has_else_setting">
+
+            <TextView
+                android:id="@+id/create_vote_tv_multiple_selections"
+                style="@style/b2_reg_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="11dp"
+                android:paddingStart="12dp"
+                android:text="@string/create_vote_multiple_selections"
+                android:textColor="@color/gray400" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/btn_checkbox_normal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/create_vote_container_anonymous_vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@id/create_vote_container_multiple_selections"
+            app:layout_constraintTop_toBottomOf="@id/create_vote_tv_has_else_setting">
+
+            <TextView
+                android:id="@+id/create_vote_tv_anonymous_vote"
+                style="@style/b2_reg_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="11dp"
+                android:paddingStart="12dp"
+                android:text="@string/create_vote_anonymous_vote"
+                android:textColor="@color/gray400" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/btn_checkbox_normal" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_vote_btn_start_vote"
+            style="@style/btn_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/create_vote_start_vote"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
