@@ -1,7 +1,6 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.create
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.CompositeDateValidator
@@ -40,7 +39,6 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     // 종료 시간 추가 여부 체크
     fun endTimeCheckListener() {
         viewModel.setHasEndTime(!viewModel.hasEndTime.value!!)
-        Log.d("kite", viewModel.endTimeInputDone.value.toString())
     }
 
     fun setEndTimeInfoListener() {
