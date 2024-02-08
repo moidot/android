@@ -3,10 +3,12 @@ package com.moidot.moidot.presentation.main.group.space.member.info
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentMemberInfoBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
 import com.moidot.moidot.presentation.main.group.space.member.MemberSpaceActivity
 import com.moidot.moidot.presentation.main.group.space.member.info.adapter.MemberGroupInfoHeaderAdapter
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
@@ -20,12 +22,18 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
     private val groupId by lazy { (activity as MemberSpaceActivity).groupId }
     private val memberGroupInfoHeaderAdapter by lazy { MemberGroupInfoHeaderAdapter() }
     private val viewModel: MemberInfoViewModel by viewModels()
+    private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadUserInfo()
         initBinding()
         initView()
         setupObservers()
+    }
+
+    private fun loadUserInfo(){
+        activityViewModel.loadUserInfo()
     }
 
     private fun initBinding() {
@@ -49,10 +57,17 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
     }
 
     private fun setupObservers() {
+        setupUserInfoView()
         setupGroupDefaultInfoView()
         setupGroupInfoRecyclerview()
         setupGroupDeleteObserver()
         setupToastEventObserver()
+    }
+
+    private fun setupUserInfoView(){
+        activityViewModel.userInfo.observe(viewLifecycleOwner) {
+            memberGroupInfoHeaderAdapter.setUserInfo(it.userName)
+        }
     }
 
     private fun setupGroupDefaultInfoView() {
