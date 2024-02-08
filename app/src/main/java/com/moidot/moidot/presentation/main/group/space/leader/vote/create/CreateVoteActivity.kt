@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.create
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.CompositeDateValidator
@@ -39,6 +40,7 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     // 종료 시간 추가 여부 체크
     fun endTimeCheckListener() {
         viewModel.setHasEndTime(!viewModel.hasEndTime.value!!)
+        Log.d("kite", viewModel.endTimeInputDone.value.toString())
     }
 
     fun setEndTimeInfoListener() {
@@ -115,8 +117,22 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     }
 
     private fun setupObserver() {
+        setHasEndTimeStateObserver()
         setValidateEndTimeObserver()
         setEndTimeTxtObserver()
+        setEndTimeInputDoneStateObserver()
+    }
+
+    private fun setHasEndTimeStateObserver() {
+        viewModel.hasEndTime.observe(this) {
+            if (it && viewModel.endTimeInputDone.value == true) {
+                viewModel.setBtnActiveState(true)
+            } else if (it && viewModel.endTimeInputDone.value == false) {
+                viewModel.setBtnActiveState(false)
+            } else {
+                viewModel.setBtnActiveState(true)
+            }
+        }
     }
 
     private fun setValidateEndTimeObserver() {
@@ -139,6 +155,18 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
                 binding.createVoteTvSetEndTimeInput.text = spannableTxt
             } else {
                 binding.createVoteTvSetEndTimeInput.text = it
+            }
+        }
+    }
+
+    private fun setEndTimeInputDoneStateObserver() {
+        // 종료 입력 활성화 체크시 ->  종료 입력 체크
+        viewModel.endTimeInputDone.observe(this) {
+            when {
+                it && viewModel.hasEndTime.value == true -> { viewModel.setBtnActiveState(true) }
+                it && viewModel.hasEndTime.value == false -> { viewModel.setBtnActiveState(true) }
+                !it && viewModel.hasEndTime.value == true -> { viewModel.setBtnActiveState(false) }
+                !it && viewModel.hasEndTime.value == false -> { viewModel.setBtnActiveState(true) }
             }
         }
     }

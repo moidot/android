@@ -237,6 +237,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="24dp"
             android:text="@string/create_vote_start_vote"
+            android:enabled="@{viewModel.btnActiveState}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -47,6 +47,9 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
     private val _anonymousVoteState = MutableLiveData<Boolean>(false)
     val anonymousVoteState: LiveData<Boolean> = _anonymousVoteState
 
+    private val _btnActiveState = MutableLiveData<Boolean>(true)
+    val btnActiveState: LiveData<Boolean> = _btnActiveState
+
     fun setHasEndTime(flag: Boolean) {
         _hasEndTime.value = flag
     }
@@ -76,7 +79,9 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
     }
 
     fun calculateEndTimeDuration(hour: Int, minute: Int) {
-        if(countDownTimer != null) { countDownTimer!!.cancel() } // 이전에 호출했던 것이 남아있으면 종료시킨다.
+        if (countDownTimer != null) {
+            countDownTimer!!.cancel()
+        } // 이전에 호출했던 것이 남아있으면 종료시킨다.
 
         val selectedDateTime = _currentSelectedEndDate.value?.let {
             LocalDate.parse(it, DateTimeFormatter.ofPattern("yyyy.MM.dd"))
@@ -109,8 +114,8 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         if (days == 0 && hours == 0 && minutes <= 59) {
             _endTimeTxt.value = "최소 1시간 이후부터 투표가 가능합니다."
             _endTimeInputDone.value = false
-            _hasEndTime.value = false
-            countDownTimer!!.cancel() // 잘못된 시간이 입력되면 카운트 다운이 종료되어야 한다.
+             _hasEndTime.value = false
+            countDownTimer!!.cancel() // 잘못된 시간으로 변경되면 카운트 다운이 종료되어야 한다.
         } else {
             _endTimeTxt.value = "${days}일 ${hours}시간 ${minutes}분 후에 투표가 종료됩니다."
             _endTimeInputDone.value = true
@@ -124,6 +129,10 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
 
     fun setAnonymousVoteState(flag: Boolean) {
         _anonymousVoteState.value = flag
+    }
+
+    fun setBtnActiveState(flag: Boolean) {
+        _btnActiveState.value = flag
     }
 
 }
