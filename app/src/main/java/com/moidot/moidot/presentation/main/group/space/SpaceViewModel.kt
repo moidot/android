@@ -25,10 +25,15 @@ class SpaceViewModel @Inject constructor(private val groupRepository: GroupRepos
     private val _userInfo = MutableLiveData<ResponseGroupUserInfo.Data>()
     val userInfo : LiveData<ResponseGroupUserInfo.Data> = _userInfo
 
+    private val userName = MutableLiveData<String>("")
+
     fun loadUserInfo() {
         viewModelScope.launch {
             groupRepository.getUserInfo(_groupId.value!!).onSuccess {
-                if (it.code == 0) _userInfo.value = it.data
+                if (it.code == 0) {
+                    _userInfo.value = it.data
+                    userName.value = it.data.userName
+                }
             }
         }
     }
@@ -43,6 +48,10 @@ class SpaceViewModel @Inject constructor(private val groupRepository: GroupRepos
 
     fun setGroupParticipates(count: Int) {
         _groupParticipates.value = count
+    }
+
+    fun getUserName():String {
+        return userName.value!!
     }
 
 }

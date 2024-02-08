@@ -55,9 +55,13 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getBestRegions(activityViewModel.groupId.value!!)
+        loadData()
         initView()
         setupObservers()
+    }
+
+    private fun loadData() {
+        activityViewModel.loadUserInfo()
     }
 
     private fun initView() {
@@ -115,8 +119,17 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     }
 
     private fun setupObservers() {
+        setupMyInfo()
         setupBestRegionsObserver()
         setupCurPosObserver()
+    }
+
+    // 유저 정보를 먼저 받아온 뒤에 해당 정보를 바탕으로 장소 정보 세팅해주기
+    // path, 띠지, 마커
+    private fun setupMyInfo() {
+        activityViewModel.userInfo.observe(viewLifecycleOwner) {
+            viewModel.getBestRegions(activityViewModel.groupId.value!!)
+        }
     }
 
     private fun setupBestRegionsObserver() {
@@ -200,17 +213,37 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     // 유저 위치 정보 마커 추가
     private fun addUserInfoMarkers(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
         for (i in moveUserInfos.indices) {
-            val moveUserInfo = moveUserInfos[i] // TODO 본인 위치의 마커는 주황색으로 분기처리 해주기 (API 대기중)₩
-            labelLayer.addLabel(
-                LabelOptions.from( // 첫번째 배열이 유저의 시작 위치
-                    moveUserInfo.userName, LatLng.from(moveUserInfo.path[0].y, moveUserInfo.path[0].x)
-                ).setStyles(
-                    LabelStyle.from(mapManager.getOtherPlaceMarker(moveUserInfo.userName))
-                        .setApplyDpScale(false)
-                        .setIconTransition(LabelTransition.from(Transition.Scale, Transition.Scale)),
-                )
-            )
+            val moveUserInfo = moveUserInfos[i]
+            if (moveUserInfo.userName == activityViewModel.getUserName()) { // 본인 마커 추가
+                addMyInfoMarker(moveUserInfo)
+            } else { // 다른 사람 마커 추가
+                addOtherInfoMarker(moveUserInfo)
+            }
         }
+    }
+
+    private fun addMyInfoMarker(moveUserInfo:ResponseBestRegion.Data.MoveUserInfo) {
+        labelLayer.addLabel(
+            LabelOptions.from( // 첫번째 배열이 유저의 시작 위치
+                moveUserInfo.userName, LatLng.from(moveUserInfo.path[0].y, moveUserInfo.path[0].x)
+            ).setStyles(
+                LabelStyle.from(mapManager.getMyPlaceMarker(moveUserInfo.userName))
+                    .setApplyDpScale(false)
+                    .setIconTransition(LabelTransition.from(Transition.Scale, Transition.Scale)),
+            )
+        )
+    }
+
+    private fun addOtherInfoMarker(moveUserInfo:ResponseBestRegion.Data.MoveUserInfo) {
+        labelLayer.addLabel(
+            LabelOptions.from( // 첫번째 배열이 유저의 시작 위치
+                moveUserInfo.userName, LatLng.from(moveUserInfo.path[0].y, moveUserInfo.path[0].x)
+            ).setStyles(
+                LabelStyle.from(mapManager.getOtherPlaceMarker(moveUserInfo.userName))
+                    .setApplyDpScale(false)
+                    .setIconTransition(LabelTransition.from(Transition.Scale, Transition.Scale)),
+            )
+        )
     }
 
     // TODO 본인게 아닌건 분기처리
