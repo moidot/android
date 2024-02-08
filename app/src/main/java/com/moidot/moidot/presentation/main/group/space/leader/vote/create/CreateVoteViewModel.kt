@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.ZoneId
 import java.time.ZoneId.systemDefault
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -91,7 +90,6 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
                     val remainingDuration = Duration.between(currentDateTime, selectedDateTime)
                     formatDuration(remainingDuration)
                 }
-
                 override fun onFinish() {
 
                 }
@@ -104,7 +102,16 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         val hours = (duration.toHours() % 24).toInt()
         val minutes = (duration.toMinutes() % 60).toInt()
 
-        _endTimeTxt.value = "${days}일 ${hours}시간 ${minutes}분 후에 투표가 종료됩니다."
+        if (days == 0 && hours == 0 && minutes <= 59) {
+            _endTimeTxt.value = "최소 1시간 이후부터 투표가 가능합니다."
+            _endTimeInputDone.value = false
+            _hasEndTime.value = false
+            countDownTimer!!.cancel()
+        } else {
+            _endTimeTxt.value = "${days}일 ${hours}시간 ${minutes}분 후에 투표가 종료됩니다."
+            _endTimeInputDone.value = true
+            _hasEndTime.value = true
+        }
     }
 
 

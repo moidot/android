@@ -70,9 +70,9 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     private fun getValidateDateRange(): CalendarConstraints.Builder {
         val minDateCalendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
 
-        minDateCalendar.add(Calendar.DAY_OF_MONTH, -1) // forward 때문에 -1
+        // TODO 4시쯤에 다시 테스트해보는걸루....?
         val fromDate = DateValidatorPointForward.from(minDateCalendar.timeInMillis)
-        minDateCalendar.add(Calendar.DAY_OF_MONTH, 8)
+        minDateCalendar.add(Calendar.DAY_OF_MONTH, 7)
         val toDate = DateValidatorPointBackward.before(minDateCalendar.timeInMillis)
 
         val validators = CompositeDateValidator.allOf(arrayListOf(fromDate, toDate))
