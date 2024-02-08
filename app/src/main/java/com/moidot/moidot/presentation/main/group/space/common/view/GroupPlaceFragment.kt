@@ -34,6 +34,7 @@ import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegion
 import com.moidot.moidot.presentation.main.group.space.common.adapter.MoveUserInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.common.viewmodel.GroupPlaceViewModel
 import com.moidot.moidot.util.MarkerManager
+import com.moidot.moidot.util.SpannableTxt
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.max
@@ -147,6 +148,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             if (viewModel.isMapInitialized.value == true) { // 지도 초기화 이후 작업
                 kakaoMap.labelManager!!.removeAllLabelLayer() // 기존 마커 삭제
                 routeLine.remove() // 기존 path 삭제
+                setUpSearchDetailBtnTxt(currentRegion.name)
                 initLabelLayerAndRouteManager()
                 kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(LatLng.from(currentRegion.latitude, currentRegion.longitude))) // 위치 좌표 설정
                 kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(setZoomLevelByCheckMapPoints(currentRegion.moveUserInfo)))
@@ -155,6 +157,16 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
                 addMovePathRoutineLines(currentRegion.moveUserInfo) // 유저 path 그리기
             }
         }
+    }
+
+    private fun setUpSearchDetailBtnTxt(regionName:String) {
+        val content = resources.getString(R.string.space_place_btn_search_detail).format(regionName)
+        val spannableTxt = SpannableTxt(requireContext()).applySpannableStyles(
+            content = content,
+            target = regionName,
+            styleResId = R.style.b2_bold_14
+        )
+        binding.bottomGroupPlaceBtnDetailSearch.text = spannableTxt
     }
 
     private fun initMapView(bestRegions: List<ResponseBestRegion.Data>) {
@@ -169,6 +181,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
                 kakaoMap = map
                 viewModel.isMapInitialized.value = true // 맵 초기화 정보 설정
                 initLabelLayerAndRouteManager()
+                setUpSearchDetailBtnTxt(bestRegions[0].name)
                 kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(setZoomLevelByCheckMapPoints(bestRegions[0].moveUserInfo)))
                 addBestRegionPlaceMarker(bestRegions[0].name, bestRegions[0].longitude, bestRegions[0].latitude) // 추천 장소 마커 추가
                 addUserInfoMarkers(bestRegions[0].moveUserInfo) // 유저 정보 마커 추가

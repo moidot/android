@@ -114,6 +114,9 @@
     <string name="space_tab_vote">장소 투표</string>
     <string name="space_tab_info">모임 정보</string>
 
+    <!--PlaceFragment -->
+    <string name="space_place_btn_search_detail">%s 상세 장소 검색하기</string>
+
     <!--Space - InfoFragment -->
     <string name="space_info_group_name_title">모이닷 스페이스 이름</string>
     <string name="space_info_member_remove">모임원 내보내기</string>
