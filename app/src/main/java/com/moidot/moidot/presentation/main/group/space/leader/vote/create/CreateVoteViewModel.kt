@@ -76,6 +76,8 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
     }
 
     fun calculateEndTimeDuration(hour: Int, minute: Int) {
+        if(countDownTimer != null) { countDownTimer!!.cancel() } // 이전에 호출했던 것이 남아있으면 종료시킨다.
+
         val selectedDateTime = _currentSelectedEndDate.value?.let {
             LocalDate.parse(it, DateTimeFormatter.ofPattern("yyyy.MM.dd"))
         }!!.atTime(hour, minute)
@@ -112,7 +114,6 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         } else {
             _endTimeTxt.value = "${days}일 ${hours}시간 ${minutes}분 후에 투표가 종료됩니다."
             _endTimeInputDone.value = true
-            _hasEndTime.value = true
         }
     }
 
