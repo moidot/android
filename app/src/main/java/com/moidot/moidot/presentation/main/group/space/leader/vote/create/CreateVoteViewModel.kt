@@ -138,4 +138,9 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         _btnActiveState.value = flag
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        countDownTimer?.cancel()
+    }
+
 }
