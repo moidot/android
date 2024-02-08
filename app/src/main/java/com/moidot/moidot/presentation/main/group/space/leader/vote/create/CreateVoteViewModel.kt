@@ -1,6 +1,5 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.create
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,15 +18,22 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
     private val _hasEndTime = MutableLiveData<Boolean>(false)
     val hasEndTime: LiveData<Boolean> = _hasEndTime
 
+    // 종료 시간 입력 완료
     private val _endTimeInputDone = MutableLiveData<Boolean>(false)
-    val dateInputDone: LiveData<Boolean> = _endTimeInputDone
+    val endTimeInputDone: LiveData<Boolean> = _endTimeInputDone
 
+    // 마지막으로 선택한 종료 시간
     private val _currentSelectedEndDate = MutableLiveData<String>()
     val currentSelectedEndDate: LiveData<String> = _currentSelectedEndDate
 
+    // 서버에 보내줄 종료 시간 - yyyy-MM-ddTHH:mm:ss” 형태로 서버에 보내주어야 한다.
+    private val selectedEndDateTime = MutableLiveData<String>()
+
+    // 뷰에서 사용자에게 보여질 종료 예정까지 남은 시간
     private val _endTimeTxt = MutableLiveData<String>()
     val endTimeTxt: LiveData<String> = _endTimeTxt
 
+    // 종료 시간 유효성 체크
     private val _isValidateEndTime = MutableSingleLiveData<Boolean>(true)
     val isValidateEndTime: SingleLiveData<Boolean> = _isValidateEndTime
 
@@ -53,7 +59,7 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         return false
     }
 
-    // 시간차이 계산 함수
+    // 시간 차이 계산 함수
     fun checkIsValidTime(hour: Int, minute: Int) {
         val currentDateTime = LocalDateTime.now()
         val givenDateTime = currentDateTime.withHour(hour).withMinute(minute)
@@ -82,9 +88,6 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         val minutes = (duration.toMinutes() % 60).toInt()
 
         _endTimeTxt.value = "${days}일 ${hours}시간 ${minutes}분 후에 투표가 종료됩니다."
-        Log.d("kite", days.toString())
-        Log.d("kite", hours.toString())
-        Log.d("kite", minutes.toString())
     }
 
 
