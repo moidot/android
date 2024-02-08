@@ -136,6 +136,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:alpha="@{viewModel.hasEndTime ? 1.0f : 0.5f}"
+                android:bufferType="spannable"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="11dp"
                 android:text="@string/create_vote_set_end_time"

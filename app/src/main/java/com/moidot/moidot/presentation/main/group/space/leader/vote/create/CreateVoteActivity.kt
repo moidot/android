@@ -13,6 +13,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityCreateVoteBinding
 import com.moidot.moidot.presentation.base.BaseActivity
 import com.moidot.moidot.util.CustomSnackBar
+import com.moidot.moidot.util.SpannableTxt
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 import java.util.Date
@@ -114,13 +115,31 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     }
 
     private fun setupObserver() {
+        setValidateEndTimeObserver()
+        setEndTimeTxtObserver()
+    }
+
+    private fun setValidateEndTimeObserver() {
         viewModel.isValidateEndTime.observe(this) {
             if (!it) {
                 CustomSnackBar.makeSnackBar(binding.root, TIME_ERROR_MSG).show()
             }
         }
+    }
+
+    private fun setEndTimeTxtObserver() {
         viewModel.endTimeTxt.observe(this) {
-            binding.createVoteTvSetEndTimeInput.text = it
+            if (viewModel.endTimeInputDone.value == true) { // 올바르게 입력된 시간은 spannable 처리를 해준다
+                val target = it.substring(0, it.indexOf("분") + 1)
+                val spannableTxt = SpannableTxt(this).applySpannableStyles(
+                    content = it,
+                    target = target,
+                    styleResId = R.style.b2_bold_14
+                )
+                binding.createVoteTvSetEndTimeInput.text = spannableTxt
+            } else {
+                binding.createVoteTvSetEndTimeInput.text = it
+            }
         }
     }
 

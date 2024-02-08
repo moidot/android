@@ -7,7 +7,7 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.TextAppearanceSpan
 
 class SpannableTxt(private val mContext: Context) {
-    fun applySpannableStyles(content: String, target: String, color: Int?, styleResId: Int?): SpannableString {
+    fun applySpannableStyles(content: String, target: String, color: Int? = null, styleResId: Int? = null): SpannableString {
         val spannableString = SpannableString(content)
         val startIdx = content.indexOf(target)
         val endIdx = startIdx + target.length
