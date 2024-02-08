@@ -88,18 +88,22 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         }!!.atTime(hour, minute)
 
         val remainingMillis = selectedDateTime.atZone(systemDefault()).toInstant().toEpochMilli()
+        fun setTimeDurationInfo() {
+            val currentDateTime = LocalDateTime.now().minusMinutes(1)
+            val remainingDuration = Duration.between(currentDateTime, selectedDateTime)
+            formatDuration(remainingDuration)
+        }
+
         // 실질적으로 보이는 시간은 59분 후지만 사용자가 보이는 ui를 매끄럽게 하기 위해 1분을 딜레이시켰다.
         if (hasEndTime.value == true) {
             // 분 단위로 ui에 보이는 숫자를 갱신시킨다.
+            setTimeDurationInfo() // UI 에 Spannable을 그리기 위해 카운트 다운 시작 전 최초로 한 번 먼저 값을 넣어 준다.
             countDownTimer = object : CountDownTimer(remainingMillis, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    val currentDateTime = LocalDateTime.now().minusMinutes(1)
-                    val remainingDuration = Duration.between(currentDateTime, selectedDateTime)
-                    formatDuration(remainingDuration)
+                    setTimeDurationInfo()
                 }
 
                 override fun onFinish() {
-
                 }
             }.start()
         }
@@ -113,7 +117,7 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         if (days == 0 && hours == 0 && minutes <= 59) {
             _endTimeTxt.value = "최소 1시간 이후부터 투표가 가능합니다."
             _endTimeInputDone.value = false
-             _hasEndTime.value = false
+            _hasEndTime.value = false
             countDownTimer!!.cancel() // 잘못된 시간으로 변경되면 카운트 다운이 종료되어야 한다.
         } else {
             _endTimeTxt.value = "${days}일 ${hours}시간 ${minutes}분 후에 투표가 종료됩니다."
