@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.kakao.vectormap.GestureType
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -17,6 +17,7 @@ import com.kakao.vectormap.label.OrderingType
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
 import com.moidot.moidot.util.MarkerManager
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,47 +30,17 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
+    private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initMapView()
+        loadUserInfo()
         initView()
+        setupObserver()
     }
 
-    private fun initMapView() {
-        binding.fgLeaderPlaceMapView.layoutParams.height = getScreenHeight(requireContext())
-        mapManager = MarkerManager(requireContext())
-        binding.fgLeaderPlaceMapView.start(object : KakaoMapReadyCallback() {
-            override fun getPosition(): LatLng { // TODO 모임장의 위치 정보
-                return LatLng.from(37.4005, 127.1101)
-            }
-
-            override fun onMapReady(map: KakaoMap) {
-                kakaoMap = map
-                disableGestures()
-                addLeaderInfoMarker()
-            }
-        })
-    }
-
-    // 지도 터치 막기
-    private fun disableGestures() {
-        GestureType.values().forEach { kakaoMap.setGestureEnable(it, false) }
-    }
-
-    // 마커 추가
-    private fun addLeaderInfoMarker() {
-        labelLayer = kakaoMap.labelManager!!.addLayer(
-            LabelLayerOptions.from()
-                .setOrderingType(OrderingType.Rank)
-        )!!
-
-        labelLayer.addLabel(
-            LabelOptions.from( // TODO 모임장의 출발 위치
-                "default", LatLng.from(37.4005, 127.1101)
-            ).setStyles( // TODO 리더의 이름 정보
-                LabelStyle.from(mapManager.getMyPlaceMarker("정")).setApplyDpScale(false)
-            )
-        )
+    private fun loadUserInfo() {
+        activityViewModel.loadUserInfo()
     }
 
     private fun initView() {
@@ -88,7 +59,6 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
         val interactionView = binding.fgLeaderPlaceViewInteraction
         val emptyMemberContainerView = binding.bottomLeaderPlaceContainerEmptyMemeber
         BottomSheetBehavior.from(binding.fgLeaderPlaceBottomSheet).apply {
-            state = BottomSheetBehavior.STATE_HALF_EXPANDED
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     when (newState) {
@@ -131,4 +101,46 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
         }
     }
 
+    private fun setupObserver() {
+        activityViewModel.userInfo.observe(viewLifecycleOwner) {
+            initMapView(it.userName)
+            setUserInfoView(it.userName)
+        }
+    }
+
+    private fun initMapView(userName: String) {
+        binding.fgLeaderPlaceMapView.layoutParams.height = getScreenHeight(requireContext())
+        mapManager = MarkerManager(requireContext())
+        binding.fgLeaderPlaceMapView.start(object : KakaoMapReadyCallback() {
+            override fun getPosition(): LatLng { // TODO 모임장의 위치 정보 -> API 수정 대기
+                return LatLng.from(37.4005, 127.1101)
+            }
+
+            override fun onMapReady(map: KakaoMap) {
+                kakaoMap = map
+                BottomSheetBehavior.from(binding.fgLeaderPlaceBottomSheet).state = BottomSheetBehavior.STATE_HALF_EXPANDED // 지도 크기 떄문에 초기화 여기서
+                addLeaderInfoMarker(userName)
+            }
+        })
+    }
+
+    // 마커 추가
+    private fun addLeaderInfoMarker(userName:String) {
+        labelLayer = kakaoMap.labelManager!!.addLayer(
+            LabelLayerOptions.from()
+                .setOrderingType(OrderingType.Rank)
+        )!!
+
+        labelLayer.addLabel(
+            LabelOptions.from( // TODO 모임장의 출발 위치
+                "default", LatLng.from(37.4005, 127.1101)
+            ).setStyles(
+                LabelStyle.from(mapManager.getMyPlaceMarker(userName)).setApplyDpScale(false)
+            )
+        )
+    }
+
+    private fun setUserInfoView(userName: String) {
+        binding.bottomLeaderPlaceTvMemberName.text = userName
+    }
 }
