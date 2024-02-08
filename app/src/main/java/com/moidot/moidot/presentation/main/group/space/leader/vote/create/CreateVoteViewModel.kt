@@ -1,9 +1,15 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.create
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.moidot.moidot.util.event.MutableSingleLiveData
+import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -12,11 +18,14 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
     private val _hasEndTime = MutableLiveData<Boolean>(false)
     val hasEndTime: LiveData<Boolean> = _hasEndTime
 
-    private val _dateInputDone = MutableLiveData<Boolean>(false)
-    val dateInputDone: LiveData<Boolean> = _dateInputDone
+    private val _endTimeInputDone = MutableLiveData<Boolean>(false)
+    val dateInputDone: LiveData<Boolean> = _endTimeInputDone
 
-    private val _timeInputDone = MutableLiveData<Boolean>(false)
-    val timeInputDone: LiveData<Boolean> = _timeInputDone
+    private val _currentSelectedEndDate = MutableLiveData<String>()
+    val currentSelectedEndDate: LiveData<String> = _currentSelectedEndDate
+
+    private val _isValidateEndTime = MutableSingleLiveData<Boolean>(true)
+    val isValidateEndTime: SingleLiveData<Boolean> = _isValidateEndTime
 
     private val _multipleSelectionsState = MutableLiveData<Boolean>(false)
     val multipleSelectionsState: LiveData<Boolean> = _multipleSelectionsState
@@ -28,13 +37,33 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         _hasEndTime.value = flag
     }
 
-    fun setDateInputDone(flag: Boolean) {
-        _dateInputDone.value = flag
+    fun setEndTimeInputDone(flag: Boolean) {
+        _endTimeInputDone.value = flag
     }
 
-    fun setTimeInputDone(flag: Boolean) {
-        _timeInputDone.value = flag
+    fun setCurrentSelectedEndDate(year: Int, month: Int, day: Int) {
+        val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+        _currentSelectedEndDate.value = LocalDate.of(year, month, day).format(formatter)
     }
+
+    /** 마감일을 당일로 설정해놓았다면, 마감시간을 최소 1시간 이후로 설정했는지 체크해야한다.*/
+    fun checkIsSameDate(): Boolean {
+        val formattedTodayDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+        if (_currentSelectedEndDate.value == formattedTodayDateTime) return true
+        return false
+    }
+
+    // 시간차이 계산 함수
+    fun checkIsValidTime(hour: Int, minute: Int) {
+        val currentDateTime = LocalDateTime.now()
+        val givenDateTime = currentDateTime.withHour(hour).withMinute(minute)
+        if (givenDateTime.isAfter(currentDateTime)) {
+            _isValidateEndTime.setValue(true)
+        } else {
+            _isValidateEndTime.setValue(false)
+        }
+    }
+
 
     fun setMultipleSelectionsCheckState(flag: Boolean) {
         _multipleSelectionsState.value = flag
@@ -43,4 +72,5 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
     fun setAnonymousVoteState(flag: Boolean) {
         _anonymousVoteState.value = flag
     }
+
 }
