@@ -40,7 +40,6 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     // 종료 시간 추가 여부 체크
     fun endTimeCheckListener() {
         viewModel.setHasEndTime(!viewModel.hasEndTime.value!!)
-        Log.d("kite", viewModel.endTimeInputDone.value.toString())
     }
 
     fun setEndTimeInfoListener() {

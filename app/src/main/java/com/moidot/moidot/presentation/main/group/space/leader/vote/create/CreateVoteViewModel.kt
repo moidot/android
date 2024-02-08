@@ -93,7 +93,6 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
             // 분 단위로 ui에 보이는 숫자를 갱신시킨다.
             countDownTimer = object : CountDownTimer(remainingMillis, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    if (hasEndTime.value == false) countDownTimer!!.cancel() // 사용자가 종료시간 선택을 해제하면 카운트 다운도 멈춰야한다.
                     val currentDateTime = LocalDateTime.now().minusMinutes(1)
                     val remainingDuration = Duration.between(currentDateTime, selectedDateTime)
                     formatDuration(remainingDuration)
