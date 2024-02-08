@@ -30,9 +30,14 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadUserInfo()
         initBinding()
         initView()
         setupObservers()
+    }
+
+    private fun loadUserInfo() {
+        activityViewModel.loadUserInfo()
     }
 
     private fun initBinding() {
@@ -56,10 +61,17 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     }
 
     private fun setupObservers() {
+        setupUserInfoView()
         setupGroupDefaultInfoView()
         setupGroupInfoRecyclerview()
         setupGroupDeleteObserver()
         setupToastEventObserver()
+    }
+
+    private fun setupUserInfoView(){
+        activityViewModel.userInfo.observe(viewLifecycleOwner) {
+            leaderGroupInfoHeaderAdapter.setUserInfo(it.userName)
+        }
     }
 
     private fun setupGroupDefaultInfoView() {
