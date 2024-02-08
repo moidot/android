@@ -59,10 +59,7 @@ class MemberSpaceActivity : BaseActivity<ActivityMemeberSpaceBinding>(R.layout.a
         binding.memberSpaceTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-
-                    0 -> {
-                        navController.navigate(R.id.groupPlaceFragment)
-                    }
+                    0 -> navController.navigate(R.id.groupPlaceFragment)
                     1 -> navController.navigate(R.id.memberVoteFragment)
                     2 -> navController.navigate(R.id.memberInfoFragment)
                 }
