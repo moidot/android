@@ -1,6 +1,5 @@
-package com.moidot.moidot.presentation.main.group.space.leader
+package com.moidot.moidot.presentation.main.group.space
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LeaderSpaceViewModel @Inject constructor(private val groupRepository: GroupRepository) : ViewModel() {
+class SpaceViewModel @Inject constructor(private val groupRepository: GroupRepository) : ViewModel() {
 
     private val _groupId = MutableLiveData<Int>(0)
     val groupId: LiveData<Int> = _groupId

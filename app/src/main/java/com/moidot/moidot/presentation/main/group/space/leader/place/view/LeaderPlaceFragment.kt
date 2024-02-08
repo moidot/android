@@ -17,7 +17,7 @@ import com.kakao.vectormap.label.OrderingType
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
-import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
+import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.util.MarkerManager
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +30,7 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
-    private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
+    private val activityViewModel: SpaceViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

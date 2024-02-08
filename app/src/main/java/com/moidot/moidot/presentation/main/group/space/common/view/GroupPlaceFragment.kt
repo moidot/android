@@ -29,10 +29,10 @@ import com.moidot.moidot.data.data.BestRegionItem
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentGroupPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegionNameAdapter
 import com.moidot.moidot.presentation.main.group.space.common.adapter.MoveUserInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.common.viewmodel.GroupPlaceViewModel
-import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
 import com.moidot.moidot.util.MarkerManager
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,8 +49,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private lateinit var routeLineManager: RouteLineManager
 
     private val viewModel: GroupPlaceViewModel by viewModels()
-    private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
-
+    private val activityViewModel: SpaceViewModel by activityViewModels()
     private val bestRegionNameAdapter by lazy { BestRegionNameAdapter() }
     private val moveUserInfoAdapter by lazy { MoveUserInfoAdapter() }
 
@@ -171,7 +170,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         val mapPoints = moveUserInfos.map { LatLng.from(it.path[0].y, it.path[0].x) }
         for (level in kakaoMap.maxZoomLevel downTo kakaoMap.minZoomLevel) {
             if (kakaoMap.canShowMapPoints(level, *mapPoints.toTypedArray())) {
-                return  level.minus(1)
+                return level.minus(1)
             }
         }
         return kakaoMap.zoomLevel
@@ -215,7 +214,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     }
 
     // TODO 본인게 아닌건 분기처리
-    private fun addMovePathRoutineLines(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>){
+    private fun addMovePathRoutineLines(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
         val stylesSet = RouteLineStylesSet.from(
             "orangeStyles",
             RouteLineStyles.from(RouteLineStyle.from(13f, resources.getColor(R.color.orange500, null)))
