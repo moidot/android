@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.common.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,20 +12,31 @@ import com.moidot.moidot.util.addVerticalMargin
 
 class MoveUserInfoAdapter : ListAdapter<ResponseBestRegion.Data.MoveUserInfo, MoveUserInfoAdapter.BestRegionViewHolder>(bestRegionDiffUtil) {
 
-    class BestRegionViewHolder(val binding: ItemMoveUserInfoBinding) : RecyclerView.ViewHolder(binding.root) {
+    var myName: String = ""
+
+    class BestRegionViewHolder(val binding: ItemMoveUserInfoBinding, private val myName:String) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ResponseBestRegion.Data.MoveUserInfo) {
             binding.data = data
+        }
+
+        fun setMyInfoView(data: ResponseBestRegion.Data.MoveUserInfo) {
+            if (myName == data.userName) {
+                binding.itemMoveUserInfoViewCover.visibility = View.VISIBLE
+            } else {
+                binding.itemMoveUserInfoViewCover.visibility = View.INVISIBLE
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestRegionViewHolder {
         val binding = ItemMoveUserInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return BestRegionViewHolder(binding)
+        return BestRegionViewHolder(binding, myName)
     }
 
     override fun onBindViewHolder(holder: BestRegionViewHolder, position: Int) {
         addVerticalMargin(holder.itemView, position, itemCount, 8)
         holder.bind(getItem(position))
+        holder.setMyInfoView(getItem(position))
     }
 
     companion object {

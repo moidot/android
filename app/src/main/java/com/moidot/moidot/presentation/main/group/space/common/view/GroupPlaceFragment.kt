@@ -268,6 +268,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             itemAnimator = null
             adapter = moveUserInfoAdapter
         }
+        moveUserInfoAdapter.myName = activityViewModel.getUserName()
         moveUserInfoAdapter.submitList(moveUserInfos)
     }
 }
