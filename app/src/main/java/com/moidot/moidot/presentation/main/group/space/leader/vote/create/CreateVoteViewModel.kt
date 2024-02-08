@@ -1,5 +1,6 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.create
 
+import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZoneId.systemDefault
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
@@ -30,6 +33,8 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
     private val selectedEndDateTime = MutableLiveData<String>()
 
     // 뷰에서 사용자에게 보여질 종료 예정까지 남은 시간
+    private var countDownTimer: CountDownTimer? = null
+
     private val _endTimeTxt = MutableLiveData<String>()
     val endTimeTxt: LiveData<String> = _endTimeTxt
 
@@ -76,10 +81,22 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
             LocalDate.parse(it, DateTimeFormatter.ofPattern("yyyy.MM.dd"))
         }!!.atTime(hour, minute)
 
+        val remainingMillis = selectedDateTime.atZone(systemDefault()).toInstant().toEpochMilli()
         // 실질적으로 보이는 시간은 59분 후지만 사용자가 보이는 ui를 매끄럽게 하기 위해 1분을 딜레이시켰다.
-        val currentDateTime = LocalDateTime.now().minusMinutes(1)
-        val duration = Duration.between(currentDateTime, selectedDateTime)
-        formatDuration(duration)
+        if (hasEndTime.value == true) {
+            // 분 단위로 ui에 보이는 숫자를 갱신시킨다.
+            countDownTimer = object : CountDownTimer(remainingMillis , 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val currentDateTime = LocalDateTime.now().minusMinutes(1)
+                    val remainingDuration = Duration.between(currentDateTime, selectedDateTime)
+                    formatDuration(remainingDuration)
+                }
+
+                override fun onFinish() {
+
+                }
+            }.start()
+        }
     }
 
     private fun formatDuration(duration: Duration) {
