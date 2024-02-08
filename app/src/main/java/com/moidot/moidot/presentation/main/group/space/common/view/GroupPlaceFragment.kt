@@ -248,11 +248,29 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
 
     // TODO 본인게 아닌건 분기처리
     private fun addMovePathRoutineLines(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
+       val othersMoveInfos = moveUserInfos.filterNot { moveUserInfo ->  moveUserInfo.userName != activityViewModel.getUserName() }
+        addOtherMovePathRoutineLine(othersMoveInfos)
+
+        val myMoveInfo =  moveUserInfos.subtract(othersMoveInfos.toSet()).toList()
+        addMyMovePathRoutineLine(myMoveInfo)
+    }
+
+    private fun addMyMovePathRoutineLine(moveUserInfo: List<ResponseBestRegion.Data.MoveUserInfo>) {
         val stylesSet = RouteLineStylesSet.from(
-            "orangeStyles",
+            "myStyles",
             RouteLineStyles.from(RouteLineStyle.from(13f, resources.getColor(R.color.orange500, null)))
         )
-        val segment = RouteLineSegment.from(moveUserInfos.flatMap { it.path }.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
+        val segment = RouteLineSegment.from(moveUserInfo.flatMap { it.path }.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
+        val options = RouteLineOptions.from(segment).setStylesSet(stylesSet)
+        routeLine = routeLineManager.layer.addRouteLine(options)
+    }
+
+    private fun addOtherMovePathRoutineLine(moveOtherUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
+        val stylesSet = RouteLineStylesSet.from(
+            "otherStyles",
+            RouteLineStyles.from(RouteLineStyle.from(8f, resources.getColor(R.color.orange300, null)))
+        ) // TODO 색깔 카카오지도랑 잘구분 안되어서 문의 넣어야할듯
+        val segment = RouteLineSegment.from(moveOtherUserInfos.flatMap { it.path }.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
         val options = RouteLineOptions.from(segment).setStylesSet(stylesSet)
         routeLine = routeLineManager.layer.addRouteLine(options)
     }
@@ -261,7 +279,6 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         bestRegionNameAdapter.updateItems(regionsName)
         binding.fgGroupPlaceVpBestRegionName.adapter = bestRegionNameAdapter
     }
-
 
     private fun initBestRegionAdapter(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
         binding.bottomGroupPlaceRvGroupInfo.apply {
