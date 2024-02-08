@@ -46,6 +46,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="80dp"
             android:background="@drawable/bg_bottom_sheet"
+            android:clickable="true"
             android:paddingHorizontal="20dp"
             app:behavior_expandedOffset="80dp"
             app:behavior_fitToContents="false"
