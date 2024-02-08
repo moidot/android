@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.moidot.moidot.util.event.MutableSingleLiveData
 import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -24,6 +25,9 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
     private val _currentSelectedEndDate = MutableLiveData<String>()
     val currentSelectedEndDate: LiveData<String> = _currentSelectedEndDate
 
+    private val _endTimeTxt = MutableLiveData<String>()
+    val endTimeTxt: LiveData<String> = _endTimeTxt
+
     private val _isValidateEndTime = MutableSingleLiveData<Boolean>(true)
     val isValidateEndTime: SingleLiveData<Boolean> = _isValidateEndTime
 
@@ -35,10 +39,6 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
 
     fun setHasEndTime(flag: Boolean) {
         _hasEndTime.value = flag
-    }
-
-    fun setEndTimeInputDone(flag: Boolean) {
-        _endTimeInputDone.value = flag
     }
 
     fun setCurrentSelectedEndDate(year: Int, month: Int, day: Int) {
@@ -59,9 +59,32 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         val givenDateTime = currentDateTime.withHour(hour).withMinute(minute)
         if (givenDateTime.isAfter(currentDateTime)) {
             _isValidateEndTime.setValue(true)
+            calculateEndTimeDuration(hour, minute)
         } else {
             _isValidateEndTime.setValue(false)
         }
+    }
+
+    fun calculateEndTimeDuration(hour: Int, minute: Int) {
+        val selectedDateTime = _currentSelectedEndDate.value?.let {
+            LocalDate.parse(it, DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+        }!!.atTime(hour, minute)
+
+        // 실질적으로 보이는 시간은 59분 후지만 사용자가 보이는 ui를 매끄럽게 하기 위해 1분을 딜레이시켰다.
+        val currentDateTime = LocalDateTime.now().minusMinutes(1)
+        val duration = Duration.between(currentDateTime, selectedDateTime)
+        formatDuration(duration)
+    }
+
+    private fun formatDuration(duration: Duration) {
+        val days = (duration.toHours() / 24).toInt()
+        val hours = (duration.toHours() % 24).toInt()
+        val minutes = (duration.toMinutes() % 60).toInt()
+
+        _endTimeTxt.value = "${days}일 ${hours}시간 ${minutes}분 후에 투표가 종료됩니다."
+        Log.d("kite", days.toString())
+        Log.d("kite", hours.toString())
+        Log.d("kite", minutes.toString())
     }
 
 

@@ -1,7 +1,6 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.create
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.CompositeDateValidator
@@ -14,7 +13,6 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityCreateVoteBinding
 import com.moidot.moidot.presentation.base.BaseActivity
 import com.moidot.moidot.util.CustomSnackBar
-import com.moidot.moidot.util.view.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 import java.util.Date
@@ -96,8 +94,10 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
             val selectedHour = timePicker.hour
             val selectedMinute = timePicker.minute
 
-            if (viewModel.checkIsSameDate()) {
+            if (viewModel.checkIsSameDate()) { // 같은 날짜 검사
                 viewModel.checkIsValidTime(selectedHour, selectedMinute) // 시간 입력 유효성 검사
+            } else {  // 정상 입력 완료 -> 시간차이 계산하기
+                viewModel.calculateEndTimeDuration(selectedHour, selectedMinute)
             }
         }
 
@@ -116,7 +116,12 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
 
     private fun setupObserver() {
         viewModel.isValidateEndTime.observe(this) {
-            if (!it) CustomSnackBar.makeSnackBar(binding.root, TIME_ERROR_MSG).show()
+            if (!it) {
+                CustomSnackBar.makeSnackBar(binding.root, TIME_ERROR_MSG).show()
+            }
+        }
+        viewModel.endTimeTxt.observe(this) {
+            binding.createVoteTvSetEndTimeInput.text = it
         }
     }
 
