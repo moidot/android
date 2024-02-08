@@ -36,9 +36,9 @@ class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) 
             }
         }
 
-        fun setRemoveView() { // TODO 모임장 본인은 내보내기 뷰 활성화 못하게 막음, 추후 서버 데이터 연동시 수정 예정
-            binding.itemGroupContainerRemoveMember.isVisible = removeActivateFlag
-            binding.itemGroupContainerMemberInfo.isVisible = !removeActivateFlag
+        fun setRemoveView(data: ResponseGroupInfo.Data.ParticipantsByRegion.Participation) {
+            binding.itemGroupContainerRemoveMember.isVisible = removeActivateFlag && !data.isAdmin
+            binding.itemGroupContainerMemberInfo.isVisible = !removeActivateFlag && !data.isAdmin
         }
 
         // 멤버 내보내기
@@ -65,7 +65,7 @@ class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) 
         addVerticalMargin(holder.itemView, position, itemCount, 8)
         holder.bind(members[position])
         holder.setMyInfoView(members[position])
-        holder.setRemoveView()
+        holder.setRemoveView(members[position])
         holder.invokeItemRemoveListener(members[position].userName, members[position].participationId)
     }
 
