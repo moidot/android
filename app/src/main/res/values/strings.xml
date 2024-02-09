@@ -25,6 +25,8 @@
     <string name="bottom_sheet_location_picker_title">출발위치를 등록해주세요</string>
     <string name="bottom_sheet_location_picker_load_current_location">현재 위치 불러오기</string>
     <string name="bottom_sheet_location_picker_search_hint">위치를 입력해주세요.</string>
+    <string name="bottom_sheet_location_picker_error_title">앗, 위치를 발견할 수 없어요!</string>
+    <string name="bottom_sheet_location_picker_error_content">정확한 위치 혹은 장소명을\n검색해주세요</string>
 
     <!-- Permission Util -->
     <string name="permission_dialog_ok">확인</string>
