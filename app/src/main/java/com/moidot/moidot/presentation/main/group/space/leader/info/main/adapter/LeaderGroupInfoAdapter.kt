@@ -2,6 +2,7 @@ package com.moidot.moidot.presentation.main.group.space.leader.info.main.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -15,9 +16,11 @@ class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) 
 
     private var removeActivateFlag = false
     var members = listOf<ResponseGroupInfo.Data.ParticipantsByRegion.Participation>()
+    var myName: String = ""
 
     class LeaderGroupInfoViewHolder(
         private val binding: ItemGroupInfoBinding,
+        private val myName: String,
         private val removeActivateFlag: Boolean,
         private val onRemoveSelectListener: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -25,9 +28,17 @@ class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) 
             binding.data = data
         }
 
-        fun setRemoveView() { // TODO 모임장 본인은 내보내기 뷰 활성화 못하게 막음, 추후 서버 데이터 연동시 수정 예정
-            binding.itemGroupContainerRemoveMember.isVisible = removeActivateFlag
-            binding.itemGroupContainerMemberInfo.isVisible = !removeActivateFlag
+        fun setMyInfoView(data: ResponseGroupInfo.Data.ParticipantsByRegion.Participation) {
+            if (myName == data.userName) {
+                binding.itemGroupViewCover.visibility = View.VISIBLE
+            } else {
+                binding.itemGroupViewCover.visibility = View.INVISIBLE
+            }
+        }
+
+        fun setRemoveView(data: ResponseGroupInfo.Data.ParticipantsByRegion.Participation) {
+            binding.itemGroupContainerRemoveMember.isVisible = removeActivateFlag && !data.isAdmin
+            binding.itemGroupContainerMemberInfo.isVisible = !removeActivateFlag && !data.isAdmin
         }
 
         // 멤버 내보내기
@@ -45,7 +56,7 @@ class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderGroupInfoViewHolder {
         val binding = ItemGroupInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return LeaderGroupInfoViewHolder(binding, removeActivateFlag, onRemoveSelectListener)
+        return LeaderGroupInfoViewHolder(binding, myName, removeActivateFlag, onRemoveSelectListener)
     }
 
     override fun getItemCount(): Int = members.size
@@ -53,7 +64,8 @@ class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) 
     override fun onBindViewHolder(holder: LeaderGroupInfoViewHolder, position: Int) {
         addVerticalMargin(holder.itemView, position, itemCount, 8)
         holder.bind(members[position])
-        holder.setRemoveView()
+        holder.setMyInfoView(members[position])
+        holder.setRemoveView(members[position])
         holder.invokeItemRemoveListener(members[position].userName, members[position].participationId)
     }
 

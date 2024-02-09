@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayout
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityLeaderSpaceBinding
 import com.moidot.moidot.presentation.base.BaseActivity
+import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_MEMBER_COUNT
 import com.moidot.moidot.util.Constant.GROUP_NAME
@@ -16,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.activity_leader_space) {
 
-    private val viewModel: LeaderSpaceViewModel by viewModels()
+    private val viewModel: SpaceViewModel by viewModels()
 
     private val groupId by lazy { intent.getIntExtra(GROUP_ID, 0) }
     private val groupParticipates by lazy { intent.getIntExtra(GROUP_MEMBER_COUNT, 1) }
@@ -64,7 +65,7 @@ class LeaderSpaceActivity : BaseActivity<ActivityLeaderSpaceBinding>(R.layout.ac
         binding.leaderSpaceTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> if (viewModel.groupParticipates.value!! < 1) navController.navigate(R.id.groupPlaceFragment) else navController.navigate(R.id.groupPlaceFragment)
+                    0 -> if (viewModel.groupParticipates.value!! > 1) navController.navigate(R.id.groupPlaceFragment) else navController.navigate(R.id.leaderPlaceFragment)
                     1 -> navController.navigate(R.id.leaderVoteFragment)
                     2 -> navController.navigate(R.id.leaderInfoFragment)
                 }

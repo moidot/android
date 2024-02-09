@@ -10,6 +10,7 @@ import com.moidot.moidot.util.addVerticalMargin
 
 class MemberGroupInfoHeaderAdapter : RecyclerView.Adapter<MemberGroupInfoHeaderAdapter.MemberGroupInfoHeaderViewHolder>() {
 
+    private var userName: String = ""
     private var participantsByRegion = listOf<ResponseGroupInfo.Data.ParticipantsByRegion>()
 
     class MemberGroupInfoHeaderViewHolder(private val binding: ItemGroupInfoHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -17,10 +18,11 @@ class MemberGroupInfoHeaderAdapter : RecyclerView.Adapter<MemberGroupInfoHeaderA
             binding.data = data
         }
 
-        fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?) {
+        fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?, userName:String) {
             members?.let {
                 val memberGroupInfoAdapter = MemberGroupInfoAdapter().apply {
                     this.members = it.participations
+                    this.myName = userName
                 }
                 binding.itemGroupInfoHeaderRvGroupInfo.apply {
                     adapter = memberGroupInfoAdapter
@@ -40,7 +42,7 @@ class MemberGroupInfoHeaderAdapter : RecyclerView.Adapter<MemberGroupInfoHeaderA
     override fun onBindViewHolder(holder: MemberGroupInfoHeaderViewHolder, position: Int) {
         addVerticalMargin(holder.itemView, position, itemCount, 24)
         holder.bind(participantsByRegion[position])
-        holder.initGroupInfoAdapter(participantsByRegion[position])
+        holder.initGroupInfoAdapter(participantsByRegion[position], userName)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -49,4 +51,9 @@ class MemberGroupInfoHeaderAdapter : RecyclerView.Adapter<MemberGroupInfoHeaderA
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun setUserInfo(name:String) {
+        userName = name
+        notifyDataSetChanged()
+    }
 }

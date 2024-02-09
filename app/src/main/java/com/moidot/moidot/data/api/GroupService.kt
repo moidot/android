@@ -5,6 +5,7 @@ import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCheckNicknameDuplication
+import com.moidot.moidot.data.remote.response.ResponseGroupUserInfo
 import com.moidot.moidot.data.remote.response.ResponsePostParticipateGroup
 import retrofit2.Response
 import retrofit2.http.Body
@@ -18,11 +19,14 @@ interface GroupService {
     suspend fun getParticipateGroup(): Response<ResponseParticipateGroup>
 
     @POST("/group/participate")
-    suspend fun participateGroup(@Body requestPostParticipateGroup:RequestPostParticipateGroup): Response<ResponsePostParticipateGroup>
+    suspend fun participateGroup(@Body requestPostParticipateGroup: RequestPostParticipateGroup): Response<ResponsePostParticipateGroup>
 
     @POST("/group")
     suspend fun createGroup(@Body requestCreateGroup: RequestCreateGroup): Response<ResponseCreateGroup>
 
     @GET("/group/nickname")
     suspend fun checkNicknameDuplication(@Query("groupId") groupId: Int, @Query("nickname") nickname: String): Response<ResponseCheckNicknameDuplication>
+
+    @GET("/group/user")
+    suspend fun getUserInfo(@Query("groupId") groupId: Int): Response<ResponseGroupUserInfo>
 }

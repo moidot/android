@@ -19,7 +19,8 @@ data class ResponseGroupInfo(
                 val participationId: Int,
                 val transportation: String,
                 val userEmail: String,
-                val userName: String
+                val userName: String,
+                val isAdmin:Boolean
             )
         }
     }

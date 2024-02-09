@@ -10,6 +10,7 @@ import com.moidot.moidot.util.addVerticalMargin
 
 class LeaderGroupInfoHeaderAdapter(private val onRemoveSelectListener: (Int) -> Unit) : RecyclerView.Adapter<LeaderGroupInfoHeaderAdapter.LeaderGroupInfoHeaderViewHolder>() {
 
+    private var userName: String = ""
     private var removeActivateFlag = false
     private var participantsByRegion = listOf<ResponseGroupInfo.Data.ParticipantsByRegion>()
 
@@ -18,10 +19,11 @@ class LeaderGroupInfoHeaderAdapter(private val onRemoveSelectListener: (Int) -> 
             binding.data = data
         }
 
-        fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?, removeActivateFlag: Boolean) {
+        fun initGroupInfoAdapter(members: ResponseGroupInfo.Data.ParticipantsByRegion?, removeActivateFlag: Boolean, userName:String) {
             members?.let {
                 val leaderGroupInfoAdapter = LeaderGroupInfoAdapter(onRemoveSelectListener).apply {
                     this.members = it.participations
+                    this.myName = userName
                     setRemoveFlag(removeActivateFlag)
                 }
                 binding.itemGroupInfoHeaderRvGroupInfo.apply {
@@ -42,7 +44,7 @@ class LeaderGroupInfoHeaderAdapter(private val onRemoveSelectListener: (Int) -> 
     override fun onBindViewHolder(holder: LeaderGroupInfoHeaderViewHolder, position: Int) {
         addVerticalMargin(holder.itemView, position, itemCount, 24)
         holder.bind(participantsByRegion[position])
-        holder.initGroupInfoAdapter(participantsByRegion[position], removeActivateFlag)
+        holder.initGroupInfoAdapter(participantsByRegion[position], removeActivateFlag, userName)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -54,6 +56,12 @@ class LeaderGroupInfoHeaderAdapter(private val onRemoveSelectListener: (Int) -> 
     @SuppressLint("NotifyDataSetChanged")
     fun setRemoveMode(flag: Boolean) {
         removeActivateFlag = flag
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setUserInfo(name:String) {
+        userName = name
         notifyDataSetChanged()
     }
 

@@ -3,11 +3,12 @@ package com.moidot.moidot.presentation.main.group.space.member.info
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentMemberInfoBinding
 import com.moidot.moidot.presentation.base.BaseFragment
-import com.moidot.moidot.presentation.main.group.space.member.MemberSpaceActivity
+import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.presentation.main.group.space.member.info.adapter.MemberGroupInfoHeaderAdapter
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import com.moidot.moidot.util.share.KakaoFeedSetting
@@ -17,15 +18,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.fragment_member_info) {
 
-    private val groupId by lazy { (activity as MemberSpaceActivity).groupId }
     private val memberGroupInfoHeaderAdapter by lazy { MemberGroupInfoHeaderAdapter() }
     private val viewModel: MemberInfoViewModel by viewModels()
+    private val activityViewModel: SpaceViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadUserInfo()
         initBinding()
         initView()
         setupObservers()
+    }
+
+    private fun loadUserInfo(){
+        activityViewModel.loadUserInfo()
     }
 
     private fun initBinding() {
@@ -45,14 +51,21 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
 
     override fun onResume() {
         super.onResume()
-        viewModel.getGroupInfo(groupId)
+        viewModel.getGroupInfo(activityViewModel.groupId.value!!)
     }
 
     private fun setupObservers() {
+        setupUserInfoView()
         setupGroupDefaultInfoView()
         setupGroupInfoRecyclerview()
         setupGroupDeleteObserver()
         setupToastEventObserver()
+    }
+
+    private fun setupUserInfoView(){
+        activityViewModel.userInfo.observe(viewLifecycleOwner) {
+            memberGroupInfoHeaderAdapter.setUserInfo(it.userName)
+        }
     }
 
     private fun setupGroupDefaultInfoView() {
@@ -81,7 +94,7 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
 
     // 모임 초대 (카톡)
     fun shareInvitationWithKakao() {
-        val kakaoFeedSetting = KakaoFeedSetting(groupId, viewModel.groupName.value!!)
+        val kakaoFeedSetting = KakaoFeedSetting(activityViewModel.groupId.value!!, viewModel.groupName.value!!)
         KakaoShareManager(requireContext(), kakaoFeedSetting).shareLink()
     }
 
@@ -91,6 +104,6 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
             getString(R.string.space_member_info_dialog_title).format(viewModel.groupName.value),
             getString(R.string.space_member_info_dialog_content),
             getString(R.string.space_member_info_dialog_btn)
-        ) { viewModel.deleteGroup(participateId = 83) }.show() // TODO 자신의 정보 받아오기
+        ) { viewModel.deleteGroup(participateId = activityViewModel.userInfo.value!!.participationId) }.show() // TODO 자신의 정보 받아오기
     }
 }

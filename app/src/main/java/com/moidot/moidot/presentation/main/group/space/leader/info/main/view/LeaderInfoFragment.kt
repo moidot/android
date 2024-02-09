@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderInfoBinding
 import com.moidot.moidot.presentation.base.BaseFragment
-import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceViewModel
+import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity
 import com.moidot.moidot.presentation.main.group.space.leader.info.main.adapter.LeaderGroupInfoHeaderAdapter
 import com.moidot.moidot.presentation.main.group.space.leader.info.main.viewmodel.LeaderInfoViewModel
@@ -25,14 +25,19 @@ import dagger.hilt.android.AndroidEntryPoint
 class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.fragment_leader_info) {
 
     private val viewModel: LeaderInfoViewModel by viewModels()
-    private val activityViewModel: LeaderSpaceViewModel by activityViewModels()
+    private val activityViewModel: SpaceViewModel by activityViewModels()
     private val leaderGroupInfoHeaderAdapter by lazy { LeaderGroupInfoHeaderAdapter(::onMemberRemoveListener) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadUserInfo()
         initBinding()
         initView()
         setupObservers()
+    }
+
+    private fun loadUserInfo() {
+        activityViewModel.loadUserInfo()
     }
 
     private fun initBinding() {
@@ -56,10 +61,17 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     }
 
     private fun setupObservers() {
+        setupUserInfoView()
         setupGroupDefaultInfoView()
         setupGroupInfoRecyclerview()
         setupGroupDeleteObserver()
         setupToastEventObserver()
+    }
+
+    private fun setupUserInfoView(){
+        activityViewModel.userInfo.observe(viewLifecycleOwner) {
+            leaderGroupInfoHeaderAdapter.setUserInfo(it.userName)
+        }
     }
 
     private fun setupGroupDefaultInfoView() {

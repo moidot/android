@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.main.group.space.SpaceViewModel" />
 
         <variable
             name="activity"
@@ -38,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:text="@{activity.groupName}"
+                android:text="@{viewModel.groupName}"
                 android:textColor="@color/gray700"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/member_space_iv_back"

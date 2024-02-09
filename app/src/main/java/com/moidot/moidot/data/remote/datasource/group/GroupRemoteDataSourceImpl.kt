@@ -7,6 +7,7 @@ import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCheckNicknameDuplication
+import com.moidot.moidot.data.remote.response.ResponseGroupUserInfo
 import com.moidot.moidot.data.remote.response.ResponsePostParticipateGroup
 import javax.inject.Inject
 
@@ -27,5 +28,8 @@ class GroupRemoteDataSourceImpl @Inject constructor(private val groupService: Gr
         return groupService.checkNicknameDuplication(groupId, nickname).getResultFromResponse()
     }
 
+    override suspend fun getUserInfo(groupId: Int): Result<ResponseGroupUserInfo> {
+        return groupService.getUserInfo(groupId).getResultFromResponse()
+    }
 
 }
