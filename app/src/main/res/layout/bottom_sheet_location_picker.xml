@@ -126,7 +126,7 @@
             tools:listitem="@layout/item_location" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/bottom_sheet_location_picker_container_error"
+            android:id="@+id/bottom_sheet_location_picker_container_empty"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
@@ -140,14 +140,14 @@
                 style="@style/h2_bold_20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bottom_sheet_location_picker_error_title"
+                android:text="@string/bottom_sheet_location_picker_empty_title"
                 android:textColor="@color/gray700" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:src="@drawable/img_loaction_error" />
+                android:src="@drawable/img_loaction_empty" />
 
             <TextView
                 style="@style/b2_reg_14"
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="@string/bottom_sheet_location_picker_error_content"
+                android:text="@string/bottom_sheet_location_picker_empty_content"
                 android:textColor="@color/gray500" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
