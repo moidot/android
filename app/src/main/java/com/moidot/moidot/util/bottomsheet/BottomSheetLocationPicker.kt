@@ -148,13 +148,13 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
 
     private fun updateViewFromCurrentLocation() {
         viewModel.currentLocationResults.observe(viewLifecycleOwner) {
-            val currentLocationName = it[0].placeName
-            binding.bottomSheetLocationPickerEtvSearch.apply {
-                setText(currentLocationName)
-                clearFocus()
+            updateSavedFavoritePlace()
+            val updatedResults = it.map { result ->
+                locationAdapter.savedFavorites.find { savedPlace ->
+                    savedPlace.copy(isFavorite = result.isFavorite) == result
+                } ?: result
             }
-            viewModel.setSearchWord(currentLocationName)
-            viewModel.setSearchWordFieldActive(true)
+            locationAdapter.setPlaceItems(updatedResults)
         }
     }
 

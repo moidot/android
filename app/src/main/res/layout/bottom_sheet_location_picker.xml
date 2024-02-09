@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
             name="viewModel"
@@ -82,8 +83,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12.5dp"
-            android:orientation="horizontal"
             android:onClick="@{() -> fragment.checkLocationPermission()}"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="@id/bottom_sheet_location_picker_etv_search"
             app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_etv_search">
 
@@ -114,15 +115,53 @@
             android:id="@+id/bottom_sheet_location_picker_rv_place"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:paddingHorizontal="20dp"
             android:clipToPadding="false"
-            android:paddingVertical="20dp"
             android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="20dp"
+            android:visibility="@{viewModel.isSearchResultEmpty() ? View.GONE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_view_line"
             tools:listitem="@layout/item_location" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/bottom_sheet_location_picker_container_empty"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.isSearchResultEmpty() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottom_sheet_location_picker_view_line">
+
+            <TextView
+                style="@style/h2_bold_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bottom_sheet_location_picker_empty_title"
+                android:textColor="@color/gray700" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/img_loaction_empty" />
+
+            <TextView
+                style="@style/b2_reg_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/bottom_sheet_location_picker_empty_content"
+                android:textColor="@color/gray500" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -26,6 +26,9 @@ class BottomSheetLocationViewModel @Inject constructor(private val locationRepos
     private val _searchResults = MutableLiveData<List<ResponseSearchPlace.Document>>()
     val searchResults: LiveData<List<ResponseSearchPlace.Document>> = _searchResults
 
+    private val _isSearchResultEmpty = MutableLiveData<Boolean>(false)
+    val isSearchResultEmpty : LiveData<Boolean> = _isSearchResultEmpty
+
     private val _currentLocationResults = MutableLiveData<List<ResponseSearchPlace.Document>>()
     val currentLocationResults: LiveData<List<ResponseSearchPlace.Document>> = _currentLocationResults
 
@@ -42,6 +45,7 @@ class BottomSheetLocationViewModel @Inject constructor(private val locationRepos
         viewModelScope.launch {
             locationRepository.searchPlace(searchWord.value!!).onSuccess {
                 _searchResults.value = it.places
+                _isSearchResultEmpty.value = it.places.isEmpty()
             }
         }
     }
