@@ -10,7 +10,7 @@
 
     <!-- error -->
     <string name="network_error_msg">네트워크 통신오류!</string>
-    
+
     <!-- scheme -->
     <string name="scheme_sign_in">scheme_sign_in</string>
     <string name="scheme_main">scheme_main</string>
@@ -164,4 +164,11 @@
     <string name="create_vote_start_vote">투표 시작하기</string>
     <string name="create_vote_date_picker_title">날짜 선택</string>
     <string name="create_vote_time_picker_title">시간 선택</string>
+
+    <!-- MemberVote -->
+    <string name="member_vote_before_title">모임장이 아직\n투표를 시작하지 않았어요!</string>
+    <string name="member_vote_before_content">모임장에게 투표를 요청할 수 있어요.</string>
+    <string name="member_vote_before_btn">모임장에게 투표 요청하기</string>
+
+
 </resources>
