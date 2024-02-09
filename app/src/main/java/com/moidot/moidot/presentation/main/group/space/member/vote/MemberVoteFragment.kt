@@ -9,12 +9,13 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentMemberVoteBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
+import com.moidot.moidot.util.Constant.MEMBER_VOTE_EXTRA
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MemberVoteFragment : BaseFragment<FragmentMemberVoteBinding>(R.layout.fragment_member_vote) {
 
-    private val viewModel: MemberVoteViewModel by viewModels()
+    val viewModel: MemberVoteViewModel by viewModels()
     private val activityViewModel: SpaceViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,10 +35,11 @@ class MemberVoteFragment : BaseFragment<FragmentMemberVoteBinding>(R.layout.frag
     }
 
     private fun initNavigation(startDestinationId: Int) {
+        val extras = Bundle().apply { putParcelable(MEMBER_VOTE_EXTRA, viewModel.groupVoteStatus.value!!) }
         val navController = (childFragmentManager.findFragmentById(R.id.fg_group_member_vote_fcv) as NavHostFragment).navController
         val navGraph = navController.navInflater.inflate(R.navigation.member_vote_nav_graph)
         navGraph.setStartDestination(startDestinationId)
-        navController.setGraph(navGraph, null)
+        navController.setGraph(navGraph, extras)
     }
 
 }
