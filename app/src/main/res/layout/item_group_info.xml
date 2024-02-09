@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
             name="data"
@@ -49,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:src="@drawable/ic_leader"
+                android:visibility="@{data.isAdmin ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@id/item_group_tv_member_name"
                 app:layout_constraintStart_toEndOf="@id/item_group_tv_member_name"
                 app:layout_constraintTop_toTopOf="@id/item_group_tv_member_name" />

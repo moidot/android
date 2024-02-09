@@ -38,7 +38,7 @@ class LeaderGroupInfoAdapter(private val onRemoveSelectListener: (Int) -> Unit) 
 
         fun setRemoveView(data: ResponseGroupInfo.Data.ParticipantsByRegion.Participation) {
             binding.itemGroupContainerRemoveMember.isVisible = removeActivateFlag && !data.isAdmin
-            binding.itemGroupContainerMemberInfo.isVisible = !removeActivateFlag && !data.isAdmin
+            binding.itemGroupContainerMemberInfo.isVisible = !removeActivateFlag
         }
 
         // 멤버 내보내기
