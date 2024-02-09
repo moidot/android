@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
             name="viewModel"
@@ -118,6 +119,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
+            android:visibility="@{viewModel.isSearchResultEmpty() ? View.GONE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +133,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:orientation="vertical"
+            android:visibility="@{viewModel.isSearchResultEmpty() ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
