@@ -1,9 +1,8 @@
 package com.moidot.moidot.presentation.main.group.space.member.vote.before
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -16,32 +15,34 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentMemberVoteBeforeBinding
 import com.moidot.moidot.presentation.base.BaseFragment
-import com.moidot.moidot.util.Constant.MEMBER_VOTE_EXTRA
+import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.MarkerManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R.layout.fragment_member_vote_before) {
 
-    private val bestRegions by lazy {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelableArray(MEMBER_VOTE_EXTRA) as Array<ResponseBestRegion.Data>
-        } else {
-            arguments?.getParcelableArray(MEMBER_VOTE_EXTRA) as Array<ResponseBestRegion.Data>
-        }
-    }
+    private val groupId by lazy { arguments?.getInt(GROUP_ID) ?: -1 }
 
     private lateinit var kakaoMap: KakaoMap
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
+    private val viewModel: MemberVoteBeforeViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initMapView()
-        Log.d("kite",bestRegions.toString())
+        viewModel.loadBestRegions(groupId)
+        setupObserver()
     }
 
-    private fun initMapView() {
+    private fun setupObserver() {
+        viewModel.bestRegions.observe(viewLifecycleOwner) {
+            initMapView(it)
+        }
+    }
+
+    private fun initMapView(bestRegions: List<ResponseBestRegion.Data>) {
         mapManager = MarkerManager(requireContext())
         binding.fgMemberVoteBeforeMapView.start(object : KakaoMapReadyCallback() {
             override fun getPosition(): LatLng {
@@ -50,12 +51,12 @@ class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R
 
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
-                addLeaderInfoMarker()
+                addLeaderInfoMarker(bestRegions)
             }
         })
     }
 
-    private fun addLeaderInfoMarker() {
+    private fun addLeaderInfoMarker(bestRegions: List<ResponseBestRegion.Data>) {
         labelLayer = kakaoMap.labelManager!!.addLayer(
             LabelLayerOptions.from()
                 .setOrderingType(OrderingType.Rank)
@@ -64,7 +65,7 @@ class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R
         bestRegions.forEach {
             labelLayer.addLabel(
                 LabelOptions.from(
-                    "voteRegions", LatLng.from(it.latitude, it.longitude)
+                    it.name, LatLng.from(it.latitude, it.longitude)
                 ).setStyles(
                     LabelStyle.from(mapManager.getBestRegionPlaceMarker(it.name)).setApplyDpScale(false)
                 )
