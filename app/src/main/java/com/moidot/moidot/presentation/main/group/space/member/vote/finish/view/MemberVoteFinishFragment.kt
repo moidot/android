@@ -124,16 +124,7 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
     // 순위 매기기 - 브루트포스 사용
     private fun calculateRankers(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>): List<Int> {
         val votes = voteStatuses.map { it.votes }
-        val ranks = IntArray(votes.size) { 1 }.toMutableList() // 추천 장소가 3개 뿐이지만 추후 확장성을 고려해 size로 받아온다.
-
-        for (i in votes.indices) {
-            for (j in votes.indices) {
-                if (votes[i] < votes[j]) {
-                    ranks[i] += 1
-                }
-            }
-        }
-        return ranks
+        return votes.map { vote -> votes.count { it > vote } + 1 }
     }
 
 }
