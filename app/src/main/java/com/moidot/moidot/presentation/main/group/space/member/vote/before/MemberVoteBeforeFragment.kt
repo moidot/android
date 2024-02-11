@@ -3,6 +3,7 @@ package com.moidot.moidot.presentation.main.group.space.member.vote.before
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -20,6 +21,8 @@ import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R.layout.fragment_member_vote_before) {
@@ -40,15 +43,20 @@ class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R
 
     private fun setupObserver() {
         viewModel.bestRegions.observe(viewLifecycleOwner) {
-            initMapView(it)
+            lifecycleScope.launch {
+                val centerLatLang = async {
+                    MapViewUtil.calculateCenter(it.map { LatLng.from(it.latitude, it.longitude) })
+                }.await()
+                initMapView(it, centerLatLang)
+            }
         }
     }
 
-    private fun initMapView(bestRegions: List<ResponseBestRegion.Data>) {
+    private fun initMapView(bestRegions: List<ResponseBestRegion.Data>, centerLatLang: LatLng) {
         mapManager = MarkerManager(requireContext())
         binding.fgMemberVoteBeforeMapView.start(object : KakaoMapReadyCallback() {
             override fun getPosition(): LatLng {
-                return LatLng.from(bestRegions[0].latitude, bestRegions[0].longitude)
+                return LatLng.from(centerLatLang.latitude, centerLatLang.longitude)
             }
 
             override fun onMapReady(map: KakaoMap) {
