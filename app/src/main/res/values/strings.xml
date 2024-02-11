@@ -178,5 +178,5 @@
     <string name="member_vote_anonymous_vote">익명투표</string>
     <string name="member_vote_progress_btn">투표하기</string>
     <string name="member_vote_end_date">%d.%d.%d %s종료</string>
-
+    <string name="member_vote_finish_title">장소 투표가 완료되었어요!</string>
 </resources>

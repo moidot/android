@@ -44,7 +44,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
                 android:gravity="start"
-                android:text="@string/member_vote_progress_title"
+                android:text="@string/member_vote_finish_title"
                 android:textColor="@color/gray700"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
