@@ -28,6 +28,10 @@
     <string name="bottom_sheet_location_picker_empty_title">앗, 위치를 발견할 수 없어요!</string>
     <string name="bottom_sheet_location_picker_empty_content">정확한 위치 혹은 장소명을\n검색해주세요</string>
 
+    <!-- popup -->
+    <string name="popup_vote_people_title">%s에 투표한 모임원</string>
+    <string name="popup_vote_people_content">%d의 모임원이 이 장소에 투표했어요!</string>
+
     <!-- Permission Util -->
     <string name="permission_dialog_ok">확인</string>
     <string name="permission_dialog_location_title">위치 접근 권한</string>
@@ -174,4 +178,5 @@
     <string name="member_vote_progress_anonymous_vote">익명투표</string>
     <string name="member_vote_progress_btn">투표하기</string>
     <string name="member_vote_progress_end_date">%d.%d.%d %s종료</string>
+
 </resources>

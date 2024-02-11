@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_popup"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/popup_vote_people_tv_title"
+            style="@style/b1_reg_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/popup_vote_people_title"
+            android:textColor="@color/gray600"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/popup_vote_people_tv_content"
+            style="@style/c1_reg_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popup_vote_people_content"
+            android:textColor="@color/orange500"
+            app:layout_constraintStart_toStartOf="@id/popup_vote_people_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/popup_vote_people_tv_title" />
+
+        <ImageView
+            android:id="@+id/popup_vote_people_iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/popup_vote_people_tv_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popup_vote_people_rv_people"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:maxHeight="264dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/popup_vote_people_tv_content"
+            app:layout_constraintTop_toBottomOf="@id/popup_vote_people_tv_content"
+            tools:listitem="@layout/item_vote_people" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

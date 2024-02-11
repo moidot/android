@@ -134,7 +134,8 @@
                 app:layout_constraintBottom_toTopOf="@id/fg_member_vote_progress_btn_vote"
                 app:layout_constraintEnd_toEndOf="@id/fg_member_vote_progress_container_info"
                 app:layout_constraintStart_toStartOf="@id/fg_member_vote_progress_container_info"
-                app:layout_constraintTop_toBottomOf="@id/fg_member_vote_progress_container_info" />
+                app:layout_constraintTop_toBottomOf="@id/fg_member_vote_progress_container_info"
+                tools:listitem="@layout/item_vote_progress" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fg_member_vote_progress_btn_vote"
