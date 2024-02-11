@@ -15,7 +15,6 @@ import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.OrderingType
 import com.moidot.moidot.R
-import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.FragmentMemberVoteFinishBinding
 import com.moidot.moidot.presentation.base.BaseFragment
@@ -29,7 +28,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MemberVoteFinishFragment: BaseFragment<FragmentMemberVoteFinishBinding>(R.layout.fragment_member_vote_finish) {
+class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R.layout.fragment_member_vote_finish) {
 
     private val groupId by lazy { arguments?.getInt(Constant.GROUP_ID) ?: -1 }
 
@@ -109,23 +108,32 @@ class MemberVoteFinishFragment: BaseFragment<FragmentMemberVoteFinishBinding>(R.
                 .setOrderingType(OrderingType.Rank)
         )!!
 
-        val voteCnt = voteStatuses.map { it.votes }.sortedDescending().withIndex().map { it.index + 1 }
-        Log.d("kite", voteStatuses.map { it.votes }.sortedDescending().toString())
-        Log.d("kite", voteCnt.toString())
-
+        val ranks = calculateRankers(voteStatuses)
         voteStatuses.forEachIndexed { idx, voteStatus ->
             labelLayer.addLabel(
                 LabelOptions.from(
                     voteStatus.placeName, LatLng.from(voteStatus.latitude, voteStatus.longitude)
                 ).setStyles(
-                    LabelStyle.from(mapManager.getVoteResultPlaceMarker(voteCnt[idx], voteStatus.placeName)).setApplyDpScale(false)
+                    LabelStyle.from(mapManager.getVoteResultPlaceMarker(ranks[idx], voteStatus.placeName)).setApplyDpScale(false)
                 )
             )
         }
     }
 
-    private fun calculateRankers() {
 
+    // 순위 매기기 - 브루트포스 사용
+    private fun calculateRankers(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>): List<Int> {
+        val votes = voteStatuses.map { it.votes }
+        val ranks = IntArray(votes.size) { 1 }.toMutableList() // 추천 장소가 3개 뿐이지만 추후 확장성을 고려해 size로 받아온다.
+
+        for (i in votes.indices) {
+            for (j in votes.indices) {
+                if (votes[i] < votes[j]) {
+                    ranks[i] += 1
+                }
+            }
+        }
+        return ranks
     }
 
 }
