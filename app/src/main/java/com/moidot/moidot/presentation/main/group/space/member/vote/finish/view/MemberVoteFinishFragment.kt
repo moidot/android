@@ -124,4 +124,8 @@ class MemberVoteFinishFragment: BaseFragment<FragmentMemberVoteFinishBinding>(R.
         }
     }
 
+    private fun calculateRankers() {
+
+    }
+
 }
