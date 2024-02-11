@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_marker_vote_result_place_iv_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_leader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_marker_vote_result_place_tv_place"
+            style="@style/c1_bold_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.2dp"
+            android:background="@drawable/bg_group_place_best_region_marker"
+            android:paddingHorizontal="13dp"
+            android:paddingVertical="5dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_marker_vote_result_place_iv_rank"
+            tools:text="성신여대입구역" />
+
+        <ImageView
+            android:id="@+id/item_marker_vote_result_place_iv_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6.4dp"
+            android:src="@drawable/ic_marker_rank"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_marker_vote_result_place_tv_place" />
+
+        <TextView
+            android:id="@+id/item_marker_vote_result_place_tv_rank"
+            style="@style/h2_bold_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6.4dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/item_marker_vote_result_place_iv_place"
+            app:layout_constraintStart_toStartOf="@+id/item_marker_vote_result_place_iv_place"
+            app:layout_constraintTop_toTopOf="@id/item_marker_vote_result_place_iv_place"
+            tools:text="1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

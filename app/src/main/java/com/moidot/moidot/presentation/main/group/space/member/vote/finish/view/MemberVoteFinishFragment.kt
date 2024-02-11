@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.member.vote.finish.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -108,12 +109,16 @@ class MemberVoteFinishFragment: BaseFragment<FragmentMemberVoteFinishBinding>(R.
                 .setOrderingType(OrderingType.Rank)
         )!!
 
-        voteStatuses.forEach {
+        val voteCnt = voteStatuses.map { it.votes }.sortedDescending().withIndex().map { it.index + 1 }
+        Log.d("kite", voteStatuses.map { it.votes }.sortedDescending().toString())
+        Log.d("kite", voteCnt.toString())
+
+        voteStatuses.forEachIndexed { idx, voteStatus ->
             labelLayer.addLabel(
                 LabelOptions.from(
-                    it.placeName, LatLng.from(it.latitude, it.longitude)
+                    voteStatus.placeName, LatLng.from(voteStatus.latitude, voteStatus.longitude)
                 ).setStyles(
-                    LabelStyle.from(mapManager.getBestRegionPlaceMarker(it.placeName)).setApplyDpScale(false)
+                    LabelStyle.from(mapManager.getVoteResultPlaceMarker(voteCnt[idx], voteStatus.placeName)).setApplyDpScale(false)
                 )
             )
         }
