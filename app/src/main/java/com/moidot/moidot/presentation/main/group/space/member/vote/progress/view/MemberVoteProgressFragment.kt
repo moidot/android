@@ -1,7 +1,6 @@
-package com.moidot.moidot.presentation.main.group.space.member.vote.progress
+package com.moidot.moidot.presentation.main.group.space.member.vote.progress.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -16,10 +15,11 @@ import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.OrderingType
 import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
+import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.FragmentMemberVoteProgressBinding
 import com.moidot.moidot.presentation.base.BaseFragment
-import com.moidot.moidot.presentation.main.group.space.member.vote.before.MemberVoteBeforeViewModel
-import com.moidot.moidot.util.Constant
+import com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter.VoteProgressInfoAdapter
+import com.moidot.moidot.presentation.main.group.space.member.vote.progress.viewmodel.MemberVoteProgressViewModel
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
@@ -36,6 +36,7 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
+    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter() }
     private val viewModel: MemberVoteProgressViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,7 +75,7 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
 
     private fun setupVoteStatuesObserver() {
         viewModel.voteStatuses.observe(viewLifecycleOwner) {
-
+            initStatusesAdapter(it)
         }
     }
 
@@ -85,8 +86,12 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
         }
     }
 
-    private fun initStatusesAdapter() {
-
+    private fun initStatusesAdapter(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>) {
+        voteProgressInfoAdapter.apply {
+            progressStatuses = voteStatuses
+            totalVoteNum = viewModel.totalVoteNum.value!!
+            binding.fgMemberVoteProgressRvVoteState.adapter = this
+        }
     }
 
     private fun initMapView(bestRegions: List<ResponseBestRegion.Data>, centerLatLang: LatLng) {

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.main.group.space.member.vote.progress.MemberVoteProgressViewModel" />
+            type="com.moidot.moidot.presentation.main.group.space.member.vote.progress.viewmodel.MemberVoteProgressViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -136,6 +136,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginVertical="24dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toTopOf="@id/fg_member_vote_progress_btn_vote"
                 app:layout_constraintEnd_toEndOf="@id/fg_member_vote_progress_container_info"
                 app:layout_constraintStart_toStartOf="@id/fg_member_vote_progress_container_info"

@@ -1,6 +1,5 @@
-package com.moidot.moidot.presentation.main.group.space.member.vote.progress
+package com.moidot.moidot.presentation.main.group.space.member.vote.progress.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,9 +22,6 @@ class MemberVoteProgressViewModel @Inject constructor(
 
     private val _bestRegions = MutableLiveData<List<ResponseBestRegion.Data>>()
     val bestRegions: LiveData<List<ResponseBestRegion.Data>> = _bestRegions
-
-    //private val _voteStatus = MutableLiveData<ResponseVoteStatus.Data>()
-    //val voteStatus: LiveData<ResponseVoteStatus.Data> = _voteStatus
 
     val voteId = MutableLiveData<Int>()
     val totalVoteNum = MutableLiveData<Int>()
