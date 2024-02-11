@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginVertical="11dp"
-                    android:background="@{data.isSelected ? @drawable/bg_place_oval_selected : @drawable/bg_place_oval_normal}"
+                    android:background="@{data.isSelected ? @drawable/bg_oval_selected : @drawable/bg_oval_normal}"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="8dp"
                     android:textColor="@{data.isSelected ? @color/white : @color/orange500}"
