@@ -33,6 +33,7 @@ import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegionNameAdapter
 import com.moidot.moidot.presentation.main.group.space.common.adapter.MoveUserInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.common.viewmodel.GroupPlaceViewModel
+import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import com.moidot.moidot.util.SpannableTxt
 import com.moidot.moidot.util.view.getScreenHeight
@@ -151,7 +152,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
                 setUpSearchDetailBtnTxt(currentRegion.name)
                 initLabelLayerAndRouteManager()
                 kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(LatLng.from(currentRegion.latitude, currentRegion.longitude))) // 위치 좌표 설정
-                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(setZoomLevelByCheckMapPoints(currentRegion.moveUserInfo)))
+                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(MapViewUtil.setZoomLevelByCheckMapPoints(kakaoMap, currentRegion.moveUserInfo)))
                 addBestRegionPlaceMarker(currentRegion.name, currentRegion.longitude, currentRegion.latitude)// 추천 장소 마커 추가
                 addUserInfoMarkers(currentRegion.moveUserInfo)// 유저 정보 마커 추가
                 addMovePathRoutineLines(currentRegion.moveUserInfo) // 유저 path 그리기
@@ -182,24 +183,13 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
                 viewModel.isMapInitialized.value = true // 맵 초기화 정보 설정
                 initLabelLayerAndRouteManager()
                 setUpSearchDetailBtnTxt(bestRegions[0].name)
-                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(setZoomLevelByCheckMapPoints(bestRegions[0].moveUserInfo)))
+                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(MapViewUtil.setZoomLevelByCheckMapPoints(kakaoMap, bestRegions[0].moveUserInfo)))
                 addBestRegionPlaceMarker(bestRegions[0].name, bestRegions[0].longitude, bestRegions[0].latitude) // 추천 장소 마커 추가
                 addUserInfoMarkers(bestRegions[0].moveUserInfo) // 유저 정보 마커 추가
                 addMovePathRoutineLines(bestRegions[0].moveUserInfo) // 루트 정보 추가
                 BottomSheetBehavior.from(binding.fgGroupPlaceBottomSheet).state = BottomSheetBehavior.STATE_HALF_EXPANDED // 바텀 시트 초가화
             }
         })
-    }
-
-    // canShowMapPoints를 사용하여 특정 zoom level에서 해당 좌표들이 다 보이는 지 확인한 후 zoomLevel을 계산하여 반환한다.
-    private fun setZoomLevelByCheckMapPoints(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>): Int {
-        val mapPoints = moveUserInfos.map { LatLng.from(it.path[0].y, it.path[0].x) }
-        for (level in kakaoMap.maxZoomLevel downTo kakaoMap.minZoomLevel) {
-            if (kakaoMap.canShowMapPoints(level, *mapPoints.toTypedArray())) {
-                return level.minus(1)
-            }
-        }
-        return kakaoMap.zoomLevel
     }
 
     private fun initLabelLayerAndRouteManager() {

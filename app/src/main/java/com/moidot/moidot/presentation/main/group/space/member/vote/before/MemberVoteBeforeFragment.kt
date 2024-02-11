@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
+import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.kakao.vectormap.label.LabelLayer
 import com.kakao.vectormap.label.LabelLayerOptions
 import com.kakao.vectormap.label.LabelOptions
@@ -16,6 +17,7 @@ import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentMemberVoteBeforeBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.util.Constant.GROUP_ID
+import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -52,6 +54,7 @@ class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
                 addLeaderInfoMarker(bestRegions)
+                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(MapViewUtil.setZoomLevelByCheckRegionNameMapPoints(kakaoMap, bestRegions)))
             }
         })
     }
