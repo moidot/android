@@ -9,4 +9,5 @@ object Constant {
     const val SCHEME_URL_STRING = "SCHEME_URL_STRING"
     const val REFRESH_DONE_STATE = "REFRESH_DONE_STATE"
     const val MEMBER_VOTE_EXTRA = "MEMBER_VOTE_EXTRA"
+    const val BEST_REGIONS_EXTRA = "BEST_REGIONS_EXTRA"
 }

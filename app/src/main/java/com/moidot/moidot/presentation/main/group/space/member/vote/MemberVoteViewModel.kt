@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
+import com.moidot.moidot.repository.GroupPlaceRepository
 import com.moidot.moidot.repository.GroupVoteRepository
 import com.moidot.moidot.util.event.MutableSingleLiveData
 import com.moidot.moidot.util.event.SingleLiveData
@@ -13,7 +15,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MemberVoteViewModel @Inject constructor(private val groupVoteRepository: GroupVoteRepository) : ViewModel() {
+class MemberVoteViewModel @Inject constructor(
+    private val groupVoteRepository: GroupVoteRepository,
+) : ViewModel() {
 
     private val _showToastEvent = MutableSingleLiveData<String>()
     val showToastEvent: SingleLiveData<String> = _showToastEvent

@@ -13,7 +13,7 @@ import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.OrderingType
 import com.moidot.moidot.R
-import com.moidot.moidot.data.remote.response.ResponseVoteStatus
+import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentMemberVoteBeforeBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.util.Constant.MEMBER_VOTE_EXTRA
@@ -23,11 +23,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R.layout.fragment_member_vote_before) {
 
-    private val voteStatus by lazy {
+    private val bestRegions by lazy {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable(MEMBER_VOTE_EXTRA, ResponseVoteStatus.Data::class.java)
+            arguments?.getParcelableArray(MEMBER_VOTE_EXTRA) as Array<ResponseBestRegion.Data>
         } else {
-            arguments?.getParcelable(MEMBER_VOTE_EXTRA)
+            arguments?.getParcelableArray(MEMBER_VOTE_EXTRA) as Array<ResponseBestRegion.Data>
         }
     }
 
@@ -38,13 +38,14 @@ class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initMapView()
+        Log.d("kite",bestRegions.toString())
     }
 
     private fun initMapView() {
         mapManager = MarkerManager(requireContext())
         binding.fgMemberVoteBeforeMapView.start(object : KakaoMapReadyCallback() {
             override fun getPosition(): LatLng {
-                return LatLng.from(voteStatus!!.voteStatuses[0].latitude, voteStatus!!.voteStatuses[0].longitude)
+                return LatLng.from(bestRegions[0].latitude, bestRegions[0].longitude)
             }
 
             override fun onMapReady(map: KakaoMap) {
@@ -60,12 +61,12 @@ class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R
                 .setOrderingType(OrderingType.Rank)
         )!!
 
-        voteStatus!!.voteStatuses.forEach {
+        bestRegions.forEach {
             labelLayer.addLabel(
                 LabelOptions.from(
                     "voteRegions", LatLng.from(it.latitude, it.longitude)
                 ).setStyles(
-                    LabelStyle.from(mapManager.getBestRegionPlaceMarker(it.placeName)).setApplyDpScale(false)
+                    LabelStyle.from(mapManager.getBestRegionPlaceMarker(it.name)).setApplyDpScale(false)
                 )
             )
         }
