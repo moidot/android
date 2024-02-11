@@ -152,7 +152,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
                 setUpSearchDetailBtnTxt(currentRegion.name)
                 initLabelLayerAndRouteManager()
                 kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(LatLng.from(currentRegion.latitude, currentRegion.longitude))) // 위치 좌표 설정
-                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(MapViewUtil.setZoomLevelByCheckMapPoints(kakaoMap, currentRegion.moveUserInfo)))
+                MapViewUtil.setZoomLevelByUserLocationMapPoints(kakaoMap, currentRegion.moveUserInfo) // 지도 줌 레벨 설정
                 addBestRegionPlaceMarker(currentRegion.name, currentRegion.longitude, currentRegion.latitude)// 추천 장소 마커 추가
                 addUserInfoMarkers(currentRegion.moveUserInfo)// 유저 정보 마커 추가
                 addMovePathRoutineLines(currentRegion.moveUserInfo) // 유저 path 그리기
@@ -183,7 +183,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
                 viewModel.isMapInitialized.value = true // 맵 초기화 정보 설정
                 initLabelLayerAndRouteManager()
                 setUpSearchDetailBtnTxt(bestRegions[0].name)
-                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(MapViewUtil.setZoomLevelByCheckMapPoints(kakaoMap, bestRegions[0].moveUserInfo)))
+                MapViewUtil.setZoomLevelByUserLocationMapPoints(kakaoMap, bestRegions[0].moveUserInfo) // 줌 레벨 설정
                 addBestRegionPlaceMarker(bestRegions[0].name, bestRegions[0].longitude, bestRegions[0].latitude) // 추천 장소 마커 추가
                 addUserInfoMarkers(bestRegions[0].moveUserInfo) // 유저 정보 마커 추가
                 addMovePathRoutineLines(bestRegions[0].moveUserInfo) // 루트 정보 추가

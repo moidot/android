@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
-import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.kakao.vectormap.label.LabelLayer
 import com.kakao.vectormap.label.LabelLayerOptions
 import com.kakao.vectormap.label.LabelOptions
@@ -45,7 +44,7 @@ class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R
         viewModel.bestRegions.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
                 val centerLatLang = async {
-                    MapViewUtil.calculateCenter(it.map { LatLng.from(it.latitude, it.longitude) })
+                    MapViewUtil.getMapCenterPointByMapPoints(it.map { LatLng.from(it.latitude, it.longitude) })
                 }.await()
                 initMapView(it, centerLatLang)
             }
@@ -62,7 +61,7 @@ class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
                 addLeaderInfoMarker(bestRegions)
-                kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(MapViewUtil.setZoomLevelByCheckRegionNameMapPoints(kakaoMap, bestRegions)))
+                MapViewUtil.setZoomLevelByRegionNameMapPoints(kakaoMap, bestRegions)
             }
         })
     }
