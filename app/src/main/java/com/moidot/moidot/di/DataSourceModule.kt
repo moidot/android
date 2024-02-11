@@ -12,6 +12,8 @@ import com.moidot.moidot.data.remote.datasource.group.GroupPlaceRemoteDataSource
 import com.moidot.moidot.data.remote.datasource.group.GroupPlaceRemoteDataSourceImpl
 import com.moidot.moidot.data.remote.datasource.group.GroupRemoteDataSource
 import com.moidot.moidot.data.remote.datasource.group.GroupRemoteDataSourceImpl
+import com.moidot.moidot.data.remote.datasource.group.GroupVoteRemoteDataSource
+import com.moidot.moidot.data.remote.datasource.group.GroupVoteRemoteDataSourceImpl
 import com.moidot.moidot.data.remote.datasource.location.LocationRemoteDataSource
 import com.moidot.moidot.data.remote.datasource.location.LocationRemoteDataSourceImpl
 import dagger.Binds
@@ -43,4 +45,7 @@ abstract class DataSourceModule {
 
     @Binds
     abstract fun bindGroupPlaceRemoteSource(groupPlaceRemoteDataSourceImpl: GroupPlaceRemoteDataSourceImpl): GroupPlaceRemoteDataSource
+
+    @Binds
+    abstract fun bingGroupVoteRemoteSource(groupVoteRemoteDataSourceImpl: GroupVoteRemoteDataSourceImpl): GroupVoteRemoteDataSource
 }

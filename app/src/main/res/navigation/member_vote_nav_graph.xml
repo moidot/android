@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/member_vote_nav_graph">
+
+    <fragment
+        android:id="@+id/memberVoteBeforeFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.member.vote.before.MemberVoteBeforeFragment"
+        android:label="fragment_member_vote_before"
+        tools:layout="@layout/fragment_member_vote_before" />
+
+    <fragment
+        android:id="@+id/memberVoteProgressFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.member.vote.progress.MemberVoteProgressFragment"
+        android:label="fragment_member_vote_progress"
+        tools:layout="@layout/fragment_member_vote_progress" />
+
+    <fragment
+        android:id="@+id/memberVoteFinishFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.member.vote.finish.MemberVoteFinishFragment"
+        android:label="fragment_member_vote_finish"
+        tools:layout="@layout/fragment_member_vote_finish" />
+
+</navigation>

@@ -4,6 +4,7 @@ import com.moidot.moidot.data.api.AuthService
 import com.moidot.moidot.data.api.GroupInfoService
 import com.moidot.moidot.data.api.GroupPlaceService
 import com.moidot.moidot.data.api.GroupService
+import com.moidot.moidot.data.api.GroupVoteService
 import com.moidot.moidot.data.api.LocationService
 import dagger.Module
 import dagger.Provides
@@ -45,5 +46,11 @@ object ServiceModule {
     @Singleton
     fun provideGroupPlaceService(retrofit: Retrofit): GroupPlaceService {
         return retrofit.create(GroupPlaceService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGroupVoteService(retrofit: Retrofit): GroupVoteService {
+        return retrofit.create(GroupVoteService::class.java)
     }
 }
