@@ -1,11 +1,10 @@
-package com.moidot.moidot.presentation.main.group.space.member.vote.progress.viewmodel
+package com.moidot.moidot.presentation.main.group.space.member.vote.finish.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
-import com.moidot.moidot.repository.GroupPlaceRepository
 import com.moidot.moidot.repository.GroupVoteRepository
 import com.moidot.moidot.util.event.MutableSingleLiveData
 import com.moidot.moidot.util.event.SingleLiveData
@@ -14,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MemberVoteProgressViewModel @Inject constructor(
+class MemberVoteFinishViewModel @Inject constructor(
     private val groupVoteRepository: GroupVoteRepository
 ) : ViewModel() {
 

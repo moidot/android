@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.main.group.space.member.vote.progress.viewmodel.MemberVoteProgressViewModel" />
+            type="com.moidot.moidot.presentation.main.group.space.member.vote.finish.viewmodel.MemberVoteFinishViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

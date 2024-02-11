@@ -4,6 +4,7 @@ import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.LatLng
 import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
+import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import java.lang.Math.atan2
 import java.lang.Math.cos
 import java.lang.Math.sin
@@ -45,6 +46,11 @@ object MapViewUtil {
 
     fun setZoomLevelByRegionNameMapPoints(kakaoMap: KakaoMap, bestRegions: List<ResponseBestRegion.Data>) {
         val mapPoints = bestRegions.map { LatLng.from(it.latitude, it.longitude) }    // 추천 장소 좌표들
+        kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(getZoomLevelByCheckMapPoints(kakaoMap, mapPoints)))
+    }
+
+    fun setZoomLevelByVoteLocationsMapPoints(kakaoMap: KakaoMap, voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>) {
+        val mapPoints = voteStatuses.map { LatLng.from(it.latitude, it.longitude) }    // 투표 추천 장소 좌표들
         kakaoMap.moveCamera(CameraUpdateFactory.zoomTo(getZoomLevelByCheckMapPoints(kakaoMap, mapPoints)))
     }
 

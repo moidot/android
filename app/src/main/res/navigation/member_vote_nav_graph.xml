@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/memberVoteFinishFragment"
-        android:name="com.moidot.moidot.presentation.main.group.space.member.vote.finish.MemberVoteFinishFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.member.vote.finish.view.MemberVoteFinishFragment"
         android:label="fragment_member_vote_finish"
         tools:layout="@layout/fragment_member_vote_finish" />
 
