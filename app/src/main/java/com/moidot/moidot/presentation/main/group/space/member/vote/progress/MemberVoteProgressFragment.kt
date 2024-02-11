@@ -7,4 +7,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBinding>(R.layout.fragment_member_vote_progress) {
+
+
 }

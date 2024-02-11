@@ -18,5 +18,4 @@ class SpannableTxt(private val mContext: Context) {
         }
         return spannableString
     }
-
 }

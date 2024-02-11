@@ -1,4 +1,4 @@
-package com.moidot.moidot.util.popup
+package com.moidot.moidot.util.popup.picker
 
 import android.app.Dialog
 import android.content.Context
