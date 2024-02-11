@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/memberVoteProgressFragment"
-        android:name="com.moidot.moidot.presentation.main.group.space.member.vote.progress.MemberVoteProgressFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.member.vote.progress.view.MemberVoteProgressFragment"
         android:label="fragment_member_vote_progress"
         tools:layout="@layout/fragment_member_vote_progress" />
 

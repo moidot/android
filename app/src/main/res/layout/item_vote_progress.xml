@@ -1,85 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.moidot.moidot.data.remote.response.ResponseVoteStatus.Data.VoteStatuses" />
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_vote_progress_container_vote_area"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/item_vote_progress_container_people_info"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/item_vote_progress_cb_vote"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_vote_progress_container_vote_area"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_vote_progress_container_people_info"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/btn_checkbox_normal" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/item_vote_progress_tv_location"
-            style="@style/b2_med_14"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textColor="@color/orange500"
-            app:layout_constraintBottom_toTopOf="@id/item_vote_progress_pb_status"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_vote_progress_cb_vote"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="성신여대입구역" />
+            <ImageView
+                android:id="@+id/item_vote_progress_cb_vote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/btn_checkbox_normal" />
 
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/item_vote_progress_pb_status"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:indicatorColor="@color/orange500"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/item_vote_progress_tv_location"
-            app:layout_constraintTop_toBottomOf="@id/item_vote_progress_tv_location"
-            app:trackColor="@color/gray100"
-            app:trackCornerRadius="8dp" />
+            <TextView
+                android:id="@+id/item_vote_progress_tv_location"
+                style="@style/b2_med_14"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/orange500"
+                android:text="@{data.placeName}"
+                app:layout_constraintBottom_toTopOf="@id/item_vote_progress_pb_status"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_vote_progress_cb_vote"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="성신여대입구역" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/item_vote_progress_pb_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:indicatorColor="@color/orange500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/item_vote_progress_tv_location"
+                app:layout_constraintTop_toBottomOf="@id/item_vote_progress_tv_location"
+                app:trackColor="@color/gray100"
+                app:trackCornerRadius="8dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/item_vote_progress_container_people_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="3dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/item_vote_progress_container_vote_area"
-        app:layout_constraintTop_toTopOf="@id/item_vote_progress_container_vote_area">
-
-        <ImageView
-            android:id="@+id/item_vote_progress_iv_people"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_vote_people" />
-
-        <TextView
-            android:id="@+id/item_vote_progress_tv_vote_cnt"
-            style="@style/c2_reg_11"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/item_vote_progress_container_people_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:gravity="top"
-            android:includeFontPadding="false"
-            android:textColor="@color/gray400"
-            tools:text="1" />
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_vote_progress_container_vote_area"
+            app:layout_constraintTop_toTopOf="@id/item_vote_progress_container_vote_area">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <ImageView
+                android:id="@+id/item_vote_progress_iv_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_vote_people" />
+
+            <TextView
+                android:id="@+id/item_vote_progress_tv_vote_cnt"
+                style="@style/c2_reg_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="top"
+                android:text="@{Integer.toString(data.votes)}"
+                android:includeFontPadding="false"
+                android:textColor="@color/gray400"
+                tools:text="1" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
