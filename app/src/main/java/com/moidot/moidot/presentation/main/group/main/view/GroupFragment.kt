@@ -2,7 +2,6 @@ package com.moidot.moidot.presentation.main.group.main.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -24,7 +23,7 @@ import com.moidot.moidot.util.StatusBarColorUtil
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
 import com.moidot.moidot.util.view.hideKeyboard
-import com.moidot.moidot.util.popup.PopupPickerDialog
+import com.moidot.moidot.util.popup.picker.PopupPickerDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.moidot.moidot.util.popup
+package com.moidot.moidot.util.popup.picker
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
