@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_popup"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/popup_edit_done_tv_title"
+        style="@style/b1_bold_16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/popup_edit_done_title"
+        android:textColor="@color/gray700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/popup_edit_done_container_my_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:cardBackgroundColor="@color/orange50"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/popup_edit_done_tv_title"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp">
+
+            <LinearLayout
+                android:id="@+id/popup_edit_done_container_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/c1_reg_12"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/popup_edit_done_nickname"
+                    android:textColor="@color/gray400" />
+
+                <TextView
+                    android:id="@+id/popup_edit_done_tv_nickname"
+                    style="@style/b2_med_14"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:textColor="@color/orange500"
+                    tools:text="아싸카이트" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/popup_edit_done_container_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/c1_reg_12"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/popup_edit_done_location"
+                    android:textColor="@color/gray400" />
+
+                <TextView
+                    android:id="@+id/popup_edit_done_tv_location"
+                    style="@style/b2_med_14"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:textColor="@color/orange500"
+                    tools:text="서울 성북구 보문로34다길 2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/popup_edit_done_container_transport_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/c1_reg_12"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/popup_edit_done_transport_type"
+                    android:textColor="@color/gray400" />
+
+                <ImageView
+                    android:id="@+id/popup_edit_done_iv_transport_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_transportation_car_selected" />
+
+                <TextView
+                    android:id="@+id/popup_edit_done_tv_transport_type"
+                    style="@style/b2_med_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/orange500"
+                    tools:text="자동차" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/btn_normal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/all_confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/popup_edit_done_container_my_info" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
