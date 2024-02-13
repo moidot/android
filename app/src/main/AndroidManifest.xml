@@ -25,7 +25,7 @@
 
         <meta-data
             android:name="com.kakao.vectormap.APP_KEY"
-            android:value="${MANIFEST_KAKAO_NATIVE_APP_KEY}"/>
+            android:value="${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -53,12 +53,14 @@
 
         <activity
             android:name=".util.deeplink.SchemeActivity"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
                 <data android:host="kakaolink" />
             </intent-filter>
@@ -67,8 +69,7 @@
         <activity
             android:name=".presentation.main.MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
+            android:windowSoftInputMode="adjustNothing"/>
 
         <activity
             android:name=".presentation.onboard.view.OnboardActivity"
@@ -90,16 +91,22 @@
             android:name=".presentation.main.group.space.leader.LeaderSpaceActivity"
             android:exported="false" />
 
-        <activity android:name=".presentation.main.group.space.leader.vote.create.CreateVoteActivity"
-            android:exported="true"/>
-        
-        <activity android:name=".presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".presentation.main.group.space.leader.vote.create.CreateVoteActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity"
+            android:exported="false" />
 
         <activity
             android:name=".presentation.main.group.space.member.MemberSpaceActivity"
             android:exported="false" />
-        
+
+        <activity
+            android:name=".presentation.main.group.space.common.edit.view.EditMyGroupInfoActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
