@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.group.space.common.adapter
+package com.moidot.moidot.presentation.main.group.space.common.place.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
