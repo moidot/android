@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.group.space.common.view
+package com.moidot.moidot.presentation.main.group.space.common.place.view
 
 import android.os.Bundle
 import android.view.View
@@ -30,9 +30,9 @@ import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentGroupPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
-import com.moidot.moidot.presentation.main.group.space.common.adapter.BestRegionNameAdapter
-import com.moidot.moidot.presentation.main.group.space.common.adapter.MoveUserInfoAdapter
-import com.moidot.moidot.presentation.main.group.space.common.viewmodel.GroupPlaceViewModel
+import com.moidot.moidot.presentation.main.group.space.common.place.adapter.BestRegionNameAdapter
+import com.moidot.moidot.presentation.main.group.space.common.place.adapter.MoveUserInfoAdapter
+import com.moidot.moidot.presentation.main.group.space.common.place.viewmodel.GroupPlaceViewModel
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import com.moidot.moidot.util.SpannableTxt
