@@ -19,3 +19,17 @@ fun getScreenHeight(mContext:Context): Int {
         displayMetrics.heightPixels
     }
 }
+
+fun getScreenWidth(mContext:Context): Int {
+    val wm = mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { // API 30이상
+        val windowMetrics = wm.currentWindowMetrics
+        val insets = windowMetrics.windowInsets
+            .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+        windowMetrics.bounds.width() - insets.right - insets.left
+    } else {
+        val displayMetrics = DisplayMetrics()
+        wm.defaultDisplay.getMetrics(displayMetrics)
+        displayMetrics.widthPixels
+    }
+}
