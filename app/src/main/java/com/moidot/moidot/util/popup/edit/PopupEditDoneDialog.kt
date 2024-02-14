@@ -1,40 +1,56 @@
 package com.moidot.moidot.util.popup.edit
 
 import android.app.Dialog
-import android.content.Context
-import android.graphics.Color
+import android.graphics.Color.TRANSPARENT
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import com.moidot.moidot.R
+import androidx.fragment.app.DialogFragment
 import com.moidot.moidot.databinding.PopupEditDoneDialogBinding
+import com.moidot.moidot.util.view.getScreenWidth
 
 class PopupEditDoneDialog(
-    context: Context,
-    val nickName: String?,
-    val location: String?,
-    val transPortType: String?,
-    val onClick: () -> Unit
-) : Dialog(context, R.style.custom_dialog) {
-    private lateinit var binding: PopupEditDoneDialogBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initBinding()
-        initView()
+    val nickName: String?, val location: String?, val transPortType: String?, val onClick: () -> Unit
+) : DialogFragment() {
+    private var _binding: PopupEditDoneDialogBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = PopupEditDoneDialogBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    private fun initBinding() {
-        binding = PopupEditDoneDialogBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.let { window ->
+            val layoutParams = window.attributes
+            layoutParams.width = (getScreenWidth(requireContext()) * 0.9).toInt() // 화면 너비의 90%
+            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            window.attributes = layoutParams
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.dialog = this
     }
 
-    private fun initView() {
-        window?.apply {
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            setCancelable(false)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.window?.apply {
+            setBackgroundDrawable(ColorDrawable(TRANSPARENT))
+            isCancelable = false
         }
+        return dialog
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     fun onClickConfirm() {

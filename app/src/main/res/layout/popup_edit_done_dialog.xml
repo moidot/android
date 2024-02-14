@@ -11,9 +11,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/popup_edit_done_container_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_popup"
+        android:minWidth="320dp"
         android:padding="16dp">
 
         <TextView
@@ -31,7 +33,7 @@
             android:id="@+id/popup_edit_done_container_my_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             app:cardBackgroundColor="@color/orange50"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
@@ -44,7 +46,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="start"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="8dp">
 
@@ -52,7 +53,6 @@
                     android:id="@+id/popup_edit_done_container_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
                     android:layout_marginBottom="4dp"
                     android:orientation="horizontal">
 
@@ -73,7 +73,7 @@
                         android:layout_marginStart="26dp"
                         android:text="@{dialog.nickName}"
                         android:textColor="@color/orange500"
-                        tools:text="아싸카이트" />
+                        tools:text="김말이튀김" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -132,6 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
+                        android:text="@{dialog.transPortType}"
                         android:textColor="@color/orange500"
                         tools:text="자동차" />
                 </LinearLayout>

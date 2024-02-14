@@ -1,5 +1,4 @@
 package com.moidot.moidot.presentation.main.group.space.common.edit.view
-
 import android.os.Bundle
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityEditMyGroupInfoBinding
@@ -10,6 +9,7 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        PopupEditDoneDialog(this, "김말이튀김", "서울 성북구 보문로34다길 2", "자동차", {}).show()
+        val dialog = PopupEditDoneDialog( "김말이튀김", "서울 성북구 보문로34다길 2", "자동차", {})
+        dialog.show(supportFragmentManager, "ss")
     }
 }
