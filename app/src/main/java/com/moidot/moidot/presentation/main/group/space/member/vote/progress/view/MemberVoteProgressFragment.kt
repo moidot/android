@@ -116,4 +116,8 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
             )
         }
     }
+
+    fun startVote() {
+        voteProgressInfoAdapter.updateVoteStateTrue()
+    }
 }
