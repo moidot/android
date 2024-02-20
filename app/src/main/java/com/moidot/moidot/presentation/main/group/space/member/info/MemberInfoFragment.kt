@@ -104,6 +104,6 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
             getString(R.string.space_member_info_dialog_title).format(viewModel.groupName.value),
             getString(R.string.space_member_info_dialog_content),
             getString(R.string.space_member_info_dialog_btn)
-        ) { viewModel.deleteGroup(participateId = activityViewModel.userInfo.value!!.participationId) }.show() // TODO 자신의 정보 받아오기
+        ) { viewModel.deleteGroup(participateId = activityViewModel.userInfo.value!!.participationId) }.show()
     }
 }

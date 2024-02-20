@@ -27,10 +27,11 @@
                 android:id="@+id/item_vote_progress_cb_vote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/btn_checkbox_normal"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/btn_checkbox_normal" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/item_vote_progress_tv_location"
@@ -38,8 +39,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:textColor="@color/orange500"
                 android:text="@{data.placeName}"
+                android:textColor="@color/orange500"
                 app:layout_constraintBottom_toTopOf="@id/item_vote_progress_pb_status"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/item_vote_progress_cb_vote"
@@ -86,8 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:gravity="top"
-                android:text="@{Integer.toString(data.votes)}"
                 android:includeFontPadding="false"
+                android:text="@{Integer.toString(data.votes)}"
                 android:textColor="@color/gray400"
                 tools:text="1" />
 

@@ -188,4 +188,18 @@
     <string name="member_vote_progress_btn">투표하기</string>
     <string name="member_vote_end_date">%d.%d.%d %s종료</string>
     <string name="member_vote_finish_title">장소 투표가 완료되었어요!</string>
+
+    <!-- Setting -->
+    <string name="setting_top_bar">설정</string>
+    <string name="setting_alarm">알림 설정</string>
+    <string name="setting_notice">공지사항</string>
+    <string name="setting_terms_of_service">이용 약관</string>
+    <string name="setting_privacy_policy">개인정보처리방침</string>
+    <string name="setting_location_based_service_terms">위치기반서비스 이용약관</string>
+    <string name="setting_version_info">버전 정보</string>
+    <string name="setting_loggout">로그아웃</string>
+    <string name="setting_withdrawal">회원 탈퇴</string>
+    <string name="setting_withdrawal_dialog_title">정말 탈퇴하실건가요?</string>
+    <string name="setting_withdrawal_dialog_content">모이닷을 탈퇴하시게 되면 내가 속해있는\n모이닷 스페이스에서 전부 나가게 됩니다</string>
+    <string name="setting_withdrawal_dialog_btn">탈퇴하기</string>
 </resources>
