@@ -198,5 +198,8 @@
     <string name="setting_location_based_service_terms">위치기반서비스 이용약관</string>
     <string name="setting_version_info">버전 정보</string>
     <string name="setting_loggout">로그아웃</string>
-    <string name="setting_withdraw">회원 탈퇴</string>
+    <string name="setting_withdrawal">회원 탈퇴</string>
+    <string name="setting_withdrawal_dialog_title">정말 탈퇴하실건가요?</string>
+    <string name="setting_withdrawal_dialog_content">모이닷을 탈퇴하시게 되면 내가 속해있는\n모이닷 스페이스에서 전부 나가게 됩니다</string>
+    <string name="setting_withdrawal_dialog_btn">탈퇴하기</string>
 </resources>

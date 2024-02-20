@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="activity"
+            type="com.moidot.moidot.presentation.main.mypage.SettingActivity" />
 
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.main.mypage.SettingViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -297,6 +303,7 @@
                     style="@style/b2_reg_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> activity.onClickLogout()}"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="16dp"
                     android:text="@string/setting_loggout"
@@ -306,13 +313,14 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/setting_tv_withdraw"
+                    android:id="@+id/setting_tv_withdrawal"
                     style="@style/b2_reg_14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> activity.onClickWithdrawal()}"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="16dp"
-                    android:text="@string/setting_withdraw"
+                    android:text="@string/setting_withdrawal"
                     android:textColor="@color/gray400"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
