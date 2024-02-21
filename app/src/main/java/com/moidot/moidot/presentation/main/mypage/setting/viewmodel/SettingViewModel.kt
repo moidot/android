@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.mypage
+package com.moidot.moidot.presentation.main.mypage.setting.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

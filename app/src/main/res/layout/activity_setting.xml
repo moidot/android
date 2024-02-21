@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="activity"
-            type="com.moidot.moidot.presentation.main.mypage.SettingActivity" />
+            type="com.moidot.moidot.presentation.main.mypage.setting.view.SettingActivity" />
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.main.mypage.SettingViewModel" />
+            type="com.moidot.moidot.presentation.main.mypage.setting.viewmodel.SettingViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/gray100">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray100"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout

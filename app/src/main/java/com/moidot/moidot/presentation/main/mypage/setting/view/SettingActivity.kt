@@ -1,10 +1,11 @@
-package com.moidot.moidot.presentation.main.mypage
+package com.moidot.moidot.presentation.main.mypage.setting.view
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySettingBinding
 import com.moidot.moidot.presentation.base.BaseActivity
+import com.moidot.moidot.presentation.main.mypage.setting.viewmodel.SettingViewModel
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import dagger.hilt.android.AndroidEntryPoint
 
