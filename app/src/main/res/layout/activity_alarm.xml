@@ -98,6 +98,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/alarm_vote_start_encourage_content"
                     android:textColor="@color/gray400"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/alarm_tv_vote_start_encourage_title"
                     app:layout_constraintTop_toBottomOf="@id/alarm_tv_vote_start_encourage_title" />
 
@@ -140,6 +141,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/alarm_vote_start_content"
                     android:textColor="@color/gray400"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/alarm_tv_vote_start_title"
                     app:layout_constraintTop_toBottomOf="@id/alarm_tv_vote_start_title" />
 
@@ -182,6 +184,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/alarm_vote_participate_encourage_content"
                     android:textColor="@color/gray400"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/alarm_tv_vote_participate_encourage_title"
                     app:layout_constraintTop_toBottomOf="@id/alarm_tv_vote_participate_encourage_title" />
 
@@ -224,6 +227,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/alarm_vote_end_content"
                     android:textColor="@color/gray400"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/alarm_tv_vote_end_title"
                     app:layout_constraintTop_toBottomOf="@id/alarm_tv_vote_end_title" />
 
