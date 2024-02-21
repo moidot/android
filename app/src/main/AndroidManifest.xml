@@ -108,7 +108,8 @@
             android:exported="false" />
 
         <activity
-            android:name=".presentation.main.mypage.SettingActivity"
+            android:name=".presentation.main.mypage.setting.view.SettingActivity"
+            android:theme="@style/Gray800.Theme.Moidot"
             android:exported="true" />
 
     </application>
