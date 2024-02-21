@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray100">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/alarm_top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/gray800"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/fg_input_leader_info_iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:src="@drawable/ic_back_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/b1_med_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="@string/alarm_top_bar"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/fg_input_leader_info_iv_back"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/alarm_tv_title"
+                style="@style/h2_bold_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/alarm_title"
+                android:textColor="@color/gray800" />
+
+            <TextView
+                android:id="@+id/alarm_tv_content"
+                style="@style/c1_reg_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="@string/alarm_content"
+                android:textColor="@color/gray500" />
+
+            <ImageView
+                android:id="@+id/alarm_iv_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="4dp"
+                android:src="@drawable/img_alarm" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/alarm_container_vote_start_encourage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/bg_popup"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="16dp">
+
+                <TextView
+                    android:id="@+id/alarm_tv_vote_start_encourage_title"
+                    style="@style/b2_med_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/alarm_vote_start_encourage_title"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/alarm_tv_vote_start_encourage_content"
+                    style="@style/c1_reg_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/alarm_vote_start_encourage_content"
+                    android:textColor="@color/gray400"
+                    app:layout_constraintStart_toStartOf="@id/alarm_tv_vote_start_encourage_title"
+                    app:layout_constraintTop_toBottomOf="@id/alarm_tv_vote_start_encourage_title" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/alarm_toggle_vote_start_encourage"
+                    style="@style/custom_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

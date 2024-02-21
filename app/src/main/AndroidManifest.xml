@@ -109,9 +109,13 @@
 
         <activity
             android:name=".presentation.main.mypage.setting.view.SettingActivity"
-            android:theme="@style/Gray800.Theme.Moidot"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Gray800.Theme.Moidot" />
 
+        <activity
+            android:name=".presentation.main.mypage.alarm.view.AlarmActivity"
+            android:exported="false"
+            android:theme="@style/Gray800.Theme.Moidot" />
     </application>
 
 </manifest>

@@ -103,7 +103,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/bg_popup">
+                android:background="@drawable/bg_popup"
+                android:onClick="@{() -> activity.onClickAlarm()}">
 
                 <TextView
                     android:id="@+id/setting_tv_alarm"
@@ -153,7 +154,7 @@
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="12dp"
                             android:paddingVertical="16dp"
-                            android:text="@string/setting_alarm"
+                            android:text="@string/setting_notice"
                             android:textColor="@color/gray700"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

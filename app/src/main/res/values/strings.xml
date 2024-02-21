@@ -202,4 +202,16 @@
     <string name="setting_withdrawal_dialog_title">정말 탈퇴하실건가요?</string>
     <string name="setting_withdrawal_dialog_content">모이닷을 탈퇴하시게 되면 내가 속해있는\n모이닷 스페이스에서 전부 나가게 됩니다</string>
     <string name="setting_withdrawal_dialog_btn">탈퇴하기</string>
+
+    <string name="alarm_top_bar">알림 설정</string>
+    <string name="alarm_title">모이닷 스페이스 알림</string>
+    <string name="alarm_content">중간 장소 선정 과정에서 PUSH알림이 발생할 수 있어요.</string>
+    <string name="alarm_vote_start_encourage_title">투표 시작 독려 알림</string>
+    <string name="alarm_vote_start_encourage_content">모임장이라면 모임원이 투표 시작을\n요청하는 알림을 받을 수 있어요</string>
+    <string name="alarm_vote_start_title">투표 시작 알림</string>
+    <string name="alarm_vote_start_content">모임원일때 투표가 시작되면\n알림을 받을 수 있어요</string>
+    <string name="alarm_vote_participate_encourage_title">투표 참여 독려 알림</string>
+    <string name="alarm_vote_participate_encourage_content">투표에 참여하지 않았다면\n마감 한 시간 전 알림을 받을 수 있어요</string>
+    <string name="alarm_vote_end_title">투표 종료 알림</string>
+    <string name="alarm_vote_end_content">투표가 종료되면 알림을 받을 수 있어요</string>
 </resources>

@@ -123,4 +123,10 @@
         <item name="chipBackgroundColor">@color/clock_chip_color</item>
     </style>
 
+    <style name="custom_switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="track">@drawable/btn_switch_selector</item>
+        <item name="trackTint">@color/switch_track_color</item>
+        <item name="android:thumb">@drawable/bg_switch_thumb</item>
+        <item name="thumbTint">@color/white</item>
+    </style>
 </resources>

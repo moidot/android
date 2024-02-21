@@ -1,11 +1,15 @@
 package com.moidot.moidot.presentation.main.mypage.setting.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySettingBinding
 import com.moidot.moidot.presentation.base.BaseActivity
+import com.moidot.moidot.presentation.main.mypage.alarm.view.AlarmActivity
 import com.moidot.moidot.presentation.main.mypage.setting.viewmodel.SettingViewModel
+import com.moidot.moidot.presentation.sign.view.SignInActivity
+import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,4 +41,9 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         ) { }.show()
     }
 
+    fun onClickAlarm() {
+        Intent(this, AlarmActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
 }
