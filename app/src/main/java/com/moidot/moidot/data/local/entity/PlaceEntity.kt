@@ -8,6 +8,7 @@ data class PlaceEntity(
     @PrimaryKey
     val placeName: String,
     val addressName: String?,
+    val roadAddressName:String?,
     val longitude: Double,
     val latitude: Double,
     var isFavorite: Boolean = true

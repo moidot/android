@@ -36,6 +36,7 @@ import com.moidot.moidot.presentation.main.group.space.common.place.viewmodel.Gr
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import com.moidot.moidot.util.SpannableTxt
+import com.moidot.moidot.util.view.dpToPx
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.max
@@ -160,7 +161,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         }
     }
 
-    private fun setUpSearchDetailBtnTxt(regionName:String) {
+    private fun setUpSearchDetailBtnTxt(regionName: String) {
         val content = resources.getString(R.string.space_place_btn_search_detail).format(regionName)
         val spannableTxt = SpannableTxt(requireContext()).applySpannableStyles(
             content = content,
@@ -225,7 +226,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         }
     }
 
-    private fun addMyInfoMarker(moveUserInfo:ResponseBestRegion.Data.MoveUserInfo) {
+    private fun addMyInfoMarker(moveUserInfo: ResponseBestRegion.Data.MoveUserInfo) {
         labelLayer.addLabel(
             LabelOptions.from( // 첫번째 배열이 유저의 시작 위치
                 moveUserInfo.userName, LatLng.from(moveUserInfo.path[0].y, moveUserInfo.path[0].x)
@@ -237,7 +238,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         )
     }
 
-    private fun addOtherInfoMarker(moveUserInfo:ResponseBestRegion.Data.MoveUserInfo) {
+    private fun addOtherInfoMarker(moveUserInfo: ResponseBestRegion.Data.MoveUserInfo) {
         labelLayer.addLabel(
             LabelOptions.from( // 첫번째 배열이 유저의 시작 위치
                 moveUserInfo.userName, LatLng.from(moveUserInfo.path[0].y, moveUserInfo.path[0].x)
@@ -251,17 +252,17 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
 
     // TODO 본인게 아닌건 분기처리
     private fun addMovePathRoutineLines(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
-       val othersMoveInfos = moveUserInfos.filterNot { moveUserInfo ->  moveUserInfo.userName == activityViewModel.getUserName() }
+        val othersMoveInfos = moveUserInfos.filterNot { moveUserInfo -> moveUserInfo.userName == activityViewModel.getUserName() }
         addOtherMovePathRoutineLine(othersMoveInfos)
 
-        val myMoveInfo =  moveUserInfos.subtract(othersMoveInfos.toSet()).toList()
+        val myMoveInfo = moveUserInfos.subtract(othersMoveInfos.toSet()).toList()
         addMyMovePathRoutineLine(myMoveInfo)
     }
 
     private fun addMyMovePathRoutineLine(moveUserInfo: List<ResponseBestRegion.Data.MoveUserInfo>) {
         val stylesSet = RouteLineStylesSet.from(
             "myStyles",
-            RouteLineStyles.from(RouteLineStyle.from(13f, resources.getColor(R.color.orange500, null)))
+            RouteLineStyles.from(RouteLineStyle.from(5.dpToPx(requireContext()).toFloat(), resources.getColor(R.color.orange500, null)))
         )
         val segment = RouteLineSegment.from(moveUserInfo.flatMap { it.path }.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
         val options = RouteLineOptions.from(segment).setStylesSet(stylesSet)
@@ -271,8 +272,8 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     private fun addOtherMovePathRoutineLine(moveOtherUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
         val stylesSet = RouteLineStylesSet.from(
             "otherStyles",
-            RouteLineStyles.from(RouteLineStyle.from(10f, resources.getColor(R.color.black, null)))
-        ) // TODO 색깔 카카오지도랑 잘구분 안되어서 문의 넣어야할듯
+            RouteLineStyles.from(RouteLineStyle.from(3.dpToPx(requireContext()).toFloat(), resources.getColor(R.color.gray500, null)))
+        ) // 굵기 단위는 픽셀
         val segment = RouteLineSegment.from(moveOtherUserInfos.flatMap { it.path }.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
         val options = RouteLineOptions.from(segment).setStylesSet(stylesSet)
         routeLine = routeLineManager.layer.addRouteLine(options)

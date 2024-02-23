@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="@{data.addressName}"
+                android:text="@{data.roadAddressName.empty ? data.addressName : data.roadAddressName}"
                 android:textColor="@color/gray400"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/item_location_tv_place_name"
