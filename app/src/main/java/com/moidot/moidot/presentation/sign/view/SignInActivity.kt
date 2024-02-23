@@ -18,6 +18,7 @@ import com.moidot.moidot.presentation.sign.model.Platform.NAVER
 import com.moidot.moidot.presentation.sign.viewmodel.SignInViewModel
 import com.moidot.moidot.util.Constant.REFRESH_DONE_STATE
 import com.moidot.moidot.util.Constant.SCHEME_URL_STRING
+import com.moidot.moidot.util.Constant.SETTING_MSG_EXTRA
 import com.moidot.moidot.util.CustomSnackBar
 import com.moidot.moidot.util.deeplink.SchemeActivity
 import com.navercorp.nid.NaverIdLoginSDK
@@ -28,12 +29,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
 
     private val refreshDoneState by lazy { intent.getBooleanExtra(REFRESH_DONE_STATE, false) }
+    private val settingMsg by lazy { intent.getStringExtra(SETTING_MSG_EXTRA) ?: "" }
     private val schemeUrl by lazy { intent.getStringExtra(SCHEME_URL_STRING) }
     private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
+        checkSettingMsg()
         checkRefreshMsg()
         initSdk()
         setupObserver()
@@ -45,6 +48,11 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private fun initSdk() {
         NaverIdLoginSDK.initialize(this, NAVER_CLIENT_ID, NAVER_CLIENT_SECRET_KEY, getString(R.string.app_name))
+    }
+
+    /** SettingActivity 로부터 로그아웃이나 회원탈퇴를 진행했을 때 넘어오는 안내메세지*/
+    private fun checkSettingMsg() {
+        if (settingMsg.isNotEmpty()) CustomSnackBar.makeSnackBar(binding.root, settingMsg).show()
     }
 
     /** 로그인 만료시 얻는 재로그인 유도 메세지
