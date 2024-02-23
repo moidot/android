@@ -1,5 +1,7 @@
 package com.moidot.moidot.presentation.main.mypage.setting.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState
@@ -21,8 +23,24 @@ class SettingViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
+    val userName = MutableLiveData<String>()
+    val userEmail = MutableLiveData<String>()
+    val platform = MutableLiveData<String>()
+
     private val _userState = MutableSingleLiveData<UserState>()
     val userState: SingleLiveData<UserState> = _userState
+
+    init {
+        loadUserInfo()
+    }
+
+    private fun loadUserInfo() {
+        userRepository.getUserInfo().apply {
+            userName.value = "${name}님"
+            userEmail.value = email
+            platform.value = type
+        }
+    }
 
     fun logout() {
         viewModelScope.launch {
