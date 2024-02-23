@@ -11,6 +11,8 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.moidot.moidot.R
+import com.moidot.moidot.presentation.sign.model.Platform.NAVER
+import com.moidot.moidot.presentation.sign.model.Platform.KAKAO
 import com.moidot.moidot.util.unit.PriceUtil
 import com.moidot.moidot.util.unit.TimeUtil
 
@@ -116,3 +118,10 @@ fun TextView.setVoteEndTimeTextFieldActive(flag: Boolean) {
     this.setTextAppearance(currentTextStyle)
 }
 
+@BindingAdapter("bind:userLoginType")
+fun ImageView.userLoginTypeImageBind(type: String) {
+    when (type) {
+        KAKAO.name -> Glide.with(this.context).load(R.drawable.ic_setting_kakao).into(this)
+        NAVER.name -> Glide.with(this.context).load(R.drawable.ic_setting_naver).into(this)
+    }
+}
