@@ -7,6 +7,7 @@ data class ResponseSearchPlace(
 ) {
     data class Document(
         @SerializedName("place_name") val placeName: String,
+        @SerializedName("road_address_name") val roadAddressName: String?,
         @SerializedName("address_name") val addressName: String?,
         @SerializedName("x") val longitude: Double,
         @SerializedName("y") val latitude: Double,
