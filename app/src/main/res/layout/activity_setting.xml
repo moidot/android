@@ -290,6 +290,7 @@
                             app:layout_constraintBottom_toBottomOf="@id/setting_tv_version_info"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/setting_tv_version_info"
+                            android:text="@{viewModel.versionName}"
                             tools:text="버전 1.0.0" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>

@@ -1,9 +1,10 @@
 package com.moidot.moidot.presentation.main.mypage.setting.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.BuildConfig
+import com.moidot.moidot.BuildConfig.VERSION_NAME
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.LOGOUT_FAIL
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.LOGOUT_SUCCESS
@@ -23,6 +24,7 @@ class SettingViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
+    val versionName = MutableLiveData<String>()
     val userName = MutableLiveData<String>()
     val userEmail = MutableLiveData<String>()
     val platform = MutableLiveData<String>()
@@ -31,7 +33,12 @@ class SettingViewModel @Inject constructor(
     val userState: SingleLiveData<UserState> = _userState
 
     init {
+        loadAppInfo()
         loadUserInfo()
+    }
+
+    private fun loadAppInfo() {
+        versionName.value = "버전 $VERSION_NAME"
     }
 
     private fun loadUserInfo() {
