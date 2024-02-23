@@ -10,4 +10,6 @@ interface AuthRepository {
     suspend fun signIn(token: String, platform: String): Result<ResponseSignIn>
 
     suspend fun logout(): Result<BaseResponse>
+
+    suspend fun withdrawal(): Result<BaseResponse>
 }

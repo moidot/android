@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.LOGOUT_FAIL
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.LOGOUT_SUCCESS
+import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.WITHDRAWAL_FAIL
+import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.WITHDRAWAL_SUCCESS
 import com.moidot.moidot.repository.AuthRepository
 import com.moidot.moidot.repository.UserRepository
 import com.moidot.moidot.util.event.MutableSingleLiveData
@@ -37,10 +39,23 @@ class SettingViewModel @Inject constructor(
         }
     }
 
+    fun withdrawal() {
+        viewModelScope.launch {
+            authRepository.withdrawal().onSuccess {
+                if (it.code == 0) {
+                    removeUserInfoPrefs()
+                    _userState.setValue(WITHDRAWAL_SUCCESS)
+                } else {
+                    _userState.setValue(WITHDRAWAL_FAIL)
+                }
+            }.onFailure {
+                _userState.setValue(WITHDRAWAL_FAIL)
+            }
+        }
+    }
+
     private fun removeUserInfoPrefs() {
         userRepository.removeAllToken()
         userRepository.saveOnboardDoneState(true) // 온보딩은 '읽음' 상태로 남겨둔다.
     }
-
-    // TODO 회원 탈퇴
 }

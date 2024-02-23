@@ -19,4 +19,8 @@ class AuthRemoteDataSourceImpl @Inject constructor(private val authService: Auth
     override suspend fun logout(): Result<BaseResponse> {
         return authService.deleteUserToken().getResultFromResponse()
     }
+
+    override suspend fun withdrawal(): Result<BaseResponse> {
+        return authService.deleteUser().getResultFromResponse()
+    }
 }

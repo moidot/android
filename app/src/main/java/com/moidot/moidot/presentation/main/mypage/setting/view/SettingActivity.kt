@@ -39,21 +39,13 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
     private fun setupObserver() {
         viewModel.userState.observe(this) {
             when (it) {
-                LOGOUT_SUCCESS -> {
-                    moveToSignIn(getString(R.string.setting_msg_logout_success))
-                }
+                LOGOUT_SUCCESS -> moveToSignIn(getString(R.string.setting_msg_logout_success))
 
-                LOGOUT_FAIL -> {
-                    this.showToast(getString(R.string.setting_msg_logout_fail))
-                }
+                LOGOUT_FAIL -> this.showToast(getString(R.string.setting_msg_logout_fail))
 
-                WITHDRAWAL_SUCCESS -> {
-                    moveToSignIn(getString(R.string.setting_msg_withdrawal_success))
-                }
+                WITHDRAWAL_SUCCESS -> moveToSignIn(getString(R.string.setting_msg_withdrawal_success))
 
-                WITHDRAWAL_FAIL -> {
-                    this.showToast(getString(R.string.setting_msg_withdrawal_fail))
-                }
+                WITHDRAWAL_FAIL -> this.showToast(getString(R.string.setting_msg_withdrawal_fail))
             }
         }
     }
@@ -78,7 +70,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
             getString(R.string.setting_withdrawal_dialog_content),
             getString(R.string.setting_withdrawal_dialog_btn)
         ) {
-
+            viewModel.withdrawal()
         }.show()
     }
 

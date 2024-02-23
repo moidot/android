@@ -19,4 +19,8 @@ class AuthRepositoryImpl @Inject constructor(private val authRemoteDataSource: A
     override suspend fun logout(): Result<BaseResponse> {
         return authRemoteDataSource.logout()
     }
+
+    override suspend fun withdrawal(): Result<BaseResponse> {
+        return authRemoteDataSource.withdrawal()
+    }
 }
