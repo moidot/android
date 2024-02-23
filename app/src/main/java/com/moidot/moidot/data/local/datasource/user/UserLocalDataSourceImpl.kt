@@ -4,6 +4,10 @@ import android.content.SharedPreferences
 import javax.inject.Inject
 
 class UserLocalDataSourceImpl @Inject constructor(private val sharedPreferences: SharedPreferences) : UserLocalDataSource {
+    override fun removeAllToken() {
+        sharedPreferences.edit().clear().apply()
+    }
+
     override fun getAccessToken(): String? {
         return sharedPreferences.getString(ACCESS_TOKEN, "")
     }

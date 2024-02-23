@@ -3,6 +3,7 @@ package com.moidot.moidot.presentation.main
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.moidot.moidot.R
@@ -18,14 +19,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initBottomNav()
     }
 
+    // TODO 추후 서비스가 확장될 때 바텀네비를 다시 추가한다.
     private fun initBottomNav() {
-        binding.mainBtmNav.itemIconTintList = null
+        // binding.mainBtmNav.itemIconTintList = null
         val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.main_fcv) as NavHostFragment? ?: return
-        val navController = host.navController
-        setupBottomNavMenu(navController)
+        host.findNavController().setGraph(R.navigation.main_nav_graph, null)
+        // val navController = host.navController
+        // setupBottomNavMenu(navController)
     }
 
-    private fun setupBottomNavMenu(navController: NavController) {
+    /*private fun setupBottomNavMenu(navController: NavController) {
         binding.mainBtmNav.apply {
             setupWithNavController(navController)
             setOnItemSelectedListener {
@@ -33,5 +36,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 return@setOnItemSelectedListener true
             }
         }
-    }
+    }*/
 }

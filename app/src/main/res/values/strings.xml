@@ -202,6 +202,10 @@
     <string name="setting_withdrawal_dialog_title">정말 탈퇴하실건가요?</string>
     <string name="setting_withdrawal_dialog_content">모이닷을 탈퇴하시게 되면 내가 속해있는\n모이닷 스페이스에서 전부 나가게 됩니다</string>
     <string name="setting_withdrawal_dialog_btn">탈퇴하기</string>
+    <string name="setting_msg_logout_success">로그아웃이 완료되었어요.</string>
+    <string name="setting_msg_logout_fail">로그아웃에 실패했습니다.</string>
+    <string name="setting_msg_withdrawal_success">탈퇴가 완료되었어요.</string>
+    <string name="setting_msg_withdrawal_fail">회원 탈퇴에 실패했습니다.</string>
 
     <string name="alarm_top_bar">알림 설정</string>
     <string name="alarm_title">모이닷 스페이스 알림</string>

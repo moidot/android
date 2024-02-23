@@ -31,7 +31,7 @@ class OnboardActivity : BaseActivity<ActivityOnboardBinding>(R.layout.activity_o
 
     private fun initNavigation() {
         val navHost = supportFragmentManager.findFragmentById(R.id.onboard_fcv) as NavHostFragment
-        navHost.findNavController().setGraph(R.navigation.onboard_nav_graph, intent.extras)
+        navHost.findNavController().setGraph(R.navigation.onboard_nav_graph, null)
     }
 
     fun exitOnboard() {

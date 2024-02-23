@@ -16,6 +16,7 @@ import com.moidot.moidot.presentation.main.group.main.viewmodel.GroupViewModel
 import com.moidot.moidot.presentation.main.group.main.adater.MyGroupAdapter
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceActivity
 import com.moidot.moidot.presentation.main.group.space.member.MemberSpaceActivity
+import com.moidot.moidot.presentation.main.mypage.setting.view.SettingActivity
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_MEMBER_COUNT
 import com.moidot.moidot.util.Constant.GROUP_NAME
@@ -110,6 +111,10 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
 
     fun moveToCreateGroup() {
         startActivity(Intent(requireContext(), CreateGroupActivity::class.java))
+    }
+
+    fun moveToSetting() {
+        startActivity(Intent(requireContext(), SettingActivity::class.java))
     }
 
     private fun setupObservers() {

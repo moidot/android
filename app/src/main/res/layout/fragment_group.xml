@@ -35,6 +35,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/fg_group_iv_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:onClick="@{() -> fragment.moveToSetting()}"
+            android:paddingHorizontal="20dp"
+            android:src="@drawable/ic_group_setting"
+            app:layout_constraintBottom_toBottomOf="@+id/fg_group_tv_top_bar"
+            app:layout_constraintEnd_toEndOf="@+id/fg_group_tv_top_bar"
+            app:layout_constraintTop_toTopOf="@+id/fg_group_tv_top_bar" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fg_group_ll_search"
             android:layout_width="match_parent"

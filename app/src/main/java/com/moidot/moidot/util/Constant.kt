@@ -10,4 +10,5 @@ object Constant {
     const val REFRESH_DONE_STATE = "REFRESH_DONE_STATE"
     const val MEMBER_VOTE_EXTRA = "MEMBER_VOTE_EXTRA"
     const val BEST_REGIONS_EXTRA = "BEST_REGIONS_EXTRA"
+    const val SETTING_MSG_EXTRA = "SETTING_MSG_EXTRA"
 }
