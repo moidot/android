@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.data.UserInfo
 import com.moidot.moidot.repository.AuthRepository
 import com.moidot.moidot.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,10 +23,17 @@ class SignInViewModel @Inject constructor(
     fun signInWithSocialToken(token: String, platform: String) {
         viewModelScope.launch {
             authRepository.signIn(token, platform).onSuccess {
-                saveUserTokens(it.data.accessToken, it.data.refreshToken)
+                it.data.apply {
+                    saveUserInfo(userId, platform, name, email)
+                    saveUserTokens(accessToken, refreshToken)
+                }
                 _loginSuccessState.value = true
             }
         }
+    }
+
+    private fun saveUserInfo(userId: Int, type: String, name: String, email: String) {
+        userRepository.saveUserInfo(UserInfo(userId, type, name, email)) // 유저 정보 저장
     }
 
     private fun saveUserTokens(accessToken: String, refreshToken: String) {

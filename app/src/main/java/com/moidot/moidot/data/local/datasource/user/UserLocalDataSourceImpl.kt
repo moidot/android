@@ -1,6 +1,11 @@
 package com.moidot.moidot.data.local.datasource.user
 
 import android.content.SharedPreferences
+import com.moidot.moidot.data.data.UserInfo
+import com.moidot.moidot.util.Constant.USER_INFO_EMAIL
+import com.moidot.moidot.util.Constant.USER_INFO_ID
+import com.moidot.moidot.util.Constant.USER_INFO_NAME
+import com.moidot.moidot.util.Constant.USER_INFO_TYPE
 import javax.inject.Inject
 
 class UserLocalDataSourceImpl @Inject constructor(private val sharedPreferences: SharedPreferences) : UserLocalDataSource {
@@ -14,6 +19,24 @@ class UserLocalDataSourceImpl @Inject constructor(private val sharedPreferences:
 
     override fun saveAccessToken(accessToken: String) {
         sharedPreferences.edit().putString(ACCESS_TOKEN, accessToken).apply()
+    }
+
+    override fun getUserInfo(): UserInfo {
+        return UserInfo(
+            userId = sharedPreferences.getInt(USER_INFO_ID, 0),
+            type = sharedPreferences.getString(USER_INFO_TYPE, "") ?: "",
+            name = sharedPreferences.getString(USER_INFO_NAME, "") ?: "",
+            email = sharedPreferences.getString(USER_INFO_EMAIL, "") ?: "",
+        )
+    }
+
+    override fun saveUserInfo(userInfo: UserInfo) {
+        sharedPreferences.edit().apply {
+            putInt(USER_INFO_ID, userInfo.userId)
+            putString(USER_INFO_TYPE, userInfo.type)
+            putString(USER_INFO_NAME, userInfo.name)
+            putString(USER_INFO_EMAIL, userInfo.email)
+        }.apply()
     }
 
     override fun getRefreshToken(): String? {
