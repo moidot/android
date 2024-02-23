@@ -20,4 +20,7 @@ interface AuthService {
 
     @DELETE("/auth/logout")
     suspend fun deleteUserToken(): Response<BaseResponse>
+
+    @DELETE("/auth")
+    suspend fun deleteUser(): Response<BaseResponse>
 }
