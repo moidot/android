@@ -5,6 +5,10 @@ import com.moidot.moidot.repository.UserRepository
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(private val userLocalDataSource: UserLocalDataSource) : UserRepository {
+    override fun removeAllToken() {
+       userLocalDataSource.removeAllToken()
+    }
+
     override fun getAccessToken(): String? {
         return userLocalDataSource.getAccessToken()
     }
