@@ -28,11 +28,12 @@ class LeaderVoteFragment : BaseFragment<FragmentLeaderVoteBinding>(R.layout.frag
 
     private fun setupObserver() {
         viewModel.groupVoteStatus.observe(viewLifecycleOwner) {
-            when {
+            when { // TODO 서버 분께 분기처리 변수 확인 요청
                 groupParticipates <= 1 -> initNavigation(R.id.leaderVoteEmptyFragment) // 모임원 초대 유도
-                it.voteId == -1 -> initNavigation(R.id.leaderVoteBeforeFragment) // 투표 시작 전 (최초 투표)
-                it.isClosed -> initNavigation(R.id.leaderVoteFinishFragment) // 투표 종료
-                else -> initNavigation(R.id.leaderVoteProgressFragment) // 투표 진행 중
+                !it.isClosed && it.voteStatuses.isNotEmpty() -> initNavigation(R.id.leaderVoteProgressFragment) // 투표 진행중
+                it.voteId == -1 && !it.isClosed -> initNavigation(R.id.leaderVoteBeforeFragment) // 투표 시작 전 (최초 투표)
+                it.voteId != -1 && !it.isClosed -> initNavigation(R.id.leaderVoteBeforeFragment) // 투표 시작 전 (재투표)
+                else -> initNavigation(R.id.leaderVoteFinishFragment) // 투표 종료
             }
         }
     }

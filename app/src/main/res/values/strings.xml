@@ -189,6 +189,11 @@
     <string name="member_vote_end_date">%d.%d.%d %s종료</string>
     <string name="member_vote_finish_title">장소 투표가 완료되었어요!</string>
 
+    <!-- LeaderVote -->
+    <string name="leader_vote_before_content">장소 투표를 시작해볼까요?</string>
+    <string name="leader_vote_before_title">모두 정보를 입력하였다면\n투표로 장소를 정할 수 있어요.</string>
+    <string name="leader_vote_before_btn">투표 시작하기</string>
+
     <!-- Setting -->
     <string name="setting_top_bar">설정</string>
     <string name="setting_alarm">알림 설정</string>
