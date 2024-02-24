@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/leader_vote_nav_graph">
+
+    <fragment
+        android:id="@+id/leaderVoteEmptyFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.empty.LeaderVoteEmptyFragment"
+        android:label="fragment_leader_vote_empty"
+        tools:layout="@layout/fragment_leader_vote_empty" />
+
+    <fragment
+        android:id="@+id/leaderVoteBeforeFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.before.LeaderVoteBeforeFragment"
+        android:label="fragment_leader_vote_before"
+        tools:layout="@layout/fragment_leader_vote_before" />
+
+    <fragment
+        android:id="@+id/leaderVoteProgressFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.progress.LeaderVoteProgressFragment"
+        android:label="fragment_leader_vote_progress"
+        tools:layout="@layout/fragment_leader_vote_progress" />
+
+    <fragment
+        android:id="@+id/leaderVoteFinishFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.finish.LeaderVoteFinishFragment"
+        android:label="fragment_leader_vote_finish"
+        tools:layout="@layout/fragment_leader_vote_finish" />
+
+</navigation>
