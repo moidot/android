@@ -17,7 +17,8 @@ import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentLeaderVoteBeforeBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.member.vote.before.MemberVoteBeforeViewModel
-import com.moidot.moidot.util.Constant
+import com.moidot.moidot.util.Constant.GROUP_ID
+import com.moidot.moidot.util.Constant.VOTE_RECREATE_STATE
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,9 +26,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LeaderVoteBeforeFragment:BaseFragment<FragmentLeaderVoteBeforeBinding>(R.layout.fragment_leader_vote_before) {
+class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R.layout.fragment_leader_vote_before) {
 
-    private val groupId by lazy { arguments?.getInt(Constant.GROUP_ID) ?: -1 }
+    private val groupId by lazy { arguments?.getInt(GROUP_ID) ?: -1 }
+    private val voteRecreateState by lazy { arguments?.getBoolean(VOTE_RECREATE_STATE) ?: false }
 
     private lateinit var kakaoMap: KakaoMap
     private lateinit var labelLayer: LabelLayer
@@ -81,6 +83,14 @@ class LeaderVoteBeforeFragment:BaseFragment<FragmentLeaderVoteBeforeBinding>(R.l
                     LabelStyle.from(mapManager.getBestRegionPlaceMarker(it.name)).setApplyDpScale(false)
                 )
             )
+        }
+    }
+
+    fun onClickVoteCreate() {
+        if (voteRecreateState) { // 재투표
+
+        } else { // 최초투표
+
         }
     }
 

@@ -16,4 +16,6 @@ object Constant {
     const val USER_INFO_ID = "USER_INFO_ID"
     const val USER_INFO_NAME = "USER_INFO_NAME"
     const val USER_INFO_EMAIL = "USER_INFO_EMAIL"
+
+    const val VOTE_RECREATE_STATE = "VOTE_RECREATE_STATE"
 }

@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.main.group.space.leader.vote.before.LeaderVoteBeforeFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,6 +80,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="24dp"
                 android:text="@string/leader_vote_before_btn"
+                android:onClick="@{() -> fragment.onClickVoteCreate()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
