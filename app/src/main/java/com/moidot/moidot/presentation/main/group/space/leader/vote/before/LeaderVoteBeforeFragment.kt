@@ -42,6 +42,7 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragment = this
         viewModel.loadBestRegions(groupId)
         setupObserver()
     }
