@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.moidot.moidot.presentation.main.group.space.SpaceViewModel" />
@@ -53,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
