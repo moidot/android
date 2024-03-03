@@ -1,6 +1,8 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.before
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +18,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentLeaderVoteBeforeBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.presentation.main.group.space.leader.vote.create.CreateVoteActivity
 import com.moidot.moidot.presentation.main.group.space.member.vote.before.MemberVoteBeforeViewModel
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.VOTE_RECREATE_STATE
@@ -86,11 +89,11 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
         }
     }
 
+    // TODO 왜 데이터 바인딩 onclick 이 안 먹는 건지 이해 x
     fun onClickVoteCreate() {
-        if (voteRecreateState) { // 재투표
-
-        } else { // 최초투표
-
+        Intent(requireContext(), CreateVoteActivity::class.java).apply {
+            putExtra(VOTE_RECREATE_STATE, voteRecreateState)
+            startActivity(this)
         }
     }
 

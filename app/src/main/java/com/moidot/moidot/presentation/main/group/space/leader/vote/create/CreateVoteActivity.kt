@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.create
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.CompositeDateValidator
@@ -12,6 +13,7 @@ import com.google.android.material.timepicker.TimeFormat
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityCreateVoteBinding
 import com.moidot.moidot.presentation.base.BaseActivity
+import com.moidot.moidot.util.Constant.VOTE_RECREATE_STATE
 import com.moidot.moidot.util.CustomSnackBar
 import com.moidot.moidot.util.SpannableTxt
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +26,7 @@ import java.util.TimeZone
 class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.activity_create_vote) {
 
     private val viewModel: CreateVoteViewModel by viewModels()
+    private val voteRecreateState by lazy { intent.getBooleanExtra(VOTE_RECREATE_STATE, false) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
