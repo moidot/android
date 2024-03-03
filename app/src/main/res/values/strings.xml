@@ -177,6 +177,8 @@
     <string name="create_vote_start_vote">투표 시작하기</string>
     <string name="create_vote_date_picker_title">날짜 선택</string>
     <string name="create_vote_time_picker_title">시간 선택</string>
+    <string name="create_vote_end_time_msg_vote_start">투표가 시작되었어요!\n</string>
+    <string name="create_vote_end_time_msg_vote_end">종료하기를 누르면 투표가 종료돼요.</string>
 
     <!-- MemberVote -->
     <string name="member_vote_before_title">모임장이 아직\n투표를 시작하지 않았어요!</string>

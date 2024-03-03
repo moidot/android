@@ -4,8 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -20,6 +24,9 @@ import com.moidot.moidot.databinding.FragmentLeaderVoteBeforeBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.leader.vote.create.CreateVoteActivity
 import com.moidot.moidot.presentation.main.group.space.member.vote.before.MemberVoteBeforeViewModel
+import com.moidot.moidot.util.Constant
+import com.moidot.moidot.util.Constant.CRATE_VOTE_MSG_EXTRA
+import com.moidot.moidot.util.Constant.CRATE_VOTE_SUCCESS_STATE
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.VOTE_RECREATE_STATE
 import com.moidot.moidot.util.MapViewUtil
@@ -39,6 +46,28 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
     private lateinit var mapManager: MarkerManager
 
     private val viewModel: MemberVoteBeforeViewModel by viewModels()
+
+    private val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        it.data?.apply {
+            getBooleanExtra(CRATE_VOTE_SUCCESS_STATE, false).let { isCreateVoteSuccess ->
+                if (isCreateVoteSuccess) { // 투표 생성 완료
+                    val extras = Bundle().apply {
+                        putInt(GROUP_ID, groupId)
+                        putExtra(CRATE_VOTE_MSG_EXTRA, this.getString(CRATE_VOTE_MSG_EXTRA)) // 스낵바 메세지
+                    }
+                    initNavigation(R.id.leaderVoteProgressFragment, extras)
+                }
+            }
+        }
+    }
+
+    private fun initNavigation(startDestinationId: Int, extras:Bundle) {
+        val navGraph = findNavController().navInflater.inflate(R.navigation.leader_vote_nav_graph)
+        navGraph.setStartDestination(startDestinationId)
+        findNavController().setGraph(navGraph, extras)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -96,8 +125,9 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
 
     fun onClickVoteCreate() {
         Intent(requireContext(), CreateVoteActivity::class.java).apply {
+            putExtra(GROUP_ID, groupId)
             putExtra(VOTE_RECREATE_STATE, voteRecreateState)
-            startActivity(this)
+            requestLauncher.launch(this)
         }
     }
 
