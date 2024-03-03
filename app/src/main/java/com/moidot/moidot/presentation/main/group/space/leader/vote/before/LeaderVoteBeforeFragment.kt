@@ -49,16 +49,16 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
 
     private val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) {
-        it.data?.apply {
-            getBooleanExtra(CRATE_VOTE_SUCCESS_STATE, false).let { isCreateVoteSuccess ->
-                if (isCreateVoteSuccess) { // 투표 생성 완료
-                    val extras = Bundle().apply {
-                        putInt(GROUP_ID, groupId)
-                        putExtra(CRATE_VOTE_MSG_EXTRA, this.getString(CRATE_VOTE_MSG_EXTRA)) // 스낵바 메세지
-                    }
-                    initNavigation(R.id.leaderVoteProgressFragment, extras)
+    ) { result ->
+        result.data?.let { data ->
+            val isCreateVoteSuccess = data.getBooleanExtra(CRATE_VOTE_SUCCESS_STATE, false)
+            if (isCreateVoteSuccess) { // 투표 생성 완료
+                val extras = Bundle().apply {
+                    putInt(GROUP_ID, groupId)
+                    putBoolean(CRATE_VOTE_SUCCESS_STATE, true) // 생성 직후 진행화면으로 넘어온 것인지 확인을 위한 변수
+                    putString(CRATE_VOTE_MSG_EXTRA, data.getStringExtra(CRATE_VOTE_MSG_EXTRA)) // 스낵바 메세지
                 }
+                initNavigation(R.id.leaderVoteProgressFragment, extras)
             }
         }
     }

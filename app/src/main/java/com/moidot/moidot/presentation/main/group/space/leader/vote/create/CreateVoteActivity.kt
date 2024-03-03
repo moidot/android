@@ -195,12 +195,10 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     fun onClickCreateVote() {
         // viewModel.crateVote(groupId)
         val message = if (viewModel.hasEndTime.value == true) {
-            getString(R.string.create_vote_end_time_msg_vote_start) + viewModel.endTimeTxt.value!!.replace("투표가 종료됩니다.", "투표가 자동으로 종료돼요.")
+            getString(R.string.create_vote_end_time_msg_vote_start) + "\n" +  viewModel.endTimeTxt.value!!.replace("투표가 종료됩니다.", "투표가 자동으로 종료돼요.")
         } else {
-            getString(R.string.create_vote_end_time_msg_vote_start) + getString(R.string.create_vote_end_time_msg_vote_end)
+            getString(R.string.create_vote_end_time_msg_vote_start) + "\n" + getString(R.string.create_vote_end_time_msg_vote_end)
         }
-
-        Log.d("kite", message.toString())
 
         intent.apply {
             putExtra(CRATE_VOTE_SUCCESS_STATE, true)
