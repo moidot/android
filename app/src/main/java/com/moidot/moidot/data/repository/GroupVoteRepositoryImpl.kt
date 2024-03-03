@@ -15,4 +15,8 @@ class GroupVoteRepositoryImpl @Inject constructor(private val groupVoteRemoteDat
     override suspend fun createVote(groupId: Int, requestCreateVote: RequestCreateVote): Result<ResponseCreateVote> {
         return groupVoteRemoteDataSource.createVote(groupId, requestCreateVote)
     }
+
+    override suspend fun reCreateVote(groupId: Int, requestCreateVote: RequestCreateVote): Result<ResponseCreateVote> {
+        return groupVoteRemoteDataSource.reCreateVote(groupId, requestCreateVote)
+    }
 }

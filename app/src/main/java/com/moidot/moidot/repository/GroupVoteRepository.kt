@@ -8,4 +8,6 @@ interface GroupVoteRepository {
     suspend fun getVoteStatus(groupId: Int): Result<ResponseVoteStatus>
 
     suspend fun createVote(groupId: Int, requestCreateVote: RequestCreateVote): Result<ResponseCreateVote>
+
+    suspend fun reCreateVote(groupId: Int, requestCreateVote: RequestCreateVote): Result<ResponseCreateVote>
 }

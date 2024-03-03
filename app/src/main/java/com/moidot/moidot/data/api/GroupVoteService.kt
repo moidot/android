@@ -17,4 +17,6 @@ interface GroupVoteService {
     @POST("/group/{groupId}/vote")
     suspend fun createVote(@Path("groupId") groupId: Int, @Body requestCreateVote: RequestCreateVote): Response<ResponseCreateVote>
 
+    @POST("/group/{spaceId}/vote")
+    suspend fun reCreateVote(@Path("spaceId") groupId: Int, @Body requestCreateVote: RequestCreateVote): Response<ResponseCreateVote>
 }
