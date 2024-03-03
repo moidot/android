@@ -12,6 +12,10 @@ import com.google.android.material.timepicker.TimeFormat
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityCreateVoteBinding
 import com.moidot.moidot.presentation.base.BaseActivity
+import com.moidot.moidot.util.Constant.CRATE_VOTE_MSG_EXTRA
+import com.moidot.moidot.util.Constant.CRATE_VOTE_SUCCESS_STATE
+import com.moidot.moidot.util.Constant.GROUP_ID
+import com.moidot.moidot.util.Constant.VOTE_RECREATE_STATE
 import com.moidot.moidot.util.CustomSnackBar
 import com.moidot.moidot.util.SpannableTxt
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +28,8 @@ import java.util.TimeZone
 class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.activity_create_vote) {
 
     private val viewModel: CreateVoteViewModel by viewModels()
+    private val groupId by lazy { intent.getIntExtra(GROUP_ID, -1) }
+    private val voteRecreateState by lazy { intent.getBooleanExtra(VOTE_RECREATE_STATE, false) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,6 +125,7 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
         setValidateEndTimeObserver()
         setEndTimeTxtObserver()
         setEndTimeInputDoneStateObserver()
+        setVoteCreateStateObserver()
     }
 
     private fun setHasEndTimeStateObserver() {
@@ -161,10 +168,44 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
         // 종료 입력 활성화 체크시 ->  종료 입력 체크
         viewModel.endTimeInputDone.observe(this) {
             when {
-                it && viewModel.hasEndTime.value == true -> { viewModel.setBtnActiveState(true) }
-                it && viewModel.hasEndTime.value == false -> { viewModel.setBtnActiveState(true) }
-                !it && viewModel.hasEndTime.value == true -> { viewModel.setBtnActiveState(false) }
-                !it && viewModel.hasEndTime.value == false -> { viewModel.setBtnActiveState(true) }
+                it && viewModel.hasEndTime.value == true -> {
+                    viewModel.setBtnActiveState(true)
+                }
+
+                it && viewModel.hasEndTime.value == false -> {
+                    viewModel.setBtnActiveState(true)
+                }
+
+                !it && viewModel.hasEndTime.value == true -> {
+                    viewModel.setBtnActiveState(false)
+                }
+
+                !it && viewModel.hasEndTime.value == false -> {
+                    viewModel.setBtnActiveState(true)
+                }
+            }
+        }
+    }
+
+    fun onClickCreateVote() {
+        if (voteRecreateState) viewModel.reCreateVote(groupId) else viewModel.crateVote(groupId)
+    }
+
+    private fun setVoteCreateStateObserver() {
+        viewModel.isVoteCreateSuccess.observe(this) { isSuccess ->
+            if (isSuccess) {
+                val message = if (viewModel.hasEndTime.value == true) {
+                    getString(R.string.create_vote_end_time_msg_vote_start) + "\n" + viewModel.endTimeTxt.value!!.replace("투표가 종료됩니다.", "투표가 자동으로 종료돼요.")
+                } else {
+                    getString(R.string.create_vote_end_time_msg_vote_start) + "\n" + getString(R.string.create_vote_end_time_msg_vote_end)
+                }
+
+                intent.apply {
+                    putExtra(CRATE_VOTE_SUCCESS_STATE, true)
+                    putExtra(CRATE_VOTE_MSG_EXTRA, message)
+                    setResult(RESULT_OK, this)
+                }
+                finish()
             }
         }
     }

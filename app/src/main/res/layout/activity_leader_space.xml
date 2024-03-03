@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.moidot.moidot.presentation.main.group.space.SpaceViewModel" />
@@ -43,12 +44,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:gravity="center"
-                tools:text="그룹명"
                 android:text="@{viewModel.groupName}"
                 android:textColor="@color/gray700"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/leader_space_iv_back"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="그룹명" />
 
             <LinearLayout
                 android:id="@+id/leader_space_container_timeline"
@@ -56,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">

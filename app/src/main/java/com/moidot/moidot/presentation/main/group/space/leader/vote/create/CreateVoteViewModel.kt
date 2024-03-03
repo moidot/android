@@ -1,12 +1,17 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.create
 
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.remote.request.RequestCreateVote
+import com.moidot.moidot.repository.GroupVoteRepository
 import com.moidot.moidot.util.event.MutableSingleLiveData
 import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -15,7 +20,7 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateVoteViewModel @Inject constructor() : ViewModel() {
+class CreateVoteViewModel @Inject constructor(private val groupVoteRepository: GroupVoteRepository) : ViewModel() {
 
     private val _hasEndTime = MutableLiveData<Boolean>(false)
     val hasEndTime: LiveData<Boolean> = _hasEndTime
@@ -29,7 +34,7 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
     val currentSelectedEndDate: LiveData<String> = _currentSelectedEndDate
 
     // 서버에 보내줄 종료 시간 - yyyy-MM-ddTHH:mm:ss” 형태로 서버에 보내주어야 한다.
-    private val selectedEndDateTime = MutableLiveData<String>()
+    private val requestSelectedEndDateTime = MutableLiveData<String>()
 
     // 뷰에서 사용자에게 보여질 종료 예정까지 남은 시간
     private var countDownTimer: CountDownTimer? = null
@@ -49,6 +54,12 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
 
     private val _btnActiveState = MutableLiveData<Boolean>(true)
     val btnActiveState: LiveData<Boolean> = _btnActiveState
+
+    private val _showToastEvent = MutableSingleLiveData<String>()
+    val showToastEvent: SingleLiveData<String> = _showToastEvent
+
+    private val _isVoteCreateSuccess = MutableSingleLiveData<Boolean>(false)
+    val isVoteCreateSuccess: SingleLiveData<Boolean> = _isVoteCreateSuccess
 
     fun setHasEndTime(flag: Boolean) {
         _hasEndTime.value = flag
@@ -86,6 +97,8 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
         val selectedDateTime = _currentSelectedEndDate.value?.let {
             LocalDate.parse(it, DateTimeFormatter.ofPattern("yyyy.MM.dd"))
         }!!.atTime(hour, minute)
+
+        requestSelectedEndDateTime.value = selectedDateTime.toString() // 서버에 전송할 포맷으로 변경
 
         val remainingMillis = selectedDateTime.atZone(systemDefault()).toInstant().toEpochMilli()
         fun setTimeDurationInfo() {
@@ -136,6 +149,36 @@ class CreateVoteViewModel @Inject constructor() : ViewModel() {
 
     fun setBtnActiveState(flag: Boolean) {
         _btnActiveState.value = flag
+    }
+
+    fun crateVote(groupId: Int) {
+        val requestCreateVote = RequestCreateVote(
+            isAnonymous = _anonymousVoteState.value!!,
+            isEnabledMultipleChoice = _multipleSelectionsState.value!!,
+            endAt = if (_hasEndTime.value == true) requestSelectedEndDateTime.value!! else null
+        )
+        viewModelScope.launch {
+            groupVoteRepository.createVote(groupId, requestCreateVote).onSuccess {
+                if (it.code == 0) _isVoteCreateSuccess.setValue(true)
+            }.onFailure {
+                _showToastEvent.setValue(it.message.toString())
+            }
+        }
+    }
+
+    fun reCreateVote(groupId: Int) {
+        val requestCreateVote = RequestCreateVote(
+            isAnonymous = _anonymousVoteState.value!!,
+            isEnabledMultipleChoice = _multipleSelectionsState.value!!,
+            endAt = if (_hasEndTime.value == true) requestSelectedEndDateTime.value!! else null
+        )
+        viewModelScope.launch {
+            groupVoteRepository.reCreateVote(groupId, requestCreateVote).onSuccess {
+                if (it.code == 0) _isVoteCreateSuccess.setValue(true)
+            }.onFailure {
+                _showToastEvent.setValue(it.message.toString())
+            }
+        }
     }
 
     override fun onCleared() {
