@@ -159,7 +159,7 @@ class CreateVoteViewModel @Inject constructor(private val groupVoteRepository: G
         )
         viewModelScope.launch {
             groupVoteRepository.createVote(groupId, requestCreateVote).onSuccess {
-                if (it.code == 0) {}
+                if (it.code == 0) _isVoteCreateSuccess.setValue(true)
             }.onFailure {
                 _showToastEvent.setValue(it.message.toString())
             }
@@ -174,7 +174,7 @@ class CreateVoteViewModel @Inject constructor(private val groupVoteRepository: G
         )
         viewModelScope.launch {
             groupVoteRepository.reCreateVote(groupId, requestCreateVote).onSuccess {
-                if (it.code == 0) { }
+                if (it.code == 0) _isVoteCreateSuccess.setValue(true)
             }.onFailure {
                 _showToastEvent.setValue(it.message.toString())
             }

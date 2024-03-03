@@ -191,30 +191,17 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
     }
 
     // TODO 재투표 로직 분기처리
-    // TODO 화면 이동 처리 (완료 후에 무조건 진행중으로 이동시키기)
     fun onClickCreateVote() {
-        // viewModel.crateVote(groupId)
-        val message = if (viewModel.hasEndTime.value == true) {
-            getString(R.string.create_vote_end_time_msg_vote_start) + "\n" +  viewModel.endTimeTxt.value!!.replace("투표가 종료됩니다.", "투표가 자동으로 종료돼요.")
-        } else {
-            getString(R.string.create_vote_end_time_msg_vote_start) + "\n" + getString(R.string.create_vote_end_time_msg_vote_end)
-        }
-
-        intent.apply {
-            putExtra(CRATE_VOTE_SUCCESS_STATE, true)
-            putExtra(CRATE_VOTE_MSG_EXTRA, message)
-            setResult(RESULT_OK, this)
-        }
-        finish()
+        viewModel.crateVote(groupId)
     }
 
     private fun setVoteCreateStateObserver() {
-        //viewModel.isVoteCreateSuccess.observe(this) { isSuccess ->
-            //if (isSuccess) {
+        viewModel.isVoteCreateSuccess.observe(this) { isSuccess ->
+            if (isSuccess) {
                 val message = if (viewModel.hasEndTime.value == true) {
-                    getString(R.string.create_vote_end_time_msg_vote_start) + viewModel.endTimeTxt.value!!.replace("투표가 종료됩니다.", "투표가 자동으로 종료돼요.")
+                    getString(R.string.create_vote_end_time_msg_vote_start) + "\n" + viewModel.endTimeTxt.value!!.replace("투표가 종료됩니다.", "투표가 자동으로 종료돼요.")
                 } else {
-                    getString(R.string.create_vote_end_time_msg_vote_start) + getString(R.string.create_vote_end_time_msg_vote_end)
+                    getString(R.string.create_vote_end_time_msg_vote_start) + "\n" + getString(R.string.create_vote_end_time_msg_vote_end)
                 }
 
                 intent.apply {
@@ -222,8 +209,9 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
                     putExtra(CRATE_VOTE_MSG_EXTRA, message)
                     setResult(RESULT_OK, this)
                 }
-            //}
-        //}
+                finish()
+            }
+        }
     }
 
     companion object {
