@@ -1,9 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.create
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.CompositeDateValidator
 import com.google.android.material.datepicker.DateValidatorPointBackward
@@ -14,7 +12,6 @@ import com.google.android.material.timepicker.TimeFormat
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivityCreateVoteBinding
 import com.moidot.moidot.presentation.base.BaseActivity
-import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.Constant.CRATE_VOTE_MSG_EXTRA
 import com.moidot.moidot.util.Constant.CRATE_VOTE_SUCCESS_STATE
 import com.moidot.moidot.util.Constant.GROUP_ID
@@ -190,9 +187,8 @@ class CreateVoteActivity : BaseActivity<ActivityCreateVoteBinding>(R.layout.acti
         }
     }
 
-    // TODO 재투표 로직 분기처리
     fun onClickCreateVote() {
-        viewModel.crateVote(groupId)
+        if (voteRecreateState) viewModel.reCreateVote(groupId) else viewModel.crateVote(groupId)
     }
 
     private fun setVoteCreateStateObserver() {
