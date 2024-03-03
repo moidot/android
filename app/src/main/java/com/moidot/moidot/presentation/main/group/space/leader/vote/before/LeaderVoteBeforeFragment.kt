@@ -42,9 +42,13 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragment = this
         viewModel.loadBestRegions(groupId)
+        initBinding()
         setupObserver()
+    }
+
+    private fun initBinding() {
+        binding.fragment = this
     }
 
     private fun setupObserver() {
@@ -90,7 +94,6 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
         }
     }
 
-    // TODO 왜 데이터 바인딩 onclick 이 안 먹는 건지 이해 x
     fun onClickVoteCreate() {
         Intent(requireContext(), CreateVoteActivity::class.java).apply {
             putExtra(VOTE_RECREATE_STATE, voteRecreateState)
