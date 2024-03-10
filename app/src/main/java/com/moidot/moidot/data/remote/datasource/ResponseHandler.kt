@@ -10,8 +10,6 @@ suspend fun <T> Response<T>.getResultFromResponse(): Result<T> {
     return if (this.isSuccessful) {
         this.body()?.let { Result.success(it) } ?: Result.failure(IllegalStateException("네트워크 통신 오류"))
     } else {
-        if (checkNetworkError(errorBody())) return Result.failure(IllegalStateException("네트워크 통신 오류"))
-
         val errorResponse = getErrorResponse(this.errorBody()?.string()!!)
         Result.failure(IllegalStateException(errorResponse.message))
     }
