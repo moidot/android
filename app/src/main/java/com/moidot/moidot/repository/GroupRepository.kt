@@ -5,8 +5,10 @@ import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCheckNicknameDuplication
+import com.moidot.moidot.data.remote.response.ResponseFilteredGroupList
 import com.moidot.moidot.data.remote.response.ResponseGroupUserInfo
 import com.moidot.moidot.data.remote.response.ResponsePostParticipateGroup
+import retrofit2.http.Query
 
 interface GroupRepository {
 
@@ -19,4 +21,6 @@ interface GroupRepository {
     suspend fun checkNicknameDuplication(groupId: Int, nickname: String): Result<ResponseCheckNicknameDuplication>
 
     suspend fun getUserInfo(groupId: Int): Result<ResponseGroupUserInfo>
+
+    suspend fun getFilteredGroupList(query: String, filter:String): Result<ResponseFilteredGroupList>
 }

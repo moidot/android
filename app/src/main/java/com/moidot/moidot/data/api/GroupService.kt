@@ -5,6 +5,7 @@ import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.data.remote.response.ResponseCheckNicknameDuplication
+import com.moidot.moidot.data.remote.response.ResponseFilteredGroupList
 import com.moidot.moidot.data.remote.response.ResponseGroupUserInfo
 import com.moidot.moidot.data.remote.response.ResponsePostParticipateGroup
 import retrofit2.Response
@@ -29,4 +30,7 @@ interface GroupService {
 
     @GET("/group/user")
     suspend fun getUserInfo(@Query("groupId") groupId: Int): Response<ResponseGroupUserInfo>
+
+    @GET("/group/participate")
+    suspend fun getFilteredGroupList(@Query("spaceName") query:String, @Query("filter") filter:String): Response<ResponseFilteredGroupList>
 }
