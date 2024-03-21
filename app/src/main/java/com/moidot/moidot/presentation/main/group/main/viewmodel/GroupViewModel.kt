@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GroupViewModel @Inject constructor(private val groupRepository: GroupRepository) : ViewModel() {
 
-    private val _searchWord = MutableLiveData<String>()
+    private val _searchWord = MutableLiveData<String>("")
     val searchWord: LiveData<String> = _searchWord
 
     private val _isSearchActive = MutableLiveData<Boolean>()
@@ -68,4 +68,22 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
         _currentFilterTxt.value = filterTxt
     }
 
+    fun searchWordWithFilter() {
+        viewModelScope.launch {
+            groupRepository.getFilteredGroupList(_searchWord.value!!, getTransFormedFilterParams()).onSuccess {
+                if (it.code == 0) _myGroupList.value = it.data
+            }.onFailure {
+                _showToastEvent.setValue(it.message.toString())
+            }
+        }
+    }
+
+    private fun getTransFormedFilterParams(): String {
+        return when (currentFilterTxt.value) {
+            "최신순" -> "LATEST"
+            "가나다순" -> "ABC"
+            "오래된순" -> "OLDEST"
+            else -> "LATEST"
+        }
+    }
 }

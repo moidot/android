@@ -3,10 +3,9 @@ package com.moidot.moidot.data.repository
 import com.moidot.moidot.data.remote.datasource.group.GroupRemoteDataSource
 import com.moidot.moidot.data.remote.request.RequestCreateGroup
 import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
+import com.moidot.moidot.data.remote.response.ResponseCheckNicknameDuplication
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
-import com.moidot.moidot.data.remote.response.ResponseCheckNicknameDuplication
-import com.moidot.moidot.data.remote.response.ResponseFilteredGroupList
 import com.moidot.moidot.data.remote.response.ResponseGroupUserInfo
 import com.moidot.moidot.data.remote.response.ResponsePostParticipateGroup
 import com.moidot.moidot.repository.GroupRepository
@@ -33,7 +32,7 @@ class GroupRepositoryImpl @Inject constructor(private val groupRemoteDataSource:
         return groupRemoteDataSource.getUserInfo(groupId)
     }
 
-    override suspend fun getFilteredGroupList(query: String, filter: String): Result<ResponseFilteredGroupList> {
+    override suspend fun getFilteredGroupList(query: String, filter: String): Result<ResponseParticipateGroup> {
         return groupRemoteDataSource.getFilteredGroupList(query, filter)
     }
 
