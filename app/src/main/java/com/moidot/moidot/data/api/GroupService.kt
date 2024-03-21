@@ -29,4 +29,7 @@ interface GroupService {
 
     @GET("/group/user")
     suspend fun getUserInfo(@Query("groupId") groupId: Int): Response<ResponseGroupUserInfo>
+
+    @GET("/group/participate")
+    suspend fun getFilteredGroupList(@Query("spaceName") query:String, @Query("filter") filter:String): Response<ResponseParticipateGroup>
 }

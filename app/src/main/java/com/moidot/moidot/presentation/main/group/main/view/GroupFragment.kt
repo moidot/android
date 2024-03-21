@@ -82,8 +82,9 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
 
     private fun setSearchDoneListener() {
         binding.fgGroupEtvSearch.setOnEditorActionListener { it, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) { // TODO 검색 완료
-                viewModel.setSearchWord(it.toString())
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.setSearchWord(it.text.toString())
+                viewModel.searchWordWithFilter()
                 viewModel.setSearchActive(false)
                 it.hideKeyboard()
                 return@setOnEditorActionListener true
@@ -95,6 +96,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     fun onCancelSearch() {
         binding.fgGroupEtvSearch.apply {
             setText("")
+            viewModel.loadMyGroupList()
             this.hideKeyboard()
         }
     }
@@ -126,6 +128,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     private fun setupCurrentFilterTxt() {
         viewModel.currentFilterTxt.observe(viewLifecycleOwner) {
             binding.fgGroupFilterTxt.text = it
+            viewModel.searchWordWithFilter()
         }
     }
 

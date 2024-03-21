@@ -32,4 +32,8 @@ class GroupRemoteDataSourceImpl @Inject constructor(private val groupService: Gr
         return groupService.getUserInfo(groupId).getResultFromResponse()
     }
 
+    override suspend fun getFilteredGroupList(query: String, filter: String): Result<ResponseParticipateGroup> {
+        return groupService.getFilteredGroupList(query, filter).getResultFromResponse()
+    }
+
 }
