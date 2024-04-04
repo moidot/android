@@ -108,8 +108,10 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:background="@color/white"
+                    android:onClick="@{() -> fragment.onGroupDeleteListener()}"
                     app:cardBackgroundColor="@color/red50"
                     app:cardCornerRadius="12dp"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:strokeWidth="0dp">
@@ -282,6 +284,7 @@
             android:layout_margin="20dp"
             android:backgroundTint="@color/orange500"
             android:onClick="@{() -> fragment.moveToCreateGroup()}"
+            android:visibility="@{viewModel.activateGroupDeleteFlag ? View.GONE : View.VISIBLE}"
             app:elevation="0dp"
             app:fabCustomSize="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -297,7 +300,7 @@
             android:background="@color/white"
             android:clickable="true"
             android:focusable="true"
-            android:visibility="gone"
+            android:visibility="@{viewModel.activateGroupDeleteFlag ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

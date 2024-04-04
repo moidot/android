@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
@@ -117,6 +118,10 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
 
     fun moveToSetting() {
         startActivity(Intent(requireContext(), SettingActivity::class.java))
+    }
+
+    fun onGroupDeleteListener() {
+        viewModel.activateGroupDeleteFlag.value = viewModel.activateGroupDeleteFlag.value != true
     }
 
     private fun setupObservers() {

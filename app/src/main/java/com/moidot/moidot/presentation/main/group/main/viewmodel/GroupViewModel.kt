@@ -32,6 +32,8 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
     private val _showToastEvent = MutableSingleLiveData<String>()
     val showToastEvent: SingleLiveData<String> = _showToastEvent
 
+    val activateGroupDeleteFlag = MutableLiveData<Boolean>(false)
+
     fun loadMyGroupList() {
         viewModelScope.launch {
             groupRepository.getMyGroupList().onSuccess {

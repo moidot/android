@@ -25,6 +25,7 @@
             app:cardCornerRadius="12dp"
             app:strokeColor="@color/white"
             app:strokeWidth="0dp"
+            app:cardBackgroundColor="@color/orange500"
             tools:cardBackgroundColor="@color/orange500" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
