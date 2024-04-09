@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
             name="data"
@@ -84,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:backgroundTint="@color/orange500_20"
-                    android:visibility="visible"
+                    android:visibility="@{data.startVote ? View.VISIBLE : View.GONE}"
                     app:cardCornerRadius="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="12dp"
                         android:layout_marginVertical="4dp"
-                        android:text="@string/group_vote_state_done"
+                        android:text="@string/group_vote_state_voting"
                         android:textColor="@color/orange500" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -107,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@{@string/group_create_date(data.groupDate)}"
+                    android:text="@{@string/group_create_date(data.getFormattedDate())}"
                     android:textColor="@color/gray400"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/item_my_group_cv_vote_state_done"
