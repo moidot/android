@@ -22,10 +22,10 @@
             android:layout_height="match_parent"
             android:outlineAmbientShadowColor="@color/white"
             android:outlineSpotShadowColor="@color/gray600"
+            app:cardBackgroundColor="@color/orange500"
             app:cardCornerRadius="12dp"
             app:strokeColor="@color/white"
             app:strokeWidth="0dp"
-            app:cardBackgroundColor="@color/orange500"
             tools:cardBackgroundColor="@color/orange500" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -149,10 +149,11 @@
                 android:id="@+id/item_my_group_ll_container_exit_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginEnd="39dp"
+                android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:visibility="gone"
+                android:paddingHorizontal="39dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">

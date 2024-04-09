@@ -12,6 +12,7 @@ data class ResponseParticipateGroup(
         val groupName: String,
         val groupParticipates: Int,
         val participantNames: List<String>,
-        val isAdmin:Boolean
+        val isAdmin:Boolean,
+        val isStartVote:Boolean,
     )
 }
