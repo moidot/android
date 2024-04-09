@@ -88,4 +88,14 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
             else -> "LATEST"
         }
     }
+
+    fun groupExit(groupId: Int) {
+        viewModelScope.launch {
+            groupRepository.getUserInfo(groupId).onSuccess {
+                if (it.code == 0) groupRepository.exitGroup(it.data.participationId).onSuccess {
+                    searchWordWithFilter()
+                }
+            }
+        }
+    }
 }
