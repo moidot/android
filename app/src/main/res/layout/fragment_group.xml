@@ -89,6 +89,16 @@
                 app:layout_constraintTop_toTopOf="@id/fg_group_etv_search" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <View
+            android:id="@+id/fg_group_dim_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#66000000"
+            android:clickable="true"
+            android:visibility="@{viewModel.activateGroupDeleteFlag ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/fg_group_ll_search"
+            app:layout_constraintTop_toTopOf="@id/fg_group_tv_top_bar" />
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -108,8 +118,10 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:background="@color/white"
+                    android:onClick="@{() -> fragment.onGroupDeleteListener()}"
                     app:cardBackgroundColor="@color/red50"
                     app:cardCornerRadius="12dp"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:strokeWidth="0dp">
@@ -259,6 +271,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:clipToPadding="false"
+                            android:nestedScrollingEnabled="false"
                             android:orientation="vertical"
                             android:paddingHorizontal="20dp"
                             android:paddingTop="2dp"
@@ -282,6 +295,7 @@
             android:layout_margin="20dp"
             android:backgroundTint="@color/orange500"
             android:onClick="@{() -> fragment.moveToCreateGroup()}"
+            android:visibility="@{viewModel.activateGroupDeleteFlag ? View.GONE : View.VISIBLE}"
             app:elevation="0dp"
             app:fabCustomSize="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -297,7 +311,7 @@
             android:background="@color/white"
             android:clickable="true"
             android:focusable="true"
-            android:visibility="gone"
+            android:visibility="@{viewModel.activateGroupDeleteFlag ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -309,6 +323,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="28dp"
                 android:layout_marginTop="20dp"
+                android:onClick="@{() -> fragment.onExitGroupDeleteModeListener()}"
                 android:text="@string/group_end_exit_mode"
                 app:rippleColor="@null" />
         </androidx.appcompat.widget.LinearLayoutCompat>

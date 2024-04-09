@@ -32,6 +32,8 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
     private val _showToastEvent = MutableSingleLiveData<String>()
     val showToastEvent: SingleLiveData<String> = _showToastEvent
 
+    val activateGroupDeleteFlag = MutableLiveData<Boolean>(false)
+
     fun loadMyGroupList() {
         viewModelScope.launch {
             groupRepository.getMyGroupList().onSuccess {
@@ -84,6 +86,16 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
             "가나다순" -> "ABC"
             "오래된순" -> "OLDEST"
             else -> "LATEST"
+        }
+    }
+
+    fun groupExit(groupId: Int) {
+        viewModelScope.launch {
+            groupRepository.getUserInfo(groupId).onSuccess {
+                if (it.code == 0) groupRepository.exitGroup(it.data.participationId).onSuccess {
+                    searchWordWithFilter()
+                }
+            }
         }
     }
 }

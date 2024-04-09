@@ -23,6 +23,7 @@ import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.StatusBarColorUtil
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
+import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import com.moidot.moidot.util.view.hideKeyboard
 import com.moidot.moidot.util.popup.picker.PopupPickerDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +54,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     }
 
     private fun initAdapter() {
-        myGroupAdapter = MyGroupAdapter(::onGroupItemClickListener)
+        myGroupAdapter = MyGroupAdapter(::onGroupItemClickListener, ::onGroupExistClickListener)
         binding.fgGroupRvMyGroup.apply {
             adapter = myGroupAdapter
             itemAnimator = null
@@ -70,6 +71,17 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
                 startActivity(this)
             }
         }
+    }
+
+    private fun onGroupExistClickListener(data: ResponseParticipateGroup.Data) {
+        PopupTwoButtonDialog(
+            requireContext(),
+            getString(R.string.space_member_info_dialog_title).format(data.groupName),
+            getString(R.string.space_member_info_dialog_content),
+            getString(R.string.space_member_info_dialog_btn)
+        ) {
+            viewModel.groupExit(data.groupId)
+        }.show()
     }
 
     private fun setSearchTextChangeListener() {
@@ -119,6 +131,16 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
         startActivity(Intent(requireContext(), SettingActivity::class.java))
     }
 
+    fun onGroupDeleteListener() {
+        viewModel.activateGroupDeleteFlag.value = true
+        myGroupAdapter.setGroupExistModeOn()
+    }
+
+    fun onExitGroupDeleteModeListener() {
+        viewModel.activateGroupDeleteFlag.value = false
+        myGroupAdapter.setGroupExistModeOff()
+    }
+
     private fun setupObservers() {
         setupCurrentFilterTxt()
         setupGroupRecyclerView()
@@ -146,7 +168,6 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
 
     override fun onResume() {
         super.onResume()
-        viewModel.loadMyGroupList()
     }
 
 
