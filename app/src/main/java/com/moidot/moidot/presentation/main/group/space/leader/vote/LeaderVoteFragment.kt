@@ -12,6 +12,7 @@ import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.Constant.GROUP_ID
+import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.Constant.VOTE_RECREATE_STATE
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +22,7 @@ class LeaderVoteFragment : BaseFragment<FragmentLeaderVoteBinding>(R.layout.frag
     val viewModel: LeaderVoteViewModel by viewModels()
     private val activityViewModel: SpaceViewModel by activityViewModels()
     private val groupId by lazy { activityViewModel.groupId.value!! }
+    private val groupName by lazy { activityViewModel.groupName.value }
     private val groupParticipates by lazy { activityViewModel.groupParticipates.value!! }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,6 +46,7 @@ class LeaderVoteFragment : BaseFragment<FragmentLeaderVoteBinding>(R.layout.frag
     private fun initNavigation(startDestinationId: Int, reCreateState: Boolean = false) {
         val extras = Bundle().apply {
             putInt(GROUP_ID, groupId)
+            putString(GROUP_NAME, groupName)
             putBoolean(VOTE_RECREATE_STATE, reCreateState) // 재투표 분기 처리
         }
         val navController = (childFragmentManager.findFragmentById(R.id.fg_group_leader_vote_fcv) as NavHostFragment).navController

@@ -50,7 +50,7 @@ class OnboardSecondFragment : BaseFragment<FragmentOnboardSecondBinding>(R.layou
             add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_group_empty)!!,resources.getString(R.string.onboard_second_title_moidot_space),resources.getString(R.string.onboard_second_content_moidot_space)))
             add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_onboard_second_invite)!!,resources.getString(R.string.onboard_second_title_invite),resources.getString(R.string.onboard_second_content_invite)))
             add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_onboard_second_mappin)!!,resources.getString(R.string.onboard_second_title_recommend_place),resources.getString(R.string.onboard_second_content_recommend_place)))
-            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_sign_in_logo)!!,resources.getString(R.string.onboard_second_title_vote_place),resources.getString(R.string.onboard_second_content_vote_place)))
+            add(OnboardItem(ContextCompat.getDrawable(requireContext(),R.drawable.img_vote_empty)!!,resources.getString(R.string.onboard_second_title_vote_place),resources.getString(R.string.onboard_second_content_vote_place)))
         }
     }
 
