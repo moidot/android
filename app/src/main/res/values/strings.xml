@@ -8,6 +8,7 @@
     <string name="all_cancel">취소하기</string>
     <string name="all_remove">내보내기</string>
     <string name="all_out">나가기</string>
+    <string name="all_moidot_space">모이닷 스페이스</string>
 
     <!-- error -->
     <string name="network_error_msg">네트워크 통신오류!</string>
@@ -195,6 +196,8 @@
     <string name="leader_vote_before_content">장소 투표를 시작해볼까요?</string>
     <string name="leader_vote_before_title">모두 정보를 입력하였다면\n투표로 장소를 정할 수 있어요.</string>
     <string name="leader_vote_before_btn">투표 시작하기</string>
+    <string name="leader_vote_empty_title">장소 투표를 통해\n장소를 정해보세요!</string>
+    <string name="leader_vote_empty_content">아직은 모이닷 스페이스에 모임원이\n초대되지 않아서 장소 투표를 진행할 수 없어요.</string>
 
     <!-- Setting -->
     <string name="setting_top_bar">설정</string>
