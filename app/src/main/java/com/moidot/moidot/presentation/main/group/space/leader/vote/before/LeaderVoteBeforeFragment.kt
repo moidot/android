@@ -24,7 +24,6 @@ import com.moidot.moidot.databinding.FragmentLeaderVoteBeforeBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.leader.vote.create.CreateVoteActivity
 import com.moidot.moidot.presentation.main.group.space.member.vote.before.MemberVoteBeforeViewModel
-import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.Constant.CRATE_VOTE_MSG_EXTRA
 import com.moidot.moidot.util.Constant.CRATE_VOTE_SUCCESS_STATE
 import com.moidot.moidot.util.Constant.GROUP_ID

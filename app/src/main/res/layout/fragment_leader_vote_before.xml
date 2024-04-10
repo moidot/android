@@ -54,7 +54,7 @@
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="34dp"
                 android:layout_marginTop="12dp"
-                android:background="@color/gray700"
+                android:src="@drawable/img_vote_empty"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="@id/fg_leader_vote_before_tv_title"
                 app:layout_constraintStart_toStartOf="@+id/fg_leader_vote_before_tv_title"
