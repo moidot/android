@@ -1,5 +1,6 @@
 package com.moidot.moidot.presentation.main.group.main.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -73,7 +74,10 @@ class GroupViewModel @Inject constructor(private val groupRepository: GroupRepos
     fun searchWordWithFilter() {
         viewModelScope.launch {
             groupRepository.getFilteredGroupList(_searchWord.value!!, getTransFormedFilterParams()).onSuccess {
-                if (it.code == 0) _myGroupList.value = it.data
+                if (it.code == 0) {
+                    _myGroupList.value = it.data
+                    isGroupListEmpty.value = it.data.isEmpty()
+                }
             }.onFailure {
                 _showToastEvent.setValue(it.message.toString())
             }
