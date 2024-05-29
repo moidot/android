@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.main.group.space.leader.vote.progress.view.LeaderVoteProgressFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.main.group.space.leader.vote.progress.viewmodel.LeaderVoteProgressViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -66,7 +73,8 @@
                     <ImageView
                         android:layout_width="6dp"
                         android:layout_height="6dp"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"
+                        android:src="@{viewModel.isEnabledMultipleChoice() ? @drawable/bg_oval_selected: @drawable/bg_oval_disabled}" />
 
                     <TextView
                         style="@style/c1_reg_12"
@@ -74,7 +82,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
-                        android:text="@string/leader_vote_multiple_choice" />
+                        android:text="@string/leader_vote_multiple_choice"
+                        android:textColor="@{viewModel.isEnabledMultipleChoice() ? @color/orange500: @color/gray600}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -87,7 +96,8 @@
                     <ImageView
                         android:layout_width="6dp"
                         android:layout_height="6dp"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"
+                        android:src="@{viewModel.isEnabledMultipleChoice() ? @drawable/bg_oval_selected: @drawable/bg_oval_disabled}" />
 
                     <TextView
                         style="@style/c1_reg_12"
@@ -95,7 +105,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
-                        android:text="@string/leader_vote_anonymous_vote" />
+                        android:text="@string/leader_vote_anonymous_vote"
+                        android:textColor="@{viewModel.isEnabledMultipleChoice() ? @color/orange500: @color/gray600}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -112,12 +123,13 @@
                         android:src="@drawable/bg_oval_selected" />
 
                     <TextView
+                        android:id="@+id/fg_leader_vote_progress_tv_end_date"
                         style="@style/c1_reg_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
-                        android:text="@string/leader_vote_end_date"
+                        tools:text="@string/leader_vote_end_date"
                         android:textColor="@color/orange500" />
                 </LinearLayout>
 
@@ -145,6 +157,7 @@
                 android:paddingVertical="10dp"
                 android:text="@string/leader_vote_progress_end"
                 android:textColor="@color/orange500"
+                android:onClick="@{() -> fragment.endVote()}"
                 app:layout_constraintBottom_toBottomOf="@id/fg_leader_vote_progress_btn_vote"
                 app:layout_constraintEnd_toStartOf="@id/fg_leader_vote_progress_btn_vote"
                 app:layout_constraintStart_toStartOf="parent"
@@ -157,9 +170,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="24dp"
-                android:text="@string/leader_vote_progress_btn_done"
+                android:text="@string/leader_vote_progress_btn_vote"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:onClick="@{() -> fragment.startVote()}"
                 app:layout_constraintStart_toEndOf="@id/fg_leader_vote_progress_tv_end" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

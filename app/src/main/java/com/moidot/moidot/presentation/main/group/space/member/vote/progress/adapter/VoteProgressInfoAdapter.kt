@@ -1,5 +1,6 @@
 package com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible

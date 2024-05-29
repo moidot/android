@@ -18,9 +18,13 @@
 
     <fragment
         android:id="@+id/leaderVoteProgressFragment"
-        android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.progress.LeaderVoteProgressFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.progress.view.LeaderVoteProgressFragment"
         android:label="fragment_leader_vote_progress"
-        tools:layout="@layout/fragment_leader_vote_progress" />
+        tools:layout="@layout/fragment_leader_vote_progress" >
+        <action
+            android:id="@+id/action_leaderVoteProgressFragment_to_leaderVoteFinishFragment"
+            app:destination="@id/leaderVoteFinishFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/leaderVoteFinishFragment"
