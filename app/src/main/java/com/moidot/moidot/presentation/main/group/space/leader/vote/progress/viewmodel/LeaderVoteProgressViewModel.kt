@@ -43,9 +43,11 @@ class LeaderVoteProgressViewModel @Inject constructor(private val groupVoteRepos
                     isEnabledMultipleChoice.value = it.data.isEnabledMultipleChoice
                     isAnonymous.value = it.data.isAnonymous
                     _endAt.value = it.data.endAt?.let { input ->
-                        val dateTime = LocalDateTime.parse(input)
-                        val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
-                        dateTime.format(formatter) + " 종료"
+                        if (input != "none") {
+                            val dateTime = LocalDateTime.parse(input)
+                            val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
+                            dateTime.format(formatter) + " 종료"
+                        } else input
                     } ?: ""
                     _voteStatuses.value = it.data.voteStatuses
                 } else _showToastEvent.setValue(it.message.toString())
@@ -58,7 +60,7 @@ class LeaderVoteProgressViewModel @Inject constructor(private val groupVoteRepos
     fun endVote(groupId: Int) {
         viewModelScope.launch {
             groupVoteRepository.endVote(groupId).onSuccess {
-                if(it.code == 0) _isVoteEnd.setValue(true)
+                if (it.code == 0) _isVoteEnd.setValue(true)
             }
         }
     }

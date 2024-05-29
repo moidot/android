@@ -91,7 +91,6 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
             binding.fgLeaderVoteProgressContainerEndDate.isVisible = it != "none"
             binding.fgLeaderVoteProgressTvEndDate.text = it
         }
-
     }
 
     private fun setupVoteEndObserver() {
@@ -140,8 +139,27 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
         }
     }
 
-    fun startVote() {
-        voteProgressInfoAdapter.updateVoteStateTrue()
+    fun onVoteClickListener() {
+        voteProgressInfoAdapter.apply {
+            updateVoteStateTrue()
+            setVoteStateUI(getVoteState())
+        }
+    }
+
+    private fun setVoteStateUI(voteState: Boolean) {
+        if (voteState) {
+            binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
+            binding.fgLeaderVoteProgressTvEnd.apply {
+                isEnabled = false
+                setTextColor(context.getColor(R.color.orange200))
+            }
+        } else {
+            binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_vote)
+            binding.fgLeaderVoteProgressTvEnd.apply {
+                isEnabled = true
+                setTextColor(context.getColor(R.color.orange500))
+            }
+        }
     }
 
     fun endVote() {

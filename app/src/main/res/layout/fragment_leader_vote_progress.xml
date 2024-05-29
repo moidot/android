@@ -173,7 +173,7 @@
                 android:text="@string/leader_vote_progress_btn_vote"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:onClick="@{() -> fragment.startVote()}"
+                android:onClick="@{() -> fragment.onVoteClickListener()}"
                 app:layout_constraintStart_toEndOf="@id/fg_leader_vote_progress_tv_end" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

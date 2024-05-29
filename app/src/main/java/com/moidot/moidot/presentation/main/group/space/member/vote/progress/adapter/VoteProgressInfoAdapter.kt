@@ -1,6 +1,5 @@
 package com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -36,8 +35,13 @@ class VoteProgressInfoAdapter : RecyclerView.Adapter<VoteProgressInfoAdapter.Vot
         holder.bind(progressStatuses[position])
     }
 
+    fun getVoteState(): Boolean {
+        return voteState
+    }
+
     fun updateVoteStateTrue() {
-        voteState = true
+        voteState = !voteState
         notifyItemRangeChanged(0, itemCount)
     }
+
 }
