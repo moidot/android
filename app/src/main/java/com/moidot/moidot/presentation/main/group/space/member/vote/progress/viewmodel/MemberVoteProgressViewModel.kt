@@ -11,6 +11,8 @@ import com.moidot.moidot.util.event.MutableSingleLiveData
 import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +25,7 @@ class MemberVoteProgressViewModel @Inject constructor(
     val isEnabledMultipleChoice = MutableLiveData<Boolean>(false)  // 복수 선// 택 여부
     val isAnonymous = MutableLiveData<Boolean>(false) // 익명 투표 여부
     private val _voteStatuses = MutableLiveData<List<ResponseVoteStatus.Data.VoteStatuses>>() // 투표 상태 정보
-    val voteStatuses : LiveData<List<ResponseVoteStatus.Data.VoteStatuses>> = _voteStatuses
+    val voteStatuses: LiveData<List<ResponseVoteStatus.Data.VoteStatuses>> = _voteStatuses
 
     private val _endAt = MutableLiveData<String>("none") // 종료 날짜
     val endAt: LiveData<String> = _endAt
@@ -39,7 +41,11 @@ class MemberVoteProgressViewModel @Inject constructor(
                     totalVoteNum.value = it.data.totalVoteNum
                     isEnabledMultipleChoice.value = it.data.isEnabledMultipleChoice
                     isAnonymous.value = it.data.isAnonymous
-                    _endAt.value = it.data.endAt ?: ""
+                    _endAt.value = it.data.endAt?.let { input ->
+                        val dateTime = LocalDateTime.parse(input)
+                        val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
+                        dateTime.format(formatter) + " 종료"
+                    } ?: ""
                     _voteStatuses.value = it.data.voteStatuses
                 } else _showToastEvent.setValue(it.message.toString())
             }.onFailure {

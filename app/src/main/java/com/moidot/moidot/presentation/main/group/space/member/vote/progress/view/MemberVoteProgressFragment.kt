@@ -70,10 +70,10 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
         }
     }
 
-    // TODO 종료 날짜 있을 때 분기처리
     private fun setupEndDateObserver() {
         viewModel.endAt.observe(viewLifecycleOwner) {
             binding.fgMemberVoteProgressContainerEndDate.isVisible = it != "none"
+            binding.fgMemberVoteProgressTvEndDate.text = it
         }
     }
 
