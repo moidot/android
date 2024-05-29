@@ -16,7 +16,7 @@ class AccessTokenInterceptor @Inject constructor(private val sharedPreferences: 
         val builder: Request.Builder = chain.request().newBuilder()
         val accessToken: String? = sharedPreferences.getString(ACCESS_TOKEN, null)
         if (accessToken != null) {
-            builder.addHeader("Authorization", accessToken)
+            builder.addHeader("Authorization", "Bearer $accessToken")
         }
         return chain.proceed(builder.build())
     }
