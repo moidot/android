@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.kakao.sdk.user.Constants.USER_ID
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -21,8 +22,6 @@ import com.moidot.moidot.databinding.FragmentLeaderVoteProgressBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.leader.vote.progress.viewmodel.LeaderVoteProgressViewModel
 import com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter.VoteProgressInfoAdapter
-import com.moidot.moidot.presentation.main.group.space.member.vote.progress.viewmodel.MemberVoteProgressViewModel
-import com.moidot.moidot.presentation.onboard.view.OnboardFirstFragmentDirections
 import com.moidot.moidot.util.Constant.CRATE_VOTE_MSG_EXTRA
 import com.moidot.moidot.util.Constant.CRATE_VOTE_SUCCESS_STATE
 import com.moidot.moidot.util.Constant.GROUP_ID
@@ -71,6 +70,7 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     private fun setupObservers() {
         setupVoteStatuesObserver()
         setupEndDateObserver()
+        setupVoteDoneObserver()
         setupVoteEndObserver()
     }
 
@@ -93,6 +93,15 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
         }
     }
 
+    // 투표를 기입한 상태이기 때문에 다시 투표하기 버튼을 누를때까지
+    // 체크 박스의 클릭을 비활성화 시킨다.
+    // TODO 체크박스 비활성화 하기
+    private fun setupVoteDoneObserver() {
+        viewModel.isVoteDone.observe(viewLifecycleOwner) {
+            binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_re_vote)
+        }
+    }
+
     private fun setupVoteEndObserver() {
         viewModel.isVoteEnd.observe(viewLifecycleOwner) {
             if (it) findNavController().navigate(LeaderVoteProgressFragmentDirections.actionLeaderVoteProgressFragmentToLeaderVoteFinishFragment())
@@ -102,6 +111,7 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     private fun initStatusesAdapter(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>) {
         voteProgressInfoAdapter.apply {
             progressStatuses = voteStatuses
+            Log.d("kite", progressStatuses.toString())
             totalVoteNum = viewModel.totalVoteNum.value!!
             binding.fgLeaderVoteProgressRvVoteState.adapter = this
         }
@@ -140,10 +150,13 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     }
 
     fun onVoteClickListener() {
-        voteProgressInfoAdapter.apply {
-            updateVoteStateTrue()
-            setVoteStateUI(getVoteState())
+        if (!voteProgressInfoAdapter.getVoteState()) {
+            voteProgressInfoAdapter.updateVoteStateTrue()
+        } else {
+            val bestPlaceIds = voteProgressInfoAdapter.progressStatuses.filter { it.isVoted }.map { it.bestPlaceId }
+            viewModel.votePlace(groupId, bestPlaceIds)
         }
+        setVoteStateUI(voteProgressInfoAdapter.getVoteState())
     }
 
     private fun setVoteStateUI(voteState: Boolean) {

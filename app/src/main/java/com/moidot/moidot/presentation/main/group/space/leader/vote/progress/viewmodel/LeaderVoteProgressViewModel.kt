@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.repository.GroupVoteRepository
+import com.moidot.moidot.repository.UserRepository
 import com.moidot.moidot.util.event.MutableSingleLiveData
 import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,9 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
-class LeaderVoteProgressViewModel @Inject constructor(private val groupVoteRepository: GroupVoteRepository) : ViewModel() {
+class LeaderVoteProgressViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val groupVoteRepository: GroupVoteRepository) : ViewModel() {
 
     val voteId = MutableLiveData<Int>()
     val totalVoteNum = MutableLiveData<Int>()
@@ -31,12 +34,17 @@ class LeaderVoteProgressViewModel @Inject constructor(private val groupVoteRepos
     private val _isVoteEnd = MutableSingleLiveData<Boolean>(false) // 투표 종료 여부
     val isVoteEnd: SingleLiveData<Boolean> = _isVoteEnd
 
+    private val _isVoteDone = MutableSingleLiveData<Boolean>(false) // 투표 완료 여부
+    val isVoteDone: SingleLiveData<Boolean> = _isVoteDone
+
     private val _showToastEvent = MutableSingleLiveData<String>()
     val showToastEvent: SingleLiveData<String> = _showToastEvent
 
+    val voteStatus = MutableLiveData<String>("VOTE_STATUS_BEFORE")
+
     fun loadVoteStatus(groupId: Int) {
         viewModelScope.launch {
-            groupVoteRepository.getVoteStatus(groupId).onSuccess {
+            groupVoteRepository.getVoteStatus(groupId, userRepository.getUserInfo().userId).onSuccess {
                 if (it.code == 0) {
                     voteId.value = it.data.voteId
                     totalVoteNum.value = it.data.totalVoteNum
@@ -61,6 +69,14 @@ class LeaderVoteProgressViewModel @Inject constructor(private val groupVoteRepos
         viewModelScope.launch {
             groupVoteRepository.endVote(groupId).onSuccess {
                 if (it.code == 0) _isVoteEnd.setValue(true)
+            }
+        }
+    }
+
+    fun votePlace(groupId: Int, bestPlaceIds: List<Int>) {
+        viewModelScope.launch {
+            groupVoteRepository.votePlace(groupId, bestPlaceIds).onSuccess {
+                if (it.code == 0) _isVoteDone.setValue(true)
             }
         }
     }

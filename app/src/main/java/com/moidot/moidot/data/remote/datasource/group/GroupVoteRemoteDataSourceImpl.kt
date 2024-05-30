@@ -9,8 +9,8 @@ import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import javax.inject.Inject
 
 class GroupVoteRemoteDataSourceImpl @Inject constructor(private val groupVoteService: GroupVoteService) : GroupVoteRemoteDataSource {
-    override suspend fun getVoteStatus(groupId: Int): Result<ResponseVoteStatus> {
-        return groupVoteService.getVoteStatus(groupId).getResultFromResponse()
+    override suspend fun getVoteStatus(groupId: Int, userId:Int): Result<ResponseVoteStatus> {
+        return groupVoteService.getVoteStatus(groupId, userId.toString()).getResultFromResponse()
     }
 
     override suspend fun createVote(groupId: Int, requestCreateVote: RequestCreateVote): Result<ResponseCreateVote> {
@@ -22,6 +22,10 @@ class GroupVoteRemoteDataSourceImpl @Inject constructor(private val groupVoteSer
     }
 
     override suspend fun endVote(groupId: Int): Result<BaseResponse> {
-        return  groupVoteService.endVote(groupId).getResultFromResponse()
+        return groupVoteService.endVote(groupId).getResultFromResponse()
+    }
+
+    override suspend fun votePlace(groupId: Int, bestPlaceIds: List<Int>): Result<BaseResponse> {
+        return groupVoteService.votePlace(groupId, bestPlaceIds).getResultFromResponse()
     }
 }

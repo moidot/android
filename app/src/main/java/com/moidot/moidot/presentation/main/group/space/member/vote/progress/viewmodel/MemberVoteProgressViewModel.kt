@@ -33,9 +33,9 @@ class MemberVoteProgressViewModel @Inject constructor(
     private val _showToastEvent = MutableSingleLiveData<String>()
     val showToastEvent: SingleLiveData<String> = _showToastEvent
 
-    fun loadVoteStatus(groupId: Int) {
+    fun loadVoteStatus(groupId: Int, userId:Int) {
         viewModelScope.launch {
-            groupVoteRepository.getVoteStatus(groupId).onSuccess {
+            groupVoteRepository.getVoteStatus(groupId, userId).onSuccess {
                 if (it.code == 0) {
                     voteId.value = it.data.voteId
                     totalVoteNum.value = it.data.totalVoteNum

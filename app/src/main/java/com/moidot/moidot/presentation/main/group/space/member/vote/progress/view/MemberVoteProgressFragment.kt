@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.kakao.sdk.user.Constants.USER_ID
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -30,6 +31,7 @@ import kotlinx.coroutines.launch
 class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBinding>(R.layout.fragment_member_vote_progress) {
 
     private val groupId by lazy { arguments?.getInt(GROUP_ID) ?: -1 }
+    private val userId by lazy { arguments?.getInt(USER_ID) ?: -1 }
 
     private lateinit var kakaoMap: KakaoMap
     private lateinit var labelLayer: LabelLayer
@@ -50,7 +52,7 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
     }
 
     private fun loadData() {
-        viewModel.loadVoteStatus(groupId)
+        viewModel.loadVoteStatus(groupId, userId)
     }
 
     private fun setupObservers() {
