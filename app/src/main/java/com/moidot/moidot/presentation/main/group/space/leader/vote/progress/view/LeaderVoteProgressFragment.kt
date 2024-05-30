@@ -70,7 +70,6 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     private fun setupObservers() {
         setupVoteStatuesObserver()
         setupEndDateObserver()
-        setupVoteDoneObserver()
         setupVoteEndObserver()
     }
 
@@ -93,14 +92,6 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
         }
     }
 
-    // 투표를 기입한 상태이기 때문에 다시 투표하기 버튼을 누를때까지
-    // 체크 박스의 클릭을 비활성화 시킨다.
-    // TODO 체크박스 비활성화 하기
-    private fun setupVoteDoneObserver() {
-        viewModel.isVoteDone.observe(viewLifecycleOwner) {
-        }
-    }
-
     private fun setupVoteEndObserver() {
         viewModel.isVoteEnd.observe(viewLifecycleOwner) {
             if (it) findNavController().navigate(LeaderVoteProgressFragmentDirections.actionLeaderVoteProgressFragmentToLeaderVoteFinishFragment())
@@ -108,8 +99,10 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     }
 
     private fun initStatusesAdapter(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>) {
+        val isAlreadyVoted = voteStatuses.any { it.isVoted } // 이미 투표한 유저인지 여부 체크
         voteProgressInfoAdapter.apply {
             progressStatuses = voteStatuses
+            voteState = isAlreadyVoted
             totalVoteNum = viewModel.totalVoteNum.value!!
             binding.fgLeaderVoteProgressRvVoteState.adapter = this
         }
@@ -151,22 +144,24 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
         val voteStatus = binding.fgLeaderVoteProgressBtnVote.text
         when(voteStatus) {
             getString(R.string.leader_vote_progress_btn_vote) -> { // 투표하기 -> 투표 완료하기
-                voteProgressInfoAdapter.updateVoteState(true)
                 binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
+                voteProgressInfoAdapter.updateCheckBoxEnableState(true)
+                setVoteStateUI(true)
             }
             getString(R.string.leader_vote_progress_btn_done) -> { // 투표 완료하기 -> 다시 투표하기
                 val bestPlaceIds = voteProgressInfoAdapter.progressStatuses.filter { it.isVoted }.map { it.bestPlaceId }
                 viewModel.votePlace(groupId, bestPlaceIds)
                 voteProgressInfoAdapter.updateCheckBoxEnableState(false)
                 binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_re_vote)
+                setVoteStateUI(false)
             }
             getString(R.string.leader_vote_progress_btn_re_vote) -> { // 다시 투표하기 -> 투표 완료하기
                 voteProgressInfoAdapter.updateVoteState(true)
                 voteProgressInfoAdapter.updateCheckBoxEnableState(true)
                 binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
+                setVoteStateUI(true)
             }
         }
-        setVoteStateUI(voteProgressInfoAdapter.getVoteState())
     }
 
     private fun setVoteStateUI(voteState: Boolean) {

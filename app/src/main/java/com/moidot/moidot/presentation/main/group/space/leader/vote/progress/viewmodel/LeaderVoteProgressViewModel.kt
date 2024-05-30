@@ -19,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LeaderVoteProgressViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val groupVoteRepository: GroupVoteRepository) : ViewModel() {
+    private val groupVoteRepository: GroupVoteRepository
+) : ViewModel() {
 
     val voteId = MutableLiveData<Int>()
     val totalVoteNum = MutableLiveData<Int>()
@@ -39,8 +40,6 @@ class LeaderVoteProgressViewModel @Inject constructor(
 
     private val _showToastEvent = MutableSingleLiveData<String>()
     val showToastEvent: SingleLiveData<String> = _showToastEvent
-
-    val voteStatus = MutableLiveData<String>("VOTE_STATUS_BEFORE")
 
     fun loadVoteStatus(groupId: Int) {
         viewModelScope.launch {

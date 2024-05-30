@@ -12,8 +12,8 @@ import com.moidot.moidot.util.addVerticalMargin
 
 class VoteProgressInfoAdapter : RecyclerView.Adapter<VoteProgressInfoAdapter.VoteProgressInfoViewHolder>() {
 
-    private var voteState = false
-    private var checkBoxEnabledState = true
+    var voteState = false
+    var checkBoxEnabledState = false
     var totalVoteNum = 0
     var progressStatuses = listOf<ResponseVoteStatus.Data.VoteStatuses>()
 
@@ -64,10 +64,6 @@ class VoteProgressInfoAdapter : RecyclerView.Adapter<VoteProgressInfoAdapter.Vot
         addVerticalMargin(holder.itemView, position, itemCount, 20)
         holder.bind(totalVoteNum, checkBoxEnabledState, voteState, progressStatuses[position])
         holder.initPlaceVoteClickListener(progressStatuses[position], ::onPlaceVoteClickListener, ::addTotalVoteNum, ::minusTotalVoteNum)
-    }
-
-    fun getVoteState(): Boolean {
-        return voteState
     }
 
     fun updateVoteState(state: Boolean) {
