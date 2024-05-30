@@ -98,7 +98,6 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     // TODO 체크박스 비활성화 하기
     private fun setupVoteDoneObserver() {
         viewModel.isVoteDone.observe(viewLifecycleOwner) {
-            binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_re_vote)
         }
     }
 
@@ -111,7 +110,6 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     private fun initStatusesAdapter(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>) {
         voteProgressInfoAdapter.apply {
             progressStatuses = voteStatuses
-            Log.d("kite", progressStatuses.toString())
             totalVoteNum = viewModel.totalVoteNum.value!!
             binding.fgLeaderVoteProgressRvVoteState.adapter = this
         }
@@ -150,24 +148,34 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     }
 
     fun onVoteClickListener() {
-        if (!voteProgressInfoAdapter.getVoteState()) {
-            voteProgressInfoAdapter.updateVoteStateTrue()
-        } else {
-            val bestPlaceIds = voteProgressInfoAdapter.progressStatuses.filter { it.isVoted }.map { it.bestPlaceId }
-            viewModel.votePlace(groupId, bestPlaceIds)
+        val voteStatus = binding.fgLeaderVoteProgressBtnVote.text
+        when(voteStatus) {
+            getString(R.string.leader_vote_progress_btn_vote) -> { // 투표하기 -> 투표 완료하기
+                voteProgressInfoAdapter.updateVoteState(true)
+                binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
+            }
+            getString(R.string.leader_vote_progress_btn_done) -> { // 투표 완료하기 -> 다시 투표하기
+                val bestPlaceIds = voteProgressInfoAdapter.progressStatuses.filter { it.isVoted }.map { it.bestPlaceId }
+                viewModel.votePlace(groupId, bestPlaceIds)
+                voteProgressInfoAdapter.updateCheckBoxEnableState(false)
+                binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_re_vote)
+            }
+            getString(R.string.leader_vote_progress_btn_re_vote) -> { // 다시 투표하기 -> 투표 완료하기
+                voteProgressInfoAdapter.updateVoteState(true)
+                voteProgressInfoAdapter.updateCheckBoxEnableState(true)
+                binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
+            }
         }
         setVoteStateUI(voteProgressInfoAdapter.getVoteState())
     }
 
     private fun setVoteStateUI(voteState: Boolean) {
         if (voteState) {
-            binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
             binding.fgLeaderVoteProgressTvEnd.apply {
                 isEnabled = false
                 setTextColor(context.getColor(R.color.orange200))
             }
         } else {
-            binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_vote)
             binding.fgLeaderVoteProgressTvEnd.apply {
                 isEnabled = true
                 setTextColor(context.getColor(R.color.orange500))
