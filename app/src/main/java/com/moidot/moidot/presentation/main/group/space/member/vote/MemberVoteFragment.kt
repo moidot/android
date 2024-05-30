@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import com.kakao.sdk.user.Constants.USER_ID
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentMemberVoteBinding
 import com.moidot.moidot.presentation.base.BaseFragment
@@ -36,7 +37,9 @@ class MemberVoteFragment : BaseFragment<FragmentMemberVoteBinding>(R.layout.frag
     }
 
     private fun initNavigation(startDestinationId: Int) {
-        val extras = Bundle().apply { putInt(GROUP_ID, groupId) }
+        val extras = Bundle().apply {
+            putInt(GROUP_ID, groupId)
+        }
         val navController = (childFragmentManager.findFragmentById(R.id.fg_group_member_vote_fcv) as NavHostFragment).navController
         val navGraph = navController.navInflater.inflate(R.navigation.member_vote_nav_graph)
         navGraph.setStartDestination(startDestinationId)

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import com.kakao.sdk.user.Constants.USER_ID
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderVoteBinding
 import com.moidot.moidot.presentation.base.BaseFragment
@@ -33,7 +34,7 @@ class LeaderVoteFragment : BaseFragment<FragmentLeaderVoteBinding>(R.layout.frag
 
     private fun setupObserver() {
         viewModel.groupVoteStatus.observe(viewLifecycleOwner) {
-            when { // TODO 서버 분께 분기처리 변수 확인 요청
+            when {
                 groupParticipates <= 1 -> initNavigation(R.id.leaderVoteEmptyFragment) // 모임원 초대 유도
                 !it.isClosed && it.voteStatuses.isNotEmpty() -> initNavigation(R.id.leaderVoteProgressFragment) // 투표 진행중
                 it.voteId == -1 && !it.isClosed -> initNavigation(R.id.leaderVoteBeforeFragment, VOTE_CREATE) // 투표 시작 전 (최초 투표)

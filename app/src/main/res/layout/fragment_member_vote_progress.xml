@@ -125,11 +125,12 @@
 
                     <TextView
                         style="@style/c1_reg_12"
+                        android:id="@+id/fg_member_vote_progress_tv_end_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
-                        android:text="@string/member_vote_end_date"
+                        tools:text="@string/member_vote_end_date"
                         android:textColor="@color/orange500" />
                 </LinearLayout>
 

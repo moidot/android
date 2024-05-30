@@ -18,11 +18,11 @@ data class ResponseVoteStatus(
     ) {
         data class VoteStatuses(
             val bestPlaceId: Int,
-            val isVoted: Boolean,
+            var isVoted: Boolean,
             val latitude: Double,
             val longitude: Double,
             val placeName: String,
-            val votes: Int
+            var votes: Int
         )
     }
 }

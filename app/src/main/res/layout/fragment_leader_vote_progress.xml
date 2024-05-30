@@ -1,13 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.main.group.space.leader.vote.progress.view.LeaderVoteProgressFragment" />
 
+        <variable
+            name="viewModel"
+            type="com.moidot.moidot.presentation.main.group.space.leader.vote.progress.viewmodel.LeaderVoteProgressViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.kakao.vectormap.MapView
+            android:id="@+id/fg_leader_vote_progress_map_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/orange50"
+            app:layout_constraintBottom_toTopOf="@id/fg_leader_vote_progress_container_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fg_leader_vote_progress_container_bottom"
+            android:layout_width="0dp"
+            android:layout_height="352dp"
+            android:background="@drawable/bg_bottom_sheet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fg_leader_vote_progress_map_view">
+
+            <TextView
+                android:id="@+id/fg_leader_vote_progress_tv_title"
+                style="@style/h3_bold_18"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="start"
+                android:text="@string/leader_vote_progress_title"
+                android:textColor="@color/gray700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+            <LinearLayout
+                android:id="@+id/fg_leader_vote_progress_container_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/fg_leader_vote_progress_tv_title"
+                app:layout_constraintStart_toStartOf="@id/fg_leader_vote_progress_tv_title"
+                app:layout_constraintTop_toBottomOf="@id/fg_leader_vote_progress_tv_title">
+
+                <LinearLayout
+                    android:id="@+id/fg_leader_vote_progress_container_multiple_choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_gravity="center"
+                        android:src="@{viewModel.isEnabledMultipleChoice() ? @drawable/bg_oval_selected: @drawable/bg_oval_disabled}" />
+
+                    <TextView
+                        style="@style/c1_reg_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/leader_vote_multiple_choice"
+                        android:textColor="@{viewModel.isEnabledMultipleChoice() ? @color/orange500: @color/gray600}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fg_leader_vote_progress_container_anonymous_vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_gravity="center"
+                        android:src="@{viewModel.isEnabledMultipleChoice() ? @drawable/bg_oval_selected: @drawable/bg_oval_disabled}" />
+
+                    <TextView
+                        style="@style/c1_reg_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/leader_vote_anonymous_vote"
+                        android:textColor="@{viewModel.isEnabledMultipleChoice() ? @color/orange500: @color/gray600}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fg_leader_vote_progress_container_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/bg_oval_selected" />
+
+                    <TextView
+                        android:id="@+id/fg_leader_vote_progress_tv_end_date"
+                        style="@style/c1_reg_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        tools:text="@string/leader_vote_end_date"
+                        android:textColor="@color/orange500" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fg_leader_vote_progress_rv_vote_state"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginVertical="24dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/fg_leader_vote_progress_btn_vote"
+                app:layout_constraintEnd_toEndOf="@id/fg_leader_vote_progress_container_info"
+                app:layout_constraintStart_toStartOf="@id/fg_leader_vote_progress_container_info"
+                app:layout_constraintTop_toBottomOf="@id/fg_leader_vote_progress_container_info"
+                tools:listitem="@layout/item_vote_progress" />
+
+            <TextView
+                android:id="@+id/fg_leader_vote_progress_tv_end"
+                style="@style/c1_reg_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="@string/leader_vote_progress_end"
+                android:textColor="@color/orange500"
+                android:onClick="@{() -> fragment.endVote()}"
+                app:layout_constraintBottom_toBottomOf="@id/fg_leader_vote_progress_btn_vote"
+                app:layout_constraintEnd_toStartOf="@id/fg_leader_vote_progress_btn_vote"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fg_leader_vote_progress_btn_vote" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fg_leader_vote_progress_btn_vote"
+                style="@style/btn_main"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/leader_vote_progress_btn_vote"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:onClick="@{() -> fragment.onVoteClickListener()}"
+                app:layout_constraintStart_toEndOf="@id/fg_leader_vote_progress_tv_end" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

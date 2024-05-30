@@ -25,9 +25,8 @@
 
             <ImageView
                 android:id="@+id/item_vote_progress_cb_vote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/btn_checkbox_normal"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

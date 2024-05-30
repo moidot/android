@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
+import com.moidot.moidot.repository.AuthRepository
 import com.moidot.moidot.repository.GroupVoteRepository
+import com.moidot.moidot.repository.UserRepository
 import com.moidot.moidot.util.event.MutableSingleLiveData
 import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,6 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LeaderVoteViewModel @Inject constructor(
+    private val userRepository: UserRepository,
     private val groupVoteRepository: GroupVoteRepository,
 ) : ViewModel() {
 
@@ -25,7 +28,7 @@ class LeaderVoteViewModel @Inject constructor(
 
     fun loadVoteStatus(groupId: Int) {
         viewModelScope.launch {
-            groupVoteRepository.getVoteStatus(groupId).onSuccess {
+            groupVoteRepository.getVoteStatus(groupId, userRepository.getUserInfo().userId).onSuccess {
                 if (it.code == 0) _groupVoteStatus.value = it.data
                 else _showToastEvent.setValue(it.message.toString())
             }.onFailure {
