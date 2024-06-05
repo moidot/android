@@ -116,10 +116,10 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
         }
     }
 
-    // TODO 종료 날짜 있을 때 분기처리
     private fun setupEndDateObserver() {
         viewModel.endAt.observe(viewLifecycleOwner) {
-            binding.fgMemberVoteFinishContainerEndDate.isVisible = it != "none"
+            binding.fgLeaderVoteFinishContainerEndDate.isVisible = it != "none"
+            binding.fgLeaderVoteFinishTvEndDate.text = it
         }
     }
 
@@ -127,13 +127,13 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
         voteFinishInfoAdapter.apply {
             progressStatuses = voteStatuses
             totalVoteNum = viewModel.totalVoteNum.value!!
-            binding.fgMemberVoteFinishRvVoteState.adapter = this
+            binding.fgLeaderVoteFinishRvVoteState.adapter = this
         }
     }
 
     private fun initMapView(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>, centerLatLang: LatLng) {
         mapManager = MarkerManager(requireContext())
-        binding.fgMemberVoteFinishMapView.start(object : KakaoMapReadyCallback() {
+        binding.fgLeaderVoteFinishMapView.start(object : KakaoMapReadyCallback() {
             override fun getPosition(): LatLng {
                 return LatLng.from(centerLatLang.latitude, centerLatLang.longitude)
             }

@@ -21,27 +21,27 @@
         android:layout_height="match_parent">
 
         <com.kakao.vectormap.MapView
-            android:id="@+id/fg_member_vote_finish_map_view"
+            android:id="@+id/fg_leader_vote_finish_map_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/orange50"
-            app:layout_constraintBottom_toTopOf="@id/fg_member_vote_finish_container_bottom"
+            app:layout_constraintBottom_toTopOf="@id/fg_leader_vote_finish_container_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fg_member_vote_finish_container_bottom"
+            android:id="@+id/fg_leader_vote_finish_container_bottom"
             android:layout_width="0dp"
             android:layout_height="352dp"
             android:background="@drawable/bg_bottom_sheet"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fg_member_vote_finish_map_view">
+            app:layout_constraintTop_toBottomOf="@id/fg_leader_vote_finish_map_view">
 
             <TextView
-                android:id="@+id/fg_member_vote_finish_tv_title"
+                android:id="@+id/fg_leader_vote_finish_tv_title"
                 style="@style/h3_bold_18"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -56,17 +56,17 @@
                 app:layout_constraintVertical_chainStyle="spread_inside" />
 
             <LinearLayout
-                android:id="@+id/fg_member_vote_finish_container_info"
+                android:id="@+id/fg_leader_vote_finish_container_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@id/fg_member_vote_finish_tv_title"
-                app:layout_constraintStart_toStartOf="@id/fg_member_vote_finish_tv_title"
-                app:layout_constraintTop_toBottomOf="@id/fg_member_vote_finish_tv_title">
+                app:layout_constraintEnd_toEndOf="@id/fg_leader_vote_finish_tv_title"
+                app:layout_constraintStart_toStartOf="@id/fg_leader_vote_finish_tv_title"
+                app:layout_constraintTop_toBottomOf="@id/fg_leader_vote_finish_tv_title">
 
                 <LinearLayout
-                    android:id="@+id/fg_member_vote_finish_container_multiple_choice"
+                    android:id="@+id/fg_leader_vote_finish_container_multiple_choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -83,12 +83,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
-                        android:text="@string/member_vote_multiple_choice"
+                        android:text="@string/leader_vote_multiple_choice"
                         android:textColor="@{viewModel.isEnabledMultipleChoice() ? @color/orange500: @color/gray600}" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/fg_member_vote_finish_container_anonymous_vote"
+                    android:id="@+id/fg_leader_vote_finish_container_anonymous_vote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -106,12 +106,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
-                        android:text="@string/member_vote_anonymous_vote"
+                        android:text="@string/leader_vote_anonymous_vote"
                         android:textColor="@{viewModel.isAnonymous() ? @color/orange500: @color/gray600}" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/fg_member_vote_finish_container_end_date"
+                    android:id="@+id/fg_leader_vote_finish_container_end_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -124,34 +124,35 @@
                         android:src="@drawable/bg_oval_selected" />
 
                     <TextView
+                        android:id="@+id/fg_leader_vote_finish_tv_end_date"
                         style="@style/c1_reg_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
-                        android:text="@string/member_vote_end_date"
+                        android:text="@string/leader_vote_end_date"
                         android:textColor="@color/orange500" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fg_member_vote_finish_rv_vote_state"
+                android:id="@+id/fg_leader_vote_finish_rv_vote_state"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="112dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/fg_member_vote_finish_container_info"
-                app:layout_constraintStart_toStartOf="@id/fg_member_vote_finish_container_info"
-                app:layout_constraintTop_toBottomOf="@id/fg_member_vote_finish_container_info"
+                app:layout_constraintEnd_toEndOf="@id/fg_leader_vote_finish_container_info"
+                app:layout_constraintStart_toStartOf="@id/fg_leader_vote_finish_container_info"
+                app:layout_constraintTop_toBottomOf="@id/fg_leader_vote_finish_container_info"
                 tools:listitem="@layout/item_vote_finish" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/fg_member_vote_finish_tv_restart_vote"
+            android:id="@+id/fg_leader_vote_finish_tv_restart_vote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"

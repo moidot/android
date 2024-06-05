@@ -12,6 +12,8 @@ import com.moidot.moidot.util.event.MutableSingleLiveData
 import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,7 +47,13 @@ class MemberVoteFinishViewModel @Inject constructor(
                     totalVoteNum.value = it.data.totalVoteNum
                     isEnabledMultipleChoice.value = it.data.isEnabledMultipleChoice
                     isAnonymous.value = it.data.isAnonymous
-                    _endAt.value = it.data.endAt ?: ""
+                    _endAt.value = it.data.endAt?.let { input ->
+                        if (input != "none") {
+                            val dateTime = LocalDateTime.parse(input)
+                            val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
+                            dateTime.format(formatter) + " 종료"
+                        } else input
+                    } ?: ""
                     _voteStatuses.value = it.data.voteStatuses
                 } else _showToastEvent.setValue(it.message.toString())
             }.onFailure {
