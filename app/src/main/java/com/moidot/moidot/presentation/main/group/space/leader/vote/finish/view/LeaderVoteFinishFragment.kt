@@ -1,12 +1,10 @@
-package com.moidot.moidot.presentation.main.group.space.member.vote.finish.view
+package com.moidot.moidot.presentation.main.group.space.leader.vote.finish.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.kakao.sdk.user.Constants.USER_ID
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -17,9 +15,9 @@ import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.OrderingType
 import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
-import com.moidot.moidot.databinding.FragmentMemberVoteFinishBinding
+import com.moidot.moidot.databinding.FragmentLeaderVoteFinishBinding
 import com.moidot.moidot.presentation.base.BaseFragment
-import com.moidot.moidot.presentation.main.group.space.member.vote.finish.viewmodel.MemberVoteFinishViewModel
+import com.moidot.moidot.presentation.main.group.space.leader.vote.finish.viewmodel.LeaderVoteFinishViewModel
 import com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter.VoteProgressInfoAdapter
 import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.MapViewUtil
@@ -29,7 +27,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R.layout.fragment_member_vote_finish) {
+class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.layout.fragment_leader_vote_finish) {
 
     private val groupId by lazy { arguments?.getInt(Constant.GROUP_ID) ?: -1 }
 
@@ -38,7 +36,7 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
     private lateinit var mapManager: MarkerManager
 
     private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter(::onMemberShowClickListener) }
-    private val viewModel: MemberVoteFinishViewModel by viewModels()
+    private val viewModel: LeaderVoteFinishViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -121,8 +119,6 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
         }
     }
 
-
-    // 순위 매기기 - 브루트포스 사용
     private fun calculateRankers(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>): List<Int> {
         val votes = voteStatuses.map { it.votes }
         return votes.map { vote -> votes.count { it > vote } + 1 }

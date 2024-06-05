@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.group.space.member.vote.finish.viewmodel
+package com.moidot.moidot.presentation.main.group.space.leader.vote.finish.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MemberVoteFinishViewModel @Inject constructor(
+class LeaderVoteFinishViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val groupVoteRepository: GroupVoteRepository
 ) : ViewModel() {
