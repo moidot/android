@@ -17,7 +17,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.FragmentMemberVoteProgressBinding
 import com.moidot.moidot.presentation.base.BaseFragment
-import com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter.VoteProgressInfoAdapter
+import com.moidot.moidot.presentation.main.group.space.common.vote.VoteProgressInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.member.vote.progress.viewmodel.MemberVoteProgressViewModel
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.MapViewUtil

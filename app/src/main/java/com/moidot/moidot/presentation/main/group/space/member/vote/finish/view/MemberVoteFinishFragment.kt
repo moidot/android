@@ -1,12 +1,10 @@
 package com.moidot.moidot.presentation.main.group.space.member.vote.finish.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.kakao.sdk.user.Constants.USER_ID
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -19,8 +17,9 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.FragmentMemberVoteFinishBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.presentation.main.group.space.common.vote.VoteFinishInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.member.vote.finish.viewmodel.MemberVoteFinishViewModel
-import com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter.VoteProgressInfoAdapter
+import com.moidot.moidot.presentation.main.group.space.common.vote.VoteProgressInfoAdapter
 import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
@@ -37,7 +36,7 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
-    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter(::onMemberShowClickListener) }
+    private val voteFinishInfoAdapter by lazy { VoteFinishInfoAdapter() }
     private val viewModel: MemberVoteFinishViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,7 +80,7 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
     }
 
     private fun initStatusesAdapter(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>) {
-        voteProgressInfoAdapter.apply {
+        voteFinishInfoAdapter.apply {
             progressStatuses = voteStatuses
             totalVoteNum = viewModel.totalVoteNum.value!!
             binding.fgMemberVoteFinishRvVoteState.adapter = this

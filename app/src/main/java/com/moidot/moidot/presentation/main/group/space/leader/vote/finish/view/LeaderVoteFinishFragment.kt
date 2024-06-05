@@ -17,8 +17,8 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.FragmentLeaderVoteFinishBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.presentation.main.group.space.common.vote.VoteFinishInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.leader.vote.finish.viewmodel.LeaderVoteFinishViewModel
-import com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter.VoteProgressInfoAdapter
 import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
@@ -35,7 +35,7 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
-    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter(::onMemberShowClickListener) }
+    private val voteFinishInfoAdapter by lazy { VoteFinishInfoAdapter() }
     private val viewModel: LeaderVoteFinishViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,7 +79,7 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
     }
 
     private fun initStatusesAdapter(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>) {
-        voteProgressInfoAdapter.apply {
+        voteFinishInfoAdapter.apply {
             progressStatuses = voteStatuses
             totalVoteNum = viewModel.totalVoteNum.value!!
             binding.fgMemberVoteFinishRvVoteState.adapter = this
