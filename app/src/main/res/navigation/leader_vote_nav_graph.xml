@@ -20,15 +20,19 @@
         android:id="@+id/leaderVoteProgressFragment"
         android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.progress.view.LeaderVoteProgressFragment"
         android:label="fragment_leader_vote_progress"
-        tools:layout="@layout/fragment_leader_vote_progress" >
+        tools:layout="@layout/fragment_leader_vote_progress">
         <action
             android:id="@+id/action_leaderVoteProgressFragment_to_leaderVoteFinishFragment"
-            app:destination="@id/leaderVoteFinishFragment" />
+            app:destination="@id/leaderVoteFinishFragment" >
+            <argument
+                android:name="GROUP_ID"
+                app:argType="integer" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/leaderVoteFinishFragment"
-        android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.finish.LeaderVoteFinishFragment"
+        android:name="com.moidot.moidot.presentation.main.group.space.leader.vote.finish.view.LeaderVoteFinishFragment"
         android:label="fragment_leader_vote_finish"
         tools:layout="@layout/fragment_leader_vote_finish" />
 

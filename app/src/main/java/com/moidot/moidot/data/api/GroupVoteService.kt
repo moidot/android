@@ -10,6 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -22,7 +23,7 @@ interface GroupVoteService {
     @POST("/group/{groupId}/vote")
     suspend fun createVote(@Path("groupId") groupId: Int, @Body requestCreateVote: RequestCreateVote): Response<ResponseCreateVote>
 
-    @POST("/group/{spaceId}/vote")
+    @PUT("/group/{spaceId}/vote")
     suspend fun reCreateVote(@Path("spaceId") groupId: Int, @Body requestCreateVote: RequestCreateVote): Response<ResponseCreateVote>
 
     @PATCH("/group/{groupId}/vote")

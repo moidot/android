@@ -1,12 +1,10 @@
 package com.moidot.moidot.presentation.main.group.space.member.vote.finish.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.kakao.sdk.user.Constants.USER_ID
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -19,11 +17,13 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.FragmentMemberVoteFinishBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.presentation.main.group.space.common.vote.VoteFinishInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.member.vote.finish.viewmodel.MemberVoteFinishViewModel
-import com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter.VoteProgressInfoAdapter
+import com.moidot.moidot.presentation.main.group.space.common.vote.VoteProgressInfoAdapter
 import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
+import com.moidot.moidot.util.popup.vote.PopupVotePeopleDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -32,13 +32,12 @@ import kotlinx.coroutines.launch
 class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R.layout.fragment_member_vote_finish) {
 
     private val groupId by lazy { arguments?.getInt(Constant.GROUP_ID) ?: -1 }
-    private val userId by lazy { arguments?.getInt(USER_ID) ?: -1 }
 
     private lateinit var kakaoMap: KakaoMap
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
-    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter(::onMemberShowClickListener) }
+    private val voteFinishInfoAdapter by lazy { VoteFinishInfoAdapter(::onMemberShowClickListener) }
     private val viewModel: MemberVoteFinishViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,12 +52,25 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
     }
 
     private fun loadData() {
-        viewModel.loadVoteStatus(groupId, userId)
+        viewModel.loadVoteStatus(groupId)
     }
 
     private fun setupObservers() {
         setupVoteStatuesObserver()
+        setupVoteMemberObserver()
         setupEndDateObserver()
+    }
+
+    // 투표한 사람 조회
+    private fun setupVoteMemberObserver() {
+        viewModel.votePlaceUsersInfo.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) PopupVotePeopleDialog(
+                context = requireContext(),
+                leaderName = it.filter { people -> people.isAdmin }.map { people -> people.nickName }.firstOrNull() ?: "",
+                location = viewModel.userVotePlaceName.value!!,
+                people = it.map { people -> people.nickName }
+            ).show()
+        }
     }
 
     // 추천 장소 조회뷰
@@ -74,16 +86,17 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
         }
     }
 
-    // TODO 종료 날짜 있을 때 분기처리
     private fun setupEndDateObserver() {
         viewModel.endAt.observe(viewLifecycleOwner) {
             binding.fgMemberVoteFinishContainerEndDate.isVisible = it != "none"
+            binding.fgMemberVoteFinishTvEndDate.text = it
         }
     }
 
     private fun initStatusesAdapter(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>) {
-        voteProgressInfoAdapter.apply {
+        voteFinishInfoAdapter.apply {
             progressStatuses = voteStatuses
+            isAnonymous = viewModel.isAnonymous.value!!
             totalVoteNum = viewModel.totalVoteNum.value!!
             binding.fgMemberVoteFinishRvVoteState.adapter = this
         }
@@ -129,9 +142,8 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
         return votes.map { vote -> votes.count { it > vote } + 1 }
     }
 
-    // TODO
     private fun onMemberShowClickListener(bestPlaceId: Int, bestPlaceName: String) {
-        // viewModel.getUsersVotePlaceInfo(groupId, bestPlaceId)
+        viewModel.getUsersVotePlaceInfo(groupId, bestPlaceId, bestPlaceName)
     }
 
 }

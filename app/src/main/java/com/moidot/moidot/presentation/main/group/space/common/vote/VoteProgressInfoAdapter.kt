@@ -1,4 +1,4 @@
-package com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter
+package com.moidot.moidot.presentation.main.group.space.common.vote
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

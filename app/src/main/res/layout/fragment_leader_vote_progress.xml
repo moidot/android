@@ -97,7 +97,7 @@
                         android:layout_width="6dp"
                         android:layout_height="6dp"
                         android:layout_gravity="center"
-                        android:src="@{viewModel.isEnabledMultipleChoice() ? @drawable/bg_oval_selected: @drawable/bg_oval_disabled}" />
+                        android:src="@{viewModel.isAnonymous() ? @drawable/bg_oval_selected: @drawable/bg_oval_disabled}" />
 
                     <TextView
                         style="@style/c1_reg_12"
@@ -106,7 +106,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
                         android:text="@string/leader_vote_anonymous_vote"
-                        android:textColor="@{viewModel.isEnabledMultipleChoice() ? @color/orange500: @color/gray600}" />
+                        android:textColor="@{viewModel.isAnonymous() ? @color/orange500: @color/gray600}" />
                 </LinearLayout>
 
                 <LinearLayout

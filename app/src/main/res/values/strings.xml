@@ -206,6 +206,8 @@
     <string name="leader_vote_multiple_choice">복수선택</string>
     <string name="leader_vote_anonymous_vote">익명투표</string>
     <string name="leader_vote_end_date">%d.%d.%d %s종료</string>
+    <string name="leader_vote_finish_title">장소 투표가 완료되었어요!</string>
+    <string name="leader_vote_finish_restart_vote">투표 초기화하기</string>
 
     <!-- Setting -->
     <string name="setting_top_bar">설정</string>

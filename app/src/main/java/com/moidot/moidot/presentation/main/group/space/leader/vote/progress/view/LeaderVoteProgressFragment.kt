@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.progress.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -19,7 +20,7 @@ import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.FragmentLeaderVoteProgressBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.leader.vote.progress.viewmodel.LeaderVoteProgressViewModel
-import com.moidot.moidot.presentation.main.group.space.member.vote.progress.adapter.VoteProgressInfoAdapter
+import com.moidot.moidot.presentation.main.group.space.common.vote.VoteProgressInfoAdapter
 import com.moidot.moidot.util.Constant.CRATE_VOTE_MSG_EXTRA
 import com.moidot.moidot.util.Constant.CRATE_VOTE_SUCCESS_STATE
 import com.moidot.moidot.util.Constant.GROUP_ID
@@ -110,7 +111,10 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
 
     private fun setupVoteEndObserver() {
         viewModel.isVoteEnd.observe(viewLifecycleOwner) {
-            if (it) findNavController().navigate(LeaderVoteProgressFragmentDirections.actionLeaderVoteProgressFragmentToLeaderVoteFinishFragment())
+            if (it) {
+                val action = LeaderVoteProgressFragmentDirections.actionLeaderVoteProgressFragmentToLeaderVoteFinishFragment(groupId)
+                findNavController().navigate(action)
+            }
         }
     }
 
@@ -119,7 +123,7 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
         viewModel.votePlaceUsersInfo.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) PopupVotePeopleDialog(
                 context = requireContext(),
-                leaderName = it.filter { people -> people.isAdmin }.map { people -> people.nickName }[0],
+                leaderName = it.filter { people -> people.isAdmin }.map { people -> people.nickName }.firstOrNull() ?: "",
                 location = viewModel.userVotePlaceName.value!!,
                 people = it.map { people -> people.nickName }
             ).show()
