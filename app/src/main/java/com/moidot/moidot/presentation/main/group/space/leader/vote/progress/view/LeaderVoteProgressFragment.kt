@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.progress.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels

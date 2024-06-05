@@ -120,6 +120,7 @@
                         android:src="@drawable/bg_oval_selected" />
 
                     <TextView
+                        android:id="@+id/fg_member_vote_finish_tv_end_date"
                         style="@style/c1_reg_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

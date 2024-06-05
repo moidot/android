@@ -36,7 +36,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.layout.fragment_leader_vote_finish) {
+class LeaderVoteFinishFragment : BaseFragment<FragmentLeaderVoteFinishBinding>(R.layout.fragment_leader_vote_finish) {
 
     private val groupId by lazy { arguments?.getInt(GROUP_ID) ?: -1 }
     private lateinit var kakaoMap: KakaoMap
@@ -53,20 +53,9 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
         result.data?.let { data ->
             val isCreateVoteSuccess = data.getBooleanExtra(Constant.CRATE_VOTE_SUCCESS_STATE, false)
             if (isCreateVoteSuccess) { // 투표 생성 완료
-                val extras = Bundle().apply {
-                    putInt(GROUP_ID, groupId)
-                    putBoolean(Constant.CRATE_VOTE_SUCCESS_STATE, true) // 생성 직후 진행화면으로 넘어온 것인지 확인을 위한 변수
-                    putString(Constant.CRATE_VOTE_MSG_EXTRA, data.getStringExtra(Constant.CRATE_VOTE_MSG_EXTRA)) // 스낵바 메세지
-                }
-                initNavigation(R.id.leaderVoteProgressFragment, extras)
+                findNavController().navigateUp()
             }
         }
-    }
-
-    private fun initNavigation(startDestinationId: Int, extras:Bundle) {
-        val navGraph = findNavController().navInflater.inflate(R.navigation.leader_vote_nav_graph)
-        navGraph.setStartDestination(startDestinationId)
-        findNavController().setGraph(navGraph, extras)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
