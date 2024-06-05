@@ -10,9 +10,9 @@ object TimeUtil {
         return current.format(formatter)
     }
 
-    fun convertToHoursAndMinutes(totalSeconds: Int): Pair<Int, Int> {
-        val hours = totalSeconds / 3600
-        val minutes = (totalSeconds % 3600) / 60
+    fun convertToHoursAndMinutes(totalMinutes: Int): Pair<Int, Int> {
+        val hours = totalMinutes / 60
+        val minutes = totalMinutes % 60
         return Pair(hours, minutes)
     }
 }

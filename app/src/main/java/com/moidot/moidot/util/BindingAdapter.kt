@@ -91,7 +91,6 @@ fun View.covertVisible(flag: Boolean) {
     this.isVisible = flag
 }
 
-// TODO 서버 분들의 답변에 따라 수정될 수도 있음
 @BindingAdapter("bind:convertToHoursAndMinutes")
 fun TextView.convertToHoursAndMinutes(totalMinutes: Int) {
     val (hours, minutes) = TimeUtil.convertToHoursAndMinutes(totalMinutes)
