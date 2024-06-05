@@ -16,7 +16,7 @@ class VoteProgressInfoAdapter(private val onMemberShowClickListener: (Int, Strin
     var checkBoxEnabledState = false
     var totalVoteNum = 0
     var progressStatuses = listOf<ResponseVoteStatus.Data.VoteStatuses>()
-    var isMultipleChoice = false
+    var isEnabledMultipleChoice = false
     var isAnonymous = false
 
     class VoteProgressInfoViewHolder(private val binding: ItemVoteProgressBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -39,16 +39,29 @@ class VoteProgressInfoAdapter(private val onMemberShowClickListener: (Int, Strin
         }
 
         fun initPlaceVoteClickListener(
+            isEnabledMultipleChoice: Boolean,
             data: ResponseVoteStatus.Data.VoteStatuses,
             onPlaceVoteClickListener: () -> Unit,
+            isUserAlreadyVoted: () -> Boolean,
             addTotalVoteNum: () -> Unit,
             minusTotalVoteNum: () -> Unit,
         ) {
             binding.itemVoteProgressCbVote.setOnClickListener {
                 binding.itemVoteProgressCbVote.isVisible = true
-                data.isVoted = !data.isVoted
-                data.votes = if (data.isVoted) data.votes + 1 else data.votes - 1
-                if (data.isVoted) addTotalVoteNum() else minusTotalVoteNum()
+
+                if(data.isVoted) { // 투표 해제
+                    data.isVoted = false
+                    data.votes -= 1
+                    minusTotalVoteNum()
+                } else { // 투표 선택
+                    // 익명투표: 기존에 선택된 투표가 없고, 복수 투표 불가능 일때
+                    // 복수투표: 복수 투표 가능 일때
+                    if (!isEnabledMultipleChoice && !isUserAlreadyVoted()  || isEnabledMultipleChoice) {
+                        data.isVoted = true
+                        data.votes += 1
+                        addTotalVoteNum()
+                    }
+                }
                 onPlaceVoteClickListener()
             }
         }
@@ -74,11 +87,10 @@ class VoteProgressInfoAdapter(private val onMemberShowClickListener: (Int, Strin
 
     override fun getItemCount(): Int = progressStatuses.size
 
-    // TODO 복수투표
     override fun onBindViewHolder(holder: VoteProgressInfoViewHolder, position: Int) {
         addVerticalMargin(holder.itemView, position, itemCount, 20)
         holder.bind(totalVoteNum, checkBoxEnabledState, voteState, progressStatuses[position])
-        holder.initPlaceVoteClickListener(progressStatuses[position], ::onPlaceVoteClickListener, ::addTotalVoteNum, ::minusTotalVoteNum)
+        holder.initPlaceVoteClickListener(isEnabledMultipleChoice, progressStatuses[position], ::onPlaceVoteClickListener, ::isUserAlreadyVoted, ::addTotalVoteNum, ::minusTotalVoteNum)
         holder.invokeVoteMemberClickListener(isAnonymous, progressStatuses[position].bestPlaceId, progressStatuses[position].placeName, onMemberShowClickListener)
     }
 
@@ -102,5 +114,9 @@ class VoteProgressInfoAdapter(private val onMemberShowClickListener: (Int, Strin
 
     private fun minusTotalVoteNum() {
         totalVoteNum = totalVoteNum.minus(1)
+    }
+
+    private fun isUserAlreadyVoted():Boolean {
+        return if(progressStatuses.any { it.isVoted }) true else return false
     }
 }

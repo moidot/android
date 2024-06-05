@@ -72,6 +72,8 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
         setupVoteStatuesObserver()
         setupEndDateObserver()
         setupVoteEndObserver()
+        setupVoteMultipleStatusObserver()
+        setupVoteAnonymousStatusObserver()
         setupVoteMemberObserver()
     }
 
@@ -91,6 +93,20 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
         viewModel.endAt.observe(viewLifecycleOwner) {
             binding.fgLeaderVoteProgressContainerEndDate.isVisible = it != "none"
             binding.fgLeaderVoteProgressTvEndDate.text = it
+        }
+    }
+
+    // 복수투표 설정
+    private fun setupVoteMultipleStatusObserver() {
+        viewModel.isAnonymous.observe(viewLifecycleOwner) {
+            voteProgressInfoAdapter.isAnonymous = it
+        }
+    }
+
+    // 익명 투표 설정
+    private fun setupVoteAnonymousStatusObserver() {
+        viewModel.isEnabledMultipleChoice.observe(viewLifecycleOwner) {
+            voteProgressInfoAdapter.isEnabledMultipleChoice = it
         }
     }
 
