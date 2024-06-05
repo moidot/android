@@ -48,5 +48,4 @@ class LeaderVoteFinishViewModel @Inject constructor(
             }
         }
     }
-
 }

@@ -1,10 +1,14 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.finish.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -18,8 +22,11 @@ import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.FragmentLeaderVoteFinishBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.common.vote.VoteFinishInfoAdapter
+import com.moidot.moidot.presentation.main.group.space.leader.vote.create.CreateVoteActivity
 import com.moidot.moidot.presentation.main.group.space.leader.vote.finish.viewmodel.LeaderVoteFinishViewModel
 import com.moidot.moidot.util.Constant
+import com.moidot.moidot.util.Constant.GROUP_ID
+import com.moidot.moidot.util.Constant.VOTE_RECREATE_STATE
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +45,29 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
     private val voteFinishInfoAdapter by lazy { VoteFinishInfoAdapter() }
     private val viewModel: LeaderVoteFinishViewModel by viewModels()
 
+    // 투표 초기화
+    private val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        result.data?.let { data ->
+            val isCreateVoteSuccess = data.getBooleanExtra(Constant.CRATE_VOTE_SUCCESS_STATE, false)
+            if (isCreateVoteSuccess) { // 투표 생성 완료
+                val extras = Bundle().apply {
+                    putInt(Constant.GROUP_ID, groupId)
+                    putBoolean(Constant.CRATE_VOTE_SUCCESS_STATE, true) // 생성 직후 진행화면으로 넘어온 것인지 확인을 위한 변수
+                    putString(Constant.CRATE_VOTE_MSG_EXTRA, data.getStringExtra(Constant.CRATE_VOTE_MSG_EXTRA)) // 스낵바 메세지
+                }
+                initNavigation(R.id.leaderVoteProgressFragment, extras)
+            }
+        }
+    }
+
+    private fun initNavigation(startDestinationId: Int, extras:Bundle) {
+        val navGraph = findNavController().navInflater.inflate(R.navigation.leader_vote_nav_graph)
+        navGraph.setStartDestination(startDestinationId)
+        findNavController().setGraph(navGraph, extras)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBinding()
@@ -46,6 +76,7 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
     }
 
     private fun initBinding() {
+        binding.fragment = this
         binding.viewModel = viewModel
     }
 
@@ -127,6 +158,14 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
     // TODO
     private fun onMemberShowClickListener(bestPlaceId: Int, bestPlaceName: String) {
         // viewModel.getUsersVotePlaceInfo(groupId, bestPlaceId)
+    }
+
+    fun onClickRestartVoteListener() {
+        Intent(requireContext(), CreateVoteActivity::class.java).apply {
+            putExtra(GROUP_ID, groupId)
+            putExtra(VOTE_RECREATE_STATE, true)
+            requestLauncher.launch(this)
+        }
     }
 
 }

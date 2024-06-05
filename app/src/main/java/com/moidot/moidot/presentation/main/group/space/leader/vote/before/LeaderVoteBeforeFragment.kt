@@ -125,7 +125,7 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
     fun onClickVoteCreate() {
         Intent(requireContext(), CreateVoteActivity::class.java).apply {
             putExtra(GROUP_ID, groupId)
-            putExtra(VOTE_RECREATE_STATE, voteRecreateState)
+            putExtra(VOTE_RECREATE_STATE, voteRecreateState) // TODO 검증후 false로 변환해도 될듯
             requestLauncher.launch(this)
         }
     }
