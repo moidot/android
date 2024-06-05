@@ -123,7 +123,7 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
         viewModel.votePlaceUsersInfo.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) PopupVotePeopleDialog(
                 context = requireContext(),
-                leaderName = it.filter { people -> people.isAdmin }.map { people -> people.nickName }[0], // TODO 모임장이 투표 안했을때를 고려
+                leaderName = it.filter { people -> people.isAdmin }.map { people -> people.nickName }.firstOrNull() ?: "",
                 location = viewModel.userVotePlaceName.value!!,
                 people = it.map { people -> people.nickName }
             ).show()
