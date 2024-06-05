@@ -38,7 +38,7 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
-    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter() }
+    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter(::onMemberShowClickListener) }
     private val viewModel: MemberVoteFinishViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -127,6 +127,11 @@ class MemberVoteFinishFragment : BaseFragment<FragmentMemberVoteFinishBinding>(R
     private fun calculateRankers(voteStatuses: List<ResponseVoteStatus.Data.VoteStatuses>): List<Int> {
         val votes = voteStatuses.map { it.votes }
         return votes.map { vote -> votes.count { it > vote } + 1 }
+    }
+
+    // TODO
+    private fun onMemberShowClickListener(bestPlaceId: Int, bestPlaceName: String) {
+        // viewModel.getUsersVotePlaceInfo(groupId, bestPlaceId)
     }
 
 }
