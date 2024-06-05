@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="24dp"
-                android:onClick="@{() -> fragment.startVote()}"
+                android:onClick="@{() -> fragment.onVoteClickListener()}"
                 android:text="@string/member_vote_progress_btn"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

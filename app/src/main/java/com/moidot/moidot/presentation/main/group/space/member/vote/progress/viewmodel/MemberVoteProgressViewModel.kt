@@ -1,12 +1,15 @@
 package com.moidot.moidot.presentation.main.group.space.member.vote.progress.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.remote.response.ResponseUsersVotePlaceInfo
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.repository.GroupPlaceRepository
 import com.moidot.moidot.repository.GroupVoteRepository
+import com.moidot.moidot.repository.UserRepository
 import com.moidot.moidot.util.event.MutableSingleLiveData
 import com.moidot.moidot.util.event.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MemberVoteProgressViewModel @Inject constructor(
+    private val userRepository: UserRepository,
     private val groupVoteRepository: GroupVoteRepository
 ) : ViewModel() {
 
@@ -33,9 +37,13 @@ class MemberVoteProgressViewModel @Inject constructor(
     private val _showToastEvent = MutableSingleLiveData<String>()
     val showToastEvent: SingleLiveData<String> = _showToastEvent
 
-    fun loadVoteStatus(groupId: Int, userId:Int) {
+    val userVotePlaceName = MutableLiveData<String>("")
+    private val _votePlaceUsersInfo = MutableLiveData<List<ResponseUsersVotePlaceInfo.Data.VoteParticipation>>()
+    val votePlaceUsersInfo = _votePlaceUsersInfo
+
+    fun loadVoteStatus(groupId: Int) {
         viewModelScope.launch {
-            groupVoteRepository.getVoteStatus(groupId, userId).onSuccess {
+            groupVoteRepository.getVoteStatus(groupId, userRepository.getUserInfo().userId).onSuccess {
                 if (it.code == 0) {
                     voteId.value = it.data.voteId
                     totalVoteNum.value = it.data.totalVoteNum
@@ -52,6 +60,23 @@ class MemberVoteProgressViewModel @Inject constructor(
                 } else _showToastEvent.setValue(it.message.toString())
             }.onFailure {
                 _showToastEvent.setValue(it.message.toString())
+            }
+        }
+    }
+
+    fun votePlace(groupId: Int, bestPlaceIds: List<Int>) {
+        viewModelScope.launch {
+            groupVoteRepository.votePlace(groupId, bestPlaceIds).onSuccess {
+                if (it.code == 0) Log.d("kite", "투표 성공")
+            }
+        }
+    }
+
+    fun getUsersVotePlaceInfo(groupId: Int, bestPlaceId: Int, bestPlaceName: String) {
+        userVotePlaceName.value = bestPlaceName
+        viewModelScope.launch {
+            groupVoteRepository.getUsersPlaceVoteInfo(groupId, bestPlaceId).onSuccess {
+                if (it.code == 0) _votePlaceUsersInfo.value = it.data.voteParticipations
             }
         }
     }
