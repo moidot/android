@@ -29,6 +29,7 @@ import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.VOTE_RECREATE_STATE
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
+import com.moidot.moidot.util.popup.vote.PopupVotePeopleDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -42,7 +43,7 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
-    private val voteFinishInfoAdapter by lazy { VoteFinishInfoAdapter() }
+    private val voteFinishInfoAdapter by lazy { VoteFinishInfoAdapter(::onMemberShowClickListener) }
     private val viewModel: LeaderVoteFinishViewModel by viewModels()
 
     // 투표 초기화
@@ -87,6 +88,19 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
     private fun setupObservers() {
         setupVoteStatuesObserver()
         setupEndDateObserver()
+        setupVoteMemberObserver()
+    }
+
+    // 투표한 사람 조회
+    private fun setupVoteMemberObserver() {
+        viewModel.votePlaceUsersInfo.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) PopupVotePeopleDialog(
+                context = requireContext(),
+                leaderName = it.filter { people -> people.isAdmin }.map { people -> people.nickName }[0],
+                location = viewModel.userVotePlaceName.value!!,
+                people = it.map { people -> people.nickName }
+            ).show()
+        }
     }
 
     // 추천 장소 조회뷰
@@ -155,9 +169,9 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
         return votes.map { vote -> votes.count { it > vote } + 1 }
     }
 
-    // TODO
+    // 투표한 사람 조회
     private fun onMemberShowClickListener(bestPlaceId: Int, bestPlaceName: String) {
-        // viewModel.getUsersVotePlaceInfo(groupId, bestPlaceId)
+        viewModel.getUsersVotePlaceInfo(groupId, bestPlaceId, bestPlaceName)
     }
 
     fun onClickRestartVoteListener() {

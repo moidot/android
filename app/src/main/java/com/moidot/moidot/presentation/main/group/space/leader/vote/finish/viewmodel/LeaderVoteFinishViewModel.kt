@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.remote.response.ResponseUsersVotePlaceInfo
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.repository.GroupVoteRepository
 import com.moidot.moidot.repository.UserRepository
@@ -32,6 +33,10 @@ class LeaderVoteFinishViewModel @Inject constructor(
     private val _showToastEvent = MutableSingleLiveData<String>()
     val showToastEvent: SingleLiveData<String> = _showToastEvent
 
+    val userVotePlaceName = MutableLiveData<String>("")
+    private val _votePlaceUsersInfo = MutableLiveData<List<ResponseUsersVotePlaceInfo.Data.VoteParticipation>>()
+    val votePlaceUsersInfo = _votePlaceUsersInfo
+
     fun loadVoteStatus(groupId: Int) {
         viewModelScope.launch {
             groupVoteRepository.getVoteStatus(groupId, userRepository.getUserInfo().userId).onSuccess {
@@ -45,6 +50,15 @@ class LeaderVoteFinishViewModel @Inject constructor(
                 } else _showToastEvent.setValue(it.message.toString())
             }.onFailure {
                 _showToastEvent.setValue(it.message.toString())
+            }
+        }
+    }
+
+    fun getUsersVotePlaceInfo(groupId: Int, bestPlaceId: Int, bestPlaceName: String) {
+        userVotePlaceName.value = bestPlaceName
+        viewModelScope.launch {
+            groupVoteRepository.getUsersPlaceVoteInfo(groupId, bestPlaceId).onSuccess {
+                if (it.code == 0) _votePlaceUsersInfo.value = it.data.voteParticipations
             }
         }
     }

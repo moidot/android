@@ -10,8 +10,9 @@ import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.ItemVoteFinishBinding
 import com.moidot.moidot.util.addVerticalMargin
 
-class VoteFinishInfoAdapter : RecyclerView.Adapter<VoteFinishInfoAdapter.VoteFinishInfoViewHolder>() {
+class VoteFinishInfoAdapter(private val onMemberShowClickListener: (Int, String) -> Unit) : RecyclerView.Adapter<VoteFinishInfoAdapter.VoteFinishInfoViewHolder>() {
 
+    var isAnonymous = false
     var totalVoteNum = 0
     var progressStatuses = listOf<ResponseVoteStatus.Data.VoteStatuses>()
 
@@ -28,6 +29,19 @@ class VoteFinishInfoAdapter : RecyclerView.Adapter<VoteFinishInfoAdapter.VoteFin
             // 해당 장소가 1등인지 여부 표시
             binding.itemVoteFinishIvRanker.isVisible = data.votes == getFirstRankVoteCount
         }
+
+        fun invokeVoteMemberClickListener(
+            isAnonymous: Boolean,
+            bestPlaceId: Int,
+            bestPlaceName: String,
+            onMemberShowClickListener: (Int, String) -> Unit,
+        ) {
+            if (!isAnonymous) {
+                binding.itemVoteFinishContainerPeopleInfo.setOnClickListener {
+                    onMemberShowClickListener.invoke(bestPlaceId, bestPlaceName)
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VoteFinishInfoViewHolder {
@@ -40,6 +54,7 @@ class VoteFinishInfoAdapter : RecyclerView.Adapter<VoteFinishInfoAdapter.VoteFin
     override fun onBindViewHolder(holder: VoteFinishInfoViewHolder, position: Int) {
         addVerticalMargin(holder.itemView, position, itemCount, 20)
         holder.bind(totalVoteNum, getFirstRankVoteCount(), progressStatuses[position])
+        holder.invokeVoteMemberClickListener(isAnonymous, progressStatuses[position].bestPlaceId, progressStatuses[position].placeName, onMemberShowClickListener)
     }
 
     private fun getFirstRankVoteCount(): Int {
