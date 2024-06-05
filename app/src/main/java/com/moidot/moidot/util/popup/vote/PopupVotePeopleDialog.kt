@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import com.moidot.moidot.R
@@ -34,6 +35,7 @@ class PopupVotePeopleDialog(
 
     private fun initView() {
         initDialogWindowView()
+        initCloseBtnEvent()
         setTitleLocationTxt()
         setContentCntTxt()
     }
@@ -47,9 +49,15 @@ class PopupVotePeopleDialog(
         }
     }
 
+    private fun initCloseBtnEvent() {
+        binding.popupVotePeopleIvClose.setOnClickListener {
+            dismiss()
+        }
+    }
+
     private fun setTitleLocationTxt() {
         val content = context.resources.getString(R.string.popup_vote_people_title).format(location)
-        val spannableTxt = SpannableTxt(context).applySpannableStyles(content, location, R.style.b1_bold_16)
+        val spannableTxt = SpannableTxt(context).applySpannableStyles(content = content, target = location, styleResId = R.style.b1_bold_16)
         binding.popupVotePeopleTvTitle.text = spannableTxt
     }
 

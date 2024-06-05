@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.remote.response.ResponseUsersVotePlaceInfo
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.repository.GroupVoteRepository
 import com.moidot.moidot.repository.UserRepository
@@ -28,6 +29,9 @@ class LeaderVoteProgressViewModel @Inject constructor(
     val isAnonymous = MutableLiveData<Boolean>(false) // 익명 투표 여부
     private val _voteStatuses = MutableLiveData<List<ResponseVoteStatus.Data.VoteStatuses>>() // 투표 상태 정보
     val voteStatuses: LiveData<List<ResponseVoteStatus.Data.VoteStatuses>> = _voteStatuses
+
+    private val _votePlaceUsersInfo = MutableLiveData<List<ResponseUsersVotePlaceInfo.Data.VoteParticipation>>()
+    val votePlaceUsersInfo = _votePlaceUsersInfo
 
     private val _endAt = MutableLiveData<String>("none") // 종료 날짜
     val endAt: LiveData<String> = _endAt
@@ -76,6 +80,16 @@ class LeaderVoteProgressViewModel @Inject constructor(
         viewModelScope.launch {
             groupVoteRepository.votePlace(groupId, bestPlaceIds).onSuccess {
                 if (it.code == 0) _isVoteDone.setValue(true)
+            }
+        }
+    }
+
+    val userVotePlaceName = MutableLiveData<String>("")
+    fun getUsersVotePlaceInfo(groupId: Int, bestPlaceId: Int, bestPlaceName: String) {
+        userVotePlaceName.value = bestPlaceName
+        viewModelScope.launch {
+            groupVoteRepository.getUsersPlaceVoteInfo(groupId, bestPlaceId).onSuccess {
+                if (it.code == 0) _votePlaceUsersInfo.value = it.data.voteParticipations
             }
         }
     }

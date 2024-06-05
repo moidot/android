@@ -28,6 +28,7 @@ import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.CustomSnackBar
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
+import com.moidot.moidot.util.popup.vote.PopupVotePeopleDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -43,7 +44,7 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
-    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter() }
+    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter(::onMemberShowClickListener) }
     private val viewModel: LeaderVoteProgressViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,6 +72,7 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
         setupVoteStatuesObserver()
         setupEndDateObserver()
         setupVoteEndObserver()
+        setupVoteMemberObserver()
     }
 
     private fun setupVoteStatuesObserver() {
@@ -95,6 +97,18 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
     private fun setupVoteEndObserver() {
         viewModel.isVoteEnd.observe(viewLifecycleOwner) {
             if (it) findNavController().navigate(LeaderVoteProgressFragmentDirections.actionLeaderVoteProgressFragmentToLeaderVoteFinishFragment())
+        }
+    }
+
+    // 투표한 사람 조회
+    private fun setupVoteMemberObserver() {
+        viewModel.votePlaceUsersInfo.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) PopupVotePeopleDialog(
+                context = requireContext(),
+                leaderName = it.filter { people -> people.isAdmin }.map { people -> people.nickName }[0],
+                location = viewModel.userVotePlaceName.value!!,
+                people = it.map { people -> people.nickName }
+            ).show()
         }
     }
 
@@ -142,12 +156,14 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
 
     fun onVoteClickListener() {
         val voteStatus = binding.fgLeaderVoteProgressBtnVote.text
-        when(voteStatus) {
+        when (voteStatus) {
             getString(R.string.leader_vote_progress_btn_vote) -> { // 투표하기 -> 투표 완료하기
                 binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
+                voteProgressInfoAdapter.updateVoteState(true)
                 voteProgressInfoAdapter.updateCheckBoxEnableState(true)
                 setVoteStateUI(true)
             }
+
             getString(R.string.leader_vote_progress_btn_done) -> { // 투표 완료하기 -> 다시 투표하기
                 val bestPlaceIds = voteProgressInfoAdapter.progressStatuses.filter { it.isVoted }.map { it.bestPlaceId }
                 viewModel.votePlace(groupId, bestPlaceIds)
@@ -155,6 +171,7 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
                 binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_re_vote)
                 setVoteStateUI(false)
             }
+
             getString(R.string.leader_vote_progress_btn_re_vote) -> { // 다시 투표하기 -> 투표 완료하기
                 voteProgressInfoAdapter.updateVoteState(true)
                 voteProgressInfoAdapter.updateCheckBoxEnableState(true)
@@ -180,5 +197,9 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
 
     fun endVote() {
         viewModel.endVote(groupId)
+    }
+
+    private fun onMemberShowClickListener(bestPlaceId: Int, bestPlaceName:String) {
+        viewModel.getUsersVotePlaceInfo(groupId, bestPlaceId, bestPlaceName)
     }
 }

@@ -37,7 +37,7 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
-    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter() }
+    private val voteProgressInfoAdapter by lazy { VoteProgressInfoAdapter(::onMemberShowClickListener) }
     private val viewModel: MemberVoteProgressViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -121,5 +121,9 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
 
     fun startVote() {
         voteProgressInfoAdapter.updateVoteState(true)
+    }
+
+    private fun onMemberShowClickListener(bestPlaceId: Int, bestPlaceName: String) {
+
     }
 }

@@ -32,7 +32,7 @@
 
     <!-- popup -->
     <string name="popup_vote_people_title">%s에 투표한 모임원</string>
-    <string name="popup_vote_people_content">%d의 모임원이 이 장소에 투표했어요!</string>
+    <string name="popup_vote_people_content">%d명의 모임원이 이 장소에 투표했어요!</string>
     <string name="popup_edit_done_title">편집이 완료되었습니다.</string>
     <string name="popup_edit_done_transport_type">이동 수단</string>
     <string name="popup_edit_done_nickname">닉네임</string>
