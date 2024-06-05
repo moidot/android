@@ -31,6 +31,9 @@ interface GroupVoteService {
     @POST("/group/{groupId}/vote/select")
     suspend fun votePlace(@Path("groupId") groupId: Int, @Query("bestPlaceIds") bestPlaceIds: List<Int>): Response<BaseResponse>
 
+    @POST("/group/{groupId}/vote/select")
+    suspend fun votePlace(@Path("groupId") groupId: Int, @Query("bestPlaceIds") bestPlaceIds: String): Response<BaseResponse>
+
     // 장소에 투표한 인원 조회
     @GET("/group/{groupId}/vote/select")
     suspend fun getVotePlaceUsersInfo(@Path("groupId") groupId: Int, @Query("bestPlaceId") bestPlaceId: Int): Response<ResponseUsersVotePlaceInfo>

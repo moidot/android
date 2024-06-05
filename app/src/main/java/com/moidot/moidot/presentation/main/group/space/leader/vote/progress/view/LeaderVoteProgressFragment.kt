@@ -166,6 +166,7 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
 
             getString(R.string.leader_vote_progress_btn_done) -> { // 투표 완료하기 -> 다시 투표하기
                 val bestPlaceIds = voteProgressInfoAdapter.progressStatuses.filter { it.isVoted }.map { it.bestPlaceId }
+
                 viewModel.votePlace(groupId, bestPlaceIds)
                 voteProgressInfoAdapter.updateCheckBoxEnableState(false)
                 binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_re_vote)

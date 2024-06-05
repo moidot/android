@@ -10,7 +10,7 @@ import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import javax.inject.Inject
 
 class GroupVoteRemoteDataSourceImpl @Inject constructor(private val groupVoteService: GroupVoteService) : GroupVoteRemoteDataSource {
-    override suspend fun getVoteStatus(groupId: Int, userId:Int): Result<ResponseVoteStatus> {
+    override suspend fun getVoteStatus(groupId: Int, userId: Int): Result<ResponseVoteStatus> {
         return groupVoteService.getVoteStatus(groupId, userId.toString()).getResultFromResponse()
     }
 
@@ -27,7 +27,11 @@ class GroupVoteRemoteDataSourceImpl @Inject constructor(private val groupVoteSer
     }
 
     override suspend fun votePlace(groupId: Int, bestPlaceIds: List<Int>): Result<BaseResponse> {
-        return groupVoteService.votePlace(groupId, bestPlaceIds).getResultFromResponse()
+        return if (bestPlaceIds.isEmpty()) { // 빈 리스트일 경우 빈 문자열로 보내주어야 동작함
+            groupVoteService.votePlace(groupId, "").getResultFromResponse()
+        } else {
+            groupVoteService.votePlace(groupId, bestPlaceIds).getResultFromResponse()
+        }
     }
 
     override suspend fun getVotePlaceUsersInfo(groupId: Int, bestPlaceId: Int): Result<ResponseUsersVotePlaceInfo> {
