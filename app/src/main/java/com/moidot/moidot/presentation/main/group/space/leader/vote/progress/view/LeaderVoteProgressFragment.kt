@@ -1,13 +1,11 @@
 package com.moidot.moidot.presentation.main.group.space.leader.vote.progress.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.kakao.sdk.user.Constants.USER_ID
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -177,7 +175,7 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
                 binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
                 voteProgressInfoAdapter.updateVoteState(true)
                 voteProgressInfoAdapter.updateCheckBoxEnableState(true)
-                setVoteStateUI(true)
+                setVoteEndTextStateUI(true)
             }
 
             getString(R.string.leader_vote_progress_btn_done) -> { // 투표 완료하기 -> 다시 투표하기
@@ -186,19 +184,19 @@ class LeaderVoteProgressFragment : BaseFragment<FragmentLeaderVoteProgressBindin
                 viewModel.votePlace(groupId, bestPlaceIds)
                 voteProgressInfoAdapter.updateCheckBoxEnableState(false)
                 binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_re_vote)
-                setVoteStateUI(false)
+                setVoteEndTextStateUI(false)
             }
 
             getString(R.string.leader_vote_progress_btn_re_vote) -> { // 다시 투표하기 -> 투표 완료하기
                 voteProgressInfoAdapter.updateVoteState(true)
                 voteProgressInfoAdapter.updateCheckBoxEnableState(true)
                 binding.fgLeaderVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
-                setVoteStateUI(true)
+                setVoteEndTextStateUI(true)
             }
         }
     }
 
-    private fun setVoteStateUI(voteState: Boolean) {
+    private fun setVoteEndTextStateUI(voteState: Boolean) {
         if (voteState) {
             binding.fgLeaderVoteProgressTvEnd.apply {
                 isEnabled = false

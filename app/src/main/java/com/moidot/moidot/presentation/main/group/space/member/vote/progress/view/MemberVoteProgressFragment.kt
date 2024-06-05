@@ -5,7 +5,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.kakao.sdk.user.Constants.USER_ID
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -23,6 +22,7 @@ import com.moidot.moidot.presentation.main.group.space.member.vote.progress.view
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
+import com.moidot.moidot.util.popup.vote.PopupVotePeopleDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -31,7 +31,6 @@ import kotlinx.coroutines.launch
 class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBinding>(R.layout.fragment_member_vote_progress) {
 
     private val groupId by lazy { arguments?.getInt(GROUP_ID) ?: -1 }
-    private val userId by lazy { arguments?.getInt(USER_ID) ?: -1 }
 
     private lateinit var kakaoMap: KakaoMap
     private lateinit var labelLayer: LabelLayer
@@ -49,15 +48,45 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
 
     private fun initBinding() {
         binding.viewModel = viewModel
+        binding.fragment = this
     }
 
     private fun loadData() {
-        viewModel.loadVoteStatus(groupId, userId)
+        viewModel.loadVoteStatus(groupId)
     }
 
     private fun setupObservers() {
+        setupVoteMultipleStatusObserver()
+        setupVoteAnonymousStatusObserver()
+        setupVoteMemberObserver()
         setupVoteStatuesObserver()
         setupEndDateObserver()
+    }
+
+    // 복수투표 설정
+    private fun setupVoteMultipleStatusObserver() {
+        viewModel.isAnonymous.observe(viewLifecycleOwner) {
+            voteProgressInfoAdapter.isAnonymous = it
+        }
+    }
+
+    // 익명 투표 설정
+    private fun setupVoteAnonymousStatusObserver() {
+        viewModel.isEnabledMultipleChoice.observe(viewLifecycleOwner) {
+            voteProgressInfoAdapter.isEnabledMultipleChoice = it
+        }
+    }
+
+    // 투표한 사람 조회
+    private fun setupVoteMemberObserver() {
+        viewModel.votePlaceUsersInfo.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) PopupVotePeopleDialog(
+                context = requireContext(),
+                leaderName = it.filter { people -> people.isAdmin }.map { people -> people.nickName }[0],
+                location = viewModel.userVotePlaceName.value!!,
+                people = it.map { people -> people.nickName }
+            ).show()
+        }
     }
 
     private fun setupVoteStatuesObserver() {
@@ -68,6 +97,10 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
                 }.await()
                 initMapView(it, centerLatLang)
                 initStatusesAdapter(it)
+
+                // 기존에 투표한 사람이 있는지 확인
+                val hasVotedData = it.any { it.isVoted }
+                voteProgressInfoAdapter.updateVoteState(hasVotedData)
             }
         }
     }
@@ -119,11 +152,31 @@ class MemberVoteProgressFragment : BaseFragment<FragmentMemberVoteProgressBindin
         }
     }
 
-    fun startVote() {
-        voteProgressInfoAdapter.updateVoteState(true)
+    fun onVoteClickListener() {
+        val voteStatus = binding.fgMemberVoteProgressBtnVote.text
+        when (voteStatus) {
+            getString(R.string.leader_vote_progress_btn_vote) -> { // 투표하기 -> 투표 완료하기
+                binding.fgMemberVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
+                voteProgressInfoAdapter.updateVoteState(true)
+                voteProgressInfoAdapter.updateCheckBoxEnableState(true)
+            }
+
+            getString(R.string.leader_vote_progress_btn_done) -> { // 투표 완료하기 -> 다시 투표하기
+                val bestPlaceIds = voteProgressInfoAdapter.progressStatuses.filter { it.isVoted }.map { it.bestPlaceId }
+                viewModel.votePlace(groupId, bestPlaceIds)
+                voteProgressInfoAdapter.updateCheckBoxEnableState(false)
+                binding.fgMemberVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_re_vote)
+            }
+
+            getString(R.string.leader_vote_progress_btn_re_vote) -> { // 다시 투표하기 -> 투표 완료하기
+                voteProgressInfoAdapter.updateVoteState(true)
+                voteProgressInfoAdapter.updateCheckBoxEnableState(true)
+                binding.fgMemberVoteProgressBtnVote.text = getString(R.string.leader_vote_progress_btn_done)
+            }
+        }
     }
 
     private fun onMemberShowClickListener(bestPlaceId: Int, bestPlaceName: String) {
-
+        viewModel.getUsersVotePlaceInfo(groupId, bestPlaceId, bestPlaceName)
     }
 }

@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
-import com.kakao.sdk.user.Constants.USER_ID
 import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentMemberVoteBinding
 import com.moidot.moidot.presentation.base.BaseFragment
