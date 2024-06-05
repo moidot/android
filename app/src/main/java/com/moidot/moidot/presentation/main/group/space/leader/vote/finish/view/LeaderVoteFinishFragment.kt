@@ -2,6 +2,7 @@ package com.moidot.moidot.presentation.main.group.space.leader.vote.finish.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,8 +38,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.layout.fragment_leader_vote_finish) {
 
-    private val groupId by lazy { arguments?.getInt(Constant.GROUP_ID) ?: -1 }
-
+    private val groupId by lazy { arguments?.getInt(GROUP_ID) ?: -1 }
     private lateinit var kakaoMap: KakaoMap
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
@@ -54,7 +54,7 @@ class LeaderVoteFinishFragment: BaseFragment<FragmentLeaderVoteFinishBinding>(R.
             val isCreateVoteSuccess = data.getBooleanExtra(Constant.CRATE_VOTE_SUCCESS_STATE, false)
             if (isCreateVoteSuccess) { // 투표 생성 완료
                 val extras = Bundle().apply {
-                    putInt(Constant.GROUP_ID, groupId)
+                    putInt(GROUP_ID, groupId)
                     putBoolean(Constant.CRATE_VOTE_SUCCESS_STATE, true) // 생성 직후 진행화면으로 넘어온 것인지 확인을 위한 변수
                     putString(Constant.CRATE_VOTE_MSG_EXTRA, data.getStringExtra(Constant.CRATE_VOTE_MSG_EXTRA)) // 스낵바 메세지
                 }
