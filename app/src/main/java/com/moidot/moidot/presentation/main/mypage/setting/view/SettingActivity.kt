@@ -9,12 +9,15 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySettingBinding
 import com.moidot.moidot.presentation.base.BaseActivity
 import com.moidot.moidot.presentation.main.mypage.alarm.view.AlarmActivity
+import com.moidot.moidot.presentation.main.mypage.policy.PolicyActivity
+import com.moidot.moidot.presentation.main.mypage.policy.PolicyType
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.LOGOUT_SUCCESS
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.LOGOUT_FAIL
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.WITHDRAWAL_SUCCESS
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.WITHDRAWAL_FAIL
 import com.moidot.moidot.presentation.main.mypage.setting.viewmodel.SettingViewModel
 import com.moidot.moidot.presentation.sign.view.SignInActivity
+import com.moidot.moidot.util.Constant.POLICY_TYPE_EXTRA
 import com.moidot.moidot.util.Constant.SETTING_MSG_EXTRA
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import com.moidot.moidot.util.view.showToast
@@ -72,6 +75,27 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         ) {
             viewModel.withdrawal()
         }.show()
+    }
+
+    fun onClickServiceTerms() {
+        Intent(this, PolicyActivity::class.java).apply {
+            putExtra(POLICY_TYPE_EXTRA, PolicyType.ServiceTerms.name)
+            startActivity(this)
+        }
+    }
+
+    fun onClickPrivacyPolicy() {
+        Intent(this, PolicyActivity::class.java).apply {
+            putExtra(POLICY_TYPE_EXTRA, PolicyType.PrivacyPolicy.name)
+            startActivity(this)
+        }
+    }
+
+    fun onClickLocationTerms() {
+        Intent(this, PolicyActivity::class.java).apply {
+            putExtra(POLICY_TYPE_EXTRA, PolicyType.LocationTerms.name)
+            startActivity(this)
+        }
     }
 
     fun onClickAlarm() {

@@ -21,4 +21,6 @@ object Constant {
 
     const val CRATE_VOTE_SUCCESS_STATE = "CRATE_VOTE_SUCCESS_STATE"
     const val CRATE_VOTE_MSG_EXTRA = "CRATE_VOTE_MSG_EXTRA"
+
+    const val POLICY_TYPE_EXTRA = "POLICY_TYPE_EXTRA"
 }

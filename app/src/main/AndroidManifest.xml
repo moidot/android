@@ -116,6 +116,10 @@
             android:name=".presentation.main.mypage.alarm.view.AlarmActivity"
             android:exported="false"
             android:theme="@style/Gray800.Theme.Moidot" />
+
+        <activity android:name=".presentation.main.mypage.policy.PolicyActivity"
+            android:exported="false"
+            android:theme="@style/Gray800.Theme.Moidot"/>
     </application>
 
 </manifest>

@@ -178,6 +178,7 @@
                         android:id="@+id/setting_container_terms_of_service"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="@{() -> activity.onClickServiceTerms()}"
                         android:background="@drawable/bg_popup">
 
                         <TextView
@@ -207,6 +208,7 @@
                         android:id="@+id/setting_container_privacy_policy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="@{() -> activity.onClickPrivacyPolicy()}"
                         android:background="@drawable/bg_popup">
 
                         <TextView
@@ -236,6 +238,7 @@
                         android:id="@+id/setting_container_location_based_service_terms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="@{() -> activity.onClickLocationTerms()}"
                         android:background="@drawable/bg_popup">
 
                         <TextView
