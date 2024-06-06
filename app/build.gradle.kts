@@ -111,7 +111,9 @@ dependencies {
     implementation ("com.google.android.gms:play-services-location:21.1.0")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1")) // dynamic link
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0")) // dynamic link
+    implementation ("com.google.firebase:firebase-dynamic-links-ktx")
+    implementation ("com.google.firebase:firebase-analytics-ktx")
 }
 
 kapt {

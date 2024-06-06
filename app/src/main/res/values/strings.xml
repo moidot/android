@@ -19,6 +19,10 @@
     <string name="scheme_kakao_invite">scheme_kakao_invite</string>
     <string name="scheme_url_invite">scheme_url_invite</string>
 
+    <!-- invite -->
+    <string name="link_invite_success_toast">클립보드에 링크가 복사되었어요.</string>
+    <string name="link_invite_clip_text">%s에서\n초대장이 도착했어요!\n\n%s</string>
+
     <!-- component -->
     <string name="component_transportation_public">대중교통</string>
     <string name="component_transportation_car">자동차</string>
