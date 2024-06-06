@@ -16,8 +16,15 @@ class PolicyActivity: BaseActivity<ActivityPolicyBinding>(R.layout.activity_poli
     }
 
     private fun initPolicyText() {
+        initPolicyCloseEvent()
         setupPolicyTitleText()
         setupPolicyContentText()
+    }
+
+    private fun initPolicyCloseEvent() {
+        binding.policyIvBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setupPolicyTitleText() {
