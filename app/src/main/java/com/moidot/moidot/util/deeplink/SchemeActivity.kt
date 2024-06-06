@@ -4,6 +4,7 @@ import android.app.TaskStackBuilder
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.moidot.moidot.data.local.datasource.user.UserLocalDataSourceImpl.Companion.ACCESS_TOKEN
 import com.moidot.moidot.presentation.main.MainActivity
@@ -11,6 +12,7 @@ import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.Constant.SCHEME_URL_STRING
 import dagger.hilt.android.AndroidEntryPoint
+import java.net.URLDecoder
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -62,10 +64,16 @@ class SchemeActivity : AppCompatActivity() {
         if (deepLinkUrlStr == null) return DeepLinkInfo.MAIN.getIntent(this) // 예기치 못한 오류 대비 MainActivity로 보내기
         val params = getParams(deepLinkUrlStr)
 
-        if (deepLinkUrlStr.startsWith("kakao")) { // TODO scheme 이 어떻게 되느냐에 따라 변경될 예정
-            return DeepLinkInfo.KAKAO_INVITE.getIntent(this).apply {
+        if (deepLinkUrlStr.startsWith("kakao")) { // from kakao
+            return DeepLinkInfo.INVITE.getIntent(this).apply {
                 putExtra(GROUP_ID, params["groupId"]?.toInt())
                 putExtra(GROUP_NAME, params["groupName"])
+            }
+        }
+        if (deepLinkUrlStr.startsWith("https://moidot.page.link/invite")) { // from dynamic Link
+            return DeepLinkInfo.INVITE.getIntent(this).apply {
+                putExtra(GROUP_ID, params["groupId"]?.toInt())
+                putExtra(GROUP_NAME, URLDecoder.decode(params["groupName"], "UTF-8"))
             }
         }
 

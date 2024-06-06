@@ -162,7 +162,6 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
 
     // 모임 초대
     fun shareInvitationWithLink() {
-        Log.d("kite", "눌리나요?")
         FirebaseLinkShareManger.shareLink(requireContext(), activityViewModel.groupId.value!!, activityViewModel.groupName.value!!)
     }
 

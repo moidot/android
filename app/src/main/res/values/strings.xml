@@ -16,8 +16,7 @@
     <!-- scheme -->
     <string name="scheme_sign_in">scheme_sign_in</string>
     <string name="scheme_main">scheme_main</string>
-    <string name="scheme_kakao_invite">scheme_kakao_invite</string>
-    <string name="scheme_url_invite">scheme_url_invite</string>
+    <string name="scheme_invite">scheme_invite</string>
 
     <!-- invite -->
     <string name="link_invite_success_toast">클립보드에 링크가 복사되었어요.</string>
