@@ -69,6 +69,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingVertical="4dp"
+                android:onClick="@{() -> fragment.shareInvitationWithLink()}"
                 app:layout_constraintEnd_toStartOf="@id/fg_leader_vote_view_share"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"

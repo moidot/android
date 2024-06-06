@@ -8,6 +8,7 @@ import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.util.Constant
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_NAME
+import com.moidot.moidot.util.share.FirebaseLinkShareManger
 import com.moidot.moidot.util.share.KakaoFeedSetting
 import com.moidot.moidot.util.share.KakaoShareManager
 
@@ -19,6 +20,10 @@ class LeaderVoteEmptyFragment: BaseFragment<FragmentLeaderVoteEmptyBinding>(R.la
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.fragment = this
+    }
+
+    fun shareInvitationWithLink() {
+        FirebaseLinkShareManger.shareLink(requireContext(), groupId, groupName)
     }
 
     fun shareInvitationWithKakao() {
