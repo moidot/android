@@ -20,7 +20,7 @@ enum class DeepLinkInfo(@StringRes val hostStringResId: Int) {
             Intent(context, MainActivity::class.java)
     },
 
-    KAKAO_INVITE(R.string.scheme_kakao_invite) {
+    INVITE(R.string.scheme_invite) {
         override fun getIntent(context: Context) =
             Intent(context, ParticipateGroupActivity::class.java)
     };

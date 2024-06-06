@@ -2,6 +2,7 @@ package com.moidot.moidot.presentation.main.group.space.leader.info.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -17,6 +18,7 @@ import com.moidot.moidot.presentation.main.group.space.leader.info.main.viewmode
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
+import com.moidot.moidot.util.share.FirebaseLinkShareManger
 import com.moidot.moidot.util.share.KakaoFeedSetting
 import com.moidot.moidot.util.share.KakaoShareManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -159,6 +161,10 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     }
 
     // 모임 초대
+    fun shareInvitationWithLink() {
+        FirebaseLinkShareManger.shareLink(requireContext(), activityViewModel.groupId.value!!, activityViewModel.groupName.value!!)
+    }
+
     fun shareInvitationWithKakao() {
         val kakaoFeedSetting = KakaoFeedSetting(activityViewModel.groupId.value!!, viewModel.groupName.value!!)
         KakaoShareManager(requireContext(), kakaoFeedSetting).shareLink()

@@ -11,6 +11,7 @@ import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.presentation.main.group.space.member.info.adapter.MemberGroupInfoHeaderAdapter
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
+import com.moidot.moidot.util.share.FirebaseLinkShareManger
 import com.moidot.moidot.util.share.KakaoFeedSetting
 import com.moidot.moidot.util.share.KakaoShareManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -92,7 +93,10 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
         }
     }
 
-    // 모임 초대 (카톡)
+    fun shareInvitationWithLink() {
+        FirebaseLinkShareManger.shareLink(requireContext(), activityViewModel.groupId.value!!, activityViewModel.groupName.value!!)
+    }
+
     fun shareInvitationWithKakao() {
         val kakaoFeedSetting = KakaoFeedSetting(activityViewModel.groupId.value!!, viewModel.groupName.value!!)
         KakaoShareManager(requireContext(), kakaoFeedSetting).shareLink()

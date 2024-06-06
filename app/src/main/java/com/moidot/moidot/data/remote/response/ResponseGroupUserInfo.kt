@@ -7,6 +7,8 @@ data class ResponseGroupUserInfo(
         val isAdmin: Boolean,
         val locationName: String,
         val participationId: Int,
+        val latitude: Double,
+        val longitude: Double,
         val transportation: String,
         val userEmail: String,
         val userName: String

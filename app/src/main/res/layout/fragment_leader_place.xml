@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="fragment"
+            type="com.moidot.moidot.presentation.main.group.space.leader.place.view.LeaderPlaceFragment" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -179,6 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:onClick="@{() -> fragment.shareInvitationWithLink()}"
                     android:orientation="horizontal"
                     android:paddingVertical="4dp"
                     app:layout_constraintEnd_toStartOf="@id/bottom_leader_place_view_share"
@@ -217,6 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:onClick="@{() -> fragment.shareInvitationWithKakao()}"
                     android:orientation="horizontal"
                     android:paddingVertical="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
