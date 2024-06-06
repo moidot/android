@@ -117,29 +117,29 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
         mapManager = MarkerManager(requireContext())
         binding.fgLeaderPlaceMapView.start(object : KakaoMapReadyCallback() {
             override fun getPosition(): LatLng {
-                return LatLng.from(37.4005, 127.1101)
+                return LatLng.from(userInfo.latitude, userInfo.longitude)
             }
 
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
                 BottomSheetBehavior.from(binding.fgLeaderPlaceBottomSheet).state = BottomSheetBehavior.STATE_HALF_EXPANDED // 지도 크기 떄문에 초기화 여기서
-                addLeaderInfoMarker(userInfo.userName)
+                addLeaderInfoMarker(userInfo)
             }
         })
     }
 
     // 마커 추가
-    private fun addLeaderInfoMarker(userName:String) {
+    private fun addLeaderInfoMarker(userInfo: ResponseGroupUserInfo.Data) {
         labelLayer = kakaoMap.labelManager!!.addLayer(
             LabelLayerOptions.from()
                 .setOrderingType(OrderingType.Rank)
         )!!
 
         labelLayer.addLabel(
-            LabelOptions.from( // TODO 모임장의 출발 위치
-                "default", LatLng.from(37.4005, 127.1101)
+            LabelOptions.from(
+                "default", LatLng.from(userInfo.latitude, userInfo.longitude)
             ).setStyles(
-                LabelStyle.from(mapManager.getMyPlaceMarker(userName)).setApplyDpScale(false)
+                LabelStyle.from(mapManager.getMyPlaceMarker(userInfo.userName)).setApplyDpScale(false)
             )
         )
     }
