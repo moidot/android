@@ -15,10 +15,14 @@ import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.OrderingType
 import com.moidot.moidot.R
+import com.moidot.moidot.data.remote.response.ResponseGroupUserInfo
 import com.moidot.moidot.databinding.FragmentLeaderPlaceBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.util.MarkerManager
+import com.moidot.moidot.util.share.FirebaseLinkShareManger
+import com.moidot.moidot.util.share.KakaoFeedSetting
+import com.moidot.moidot.util.share.KakaoShareManager
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.max
@@ -103,23 +107,23 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
 
     private fun setupObserver() {
         activityViewModel.userInfo.observe(viewLifecycleOwner) {
-            initMapView(it.userName)
+            initMapView(it)
             setUserInfoView(it.userName)
         }
     }
 
-    private fun initMapView(userName: String) {
+    private fun initMapView(userInfo:ResponseGroupUserInfo.Data) {
         binding.fgLeaderPlaceMapView.layoutParams.height = getScreenHeight(requireContext())
         mapManager = MarkerManager(requireContext())
         binding.fgLeaderPlaceMapView.start(object : KakaoMapReadyCallback() {
-            override fun getPosition(): LatLng { // TODO 모임장의 위치 정보 -> API 수정 대기
+            override fun getPosition(): LatLng {
                 return LatLng.from(37.4005, 127.1101)
             }
 
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
                 BottomSheetBehavior.from(binding.fgLeaderPlaceBottomSheet).state = BottomSheetBehavior.STATE_HALF_EXPANDED // 지도 크기 떄문에 초기화 여기서
-                addLeaderInfoMarker(userName)
+                addLeaderInfoMarker(userInfo.userName)
             }
         })
     }
@@ -142,5 +146,14 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
 
     private fun setUserInfoView(userName: String) {
         binding.bottomLeaderPlaceTvMemberName.text = userName
+    }
+
+    fun shareInvitationWithLink() {
+        FirebaseLinkShareManger.shareLink(requireContext(), activityViewModel.groupId.value!!, activityViewModel.groupName.value!!)
+    }
+
+    fun shareInvitationWithKakao() {
+        val kakaoFeedSetting = KakaoFeedSetting(activityViewModel.groupId.value!!, activityViewModel.groupName.value!!)
+        KakaoShareManager(requireContext(), kakaoFeedSetting).shareLink()
     }
 }
