@@ -9,7 +9,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray100">
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/policy_top_bar"
+                android:id="@+id/notice_detail_top_bar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:background="@color/gray800"
@@ -26,7 +26,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/policy_iv_back"
+                    android:id="@+id/notice_detail_iv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:paddingStart="12dp"
@@ -37,31 +37,55 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/policy_tv_title"
+                    android:id="@+id/notice_detail_tv_top_bar_title"
                     style="@style/b1_med_16"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:gravity="center"
-                    android:text="@string/setting_top_bar"
+                    android:text="@string/notice_detail_title"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/policy_iv_back"
+                    app:layout_constraintStart_toEndOf="@id/notice_detail_iv_back"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="12dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingTop="12dp">
 
                 <TextView
-                    android:id="@+id/policy_tv_content"
-                    style="@style/b2_reg_14"
-                    android:autoLink="all"
+                    android:id="@+id/notice_detail_tv_title"
+                    style="@style/h2_bold_20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:textColor="@color/gray800" />
+
+                <TextView
+                    android:id="@+id/notice_detail_tv_date"
+                    style="@style/b2_reg_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:textColor="@color/gray400" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/gray100" />
+
+                <TextView
+                    android:id="@+id/notice_detail_tv_content"
+                    style="@style/b2_reg_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:autoLink="all"
                     android:textColor="@color/gray600" />
 
             </LinearLayout>

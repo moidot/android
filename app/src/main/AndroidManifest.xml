@@ -70,7 +70,7 @@
                 <data
                     android:host="moidot.page.link"
                     android:path="/invite"
-                    android:scheme="https"/>
+                    android:scheme="https" />
             </intent-filter>
         </activity>
 
@@ -125,9 +125,19 @@
             android:exported="false"
             android:theme="@style/Gray800.Theme.Moidot" />
 
-        <activity android:name=".presentation.main.mypage.policy.PolicyActivity"
+        <activity
+            android:name=".presentation.main.mypage.policy.PolicyActivity"
             android:exported="false"
-            android:theme="@style/Gray800.Theme.Moidot"/>
+            android:theme="@style/Gray800.Theme.Moidot" />
+
+        <activity
+            android:name=".presentation.main.mypage.notice.view.NoticeActivity"
+            android:exported="false"
+            android:theme="@style/Gray800.Theme.Moidot" />
+        <activity
+            android:name=".presentation.main.mypage.notice.view.NoticeDetailActivity"
+            android:exported="false"
+            android:theme="@style/Gray800.Theme.Moidot" />
     </application>
 
 </manifest>

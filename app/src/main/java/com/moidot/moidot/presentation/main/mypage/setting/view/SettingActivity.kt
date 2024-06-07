@@ -9,6 +9,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.ActivitySettingBinding
 import com.moidot.moidot.presentation.base.BaseActivity
 import com.moidot.moidot.presentation.main.mypage.alarm.view.AlarmActivity
+import com.moidot.moidot.presentation.main.mypage.notice.view.NoticeActivity
 import com.moidot.moidot.presentation.main.mypage.policy.PolicyActivity
 import com.moidot.moidot.presentation.main.mypage.policy.PolicyType
 import com.moidot.moidot.presentation.main.mypage.setting.model.UserState.LOGOUT_SUCCESS
@@ -75,6 +76,12 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         ) {
             viewModel.withdrawal()
         }.show()
+    }
+
+    fun onClickNotice() {
+        Intent(this, NoticeActivity::class.java).apply {
+            startActivity(this)
+        }
     }
 
     fun onClickServiceTerms() {

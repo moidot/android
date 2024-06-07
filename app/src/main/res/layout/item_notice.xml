@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.moidot.moidot.data.data.NoticeItemData" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="12dp"
+        app:strokeWidth="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                android:id="@+id/notice_tv_title"
+                style="@style/b2_bold_14"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{data.title}"
+                android:textColor="@color/gray700"
+                app:layout_constraintEnd_toStartOf="@+id/notice_iv_go"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="공지내용" />
+
+            <TextView
+                android:id="@+id/notice_tv_date"
+                style="@style/c1_reg_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.date}"
+                android:textColor="@color/gray400"
+                app:layout_constraintStart_toStartOf="@id/notice_tv_title"
+                app:layout_constraintTop_toBottomOf="@id/notice_tv_title"
+                tools:text="2024.02.21 10:00" />
+
+            <TextView
+                android:id="@+id/notice_tv_content"
+                style="@style/c1_reg_12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{data.content}"
+                android:textColor="@color/gray500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/notice_iv_go"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/notice_tv_date"
+                tools:text="공지내용공지내용공지내용공지내용지내용공지내용공지내용공지지내용공지내용공지내용공지" />
+
+            <ImageView
+                android:id="@+id/notice_iv_go"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
