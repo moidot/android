@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.dynamiclinks.DynamicLink.AndroidParameters
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.moidot.moidot.R
@@ -22,6 +23,7 @@ object FirebaseLinkShareManger {
 
         dynamicLink.addOnSuccessListener {
             copyToClipboard(context, groupName, it.shortLink.toString())
+            Toast.makeText(context, "클립보드에 복사가 완료되었습니다!", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
             Log.e("error", it.toString())
         }

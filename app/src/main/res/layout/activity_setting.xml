@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="activity"
             type="com.moidot.moidot.presentation.main.mypage.setting.view.SettingActivity" />
@@ -81,9 +82,9 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="4dp"
-                    bind:userLoginType="@{viewModel.platform}"
                     app:layout_constraintStart_toStartOf="@id/setting_tv_name"
                     app:layout_constraintTop_toBottomOf="@id/setting_tv_name"
+                    bind:userLoginType="@{viewModel.platform}"
                     tools:src="@drawable/ic_setting_naver" />
 
                 <TextView
@@ -108,7 +109,8 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_popup"
-                android:onClick="@{() -> activity.onClickAlarm()}">
+                android:onClick="@{() -> activity.onClickAlarm()}"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/setting_tv_alarm"
@@ -149,7 +151,8 @@
                         android:id="@+id/setting_container_notice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_popup">
+                        android:background="@drawable/bg_popup"
+                        android:onClick="@{() -> activity.onClickNotice()}">
 
                         <TextView
                             android:id="@+id/setting_tv_notice"
@@ -178,8 +181,8 @@
                         android:id="@+id/setting_container_terms_of_service"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="@{() -> activity.onClickServiceTerms()}"
-                        android:background="@drawable/bg_popup">
+                        android:background="@drawable/bg_popup"
+                        android:onClick="@{() -> activity.onClickServiceTerms()}">
 
                         <TextView
                             android:id="@+id/setting_tv_terms_of_service"
@@ -208,8 +211,8 @@
                         android:id="@+id/setting_container_privacy_policy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="@{() -> activity.onClickPrivacyPolicy()}"
-                        android:background="@drawable/bg_popup">
+                        android:background="@drawable/bg_popup"
+                        android:onClick="@{() -> activity.onClickPrivacyPolicy()}">
 
                         <TextView
                             android:id="@+id/setting_tv_privacy_policy"
@@ -238,8 +241,8 @@
                         android:id="@+id/setting_container_location_based_service_terms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="@{() -> activity.onClickLocationTerms()}"
-                        android:background="@drawable/bg_popup">
+                        android:background="@drawable/bg_popup"
+                        android:onClick="@{() -> activity.onClickLocationTerms()}">
 
                         <TextView
                             android:id="@+id/setting_tv_location_based_service_terms"
@@ -289,11 +292,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="12dp"
+                            android:text="@{viewModel.versionName}"
                             android:textColor="@color/gray700"
                             app:layout_constraintBottom_toBottomOf="@id/setting_tv_version_info"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/setting_tv_version_info"
-                            android:text="@{viewModel.versionName}"
                             tools:text="버전 1.0.0" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>

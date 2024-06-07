@@ -17,7 +17,7 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/policy_top_bar"
+                android:id="@+id/notice_top_bar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:background="@color/gray800"
@@ -26,7 +26,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/policy_iv_back"
+                    android:id="@+id/notice_iv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:paddingStart="12dp"
@@ -37,34 +37,57 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/policy_tv_title"
+                    android:id="@+id/notice_tv_title"
                     style="@style/b1_med_16"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:gravity="center"
-                    android:text="@string/setting_top_bar"
+                    android:text="@string/notice_title"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/policy_iv_back"
+                    app:layout_constraintStart_toEndOf="@id/notice_iv_back"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
+                android:id="@+id/notice_container_notice_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="12dp"
-                android:orientation="vertical">
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/policy_tv_content"
-                    style="@style/b2_reg_14"
-                    android:autoLink="all"
+                    style="@style/h2_bold_20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray600" />
+                    android:text="총 "
+                    android:textColor="@color/gray800" />
 
+                <TextView
+                    android:id="@+id/notice_tv_notice_count"
+                    style="@style/h2_bold_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orange500"
+                    android:text="1건" />
+
+                <TextView
+                    style="@style/h2_bold_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="의 공지사항이 있어요"
+                    android:textColor="@color/gray800" />
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notice_rv_notice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="24dp"
+                tools:listitem="@layout/item_notice"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

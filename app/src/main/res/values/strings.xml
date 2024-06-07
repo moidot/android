@@ -230,6 +230,10 @@
     <string name="setting_msg_withdrawal_success">탈퇴가 완료되었어요.</string>
     <string name="setting_msg_withdrawal_fail">회원 탈퇴에 실패했습니다.</string>
 
+    <string name="notice_title">공지사항</string>
+    <string name="notice_count_title">총 %d건의 공지사항이 있어요</string>
+    <string name="notice_detail_title">공지사항</string>
+
     <string name="alarm_top_bar">알림 설정</string>
     <string name="alarm_title">모이닷 스페이스 알림</string>
     <string name="alarm_content">중간 장소 선정 과정에서 PUSH알림이 발생할 수 있어요.</string>

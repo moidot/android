@@ -33,8 +33,8 @@ interface GroupService {
     suspend fun getUserInfo(@Query("groupId") groupId: Int): Response<ResponseGroupUserInfo>
 
     @GET("/group/participate")
-    suspend fun getFilteredGroupList(@Query("spaceName") query:String, @Query("filter") filter:String): Response<ResponseParticipateGroup>
+    suspend fun getFilteredGroupList(@Query("spaceName") query: String, @Query("filter") filter: String): Response<ResponseParticipateGroup>
 
     @DELETE("/group/participate")
-    suspend fun deleteGroup(@Query("participateId") participateId: Int) : Response<BaseResponse>
+    suspend fun deleteGroup(@Query("participateId") participateId: Int): Response<BaseResponse>
 }
