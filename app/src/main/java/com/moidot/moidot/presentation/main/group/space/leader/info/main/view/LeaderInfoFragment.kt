@@ -12,6 +12,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentLeaderInfoBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
+import com.moidot.moidot.presentation.main.group.space.common.edit.view.EditMyGroupInfoActivity
 import com.moidot.moidot.presentation.main.group.space.leader.info.edit.view.EditGroupNameActivity
 import com.moidot.moidot.presentation.main.group.space.leader.info.main.adapter.LeaderGroupInfoHeaderAdapter
 import com.moidot.moidot.presentation.main.group.space.leader.info.main.viewmodel.LeaderInfoViewModel
@@ -178,6 +179,15 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
             getString(R.string.space_leader_info_dialog_delete_content),
             getString(R.string.space_leader_info_dialog_delete_btn)
         ) { viewModel.deleteGroup(activityViewModel.groupId.value!!) }.show()
+    }
+
+    // 내 정보 수정
+    fun editMyGroupInfo() {
+        Intent(requireContext(), EditMyGroupInfoActivity::class.java).apply {
+            putExtra(GROUP_ID, activityViewModel.groupId.value!!)
+            putExtra(GROUP_NAME, viewModel.groupName.value)
+            startActivity(this)
+        }
     }
 
     companion object {

@@ -1,5 +1,6 @@
 package com.moidot.moidot.presentation.main.group.space.member.info
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,7 +10,11 @@ import com.moidot.moidot.R
 import com.moidot.moidot.databinding.FragmentMemberInfoBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
+import com.moidot.moidot.presentation.main.group.space.common.edit.view.EditMyGroupInfoActivity
 import com.moidot.moidot.presentation.main.group.space.member.info.adapter.MemberGroupInfoHeaderAdapter
+import com.moidot.moidot.util.Constant
+import com.moidot.moidot.util.Constant.GROUP_ID
+import com.moidot.moidot.util.Constant.GROUP_NAME
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
 import com.moidot.moidot.util.share.FirebaseLinkShareManger
 import com.moidot.moidot.util.share.KakaoFeedSetting
@@ -100,6 +105,15 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
     fun shareInvitationWithKakao() {
         val kakaoFeedSetting = KakaoFeedSetting(activityViewModel.groupId.value!!, viewModel.groupName.value!!)
         KakaoShareManager(requireContext(), kakaoFeedSetting).shareLink()
+    }
+
+    // 내 정보 수정
+    fun editMyGroupInfo() {
+        Intent(requireContext(), EditMyGroupInfoActivity::class.java).apply {
+            putExtra(GROUP_ID, activityViewModel.groupId.value!!)
+            putExtra(GROUP_NAME, viewModel.groupName.value)
+            startActivity(this)
+        }
     }
 
     // 모임 나가기
