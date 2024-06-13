@@ -21,7 +21,7 @@ class EditMyGroupInfoViewModel @Inject constructor(
 ) : ViewModel() {
 
     // 기존 정보
-    private val prevUserGroupInfo = MutableLiveData<ResponseGroupUserInfo.Data>()
+    val prevUserGroupInfo = MutableLiveData<ResponseGroupUserInfo.Data>()
 
     // 닉네임
     val newNickName = MutableLiveData<String>()

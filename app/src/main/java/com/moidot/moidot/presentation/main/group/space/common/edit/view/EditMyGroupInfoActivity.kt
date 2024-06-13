@@ -47,6 +47,9 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
     }
 
     private fun setupObservers() {
+        viewModel.prevUserGroupInfo.observe(this) {
+            initPrevTransportationView(it.transportation)
+        }
         viewModel.isNickNameDuplicated.observe(this) {
             if (it) {
                 viewModel.nickNameErrorMsg.value = getString(R.string.participate_group_nickname_duplicate_error)
@@ -118,7 +121,6 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
 
     // 이동수단 선택
     private fun setTransportationSelectedTypeView() {
-        initPrevTransportationView()
         binding.editMyGroupInfoComponentTransportationPicker.setLifecycleOwner(this)
         binding.editMyGroupInfoComponentTransportationPicker.apply {
             selectedtransportationTypeTxt.observe(this@EditMyGroupInfoActivity) {
@@ -132,16 +134,18 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
         }
     }
 
-    private fun initPrevTransportationView() {
-        if (viewModel.newTransportation.value == "PUBLIC") {
+    private fun initPrevTransportationView(transportationType: String) {
+        if (transportationType == "PUBLIC") {
             binding.editMyGroupInfoComponentTransportationPicker.apply {
                 isPublicSelected.value = true
                 selectedtransportationTypeTxt.value = "PUBLIC"
+                viewModel.newTransportation.value = "PUBLIC"
             }
         } else {
             binding.editMyGroupInfoComponentTransportationPicker.apply {
                 isCarSelected.value = true
                 selectedtransportationTypeTxt.value = "PERSONAL"
+                viewModel.newTransportation.value = "PERSONAL"
             }
         }
     }

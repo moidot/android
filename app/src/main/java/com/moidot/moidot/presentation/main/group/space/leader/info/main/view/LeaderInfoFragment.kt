@@ -33,14 +33,9 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadUserInfo()
         initBinding()
         initView()
         setupObservers()
-    }
-
-    private fun loadUserInfo() {
-        activityViewModel.loadUserInfo()
     }
 
     private fun initBinding() {
@@ -61,6 +56,11 @@ class LeaderInfoFragment : BaseFragment<FragmentLeaderInfoBinding>(R.layout.frag
     override fun onResume() {
         super.onResume()
         viewModel.getGroupInfo(activityViewModel.groupId.value!!)
+        loadUserInfo()
+    }
+
+    private fun loadUserInfo() {
+        activityViewModel.loadUserInfo()
     }
 
     private fun setupObservers() {
