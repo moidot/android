@@ -12,6 +12,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -37,4 +38,7 @@ interface GroupService {
 
     @DELETE("/group/participate")
     suspend fun deleteGroup(@Query("participateId") participateId: Int): Response<BaseResponse>
+
+    @PATCH("group/participate")
+    suspend fun editMyGroupInfo(@Query("participateId") participateId: Int): Response<BaseResponse>
 }

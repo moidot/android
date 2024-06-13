@@ -41,4 +41,8 @@ class GroupRepositoryImpl @Inject constructor(private val groupRemoteDataSource:
         return groupRemoteDataSource.exitGroup(participationId)
     }
 
+    override suspend fun editMyGroupInfo(participationId: Int): Result<BaseResponse> {
+        return groupRemoteDataSource.editMyGroupInfo(participationId)
+    }
+
 }

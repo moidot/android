@@ -19,9 +19,11 @@ interface GroupRemoteDataSource {
 
     suspend fun checkNicknameDuplication(groupId: Int, nickname: String): Result<ResponseCheckNicknameDuplication>
 
-    suspend fun getUserInfo(groupId: Int) : Result<ResponseGroupUserInfo>
+    suspend fun getUserInfo(groupId: Int): Result<ResponseGroupUserInfo>
 
     suspend fun getFilteredGroupList(query: String, filter: String): Result<ResponseParticipateGroup>
 
     suspend fun exitGroup(participateId: Int): Result<BaseResponse>
+
+    suspend fun editMyGroupInfo(participateId: Int): Result<BaseResponse>
 }

@@ -67,7 +67,7 @@ class MemberVoteProgressViewModel @Inject constructor(
     fun votePlace(groupId: Int, bestPlaceIds: List<Int>) {
         viewModelScope.launch {
             groupVoteRepository.votePlace(groupId, bestPlaceIds).onSuccess {
-                if (it.code == 0) Log.d("kite", "투표 성공")
+                if (it.code == 0) Log.d("success", "투표 성공")
             }
         }
     }
