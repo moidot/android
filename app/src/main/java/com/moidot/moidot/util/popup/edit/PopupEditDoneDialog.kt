@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.moidot.moidot.databinding.PopupEditDoneDialogBinding
 import com.moidot.moidot.util.view.getScreenWidth
@@ -36,7 +37,8 @@ class PopupEditDoneDialog(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.dialog = this
+        initView()
+        initBinding()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -46,6 +48,16 @@ class PopupEditDoneDialog(
             isCancelable = false
         }
         return dialog
+    }
+
+    private fun initView() {
+        if (nickName.isNullOrEmpty()) binding.popupEditDoneContainerNickname.isVisible = false
+        if (location.isNullOrEmpty()) binding.popupEditDoneContainerLocation.isVisible = false
+        if (transPortType.isNullOrEmpty()) binding.popupEditDoneContainerTransportType.isVisible = false
+    }
+
+    private fun initBinding() {
+        binding.dialog = this
     }
 
     override fun onDestroyView() {
