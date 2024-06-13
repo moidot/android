@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
-                        android:text="@{dialog.transPortType}"
+                        android:text="@{dialog.transPortType.equals(`PUBLIC`) ? `대중교통` : `자동차`}"
                         android:textColor="@color/orange500"
                         tools:text="자동차" />
                 </LinearLayout>
