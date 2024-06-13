@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.leader.place.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
@@ -40,6 +41,7 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
         super.onViewCreated(view, savedInstanceState)
         loadUserInfo()
         initView()
+        initBinding()
         setupObserver()
     }
 
@@ -49,6 +51,10 @@ class LeaderPlaceFragment : BaseFragment<FragmentLeaderPlaceBinding>(R.layout.fr
 
     private fun initView() {
         initBottomSheetBehavior()
+    }
+
+    private fun initBinding() {
+        binding.fragment = this
     }
 
     /** slideOffset: 0은 완전히 닫힌 상태 1은 완전 펼쳐진 상태이다. slideOffset가
