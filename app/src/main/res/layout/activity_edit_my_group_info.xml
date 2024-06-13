@@ -8,11 +8,11 @@
 
         <variable
             name="activity"
-            type="com.moidot.moidot.presentation.main.group.join.participate.view.ParticipateGroupActivity" />
+            type="com.moidot.moidot.presentation.main.group.space.common.edit.view.EditMyGroupInfoActivity" />
 
         <variable
             name="viewModel"
-            type="com.moidot.moidot.presentation.main.group.join.participate.viewmodel.ParticipateGroupViewModel" />
+            type="com.moidot.moidot.presentation.main.group.space.common.edit.viewmodel.EditMyGroupInfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,6 @@
                 android:id="@+id/edit_my_group_info_iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:onClick="@{() -> activity.finish()}"
                 android:paddingStart="12dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/ic_back"
@@ -57,7 +56,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@{viewModel.groupName}"
                 android:textColor="@color/orange500"
                 tools:text="모이닷 스페이스 팀 프로젝트" />
 
@@ -89,7 +87,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/input_group_nickname"
-            android:textColor="@{viewModel.isNickNameFieldActive() ? @color/orange500 : @color/gray800}"
             app:layout_constraintStart_toStartOf="@id/edit_my_group_info_tv_title_input_your_info"
             app:layout_constraintTop_toBottomOf="@id/edit_my_group_info_tv_title_input_your_info" />
 
@@ -99,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="@{@string/input_group_nickname_input_cnt(viewModel.nickname.length)}"
+            android:text="@{@string/input_group_nickname_input_cnt(viewModel.newNickName.length)}"
             android:textColor="@color/gray400"
             app:layout_constraintBottom_toBottomOf="@id/edit_my_group_info_tv_nickname_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -119,12 +116,13 @@
             android:maxLines="1"
             android:paddingHorizontal="12dp"
             android:paddingVertical="13dp"
+            android:text="@{viewModel.newNickName}"
             android:textColor="@color/gray800"
             android:textColorHint="@color/gray400"
             app:layout_constraintEnd_toEndOf="@id/edit_my_group_info_tv_nickname_cnt"
             app:layout_constraintStart_toStartOf="@id/edit_my_group_info_tv_nickname_title"
             app:layout_constraintTop_toBottomOf="@id/edit_my_group_info_tv_nickname_title"
-            bind:InputEditTextFieldActive="@{viewModel.nickname.length()}" />
+            bind:InputEditTextFieldActive="@{viewModel.newNickName.length()}" />
 
         <TextView
             android:id="@+id/edit_my_group_info_tv_nickname_error"
@@ -163,12 +161,11 @@
             android:onClick="@{() -> activity.onClickStartLocationPicker()}"
             android:paddingHorizontal="12dp"
             android:paddingVertical="13dp"
-            android:text="@{viewModel.isLocationInputComplete() ? viewModel.locationInfo.placeName : @string/input_group_start_location_hint }"
+            android:text="@{viewModel.newLocationInfo.placeName}"
             android:textColor="@color/gray400"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_my_group_info_tv_start_location"
-            bind:InputTextFieldActive="@{viewModel.isLocationInputComplete()}" />
+            app:layout_constraintTop_toBottomOf="@id/edit_my_group_info_tv_start_location" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -187,8 +184,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="24dp"
-            android:enabled="@{viewModel.isParticipateBtnActive()}"
-            android:onClick="@{() -> activity.participateGroup()}"
+            android:enabled="@{viewModel.isBtnActive()}"
+            android:onClick="@{() -> activity.onClickEditMyGroupInfoListener()}"
             android:text="@string/edit_my_group_info_btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

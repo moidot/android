@@ -25,4 +25,5 @@ interface GroupRepository {
 
     suspend fun exitGroup(participationId: Int): Result<BaseResponse>
 
+    suspend fun editMyGroupInfo(participationId: Int): Result<BaseResponse>
 }

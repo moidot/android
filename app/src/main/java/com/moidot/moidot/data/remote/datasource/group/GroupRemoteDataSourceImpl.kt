@@ -38,7 +38,11 @@ class GroupRemoteDataSourceImpl @Inject constructor(private val groupService: Gr
     }
 
     override suspend fun exitGroup(participateId: Int): Result<BaseResponse> {
-       return groupService.deleteGroup(participateId).getResultFromResponse()
+        return groupService.deleteGroup(participateId).getResultFromResponse()
+    }
+
+    override suspend fun editMyGroupInfo(participateId: Int): Result<BaseResponse> {
+        return groupService.editMyGroupInfo(participateId).getResultFromResponse()
     }
 
 }
