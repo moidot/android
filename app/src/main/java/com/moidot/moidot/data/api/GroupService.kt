@@ -1,6 +1,7 @@
 package com.moidot.moidot.data.api
 
 import com.moidot.moidot.data.remote.request.RequestCreateGroup
+import com.moidot.moidot.data.remote.request.RequestEditGroupInfo
 import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.BaseResponse
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
@@ -40,5 +41,5 @@ interface GroupService {
     suspend fun deleteGroup(@Query("participateId") participateId: Int): Response<BaseResponse>
 
     @PATCH("group/participate")
-    suspend fun editMyGroupInfo(@Query("participateId") participateId: Int): Response<BaseResponse>
+    suspend fun editMyGroupInfo(@Body requestEditGroupInfo: RequestEditGroupInfo): Response<BaseResponse>
 }

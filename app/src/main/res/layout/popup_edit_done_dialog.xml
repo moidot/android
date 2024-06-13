@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="12dp"
-                        android:src="@drawable/ic_transportation_car_selected" />
+                        android:src="@{dialog.transPortType.equals(`PUBLIC`) ? @drawable/ic_transportation_public_selected : @drawable/ic_transportation_car_selected}" />
 
                     <TextView
                         android:id="@+id/popup_edit_done_tv_transport_type"
@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
-                        android:text="@{dialog.transPortType}"
+                        android:text="@{dialog.transPortType.equals(`PUBLIC`) ? `대중교통` : `자동차`}"
                         android:textColor="@color/orange500"
                         tools:text="자동차" />
                 </LinearLayout>

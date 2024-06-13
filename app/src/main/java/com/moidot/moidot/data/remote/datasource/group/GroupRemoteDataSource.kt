@@ -1,6 +1,7 @@
 package com.moidot.moidot.data.remote.datasource.group
 
 import com.moidot.moidot.data.remote.request.RequestCreateGroup
+import com.moidot.moidot.data.remote.request.RequestEditGroupInfo
 import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.BaseResponse
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
@@ -25,5 +26,5 @@ interface GroupRemoteDataSource {
 
     suspend fun exitGroup(participateId: Int): Result<BaseResponse>
 
-    suspend fun editMyGroupInfo(participateId: Int): Result<BaseResponse>
+    suspend fun editMyGroupInfo(requestEditGroupInfo: RequestEditGroupInfo): Result<BaseResponse>
 }

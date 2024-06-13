@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moidot.moidot.data.remote.request.RequestEditGroupInfo
 import com.moidot.moidot.data.remote.response.ResponseGroupUserInfo
 import com.moidot.moidot.data.remote.response.ResponseSearchPlace
 import com.moidot.moidot.presentation.main.group.join.create.model.InputInfoType
@@ -20,7 +21,7 @@ class EditMyGroupInfoViewModel @Inject constructor(
 ) : ViewModel() {
 
     // 기존 정보
-    private val prevUserGroupInfo = MutableLiveData<ResponseGroupUserInfo.Data>()
+    val prevUserGroupInfo = MutableLiveData<ResponseGroupUserInfo.Data>()
 
     // 닉네임
     val newNickName = MutableLiveData<String>()
@@ -131,8 +132,16 @@ class EditMyGroupInfoViewModel @Inject constructor(
     }
 
     fun editMyGroupInfo() {
+        val requestEditGroupInfo = RequestEditGroupInfo(
+            participateId = prevUserGroupInfo.value!!.participationId,
+            userName = newNickName.value!!,
+            locationName = newLocationInfo.value!!.placeName,
+            longitude = newLocationInfo.value!!.longitude,
+            latitude = newLocationInfo.value!!.latitude,
+            transportationType = newTransportation.value!!
+        )
         viewModelScope.launch {
-            groupRepository.editMyGroupInfo(prevUserGroupInfo.value!!.participationId).onSuccess {
+            groupRepository.editMyGroupInfo(requestEditGroupInfo).onSuccess {
                 if (it.code == 0) _isEditSuccess.setValue(true)
             }.onFailure {
                 _showToastEvent.setValue(it.message.toString())
