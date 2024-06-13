@@ -3,6 +3,7 @@ package com.moidot.moidot.data.remote.datasource.group
 import com.moidot.moidot.data.api.GroupService
 import com.moidot.moidot.data.remote.datasource.getResultFromResponse
 import com.moidot.moidot.data.remote.request.RequestCreateGroup
+import com.moidot.moidot.data.remote.request.RequestEditGroupInfo
 import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.BaseResponse
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
@@ -41,8 +42,8 @@ class GroupRemoteDataSourceImpl @Inject constructor(private val groupService: Gr
         return groupService.deleteGroup(participateId).getResultFromResponse()
     }
 
-    override suspend fun editMyGroupInfo(participateId: Int): Result<BaseResponse> {
-        return groupService.editMyGroupInfo(participateId).getResultFromResponse()
+    override suspend fun editMyGroupInfo(requestEditGroupInfo: RequestEditGroupInfo): Result<BaseResponse> {
+        return groupService.editMyGroupInfo(requestEditGroupInfo).getResultFromResponse()
     }
 
 }

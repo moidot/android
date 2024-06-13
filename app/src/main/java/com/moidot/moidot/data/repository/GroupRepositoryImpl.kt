@@ -2,6 +2,7 @@ package com.moidot.moidot.data.repository
 
 import com.moidot.moidot.data.remote.datasource.group.GroupRemoteDataSource
 import com.moidot.moidot.data.remote.request.RequestCreateGroup
+import com.moidot.moidot.data.remote.request.RequestEditGroupInfo
 import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.BaseResponse
 import com.moidot.moidot.data.remote.response.ResponseCheckNicknameDuplication
@@ -41,8 +42,8 @@ class GroupRepositoryImpl @Inject constructor(private val groupRemoteDataSource:
         return groupRemoteDataSource.exitGroup(participationId)
     }
 
-    override suspend fun editMyGroupInfo(participationId: Int): Result<BaseResponse> {
-        return groupRemoteDataSource.editMyGroupInfo(participationId)
+    override suspend fun editMyGroupInfo(requestEditGroupInfo: RequestEditGroupInfo): Result<BaseResponse> {
+        return groupRemoteDataSource.editMyGroupInfo(requestEditGroupInfo)
     }
 
 }

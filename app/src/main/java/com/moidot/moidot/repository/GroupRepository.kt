@@ -1,6 +1,7 @@
 package com.moidot.moidot.repository
 
 import com.moidot.moidot.data.remote.request.RequestCreateGroup
+import com.moidot.moidot.data.remote.request.RequestEditGroupInfo
 import com.moidot.moidot.data.remote.request.RequestPostParticipateGroup
 import com.moidot.moidot.data.remote.response.BaseResponse
 import com.moidot.moidot.data.remote.response.ResponseCreateGroup
@@ -25,5 +26,5 @@ interface GroupRepository {
 
     suspend fun exitGroup(participationId: Int): Result<BaseResponse>
 
-    suspend fun editMyGroupInfo(participationId: Int): Result<BaseResponse>
+    suspend fun editMyGroupInfo(requestEditGroupInfo: RequestEditGroupInfo): Result<BaseResponse>
 }
