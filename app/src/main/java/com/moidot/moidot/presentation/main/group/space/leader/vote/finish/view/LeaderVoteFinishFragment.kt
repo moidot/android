@@ -22,6 +22,7 @@ import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseVoteStatus
 import com.moidot.moidot.databinding.FragmentLeaderVoteFinishBinding
 import com.moidot.moidot.presentation.base.BaseFragment
+import com.moidot.moidot.presentation.main.group.join.create.view.InputGroupInfoFragmentDirections
 import com.moidot.moidot.presentation.main.group.space.common.vote.VoteFinishInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.leader.vote.create.CreateVoteActivity
 import com.moidot.moidot.presentation.main.group.space.leader.vote.finish.viewmodel.LeaderVoteFinishViewModel
@@ -53,7 +54,9 @@ class LeaderVoteFinishFragment : BaseFragment<FragmentLeaderVoteFinishBinding>(R
         result.data?.let { data ->
             val isCreateVoteSuccess = data.getBooleanExtra(Constant.CRATE_VOTE_SUCCESS_STATE, false)
             if (isCreateVoteSuccess) { // 투표 생성 완료
-                findNavController().navigateUp()
+                findNavController().navigate(
+                    LeaderVoteFinishFragmentDirections.actionLeaderVoteFinishFragmentToLeaderVoteProgressFragment(groupId)
+                )
             }
         }
     }
