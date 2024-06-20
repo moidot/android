@@ -21,6 +21,9 @@ class GroupPlaceViewModel @Inject constructor(private val groupPlaceRepository: 
     private val _bestRegions = MutableLiveData<List<ResponseBestRegion.Data>>()
     val bestRegions: LiveData<List<ResponseBestRegion.Data>> = _bestRegions
 
+    private val _isLoading = MutableLiveData<Boolean>(true)
+    val isLoading = _isLoading
+
     fun setCurrentPos(posValue: Int) {
         _currentPos.value = posValue
     }
@@ -29,8 +32,9 @@ class GroupPlaceViewModel @Inject constructor(private val groupPlaceRepository: 
         viewModelScope.launch {
             groupPlaceRepository.bestRegions(groupId).onSuccess {
                 if (it.code == 0) _bestRegions.value = it.data
+                _isLoading.value = false
             }.onFailure {
-
+                _isLoading.value = false
             }
         }
     }

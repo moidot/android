@@ -21,13 +21,18 @@ class MemberVoteBeforeViewModel @Inject constructor(private val groupPlaceReposi
     private val _showToastEvent = MutableSingleLiveData<String>()
     val showToastEvent: SingleLiveData<String> = _showToastEvent
 
+    private val _isLoading = MutableLiveData<Boolean>(true)
+    val isLoading = _isLoading
+
     fun loadBestRegions(groupId: Int) {
         viewModelScope.launch {
             groupPlaceRepository.bestRegions(groupId).onSuccess {
                 if (it.code == 0) _bestRegions.value = it.data
                 else _showToastEvent.setValue(it.message.toString())
+                _isLoading.value = false
             }.onFailure {
                 _showToastEvent.setValue(it.message.toString())
+                _isLoading.value = false
             }
         }
     }

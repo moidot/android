@@ -28,6 +28,7 @@ import com.moidot.moidot.util.Constant.CRATE_VOTE_MSG_EXTRA
 import com.moidot.moidot.util.Constant.CRATE_VOTE_SUCCESS_STATE
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.VOTE_RECREATE_STATE
+import com.moidot.moidot.util.DialogUtil
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +45,7 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
     private lateinit var labelLayer: LabelLayer
     private lateinit var mapManager: MarkerManager
 
-    private val viewModel: MemberVoteBeforeViewModel by viewModels()
+    private val viewModel: LeaderVoteBeforeViewModel by viewModels()
 
     private val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -87,6 +88,10 @@ class LeaderVoteBeforeFragment : BaseFragment<FragmentLeaderVoteBeforeBinding>(R
                 }.await()
                 initMapView(it, centerLatLang)
             }
+        }
+        val dialogUtil = DialogUtil(requireContext())
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) dialogUtil.show() else dialogUtil.dismiss()
         }
     }
 

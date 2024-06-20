@@ -17,6 +17,7 @@ import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.databinding.FragmentMemberVoteBeforeBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.util.Constant.GROUP_ID
+import com.moidot.moidot.util.DialogUtil
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +49,10 @@ class MemberVoteBeforeFragment : BaseFragment<FragmentMemberVoteBeforeBinding>(R
                 }.await()
                 initMapView(it, centerLatLang)
             }
+        }
+        val dialogUtil = DialogUtil(requireContext())
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) dialogUtil.show() else dialogUtil.dismiss()
         }
     }
 

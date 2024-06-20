@@ -42,9 +42,9 @@ object NetWorkModule {
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .authenticator(tokenAuthenticator)
             .addNetworkInterceptor(accessTokenInterceptor)
-            .readTimeout(10, TimeUnit.SECONDS)
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.MINUTES)
+            .connectTimeout(10, TimeUnit.MINUTES)
+            .writeTimeout(10, TimeUnit.MINUTES)
             .build()
     }
 
@@ -66,9 +66,9 @@ object NetWorkModule {
     fun provideKakaoHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .readTimeout(10, TimeUnit.SECONDS)
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.MINUTES)
+            .connectTimeout(10, TimeUnit.MINUTES)
+            .writeTimeout(10, TimeUnit.MINUTES)
             .build()
     }
 
