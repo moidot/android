@@ -1,6 +1,7 @@
 package com.moidot.moidot.presentation.main.group.space.common.place.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -33,12 +34,17 @@ import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.presentation.main.group.space.common.place.adapter.BestRegionNameAdapter
 import com.moidot.moidot.presentation.main.group.space.common.place.adapter.MoveUserInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.common.place.viewmodel.GroupPlaceViewModel
+import com.moidot.moidot.util.DialogUtil
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
 import com.moidot.moidot.util.SpannableTxt
 import com.moidot.moidot.util.view.dpToPx
 import com.moidot.moidot.util.view.getScreenHeight
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.math.max
 
 
@@ -122,9 +128,17 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
     }
 
     private fun setupObservers() {
+        setLoadingDialog()
         setupMyInfo()
         setupBestRegionsObserver()
         setupCurPosObserver()
+    }
+
+    private fun setLoadingDialog() {
+        val dialogUtil = DialogUtil(requireContext())
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) dialogUtil.show() else dialogUtil.dismiss()
+        }
     }
 
     // 유저 정보를 먼저 받아온 뒤에 해당 정보를 바탕으로 장소 정보 세팅해주기
@@ -150,6 +164,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             if (viewModel.isMapInitialized.value == true) { // 지도 초기화 이후 작업
                 kakaoMap.labelManager!!.removeAllLabelLayer() // 기존 마커 삭제
                 routeLine.remove() // 기존 path 삭제
+                routeLineManager.layer.removeAll() // 기존 path 삭제
                 setUpSearchDetailBtnTxt(currentRegion.name)
                 initLabelLayerAndRouteManager()
                 kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(LatLng.from(currentRegion.latitude, currentRegion.longitude))) // 위치 좌표 설정
@@ -250,31 +265,31 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         )
     }
 
-    // TODO 본인게 아닌건 분기처리
     private fun addMovePathRoutineLines(moveUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
         val othersMoveInfos = moveUserInfos.filterNot { moveUserInfo -> moveUserInfo.userName == activityViewModel.getUserName() }
-        addOtherMovePathRoutineLine(othersMoveInfos)
-
+        othersMoveInfos.forEach { moveUserInfo ->
+            addOtherMovePathRoutineLine(moveUserInfo)
+        }
         val myMoveInfo = moveUserInfos.subtract(othersMoveInfos.toSet()).toList()
-        addMyMovePathRoutineLine(myMoveInfo)
+        addMyMovePathRoutineLine(myMoveInfo[0])
     }
 
-    private fun addMyMovePathRoutineLine(moveUserInfo: List<ResponseBestRegion.Data.MoveUserInfo>) {
+    private fun addMyMovePathRoutineLine(moveUserInfo: ResponseBestRegion.Data.MoveUserInfo) {
         val stylesSet = RouteLineStylesSet.from(
             "myStyles",
             RouteLineStyles.from(RouteLineStyle.from(5.dpToPx(requireContext()).toFloat(), resources.getColor(R.color.orange500, null)))
         )
-        val segment = RouteLineSegment.from(moveUserInfo.flatMap { it.path }.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
+        val segment = RouteLineSegment.from(moveUserInfo.path.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
         val options = RouteLineOptions.from(segment).setStylesSet(stylesSet)
         routeLine = routeLineManager.layer.addRouteLine(options)
     }
 
-    private fun addOtherMovePathRoutineLine(moveOtherUserInfos: List<ResponseBestRegion.Data.MoveUserInfo>) {
+    private fun addOtherMovePathRoutineLine(moveOtherUserInfo: ResponseBestRegion.Data.MoveUserInfo) {
         val stylesSet = RouteLineStylesSet.from(
             "otherStyles",
             RouteLineStyles.from(RouteLineStyle.from(3.dpToPx(requireContext()).toFloat(), resources.getColor(R.color.gray500, null)))
         ) // 굵기 단위는 픽셀
-        val segment = RouteLineSegment.from(moveOtherUserInfos.flatMap { it.path }.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
+        val segment = RouteLineSegment.from(moveOtherUserInfo.path.map { LatLng.from(it.y, it.x) }).setStyles(stylesSet.getStyles(0))
         val options = RouteLineOptions.from(segment).setStylesSet(stylesSet)
         routeLine = routeLineManager.layer.addRouteLine(options)
     }
