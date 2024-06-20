@@ -10,6 +10,9 @@
     <string name="all_out">나가기</string>
     <string name="all_moidot_space">모이닷 스페이스</string>
 
+    <!-- Loading -->
+    <string name="loading_msg">잠시만 기다려주세요!</string>
+
     <!-- error -->
     <string name="network_error_msg">네트워크 통신오류!</string>
 
