@@ -73,7 +73,7 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-
+        
         <activity
             android:name=".presentation.main.MainActivity"
             android:exported="true"
@@ -138,6 +138,9 @@
             android:name=".presentation.main.mypage.notice.view.NoticeDetailActivity"
             android:exported="false"
             android:theme="@style/Gray800.Theme.Moidot" />
+        
+        <activity android:name=".presentation.main.group.space.common.place.view.RecommendPlaceActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

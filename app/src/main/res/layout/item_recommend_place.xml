@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="4dp"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/item_recommend_img"
+            android:layout_width="78dp"
+            android:layout_height="102dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:background="@drawable/bg_img_detail"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_recommend_tv_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_recommend_tv_name"
+            style="@style/b2_bold_14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:textColor="@color/gray700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_recommend_img"
+            app:layout_constraintTop_toTopOf="@+id/item_recommend_img"
+            tools:text="빡공스터디카페 돈암점" />
+
+        <TextView
+            android:id="@+id/item_recommend_tv_distance"
+            style="@style/c1_reg_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/orange500"
+            app:layout_constraintEnd_toEndOf="@+id/item_recommend_tv_name"
+            app:layout_constraintStart_toStartOf="@+id/item_recommend_tv_name"
+            app:layout_constraintTop_toBottomOf="@id/item_recommend_tv_name"
+            tools:text="성신여대입구역(으)로부터 480m" />
+
+        <LinearLayout
+            android:id="@+id/item_recommend_container_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/item_recommend_container_tel"
+            app:layout_constraintStart_toStartOf="@+id/item_recommend_tv_distance">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_time" />
+
+            <TextView
+                style="@style/c2_reg_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/item_recommend_close_time"
+                android:textColor="@color/gray400" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_recommend_tv_end_time"
+            style="@style/c2_bold_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/gray400"
+            app:layout_constraintBottom_toBottomOf="@id/item_recommend_container_end_time"
+            app:layout_constraintStart_toEndOf="@id/item_recommend_container_end_time"
+            app:layout_constraintTop_toTopOf="@id/item_recommend_container_end_time"
+            tools:text="10:00" />
+
+        <LinearLayout
+            android:id="@+id/item_recommend_container_tel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/item_recommend_img"
+            app:layout_constraintStart_toStartOf="@+id/item_recommend_container_end_time">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_tel" />
+
+            <TextView
+                style="@style/c2_reg_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/item_recommend_tel"
+                android:textColor="@color/gray400" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_recommend_tv_tel"
+            style="@style/c2_bold_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray400"
+            app:layout_constraintBottom_toBottomOf="@+id/item_recommend_container_tel"
+            app:layout_constraintStart_toStartOf="@id/item_recommend_tv_end_time"
+            app:layout_constraintTop_toTopOf="@+id/item_recommend_container_tel"
+            tools:text="02-922-1672" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

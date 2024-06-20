@@ -49,6 +49,19 @@
         <item name="chipBackgroundColor">@color/indicator_chip_color</item>
     </style>
 
+
+    <style name="chip_recommend" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="rippleColor">@null</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:paddingVertical">2dp</item>
+        <item name="android:paddingHorizontal">1dp</item>
+        <item name="chipCornerRadius">8dp</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/indicator_txt_color</item>
+        <item name="chipBackgroundColor">@color/indicator_chip_color</item>
+    </style>
+
     <style name="custom_dialog" parent="Theme.MaterialComponents.Dialog">
         <item name="android:layout_marginHorizontal">20dp</item>
         <item name="android:paddingStart">0dp</item>

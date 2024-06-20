@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/slate50">
+
+        <LinearLayout
+            android:id="@+id/recommend_top_bar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/recommend_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="16dp"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/recommend_tv_name"
+                style="@style/b1_bold_16"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/gray700"
+                tools:text="성신여대입구 상세 장소" />
+        </LinearLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/recommend_chip_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            app:chipSpacing="8dp"
+            app:layout_constraintBottom_toTopOf="@id/recommend_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recommend_top_bar_container"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                style="@style/chip_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/recommend_place_chip_cafe" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/chip_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recommend_place_chip_restaurant" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/chip_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recommend_place_chip_study_cafe" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/chip_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recommend_place_chip_study_room" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/chip_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recommend_place_chip_library" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <View
+            android:id="@+id/recommend_divider"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recommend_chip_group" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"
+            android:background="@color/white"
+            android:clipChildren="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recommend_divider"
+            tools:listitem="@layout/item_recommend_place" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

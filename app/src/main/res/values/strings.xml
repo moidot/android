@@ -138,6 +138,16 @@
 
     <!--PlaceFragment -->
     <string name="space_place_btn_search_detail">%s 상세 장소 검색하기</string>
+    
+    <!--Recommend Place -->
+    <string name="recommend_place_top_bar">%s 상세 장소</string>
+    <string name="recommend_place_chip_cafe">카페</string>
+    <string name="recommend_place_chip_restaurant">식당</string>
+    <string name="recommend_place_chip_study_cafe">스터디카페</string>
+    <string name="recommend_place_chip_study_room">스터디룸</string>
+    <string name="recommend_place_chip_library">도서관</string>
+    <string name="item_recommend_close_time">영업 종료 시간</string>
+    <string name="item_recommend_tel">연락처</string>
 
     <!--Space - InfoFragment -->
     <string name="space_info_group_name_title">모이닷 스페이스 이름</string>
