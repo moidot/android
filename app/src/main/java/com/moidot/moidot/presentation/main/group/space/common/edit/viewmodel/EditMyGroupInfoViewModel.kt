@@ -1,6 +1,5 @@
 package com.moidot.moidot.presentation.main.group.space.common.edit.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -135,7 +134,7 @@ class EditMyGroupInfoViewModel @Inject constructor(
         val requestEditGroupInfo = RequestEditGroupInfo(
             participateId = prevUserGroupInfo.value!!.participationId,
             userName = newNickName.value!!,
-            locationName = newLocationInfo.value!!.placeName,
+            locationName = newLocationInfo.value!!.addressName ?: newLocationInfo.value!!.placeName,
             longitude = newLocationInfo.value!!.longitude,
             latitude = newLocationInfo.value!!.latitude,
             transportationType = newTransportation.value!!

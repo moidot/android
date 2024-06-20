@@ -16,6 +16,7 @@ import com.moidot.moidot.databinding.BottomSheetLocationPickerBinding
 import com.moidot.moidot.presentation.base.BaseBottomSheetDialogFragment
 import com.moidot.moidot.presentation.main.group.join.create.view.CreateGroupActivity
 import com.moidot.moidot.presentation.main.group.join.participate.view.ParticipateGroupActivity
+import com.moidot.moidot.presentation.main.group.space.common.edit.view.EditMyGroupInfoActivity
 import com.moidot.moidot.util.CustomSnackBar
 import com.moidot.moidot.util.view.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -170,6 +171,7 @@ class BottomSheetLocationPicker(private val onLocationSelectListener: LocationPi
     fun checkLocationPermission() {
         when (val currentActivity = activity) {
             is CreateGroupActivity -> currentActivity.permissionUtil.requestLocationPermission { getMyCurrentLocation() }
+            is EditMyGroupInfoActivity -> currentActivity.permissionUtil.requestLocationPermission { getMyCurrentLocation() }
             is ParticipateGroupActivity -> currentActivity.permissionUtil.requestLocationPermission { getMyCurrentLocation() }
         }
     }

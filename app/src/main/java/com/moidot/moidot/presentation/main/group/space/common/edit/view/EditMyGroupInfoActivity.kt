@@ -13,6 +13,8 @@ import com.moidot.moidot.presentation.main.group.join.create.model.InputInfoType
 import com.moidot.moidot.presentation.main.group.space.common.edit.viewmodel.EditMyGroupInfoViewModel
 import com.moidot.moidot.util.Constant.GROUP_ID
 import com.moidot.moidot.util.Constant.GROUP_NAME
+import com.moidot.moidot.util.PermissionUtil
+import com.moidot.moidot.util.PermissionUtil.Companion.LOCATION_CHECK
 import com.moidot.moidot.util.bottomsheet.BottomSheetLocationPicker
 import com.moidot.moidot.util.popup.edit.PopupEditDoneDialog
 import com.moidot.moidot.util.view.hideKeyboard
@@ -21,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.layout.activity_edit_my_group_info) {
 
+    lateinit var permissionUtil: PermissionUtil
     private val groupId by lazy { intent.getIntExtra(GROUP_ID, -1) }
     private val groupName by lazy { intent.getStringExtra(GROUP_NAME) ?: "" }
 
@@ -30,6 +33,7 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
         super.onCreate(savedInstanceState)
         initView()
         initBinding()
+        initPermissionUtil()
         loadPrevUserData()
         setupNickNameInputView()
         setTransportationSelectedTypeView()
@@ -44,6 +48,10 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
     private fun initBinding() {
         binding.activity = this
         binding.viewModel = viewModel
+    }
+
+    private fun initPermissionUtil(){
+        permissionUtil = PermissionUtil(this, LOCATION_CHECK)
     }
 
     private fun setupObservers() {
