@@ -22,7 +22,7 @@ android {
         applicationId = "com.moidot.moidot"
         minSdk = 28
         targetSdk = 33
-        versionCode = 1
+        versionCode = 100
         versionName = "1.0.0"
 
         buildConfigField("String", "KAKAO_NATIVE_APP_KEY", properties.getProperty("kakao_native_app_key"))
