@@ -26,4 +26,8 @@ object Constant {
     const val NOTICE_TITLE_EXTRA = "NOTICE_TITLE_EXTRA"
     const val NOTICE_DATE_EXTRA = "NOTICE_DATE_EXTRA"
     const val NOTICE_CONTENT_EXTRA = "NOTICE_CONTENT_EXTRA"
+
+    const val PLACE_NAME_EXTRA = "PLACE_NAME_EXTRA"
+    const val PLACE_X_EXTRA = "PLACE_X_EXTRA"
+    const val PLACE_Y_EXTRA = "PLACE_Y_EXTRA"
 }
