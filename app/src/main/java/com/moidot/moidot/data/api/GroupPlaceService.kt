@@ -11,5 +11,5 @@ interface GroupPlaceService {
     suspend fun getBestRegions(@Query("groupId") groupId: Int): Response<ResponseBestRegion>
 
     @GET("/group/best-region/place")
-    suspend fun getRecommendPlace(@Query("x") x: Double, @Query("y") y: Double, @Query("local") local: String, @Query("keyword") keyword: String): Response<ResponseRecommendPlace>
+    suspend fun getRecommendPlace(@Query("x") x: String, @Query("y") y: String, @Query("local") local: String, @Query("keyword") keyword: String): Response<ResponseRecommendPlace>
 }

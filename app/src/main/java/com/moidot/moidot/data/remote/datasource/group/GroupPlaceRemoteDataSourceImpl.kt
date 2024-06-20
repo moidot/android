@@ -12,6 +12,6 @@ class GroupPlaceRemoteDataSourceImpl @Inject constructor(private val groupPlaceS
     }
 
     override suspend fun getRecommendPlace(x: Double, y: Double, local: String, keyword: String): Result<ResponseRecommendPlace> {
-        return groupPlaceService.getRecommendPlace(x, y, local, keyword).getResultFromResponse()
+        return groupPlaceService.getRecommendPlace(x.toString(), y.toString(), local, keyword).getResultFromResponse()
     }
 }

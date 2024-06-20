@@ -1,5 +1,6 @@
 package com.moidot.moidot.presentation.main.group.space.common.place.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -34,6 +35,9 @@ import com.moidot.moidot.presentation.main.group.space.SpaceViewModel
 import com.moidot.moidot.presentation.main.group.space.common.place.adapter.BestRegionNameAdapter
 import com.moidot.moidot.presentation.main.group.space.common.place.adapter.MoveUserInfoAdapter
 import com.moidot.moidot.presentation.main.group.space.common.place.viewmodel.GroupPlaceViewModel
+import com.moidot.moidot.util.Constant.PLACE_NAME_EXTRA
+import com.moidot.moidot.util.Constant.PLACE_X_EXTRA
+import com.moidot.moidot.util.Constant.PLACE_Y_EXTRA
 import com.moidot.moidot.util.DialogUtil
 import com.moidot.moidot.util.MapViewUtil
 import com.moidot.moidot.util.MarkerManager
@@ -77,6 +81,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
         setRegionNameVpEffect()
         setBestRegionNameVpEvent()
         initBottomSheetBehavior()
+        setMoveToRecommendPlaceBtnEvent()
     }
 
     /** dp로 설정하면 가로가 짧은 기기 혹은 긴 기기가 잘리는 현상이 있다.
@@ -124,6 +129,19 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
                     }
                 }
             })
+        }
+    }
+
+    private fun setMoveToRecommendPlaceBtnEvent() {
+        binding.bottomGroupPlaceBtnDetailSearch.setOnClickListener {
+            val currentPos = viewModel.currentPos.value ?: 0
+            val currentRegion = viewModel.bestRegions.value?.get(currentPos)
+            Intent(requireContext(), RecommendPlaceActivity::class.java).apply {
+                putExtra(PLACE_NAME_EXTRA, currentRegion?.name)
+                putExtra(PLACE_X_EXTRA, currentRegion?.latitude)
+                putExtra(PLACE_Y_EXTRA, currentRegion?.longitude)
+                startActivity(this)
+            }
         }
     }
 
