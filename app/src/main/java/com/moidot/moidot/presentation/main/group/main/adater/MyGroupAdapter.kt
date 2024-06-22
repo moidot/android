@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.moidot.moidot.R
 import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.databinding.ItemMyGroupBinding
+import com.moidot.moidot.util.SpannableTxt
 import com.moidot.moidot.util.addVerticalMargin
 
 
@@ -15,6 +17,7 @@ class MyGroupAdapter(
 ) :
     RecyclerView.Adapter<MyGroupAdapter.MyGroupViewHolder>() {
 
+    private var currentKeyword = ""
     private var isGroupExitMode = false
     private var groups: List<ResponseParticipateGroup.Data> = listOf()
 
@@ -44,6 +47,12 @@ class MyGroupAdapter(
                 onGroupExitClickListener(data)
             }
         }
+
+        fun highLightKeywordInText(data: ResponseParticipateGroup.Data, keyword: String) {
+            val groupName = data.groupName
+            val spannableText = SpannableTxt(itemView.context).applySpannableStyles(groupName, keyword, R.color.orange500)
+            binding.itemMyGroupTvName.text = spannableText
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyGroupViewHolder {
@@ -57,6 +66,7 @@ class MyGroupAdapter(
         holder.setGroupExitMode(groups[position], isGroupExitMode)
         holder.invokeGroupItemClickListener(groups[position])
         holder.invokeGroupExitClickListener(groups[position])
+        holder.highLightKeywordInText(groups[position], currentKeyword)
     }
 
     override fun getItemCount(): Int = groups.size
@@ -74,5 +84,9 @@ class MyGroupAdapter(
     fun setGroupExistModeOff() {
         isGroupExitMode = false
         notifyItemRangeChanged(0, itemCount)
+    }
+
+    fun updateCurrentKeyword(keyword: String) {
+        currentKeyword = keyword
     }
 }

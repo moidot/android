@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
 
         <variable
             name="data"
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="11dp"
+                android:bufferType="spannable"
                 android:text="@{data.groupName}"
                 android:textColor="@color/gray600"
                 app:layout_constraintStart_toStartOf="parent"

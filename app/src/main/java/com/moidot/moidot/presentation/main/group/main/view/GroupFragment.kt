@@ -90,15 +90,18 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
             val word = it.toString()
             viewModel.setSearchWord(word)
             viewModel.setSearchActive(word)
+            myGroupAdapter.updateCurrentKeyword(word)
         }
     }
 
     private fun setSearchDoneListener() {
         binding.fgGroupEtvSearch.setOnEditorActionListener { it, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.setSearchWord(it.text.toString())
+                val word = it.text.toString()
+                viewModel.setSearchWord(word)
                 viewModel.searchWordWithFilter()
                 viewModel.setSearchActive(false)
+                myGroupAdapter.updateCurrentKeyword(word)
                 it.hideKeyboard()
                 return@setOnEditorActionListener true
             }
@@ -110,6 +113,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
         binding.fgGroupEtvSearch.apply {
             setText("")
             viewModel.loadMyGroupList()
+            myGroupAdapter.updateCurrentKeyword("")
             this.hideKeyboard()
         }
     }
@@ -140,7 +144,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     fun onExitGroupDeleteModeListener() {
         viewModel.activateGroupDeleteFlag.value = false
         myGroupAdapter.setGroupExistModeOff()
-        if(myGroupAdapter.itemCount == 0) {
+        if (myGroupAdapter.itemCount == 0) {
             binding.fgGroupFloatingBtnAddGroup.isVisible = false
         }
     }
