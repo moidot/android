@@ -65,15 +65,24 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
-                <data android:host="kakaolink" />
+                <data
+                    android:host="kakaolink"
+                    android:scheme="kakao${MANIFEST_KAKAO_NATIVE_APP_KEY}" />
+            </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
                 <data
                     android:host="moidot.page.link"
                     android:path="/invite"
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        
+
         <activity
             android:name=".presentation.main.MainActivity"
             android:exported="true"
@@ -138,9 +147,10 @@
             android:name=".presentation.main.mypage.notice.view.NoticeDetailActivity"
             android:exported="false"
             android:theme="@style/Gray800.Theme.Moidot" />
-        
-        <activity android:name=".presentation.main.group.space.common.place.view.RecommendPlaceActivity"
-            android:exported="false"/>
+
+        <activity
+            android:name=".presentation.main.group.space.common.place.view.RecommendPlaceActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
