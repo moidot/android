@@ -180,7 +180,7 @@ class GroupPlaceFragment : BaseFragment<FragmentGroupPlaceBinding>(R.layout.frag
             val currentRegion = viewModel.bestRegions.value?.get(position)!! // 선택된 추천 지역 정보
             updateAdapterInfo(position, currentRegion) // rv, vp 정보 갱신
             if (viewModel.isMapInitialized.value == true) { // 지도 초기화 이후 작업
-                kakaoMap.labelManager!!.removeAllLabelLayer() // 기존 마커 삭제
+                kakaoMap.labelManager?.removeAllLabelLayer() // 기존 마커 삭제
                 routeLine.remove() // 기존 path 삭제
                 routeLineManager.layer.removeAll() // 기존 path 삭제
                 setUpSearchDetailBtnTxt(currentRegion.name)
