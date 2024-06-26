@@ -107,7 +107,8 @@ class EditMyGroupInfoViewModel @Inject constructor(
         viewModelScope.launch {
             groupRepository.checkNicknameDuplication(groupId, newNickName.value!!).onSuccess {
                 if (it.code == 0) {
-                    if (it.data.duplicated) {
+                    val isUserOldNickName = prevUserGroupInfo.value!!.userName == newNickName.value
+                    if (it.data.duplicated && !isUserOldNickName) {
                         isNickNameDuplicated.value = true
                     } else {
                         editMyGroupInfo()
