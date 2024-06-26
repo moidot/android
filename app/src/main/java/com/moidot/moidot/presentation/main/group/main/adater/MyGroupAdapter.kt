@@ -50,8 +50,11 @@ class MyGroupAdapter(
 
         fun highLightKeywordInText(data: ResponseParticipateGroup.Data, keyword: String) {
             val groupName = data.groupName
-            val spannableText = SpannableTxt(itemView.context).applySpannableStyles(groupName, keyword, R.color.orange500)
-            binding.itemMyGroupTvName.text = spannableText
+            binding.itemMyGroupTvName.text = if (groupName.contains(keyword)) {
+                SpannableTxt(itemView.context).applySpannableStyles(groupName, keyword, R.color.orange500)
+            } else {
+                groupName
+            }
         }
     }
 
