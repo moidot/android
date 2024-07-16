@@ -156,7 +156,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/bg_input_info_normal"
-            android:maxLength="15"
+            android:maxLength="20"
             android:maxLines="1"
             android:onClick="@{() -> activity.onClickStartLocationPicker()}"
             android:paddingHorizontal="12dp"

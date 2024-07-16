@@ -154,6 +154,7 @@
     <string name="space_info_member_remove">모임원 내보내기</string>
     <string name="space_info_edit_my_info">내 정보 편집하기</string>
     <string name="space_info_delete_space"><u>모이닷 스페이스 삭제하기</u></string>
+    <string name="space_info_exit_space"><u>모이닷 스페이스 나가기</u></string>
     <string name="space_info_share_title">모임원을 초대해보세요!</string>
     <string name="space_info_copy_url">URL 복사하기</string>
     <string name="space_info_share_with_kakao">카카오톡 공유하기</string>

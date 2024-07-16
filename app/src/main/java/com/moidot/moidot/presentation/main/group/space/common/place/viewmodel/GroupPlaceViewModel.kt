@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.moidot.moidot.data.remote.response.ResponseBestRegion
 import com.moidot.moidot.repository.GroupPlaceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,8 +17,8 @@ class GroupPlaceViewModel @Inject constructor(private val groupPlaceRepository: 
 
     val isMapInitialized = MutableLiveData<Boolean>(false)
 
-    private val _currentPos = MutableLiveData<Int>()
-    val currentPos: LiveData<Int> = _currentPos
+    private val _currentPos = MutableSharedFlow<Int>()
+    val currentPos: SharedFlow<Int> = _currentPos
 
     private val _bestRegions = MutableLiveData<List<ResponseBestRegion.Data>>()
     val bestRegions: LiveData<List<ResponseBestRegion.Data>> = _bestRegions
@@ -25,7 +27,9 @@ class GroupPlaceViewModel @Inject constructor(private val groupPlaceRepository: 
     val isLoading = _isLoading
 
     fun setCurrentPos(posValue: Int) {
-        _currentPos.value = posValue
+        viewModelScope.launch {
+            _currentPos.emit(posValue)
+        }
     }
 
     fun getBestRegions(groupId: Int) {

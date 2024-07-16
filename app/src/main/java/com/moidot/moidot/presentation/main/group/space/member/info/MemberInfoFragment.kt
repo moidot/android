@@ -117,7 +117,7 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(R.layout.frag
     }
 
     // 모임 나가기
-    fun showGroupDeleteDialog() {
+    fun showGroupExitDialog() {
         PopupTwoButtonDialog(requireContext(),
             getString(R.string.space_member_info_dialog_title).format(viewModel.groupName.value),
             getString(R.string.space_member_info_dialog_content),

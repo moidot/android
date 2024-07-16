@@ -2,10 +2,10 @@ package com.moidot.moidot.presentation.main.group.main.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.moidot.moidot.R
@@ -13,8 +13,8 @@ import com.moidot.moidot.data.remote.response.ResponseParticipateGroup
 import com.moidot.moidot.databinding.FragmentGroupBinding
 import com.moidot.moidot.presentation.base.BaseFragment
 import com.moidot.moidot.presentation.main.group.join.create.view.CreateGroupActivity
-import com.moidot.moidot.presentation.main.group.main.viewmodel.GroupViewModel
 import com.moidot.moidot.presentation.main.group.main.adater.MyGroupAdapter
+import com.moidot.moidot.presentation.main.group.main.viewmodel.GroupViewModel
 import com.moidot.moidot.presentation.main.group.space.leader.LeaderSpaceActivity
 import com.moidot.moidot.presentation.main.group.space.member.MemberSpaceActivity
 import com.moidot.moidot.presentation.main.mypage.setting.view.SettingActivity
@@ -25,8 +25,8 @@ import com.moidot.moidot.util.StatusBarColorUtil
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.DARK_ICON_COLOR
 import com.moidot.moidot.util.StatusBarColorUtil.Companion.LIGHT_ICON_COLOR
 import com.moidot.moidot.util.popup.PopupTwoButtonDialog
-import com.moidot.moidot.util.view.hideKeyboard
 import com.moidot.moidot.util.popup.picker.PopupPickerDialog
+import com.moidot.moidot.util.view.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -90,15 +90,18 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
             val word = it.toString()
             viewModel.setSearchWord(word)
             viewModel.setSearchActive(word)
+            myGroupAdapter.updateCurrentKeyword(word)
         }
     }
 
     private fun setSearchDoneListener() {
         binding.fgGroupEtvSearch.setOnEditorActionListener { it, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.setSearchWord(it.text.toString())
+                val word = it.text.toString()
+                viewModel.setSearchWord(word)
                 viewModel.searchWordWithFilter()
                 viewModel.setSearchActive(false)
+                myGroupAdapter.updateCurrentKeyword(word)
                 it.hideKeyboard()
                 return@setOnEditorActionListener true
             }
@@ -110,6 +113,7 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
         binding.fgGroupEtvSearch.apply {
             setText("")
             viewModel.loadMyGroupList()
+            myGroupAdapter.updateCurrentKeyword("")
             this.hideKeyboard()
         }
     }
@@ -140,6 +144,9 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     fun onExitGroupDeleteModeListener() {
         viewModel.activateGroupDeleteFlag.value = false
         myGroupAdapter.setGroupExistModeOff()
+        if (myGroupAdapter.itemCount == 0) {
+            binding.fgGroupFloatingBtnAddGroup.isVisible = false
+        }
     }
 
     private fun setupObservers() {
@@ -158,6 +165,20 @@ class GroupFragment : BaseFragment<FragmentGroupBinding>(R.layout.fragment_group
     private fun setupGroupRecyclerView() {
         viewModel.myGroupList.observe(viewLifecycleOwner) {
             myGroupAdapter.updateItems(it)
+            setGroupButtonViews(it.isEmpty())
+        }
+    }
+
+    // 나가기, 필터링, 플로팅 버튼 활성화 여부 선택
+    private fun setGroupButtonViews(hasFlag: Boolean) {
+        val existViewItems = listOf(binding.fgGroupCvDelete, binding.fgGroupCvFilter, binding.fgGroupFloatingBtnAddGroup)
+        if (hasFlag) existViewItems.forEach { view ->
+            view.visibility = View.INVISIBLE
+            view.isEnabled = false
+        }
+        else existViewItems.forEach { view ->
+            view.visibility = View.VISIBLE
+            view.isEnabled = true
         }
     }
 

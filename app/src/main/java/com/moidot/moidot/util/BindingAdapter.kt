@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.moidot.moidot.R
 import com.moidot.moidot.presentation.sign.model.Platform.NAVER
 import com.moidot.moidot.presentation.sign.model.Platform.KAKAO
@@ -21,6 +22,8 @@ fun ImageView.imageBind(url: String?) {
     if (!url.isNullOrEmpty()) {
         Glide.with(this.context)
             .load(url)
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(this)
     }
 }

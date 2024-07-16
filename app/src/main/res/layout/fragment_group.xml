@@ -295,7 +295,6 @@
             android:layout_margin="20dp"
             android:backgroundTint="@color/orange500"
             android:onClick="@{() -> fragment.moveToCreateGroup()}"
-            android:visibility="@{viewModel.activateGroupDeleteFlag ? View.GONE : View.VISIBLE}"
             app:elevation="0dp"
             app:fabCustomSize="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
