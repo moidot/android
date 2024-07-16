@@ -96,7 +96,6 @@
         <item name="tabIndicatorFullWidth">false</item>
         <item name="tabMaxWidth">0dp</item>
         <item name="tabBackground">@color/white</item>
-        <item name="android:layout_marginStart">20dp</item>
         <item name="tabIndicator">@drawable/bg_tab_indicator</item>
         <item name="tabSelectedTextAppearance">@style/b2_bold_14</item>
     </style>
