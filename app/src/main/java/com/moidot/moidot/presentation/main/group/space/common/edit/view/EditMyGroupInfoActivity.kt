@@ -50,7 +50,7 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
         binding.viewModel = viewModel
     }
 
-    private fun initPermissionUtil(){
+    private fun initPermissionUtil() {
         permissionUtil = PermissionUtil(this, LOCATION_CHECK)
     }
 
@@ -65,7 +65,7 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
             }
         }
         viewModel.isEditSuccess.observe(this) {// 수정 성공
-            if (it) showEditPopupDialog(viewModel.checkUpdatedInfo())
+            if (it) checkEditInfo(viewModel.checkUpdatedInfo())
         }
         viewModel.showToastEvent.observe(this) {// 에러 메세지 출력
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
@@ -99,7 +99,7 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
         binding.editMyGroupInfoEtvNickname.addTextChangedListener {
             val name = it.toString()
             viewModel.newNickName.value = name
-            if(!hasPrevData) viewModel.setNickNameFieldActive(name)
+            if (!hasPrevData) viewModel.setNickNameFieldActive(name)
             viewModel.updateInputInfoComplete(InputInfoType.NICKNAME_INPUT, name.isNotEmpty())
             hasPrevData = false
         }
@@ -164,12 +164,16 @@ class EditMyGroupInfoActivity : BaseActivity<ActivityEditMyGroupInfoBinding>(R.l
         }
     }
 
-    private fun showEditPopupDialog(updatedInfo: List<Boolean>) {
+    private fun checkEditInfo(updatedInfo: List<Boolean>) {
         val nickname = if (updatedInfo[0]) viewModel.newNickName.value else null
         val location = if (updatedInfo[1]) viewModel.newLocationInfo.value!!.placeName else null
         val transportation = if (updatedInfo[2]) viewModel.newTransportation.value else null
 
-        val dialog = PopupEditDoneDialog(nickname, location, transportation) { finish() }
-        dialog.show(supportFragmentManager, "update_popup")
+        if (nickname == null && location == null && transportation == null) {
+            finish()
+        } else {
+            val dialog = PopupEditDoneDialog(nickname, location, transportation) { finish() }
+            dialog.show(supportFragmentManager, "update_popup")
+        }
     }
 }
