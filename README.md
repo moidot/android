@@ -18,3 +18,8 @@
 
 <img src="https://github.com/moidot/android/assets/62979643/722aa88e-959d-4198-971d-5051f113feb4.png" width="200"> <img src="https://github.com/moidot/android/assets/62979643/809a994c-e2dc-4bc4-999f-26dc6d86b6ec.png" width="200">
  <img src="https://github.com/moidot/android/assets/62979643/45d3d627-1ba5-40ed-9603-2a82ea81f668.png" width="200"> <img src="https://github.com/moidot/android/assets/62979643/4d9a4617-8cfe-4fa3-a655-b60df9944dd7.png" width="200"> <img src="https://github.com/moidot/android/assets/62979643/cd311948-268e-4395-9ff3-e29e21a0a8e1.png" width="200"> <img src="https://github.com/moidot/android/assets/62979643/08f906ca-f1ef-4773-bb24-0395f005ffaf.png" width="200">
+
+
+## 📹 시연영상
+https://github.com/user-attachments/assets/19f48825-d376-42c1-bc06-32fe8e6da816
+
